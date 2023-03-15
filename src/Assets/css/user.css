@@ -1,0 +1,97 @@
+.add-user {
+    border-radius: 6px;
+    color: #fff;
+    background: #5D92F4 linear-gradient(180deg, #74a1f5, #5D92F4) repeat-x;
+    border: none;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 15%), 0 1px 1px rgb(0 0 0 / 8%);
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+.view_profile {
+    width: 500px;
+    padding: 32px 24px !important;
+}
+
+.MuiDialogContent-root:first-child {
+    padding-top: 0;
+}
+
+.media {
+    gap: 20px;
+}
+
+.media-body p {
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.media-body div {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    gap: 10px;
+}
+
+.quciklink-dropdown .dropdown-menu .dropdown-list li {
+    width: 97%;
+}
+
+.profile-block {
+    padding: 10px 0px !important;
+}
+
+.rct-sidebar .user-profile > img {
+    box-shadow: none;
+}
+
+.addBtn {
+    background: #5D92F4 linear-gradient(180deg, #74a1f5, #5D92F4) repeat-x;
+    padding: 6px 38px !important;
+}
+
+.addNewCustomerForm .form-control {
+    border: 1px solid #3d76a8;
+    padding: 10px 12px;
+}
+
+.addCustomerModal .modal-content {
+    width: 650px;
+}
+
+.addNewCustomerForm .form-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.addNewCustomerForm .form-group label {
+    margin-bottom: 0;
+    width: 30%;
+    font-size: 17px;
+    color: #000;
+}
+
+.addCustomerModal .modal-title {
+    font-size: 18px;
+}
+
+
+.MuiDialog-paperWidthSm {
+    width: 800px;
+    max-width: 800px !important;
+}
+
+.paginationDiv .page-item.active .page-link {
+    background-color: rgb(11, 61, 69);
+    border-color:rgb(11, 61, 69) ;
+}
+
+.paginationDiv .page-link {
+    color: rgb(11, 61, 69);
+}
+
+.userBlockHorizontalDropdown {
+    /* background-color: #0b3d45cf; */
+}

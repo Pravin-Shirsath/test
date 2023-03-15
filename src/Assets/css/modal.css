@@ -1,0 +1,37 @@
+ .csvReader{
+      display:flex;
+      width: 500px;
+      margin-bottom: 10px;
+    }
+
+    .browseFile {
+      width: 150px;
+      padding: 10px;
+      border: none;
+      text-decoration: none;
+      background: #4B91C9;
+      color: #FFF;
+      cursor: pointer;
+    }
+
+    .acceptedFile {
+      border: 1px solid #ccc;
+      width: 80%;
+      padding: 0px 10px;
+    }
+
+    .remove {
+      border-radius: 0;
+      padding: 0 20px;
+      background-color: #A01919;
+      border: none;
+      color: #FFF;
+      cursor: pointer;
+
+
+    }
+
+    .progressBarBackgroundColor {
+      background-color: red
+    }
+  
