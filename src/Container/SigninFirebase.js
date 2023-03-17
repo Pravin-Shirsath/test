@@ -62,7 +62,7 @@ function Signin(props) {
          history.push("/signin")
       }
    }, [])
-
+   
    const onUserSignUp = () => {
       props.history.push('/signup');
    }
@@ -93,37 +93,32 @@ function Signin(props) {
            }else if(check != true){
             NotificationManager.warning(str.checkedboxWarning);
           }else{
-            localStorage.setItem('token', JSON.stringify("asdASFADFADFAFASDFASDFD3E423WEDCFWEF23"));
-                     localStorage.setItem("isLoggedIn", JSON.stringify(true))
-                     localStorage.setItem("user_id", "user-id");
-                     localStorage.setItem("user_type", JSON.stringify("admin"));
-                     dispatch({ type: LOGIN_USER_SUCCESS, payload: localStorage.getItem('user_id') });
-                     history.push('/app/dashboard/saas');
-                     NotificationManager.success('User Login Successfully!');
-                     setShow(false);
-                     setNameError('');
-                     setPassError('');
-            
-            //   BELO REGISTER Api Call
-         
+           
+             login(name, password).then((res) => {
+                   if (res?.data?.token) {
+                      localStorage.setItem('token', JSON.stringify(res.data.token));
+                      localStorage.setItem("isLoggedIn", JSON.stringify(true))
+                      localStorage.setItem("user_id", "user-id");
+                      localStorage.setItem("user_type", JSON.stringify("admin"));
+    
+                      dispatch({ type: LOGIN_USER_SUCCESS, payload: localStorage.getItem('user_id') });
+                      history.push('/app/dashboard/saas');
+                      NotificationManager.success('User Login Successfully!');
+                      setShow(false);
+                      setNameError('');
+                      setPassError('');
+                   }else if(res?.data?.error){
+                     NotificationManager.error(res?.data?.error);
+
+                   }else{
+                      setShow(false);
+               
+                   }
+             }).catch(err => {
+                NotificationManager.error(err?.response?.data?.non_field_errors?.[0]);
+             });
            }
 
-         // login(name, password).then((res) => {
-         //       if (res?.data?.key) {
-         //          localStorage.setItem('token', JSON.stringify(res.data.key));
-         //          localStorage.setItem("isLoggedIn", JSON.stringify(true))
-         //          localStorage.setItem("user_id", "user-id");
-         //          localStorage.setItem("user_type", JSON.stringify(res?.data?.user_details?.user_type));
-         //          dispatch({ type: LOGIN_USER_SUCCESS, payload: localStorage.getItem('user_id') });
-         //          history.push('/app/dashboard/saas');
-         //          NotificationManager.success('User Login Successfully!');
-         //          setShow(false);
-         //          setNameError('');
-         //          setPassError('');
-         //       }
-         // }).catch(err => {
-         //    NotificationManager.error(err?.response?.data?.non_field_errors?.[0]);
-         // });
 
       }
    }

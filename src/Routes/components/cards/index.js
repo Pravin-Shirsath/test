@@ -240,7 +240,7 @@ function Cards(props) {
                </Card>
             </CardGroup>
          </RctCollapsibleCard>
-      </div >
+      </div>
    );
 }
 

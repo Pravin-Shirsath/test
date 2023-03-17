@@ -420,7 +420,7 @@ export default function UserProfile(props) {
             </tbody>
           </table>
           {
-            modalListData?.length > 0 &&
+          
             <div className='paginationDiv'>
               <Pagination
                 activePage={activePage}

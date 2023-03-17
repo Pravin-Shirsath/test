@@ -33,7 +33,7 @@ const options = {
       }  
    },   
    cutout: 30,
-   responsive: true,
+   responsive: false,
    maintainAspectRatio:false
 };
 

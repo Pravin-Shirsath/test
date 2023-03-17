@@ -31,6 +31,7 @@ import {
 import { SIGNUP_USER_SUCCESS } from 'Store/Actions/types';
 import {useHistory} from "react-router-dom"
 import { register } from '../Api/index';
+import { NotificationManager } from 'react-notifications';
 
 
 function SignupFirebase(props){
@@ -59,11 +60,12 @@ function SignupFirebase(props){
  // Sign Up API Call
    const onUserSignUp = () => {
 
-// MY CODE 
-setNameError('');
-setEmailError('');
-setPassError('');
-setComfpassError(''); 
+// // MY CODE 
+// setNameError('');
+// setEmailError('');
+// setPassError('');
+// setComfpassError(''); 
+
 if (name.trim() == ''  && email.trim() == '' && password.trim() == '' && comfpass.trim() == '') {
  
    setNameError(str.MandotoryField);
@@ -83,14 +85,48 @@ if (name.trim() == ''  && email.trim() == '' && password.trim() == '' && comfpas
   }else if(password.trim() != comfpass.trim()){
     setComfpassError(str.InvalidComfimpass);
   }else{
-   localStorage.setItem("signedUpUser", JSON.stringify({name, email, password}));
-   localStorage.setItem("user_id", "user-id");
+   // NotificationManager.success('start');
+   register(name,email,password).then((res) => {
+               if (res?.status === 200) {
+                   console.log("Response from auth:", res);  
+   
+                   localStorage.setItem("signedUpUser", JSON.stringify({name, email, password}));
+                   localStorage.setItem("user_id", "user-id");
+   
+                   dispatch({ type: SIGNUP_USER_SUCCESS, payload: localStorage.getItem('user_id') });
+                   NotificationManager.success('User Registration Successfully!');
+                   history.push('/signin');
+                   setShow(false);
+                   setNameError('');
+                   setEmailError('');
+                   setPassError('');
+                   setComfpassError('');
+                   
+               } else if(res?.status === 400) { 
+                  setShow(false);
+                  setNameError('');
+                  setEmailError('');
+                  setPassError('');
+                  setComfpassError('');
+                  console.log("Response from auth:", res); 
+                }
+               else {
+                  setShow(false);
+                  setNameError('');
+                  setEmailError('');
+                  setPassError('');
+                  setComfpassError('');
+                 console.log("Response from auth:", res);
+                 
+               //   NotificationManager.error('User Registration Successfully!');
+               }
+           }).catch(err => {
+                 console.log("Registration error :",err?.response);
+        });
+           
   
   
   
-   //   console.log("suceesfull")
-   //   alert("suceefully")
-   //   BELO REGISTER Api Call
 
   }
 

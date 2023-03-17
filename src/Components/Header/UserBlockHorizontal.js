@@ -40,7 +40,7 @@ import { BASE_URL } from 'Api/APIConst';
 
 function UserBlockHorizontal(props) {
    const [userDropdownMenu, setUserDropdownMenu] = useState(false);
-   const [profileData, setProfileData] = useState();
+   const [profileData, setProfileData] = useState({});
 
    const history = useHistory();
 
@@ -169,7 +169,7 @@ function UserBlockHorizontal(props) {
          if (regexFormat.test(newPassword.trim())) {
             console.log("Updated Details:", oldPassword, newPassword, rePassword);
 
-            axios.post(`${BASE_URL}/version_0/authentication/change-password/`, {
+            axios.post(`${BASE_URL}/api/version_0/authentication/change-password/`, {
                "old_password": oldPassword,
                "new_password1": newPassword,
                "new_password2": rePassword,
@@ -188,7 +188,7 @@ function UserBlockHorizontal(props) {
                      // history.push("/confirm-password") // currently not in use, confirm-password component is still there
                      localStorage.clear();
                      history.push("/signin");
-                     // NotificationManager.success('Password changed successfully!');   
+                     //  NotificationManager.success('Password changed successfully!');   
                      NotificationManager.success(res?.data?.detail);
                      setOpen(false);
                      setOldPassword("");

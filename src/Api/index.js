@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_MI, BASE_URL } from './APIConst';
+import { BASE_MI, BASE_URL, Guest_Auth_Token } from './APIConst';
 
 
 
@@ -21,9 +21,9 @@ export default
     * @returns 
     */
   export const register = (name,email,password) => {
-        // console.log("Before Registration :", name,email,password);
+         console.log("Before Registration :", name,email,password);
 
-        return axios.post(`${BASE_URL}/version_0/authentication/register/`, { 
+        return axios.post(`${BASE_URL}/api/version_0/authentication/register/`, { 
             username: name,
             email: email,
             password: password
@@ -36,7 +36,7 @@ export default
             }
         })
         .then( res => {
-            // console.log("Registration :",res);
+             console.log("Registration :",res);
             return res;
         
         })
@@ -52,7 +52,7 @@ export default
    export const login = (username,password) => {
     // console.log("Before Login :", username,password);
 
-    return axios.post(`${BASE_URL}/version_0/authentication/login/`, { 
+    return axios.post(`${BASE_URL}/api/version_0/authentication/knox-login/`, { 
         username: username,
         password: password
     },
@@ -64,7 +64,7 @@ export default
         }
     })
     .then( res => {
-        // console.log("Login :",res);
+        console.log("Login :",res);
         return res;
     
     })
@@ -79,14 +79,14 @@ export default
 export const profileInfo = (token) => {
 
     // console.log("IN profile API :", token);
-    return axios.get(`${BASE_URL}/version_0/users/profile-details/`, 
+    return axios.get(`${BASE_URL}/api/version_0/users/profile-details/`, 
     {
     headers: {
         Authorization:`Token ${token}`,
     }
     })
     .then(res => {
-        // console.log("profile :",res);
+         console.log("profile :",res);
         return res;    
     })
 }
@@ -127,7 +127,7 @@ export const updateProfileInfo = (firstname, lastname, email,phone,token) => {
  * @returns 
  */
 export const logOut = (token) => {
-    return axios.get(`${BASE_URL}/version_0/authentication/logout/`, 
+    return axios.get(`${BASE_URL}/version_0/authentication/knox-logout/`, 
     {
     headers: {
         Authorization:`Token ${token}`

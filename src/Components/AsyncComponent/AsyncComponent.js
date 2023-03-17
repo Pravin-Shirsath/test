@@ -8,9 +8,36 @@ import Loadable from 'react-loadable';
 // rct page loader
 import RctPageLoader from 'Components/RctPageLoader/RctPageLoader';
 
+
+
 // ecommerce dashboard
 const AsyncEcommerceDashboardComponent = Loadable({
 	loader: () => import("Routes/dashboard/ecommerce"),
+	loading: () => <RctPageLoader />,
+});
+
+
+
+
+
+
+//user dashboard
+const AsyncAccountDashboardComponent = Loadable({
+	loader: () => import("Routes/dashboard/account"),
+	loading: () => <RctPageLoader />,
+});
+
+const AsyncReportDashboardComponent = Loadable({
+	loader: () => import("Routes/dashboard/report"),
+	loading: () => <RctPageLoader />,
+});
+
+const AsyncProjectDashboardComponent = Loadable({
+	loader: () => import("Routes/dashboard/project"),
+	loading: () => <RctPageLoader />,
+});
+const AsyncUserManagmentDashboardComponent = Loadable({
+	loader: () => import("Routes/dashboard/userManagment"),
 	loading: () => <RctPageLoader />,
 });
 
@@ -647,4 +674,8 @@ export {
 	// added by vish
 	AsyncModalComponent,
 	AsyncAdminComponent,
+	AsyncAccountDashboardComponent,
+   AsyncReportDashboardComponent,
+   AsyncProjectDashboardComponent,
+   AsyncUserManagmentDashboardComponent
 };

@@ -2,32 +2,33 @@
 let sidebarMenu = {
    category1: [
 
-      
-      {
-         "menu_title": "sidebar.users",
-         "path": "/app/dashboard/saas",
-         "new_item": false,
-          "menu_icon": "zmdi zmdi-accounts",
-
-      },
+   
+    
 
       {
-         "menu_title": "sidebar.users",
-         "path": "/app/dashboard/saas",
+         "menu_title": "sidebar.usermangement",
+         "path": "/app/dashboard/userManagment",
          "new_item": false,
-          "menu_icon": "zmdi zmdi-accounts",
+         //  "menu_icon": "zmdi zmdi-accounts",
 
       },
       {
-         "menu_title": "sidebar.users",
-         "path": "/app/dashboard/saas",
+         "menu_title": "sidebar.account",
+         "path": "/app/dashboard/account",
          "new_item": false,
-         "menu_icon": "zmdi zmdi-accounts",
+         // "menu_icon": "zmdi zmdi-accounts",
 
       },
       {
-         "menu_title": "sidebar.users",
-         "path": "/app/dashboard/saas",
+         "menu_title": "sidebar.project",
+         "path": "/app/dashboard/project",
+         "new_item": false,
+         //  "menu_icon": "zmdi zmdi-accounts",
+
+      },
+      {
+         "menu_title": "sidebar.report",
+         "path": "/app/dashboard/report",
          "new_item": false,
          //  "menu_icon": "zmdi zmdi-accounts",
 
@@ -227,29 +228,29 @@ let sidebarMenu = {
       // }
    ],
    category2: [
-      {
-         "menu_title": "sidebar.users",
-         "menu_icon": "zmdi zmdi-accounts",
-         "type_multi": null,
-         "new_item": false,
-         "child_routes": [
-            {
-               "path": "/app/users/user-management",
-               "new_item": false,
-               "menu_title": "sidebar.userManagement"
-            },
-            {
-               "path": "/app/users/admin-management",
-               "new_item": false,
-               "menu_title": "sidebar.adminManagement"
-            },
-            // {
-            //    "path": "/app/users/user-list",
-            //    "new_item": false,
-            //    "menu_title": "sidebar.userList"
-            // },
-         ]
-      }
+      // {
+      //    "menu_title": "sidebar.users",
+      //    "menu_icon": "zmdi zmdi-accounts",
+      //    "type_multi": null,
+      //    "new_item": false,
+      //    "child_routes": [
+      //       {
+      //          "path": "/app/users/user-management",
+      //          "new_item": false,
+      //          "menu_title": "sidebar.userManagement"
+      //       },
+      //       {
+      //          "path": "/app/users/admin-management",
+      //          "new_item": false,
+      //          "menu_title": "sidebar.adminManagement"
+      //       },
+      //       // {
+      //       //    "path": "/app/users/user-list",
+      //       //    "new_item": false,
+      //       //    "menu_title": "sidebar.userList"
+      //       // },
+      //    ]
+      // }
    ],
    category3: [
       // {
@@ -496,39 +497,39 @@ let sidebarMenu = {
       // }
    ],
    category5: [   
-      {
-         "menu_title": "sidebar.users",
-         "menu_icon": "zmdi zmdi-accounts",
-         "type_multi": null,
-         "new_item": false,
-         "child_routes": [
-            {
-               "path": "/app/users/user-profile-1",
-               "new_item": false,
-               "menu_title": "sidebar.userProfile1"
-            },
-            {
-               "path": "/app/users/user-profile", 
-               "new_item": false,
-               "menu_title": "sidebar.userProfile2"
-            },
-            {
-               "path": "/app/users/user-management", 
-               "new_item": false,
-               "menu_title": "sidebar.userManagement"
-            },
-            {
-               "path": "/app/users/user-list",
-               "new_item": false,
-               "menu_title": "sidebar.userList"
-            },
-            {
-               "path": "/app/users/admin", 
-               "new_item": false,
-               "menu_title": "sidebar.admin"
-            }
-         ]
-      }
+      // {
+      //    "menu_title": "sidebar.users",
+      //    "menu_icon": "zmdi zmdi-accounts",
+      //    "type_multi": null,
+      //    "new_item": false,
+      //    "child_routes": [
+      //       {
+      //          "path": "/app/users/user-profile-1",
+      //          "new_item": false,
+      //          "menu_title": "sidebar.userProfile1"
+      //       },
+      //       {
+      //          "path": "/app/users/user-profile", 
+      //          "new_item": false,
+      //          "menu_title": "sidebar.userProfile2"
+      //       },
+      //       {
+      //          "path": "/app/users/user-management", 
+      //          "new_item": false,
+      //          "menu_title": "sidebar.userManagement"
+      //       },
+      //       {
+      //          "path": "/app/users/user-list",
+      //          "new_item": false,
+      //          "menu_title": "sidebar.userList"
+      //       },
+      //       {
+      //          "path": "/app/users/admin", 
+      //          "new_item": false,
+      //          "menu_title": "sidebar.admin"
+      //       }
+      //    ]
+      // }
       
    ],
    category6: [
@@ -591,38 +592,38 @@ let sidebarMenu = {
       //       // },
       //    ]
       // },
-      {
-         "menu_title": "sidebar.modal1",
-         "path": "/app/pages/create-new-modal",
-         "new_item": false,
-          "menu_icon": "zmdi zmdi-accounts",
+      // {
+      //    "menu_title": "sidebar.modal1",
+      //    "path": "/app/pages/create-new-modal",
+      //    "new_item": false,
+      //     "menu_icon": "zmdi zmdi-accounts",
 
-      },
-      {
-         "menu_title": "sidebar.modal2",
-         "path": "/app/pages/existing-model",
-         "new_item": false,
-         "menu_icon": "zmdi zmdi-star",
+      // },
+      // {
+      //    "menu_title": "sidebar.modal2",
+      //    "path": "/app/pages/existing-model",
+      //    "new_item": false,
+      //    "menu_icon": "zmdi zmdi-star",
 
-      },
-      {
-         "menu_title": "sidebar.modal3",
-         "path": "/app/pages/compare-modals",
-         "new_item": false,
-         "menu_icon": "zmdi zmdi-compare",
-      },
-      {
-         "menu_title": "sidebar.modal4",
-         "path": "/app/pages/download-results",
-         "new_item": false,
-         "menu_icon": "zmdi zmdi-chart-donut",
-      },
-      {
-         "menu_title": "sidebar.modal5",
-         "path": "/terms-condition",
-         "new_item": false,
-         "menu_icon": "zmdi zmdi-file-text",
-      },
+      // },
+      // {
+      //    "menu_title": "sidebar.modal3",
+      //    "path": "/app/pages/compare-modals",
+      //    "new_item": false,
+      //    "menu_icon": "zmdi zmdi-compare",
+      // },
+      // {
+      //    "menu_title": "sidebar.modal4",
+      //    "path": "/app/pages/download-results",
+      //    "new_item": false,
+      //    "menu_icon": "zmdi zmdi-chart-donut",
+      // },
+      // {
+      //    "menu_title": "sidebar.modal5",
+      //    "path": "/terms-condition",
+      //    "new_item": false,
+      //    "menu_icon": "zmdi zmdi-file-text",
+      // },
    ],
 
 }

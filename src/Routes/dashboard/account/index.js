@@ -4,32 +4,31 @@
 
  import React from 'react'
  import { Helmet } from "react-helmet";
- // intl messages
- import IntlMessages from 'Util/IntlMessages';
- 
- // page title bar
- import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
+
+ import { Progress ,Button,
+	Form,
+	FormGroup,
+	Label,
+	Input,
+	FormText,
+	Col,
+	FormFeedback} from 'reactstrap';
+
+
+
+
+// intl messages
+import IntlMessages from '../../../Util/IntlMessages';
+
+
+
+
+
  
  // rct collapsible card
- import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
+
  
- import {
-     VisitorAreaChartWidget,
-     SalesAreaChartWidget,
-     OrdersAreaChartWidget,
-     RecentOrdersWidget,
-     SupportRequest,
-     Notifications,
-     TopSellingWidget,
-     OverallTrafficStatusWidget,
-     ProductReportsWidget,
-     OnlineVisitorsWidget,
-     TodayOrdersStatsWidget,
-     BookingInfo,
-     NewOrderCountdown,
-     FollowersWidget,
-     Notes
- } from "Components/Widgets";
+ 
  
  // widgets data
  import {
@@ -39,58 +38,64 @@
      topSellingProducts,
      trafficStatus
  } from './data';
+import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
+import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
+import { str } from 'Constants/stringConst';
+
  
- export default function (props) {
+ export default function Account(props) {
     const { match } = props;
     return (
        <div className="ecom-dashboard-wrapper">
           <Helmet>
-             <title>Ecommerce Dashboard</title>
-             <meta name="description" content="Automaton Ecommerce Dashboard" />
+             <title>Account Dashboard</title>
+             <meta name="description" content="" />
           </Helmet>
-          <PageTitleBar title={<IntlMessages id="sidebar.ecommerce" />} match={match} />
-          <div className="row">
-             <div className="col-sm-6 col-md-4 w-xs-half-block">
-                <VisitorAreaChartWidget
-                   data={visitorsData}
-                />
-             </div>
-             <div className="col-sm-12 col-md-4 w-xs-half-block">
-                <OrdersAreaChartWidget
-                   data={ordersData}
-                />
-             </div>
-             <div className="col-sm-6 col-md-4 w-xs-full">
-                <SalesAreaChartWidget
-                   data={salesData}
-                />
-             </div>
-          </div>
-          <div className="row">
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-4 col-lg-4 w-xs-full"
-                heading={<IntlMessages id="widgets.supportRequest" />}
-                collapsible
-                reloadable
-                closeable
-                fullBlock
-                customClasses="overflow-hidden"
-             >
-                <SupportRequest />
-             </RctCollapsibleCard>
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-8 col-lg-8 w-xs-full"
-                heading={<IntlMessages id="widgets.RecentOrders" />}
-                collapsible
-                reloadable
-                closeable
-                fullBlock
-             >
-                <RecentOrdersWidget />
-             </RctCollapsibleCard>
-          </div>
-          <div className="row">
-             <RctCollapsibleCard
+         
+        
+          <div className="charts-widgets-wrapper">
+         {/* <PageTitleBar title={<IntlMessages id="sidebar.charts" />} match={props.match} /> */}
+         <RctCollapsibleCard
+            heading={<center> <h2>Account</h2></center> }
+                 
+         >
+        <div className="w-100 d-flex justify-content-between px-40"> 
+        <h3>used </h3> <h3>Available </h3>
+        </div>
+
+        <div>
+        <Progress multi style={{ height: "50px" }}>
+        <Progress bar color="danger" value="80" ><h2 style={{marginTop:"6px"}}>80%</h2></Progress>
+        <Progress bar color="success" value="20" ><h2 style={{marginTop:"6px"}}>20%</h2></Progress>
+      </Progress>
+        </div>
+            <div className="d-flex justify-content-center mt-50">
+              
+               <h2>{str.askRechargeText} <span className="mx-5 font-weight-bold ">{str.recharge} ?</span></h2>
+               
+            </div>
+            <div className=" d-flex justify-content-center">
+
+            <FormGroup tag="fieldset" className="d-flex justify-content-between my-100 " >
+                       
+                        <FormGroup check className="d-flex align-item-center mx-50">
+                        <Input type="radio" name="radio1" style={{width:"30px" ,height:"30px"}} />
+          <Label check className="mx-20  mt-10">
+             Yes
+          </Label>
+        </FormGroup>
+            
+        <FormGroup check className="d-flex align-item-center mx-50">
+                        <Input type="radio" name="radio1" style={{width:"30px" ,height:"30px"}} />
+          <Label check className="mx-20 mt-10">
+             No
+          </Label>
+        </FormGroup>
+                     </FormGroup>
+            </div>
+         </RctCollapsibleCard>
+
+ {/* <RctCollapsibleCard
                 customClasses="trafic-bar-chart"
                 colClasses="col-sm-12 col-md-12 col-lg-5 d-sm-full"
                 heading={<IntlMessages id="widgets.overallTrafficStatus" />}
@@ -102,55 +107,103 @@
                 <OverallTrafficStatusWidget
                    chartData={trafficStatus}
                 />
-             </RctCollapsibleCard>
-             <div className="col-sm-12 col-md-12 col-lg-7 d-sm-full">
-                <div className="row">
-                   <div className="col-sm-6 col-md-6 col-lg-6">
-                      <div className="dash-cards">
-                         <Notes />
-                      </div>
-                      <NewOrderCountdown />
-                      <TodayOrdersStatsWidget />
-                   </div>
-                   <div className="col-sm-6 col-md-6 col-lg-6">
-                      <div className="dash-cards-lg">
-                         <OnlineVisitorsWidget />
-                      </div>
-                      <FollowersWidget />
-                      <BookingInfo />
-                   </div>
-                </div>
-             </div>
-          </div>
-          <div className="row">
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-4 col-lg-4 w-xs-full"
-                heading={<IntlMessages id="widgets.productReports" />}
-                collapsible
-                reloadable
-                closeable
-                fullBlock
-             >
-                <ProductReportsWidget />
-             </RctCollapsibleCard>
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-4 col-lg-4 w-xs-full"
-                fullBlock
-                customClasses="overflow-hidden"
-             >
-                <Notifications />
-             </RctCollapsibleCard>
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-4 col-lg-4 w-xs-full"
-                heading={<IntlMessages id="widgets.topSellings" />}
-                collapsible
-                reloadable
-                closeable
-                fullBlock
-             >
-                <TopSellingWidget data={topSellingProducts} />
-             </RctCollapsibleCard>
-          </div>
+             </RctCollapsibleCard> */}
+
+         {/* <div className="row">
+            
+            <RctCollapsibleCard
+               heading={<IntlMessages id="widgets.trafficChannel" />}
+               customClasses="overflow-hidden"
+               colClasses="col-sm-6 col-md-4 w-xs-half-block"
+               badge={{
+                  name: <IntlMessages id="widgets.today" />,
+                  class: 'danger'
+               }}
+               collapsible
+               reloadable
+               closeable
+               fullBlock
+            >
+              
+            </RctCollapsibleCard>
+            <RctCollapsibleCard
+               heading={<IntlMessages id="widgets.campaignPerformance" />}
+               colClasses="col-sm-6 col-md-4 w-xs-full"
+               collapsible
+               reloadable
+               closeable
+            >
+             
+            </RctCollapsibleCard>
+         </div>
+          */}
+         {/* <div className="row">
+            <RctCollapsibleCard
+               colClasses="col-sm-12 col-md-5 col-lg-5 col-xl-4 w-8-full"
+               heading={<IntlMessages id="widgets.emailsStatistics" />}
+               customClasses="gradient-primary"
+               collapsible
+               reloadable
+               closeable
+               fullBlock
+            >
+              
+            </RctCollapsibleCard>
+            <RctCollapsibleCard
+               colClasses="col-sm-12 col-md-7 col-lg-7 col-xl-8 w-8-full"
+               heading={<IntlMessages id="widgets.totalEarns" />}
+               collapsible
+               fullBlock
+               reloadable
+               closeable
+            >
+             
+            </RctCollapsibleCard>
+         </div> */}
+         {/* <div className="row">
+            <div className="col-sm-12 col-md-6">
+             
+            </div>
+            <div className="col-sm-12 col-md-6">
+             
+            </div>
+         </div> */}
+         {/* <div className="row">
+            <RctCollapsibleCard
+               colClasses="col-md-7 col-xl-8 w-xs-half-block w-8-full"
+               heading={<IntlMessages id="widgets.productStats" />}
+               collapsible
+               reloadable
+               closeable
+            >
+              
+            </RctCollapsibleCard>
+            <RctCollapsibleCard
+               customClasses="gradient-primary"
+               colClasses="col-md-5 col-xl-4 w-xs-half-block w-8-full"
+               heading={<IntlMessages id="widgets.emailsStatistics" />}
+               collapsible
+               reloadable
+               closeable
+               fullBlock
+            >
+              
+            </RctCollapsibleCard>
+         </div>
+         <div className="row">
+            <RctCollapsibleCard
+               colClasses="col-sm-12 col-md-6 w-xs-full"
+               heading={<IntlMessages id="widgets.siteVisitors" />}
+               collapsible
+               reloadable
+               closeable
+               fullBlock
+            >
+            
+            </RctCollapsibleCard>
+         </div> */}
+      </div>
+         
        </div>
     )
  }

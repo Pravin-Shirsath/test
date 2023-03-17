@@ -17,7 +17,7 @@ import IntlMessages from 'Util/IntlMessages';
 function SupportRequest(){
    return (
       <div className="support-widget-wrap">
-         <div className="text-center py-10">
+         <div className=" py-10">
             <DoughnutChart />
          </div>
          <List className="list-unstyled p-0">

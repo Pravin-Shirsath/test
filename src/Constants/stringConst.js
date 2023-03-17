@@ -20,5 +20,7 @@ export  const str = {
     Re_enterPassText:"Re-enter New Password",
     CancelText:"Cancel",
     changeText:"Change",
-    checkedboxWarning:'Make sure you have checked the checkbox'
+    checkedboxWarning:'Make sure you have checked the checkbox',
+    askRechargeText:"Do you want to ",
+    recharge:"recharge"
 }

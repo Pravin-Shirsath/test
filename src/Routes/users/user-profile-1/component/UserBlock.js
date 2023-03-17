@@ -44,7 +44,7 @@ function UserBlock(){
                   <div className="media-body pt-25">
                         <div className="d-flex flex-column align-items-baseline">
                            <h2 className="user-name text-white">{profileData?.first_name} {profileData?.last_name}</h2>
-                           {/* <h2>{profileData?.username}</h2> */}
+                           <h2>{profileData?.username}</h2>
                            <p>{profileData?.email}</p>
                         </div>
                   </div>

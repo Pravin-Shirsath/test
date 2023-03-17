@@ -10,7 +10,13 @@ import {
    AsyncSaasDashboardComponent,
    AsyncAgencyDashboardComponent,
    AsyncNewsDashboardComponent,
-   AsyncScenarioPlanningDashboardComponent
+   AsyncScenarioPlanningDashboardComponent,
+
+   AsyncAccountDashboardComponent,
+   AsyncReportDashboardComponent,
+   AsyncProjectDashboardComponent,
+   AsyncUserManagmentDashboardComponent
+
 } from 'Components/AsyncComponent/AsyncComponent';
 
 
@@ -25,6 +31,11 @@ const Dashboard = ({ match }) => (
          <Route path={`${match.url}/ecommerce`} component={AsyncEcommerceDashboardComponent} />
          <Route path={`${match.url}/agency`} component={AsyncAgencyDashboardComponent} />
          <Route path={`${match.url}/news`} component={AsyncNewsDashboardComponent} />
+        
+         <Route path={`${match.url}/account`} component={AsyncAccountDashboardComponent} />
+         <Route path={`${match.url}/report`} component={AsyncReportDashboardComponent} />
+         <Route path={`${match.url}/project`} component={AsyncProjectDashboardComponent} />
+         <Route path={`${match.url}/userManagment`} component={AsyncUserManagmentDashboardComponent} />
 
       </Switch>
    </div>

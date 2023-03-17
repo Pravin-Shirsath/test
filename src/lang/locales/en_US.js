@@ -1,5 +1,8 @@
 module.exports = {
    "sidebar.app": "App",
+   "sidebar.account": "Account",
+   "sidebar.project": "Project",
+   "sidebar.usermangement": "User Management",
    "sidebar.news": "News",
    "sidebar.horizontal": "Horizontal",
    "sidebar.horizontalMenu": "Horizontal Menu",
