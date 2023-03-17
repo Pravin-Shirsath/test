@@ -48,11 +48,12 @@ function UserBlockHorizontal(props) {
 
    const logoutUser = () => {
       const accessToken = JSON.parse(localStorage.getItem('token'));
-      console.log("Token", accessToken)
+      // console.log("Token", accessToken)
       if (accessToken !== null) {
          logOut(accessToken)
             .then(res => {
-               if (res?.status === 200) {
+               console.log("ResponseData", res)
+               if (res?.status === 204) {
                   console.log("ResponseData", res?.data)
                   dispatch({ type: LOGOUT_USER });
                   localStorage.removeItem('user_id');
@@ -69,6 +70,7 @@ function UserBlockHorizontal(props) {
                }
 
             }).catch(err => {
+               console.log("errr====",err)
                dispatch({ type: LOGIN_USER_FAILURE });
                NotificationManager.error('Unable to logout');
                console.log(err);
@@ -187,10 +189,11 @@ function UserBlockHorizontal(props) {
                      console.log("Response 200 from Chage Password:", res);
                      // history.push("/confirm-password") // currently not in use, confirm-password component is still there
                      localStorage.clear();
+                     setOpen(false);
                      history.push("/signin");
                      //  NotificationManager.success('Password changed successfully!');   
                      NotificationManager.success(res?.data?.detail);
-                     setOpen(false);
+                    
                      setOldPassword("");
                      setNewPassword("");
                      setRePassword("");
@@ -238,7 +241,7 @@ function UserBlockHorizontal(props) {
 
    return (
       <div className="top-sidebar">
-         <div className="sidebar-user-block profile-block" >
+      <div className="sidebar-user-block profile-block" >
             <Dropdown
                isOpen={userDropdownMenu}
                toggle={() => toggleUserDropdownMenu()}
@@ -246,9 +249,9 @@ function UserBlockHorizontal(props) {
             >
                <DropdownToggle
                   tag="div"
-                  className="d-flex align-items-center g-2"
+                  className="d-flex align-items-center g-2  myprofile-block100"
                >
-                  {/* <div className="user-profile">
+                  <div className="user-profile">
                      <img
                          src={`${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg`}
                          alt="user profile"
@@ -256,7 +259,7 @@ function UserBlockHorizontal(props) {
                          width="50"
                          height="100"
                       />
-                  </div> */}
+                  </div>
                   <div className="user-info flex-column d-flex">
                      <span className="user-name ml-4 text-white">{profileData?.first_name} {profileData?.last_name}</span>
                      <span className="user-name ml-4 text-white">{profileData?.email}</span>
@@ -317,19 +320,19 @@ function UserBlockHorizontal(props) {
                   <Form>
                      <FormGroup>
                         <Label for="oldPassword">Old Password</Label>
-                        <Input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} type="password" name="password" id="oldPassword" placeholder="old password" />
+                        <Input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} type="password" name="password" id="oldPassword" placeholder="old password" className="py-3"/>
                         <Label>{validateOld ? "" : <span style={{ color: "red", marginLeft: "15px" }}>old password not matched</span>}</Label>
                      </FormGroup>
 
                      <FormGroup>
                         <Label for="newPassword">New Password</Label>
-                        <Input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} type="password" name="password" id="newPassword" placeholder="new password" />
+                        <Input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} type="password" name="password" id="newPassword" placeholder="new password" className="py-3" />
                         <Label>{validateNew ? "" : <span style={{ color: "red", marginLeft: "15px" }}>must be alphanumeric and minimum 8 characters long</span>}</Label>
                      </FormGroup>
 
                      <FormGroup>
                         <Label for="confirmPassword">Confirm Password</Label>
-                        <Input value={rePassword} onChange={(e) => setRePassword(e.target.value)} type="password" name="password" id="confirmPassword" placeholder="confirm password" />
+                        <Input value={rePassword} onChange={(e) => setRePassword(e.target.value)} type="password" name="password" id="confirmPassword" placeholder="confirm password" className="py-3" />
                         <Label>{validateConfirm ? "" : <span style={{ color: "red", marginLeft: "15px" }}>confirm password incorrect</span>}</Label>
                      </FormGroup>
                   </Form>

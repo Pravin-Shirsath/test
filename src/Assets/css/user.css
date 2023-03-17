@@ -38,7 +38,15 @@
 }
 
 .profile-block {
-    padding: 10px 0px !important;
+    padding: 0px  !important;
+   
+
+
+}
+.myprofile-block100{
+    padding: 10px  !important;
+    background-color: #3d76a8 !important;
+    border-radius: 8px !important; 
 }
 
 .rct-sidebar .user-profile > img {

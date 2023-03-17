@@ -127,7 +127,7 @@ export const updateProfileInfo = (firstname, lastname, email,phone,token) => {
  * @returns 
  */
 export const logOut = (token) => {
-    return axios.get(`${BASE_URL}/version_0/authentication/knox-logout/`, 
+    return axios.post(`${BASE_URL}/api/version_0/authentication/knox-logout/`, {},
     {
     headers: {
         Authorization:`Token ${token}`

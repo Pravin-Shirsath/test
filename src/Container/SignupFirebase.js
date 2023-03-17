@@ -117,7 +117,8 @@ if (name.trim() == ''  && email.trim() == '' && password.trim() == '' && comfpas
                   setPassError('');
                   setComfpassError('');
                  console.log("Response from auth:", res);
-                 
+               
+                
                //   NotificationManager.error('User Registration Successfully!');
                }
            }).catch(err => {

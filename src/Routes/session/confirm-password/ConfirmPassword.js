@@ -52,7 +52,7 @@ export default function ConfirmPwd() {
         }
         else {
             // console.log("Updated Details:", newPassword, confirmNewPassword);
-            axios.post(`${BASE_URL}/version_0/authentication/forgot-password/confirm/`, {
+            axios.post(`${BASE_URL}/api/version_0/authentication/forgot-password/confirm/`, {
                 "new_password1": newPassword,
                 "new_password2": confirmNewPassword,
                 "uid": pathKey,
@@ -66,7 +66,7 @@ export default function ConfirmPwd() {
                     }
                 })
                 .then(res => {
-                    // console.log("Confirm Forgot Password :", res);
+                     console.log("Confirm Forgot Password :", res);
                     return res;
                 })
                 .then((res) => {

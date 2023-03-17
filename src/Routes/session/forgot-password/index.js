@@ -41,7 +41,7 @@ export default function Forgotpwd() {
       } else {
          // console.log("Forgot password email detail:", email);
 
-         axios.post(`${BASE_URL}/version_0/authentication/forgot-password/`, {
+         axios.post(`${BASE_URL}/api/version_0/authentication/forgot-password/`, {
             email: email,
          },
             {
