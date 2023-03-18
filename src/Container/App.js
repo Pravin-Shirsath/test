@@ -103,7 +103,7 @@ function App(props) {
 // conditional rendring
    if (location.pathname === '/') {
       if (user === null && accessToken === null) {
-         return (<Redirect to={'/signup'} />);
+         return (<Redirect to={'/signin'} />);
       } else {
          return (<Redirect to={'/app/dashboard/saas'} />);
       }

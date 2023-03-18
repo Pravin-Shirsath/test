@@ -29,12 +29,12 @@ import {
 
 // imported by us
 import { SIGNUP_USER_SUCCESS } from 'Store/Actions/types';
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { register } from '../Api/index';
 import { NotificationManager } from 'react-notifications';
 
 
-function SignupFirebase(props){
+function SignupFirebase(props) {
    const [name, setName] = useState('');
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
@@ -43,105 +43,126 @@ function SignupFirebase(props){
    const dispatch = useDispatch();
    const loading = useSelector(state => state.loading);
    const [show, setShow] = useState(false);
-  const [nameError, setNameError] = useState('');
+   const [nameError, setNameError] = useState('');
    const [emailError, setEmailError] = useState('');
    const [passError, setPassError] = useState('');
    const [comfpassError, setComfpassError] = useState('');
-   const [passToggle,setpassToggle] =  useState(false);
-   const [comfpassToggle,setComfpassToggle] =  useState(false);
+   const [passToggle, setpassToggle] = useState(false);
+   const [comfpassToggle, setComfpassToggle] = useState(false);
 
    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-   const regexname = /^[a-zA-Z '.-]*$/ ;
+   const regexname = /^[a-zA-Z]{1,30}$/;
    const regexpassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
    const history = useHistory();
 
 
- // Sign Up API Call
+   // Sign Up API Call
    const onUserSignUp = () => {
+      setNameError('');
+      setEmailError('');
+      setPassError('');
+      setComfpassError('');
+      setShow(true);
 
-// // MY CODE 
-// setNameError('');
-// setEmailError('');
-// setPassError('');
-// setComfpassError(''); 
+      if (name.trim() == '' && email.trim() == '' && password.trim() == '' && comfpass.trim() == '') {
 
-if (name.trim() == ''  && email.trim() == '' && password.trim() == '' && comfpass.trim() == '') {
- 
-   setNameError(str.MandotoryField);
-   setEmailError(str.MandotoryField);
-   setPassError(str.MandotoryField);
-   setComfpassError(str.MandotoryField);
-   setShow(true);
+         setNameError(str.MandotoryField);
+         setEmailError(str.MandotoryField);
+         setPassError(str.MandotoryField);
+         setComfpassError(str.MandotoryField);
+         setShow(true);
 
-} else {
-   
-  if(regexname.test(name.trim()) != true ){
-   setNameError(str.InvalidName);
-  }else if(emailRegex.test(email.trim()) != true){
-   setEmailError(str. InvalidEmail);
-  }else if(regexpassword.test(password.trim()) != true){
-    setPassError(str.InvalidPassword) 
-  }else if(password.trim() != comfpass.trim()){
-    setComfpassError(str.InvalidComfimpass);
-  }else{
-   // NotificationManager.success('start');
-   register(name,email,password).then((res) => {
+      } else {
+        
+       
+        
+         // if (regexname.test(name.trim()) != true) {
+         //    setNameError('User name must contain only alphabet and no spacings!');
+         // } else 
+         if (emailRegex.test(email.trim()) != true) {
+            setEmailError(str.InvalidEmail);
+         } else if (regexpassword.test(password.trim()) != true) {
+            setPassError(str.InvalidPassword)
+         } else if (password.trim() != comfpass.trim()) {
+            setComfpassError(str.InvalidComfimpass);
+         } else {
+           
+            // NotificationManager.success('start');
+            register(name, email.toLowerCase(), password).then((res) => {
                if (res?.status === 200) {
-                   console.log("Response from auth:", res);  
-   
-                   localStorage.setItem("signedUpUser", JSON.stringify({name, email, password}));
-                   localStorage.setItem("user_id", "user-id");
-   
-                   dispatch({ type: SIGNUP_USER_SUCCESS, payload: localStorage.getItem('user_id') });
-                   NotificationManager.success('User Registration Successfully!');
-                   history.push('/signin');
-                   setShow(false);
-                   setNameError('');
-                   setEmailError('');
-                   setPassError('');
-                   setComfpassError('');
-                   
-               } else if(res?.status === 400) { 
+                  console.log("Response from auth:", res);
+
+                  localStorage.setItem("signedUpUser", JSON.stringify({ name, email, password }));
+                  localStorage.setItem("user_id", "user-id");
+
+                  dispatch({ type: SIGNUP_USER_SUCCESS, payload: localStorage.getItem('user_id') });
+                  NotificationManager.success('User Registration Successfully!');
+                  history.push('/signin');
                   setShow(false);
                   setNameError('');
                   setEmailError('');
                   setPassError('');
                   setComfpassError('');
-                  console.log("Response from auth:", res); 
-                }
+
+               } else if (res?.status === 400) {
+                  setShow(false);
+                  setNameError('');
+                  setEmailError('');
+                  setPassError('');
+                  setComfpassError('');
+                  console.log("Response from auth:", res);
+
+
+                   const emailErr= res?.data?.email[0]
+                   const usernameErr = res?.data?.username[0]
+
+                  if(emailErr){
+
+                     NotificationManager.error(emailErr);
+                  }
+                  if(usernameErr){
+
+                     NotificationManager.error(usernameErr);
+                  }
+               }
                else {
                   setShow(false);
                   setNameError('');
                   setEmailError('');
                   setPassError('');
                   setComfpassError('');
-                 console.log("Response from auth:", res);
-               
-                
-               //   NotificationManager.error('User Registration Successfully!');
+                  console.log("Response from auth:", res);
+
+
+                  //   NotificationManager.error('User Registration Successfully!');
                }
-           }).catch(err => {
-                 console.log("Registration error :",err?.response);
-        });
-           
-  
-  
-  
+            }).catch(err => {
+               console.log("Registration error :", err?.response);
+               const emailErr= err?.response?.data?.email[0]
+               const usernameErr = err?.response?.data?.username[0]
 
-  }
+              if(emailErr){
 
+                 NotificationManager.error(emailErr);
+              }
+              if(usernameErr){
 
-
-  
-
-}
-
+                 NotificationManager.error(usernameErr);
+              }
+            });
 
 
 
 
 
+         }
+
+
+
+
+
+      }
 
 
 
@@ -153,54 +174,60 @@ if (name.trim() == ''  && email.trim() == '' && password.trim() == '' && comfpas
 
 
 
-   //    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-   //    if (email.trim() == '' && password.trim() == '' && name.trim() == '') {
-   //       setNameError('* This is required Field');
-   //       setEmailError('* This is required Field');
-   //       setPassError('* This is required Field');
-   //       setShow(true);
-    
-   //    } else if(emailRegex.test(email.trim())) {
-   //       console.log("Register Details:", email,password,name);
-          
-   //       register(name,email,password).then((res) => {
-   //          if (res?.status === 200) {
-   //              console.log("Response from auth:", res);  
 
-   //              localStorage.setItem("signedUpUser", JSON.stringify({name, email, password}));
-   //              localStorage.setItem("user_id", "user-id");
 
-   //              dispatch({ type: SIGNUP_USER_SUCCESS, payload: localStorage.getItem('user_id') });
-   //              history.push('/signin');
-   //              setShow(false);
-   //              setNameError('');
-   //              setEmailError('');
-   //              setPassError('');
-   //          } else if(res?.status === 400) { 
-   //             setShow(false);
-   //             setNameError('');
-   //             setEmailError('');
-   //             setPassError('');
-   //             console.log("Response from auth:", res); 
-   //           }
-   //          else {
-   //             setShow(false);
-   //             setNameError('');
-   //             setEmailError('');
-   //             setPassError('');
-   //           console.log("Response from auth:", res);
-   //          }
-   //      }).catch(err => {
-   //       console.log("Registration error :",err?.response);
-   //   });
-        
-   //    } else {
-   //       setShow(true);
-   //       setNameError('');
-   //       setPassError('');
-   //       setEmailError("* Please Enter Valid Email address");
-   //    }
+
+
+
+      //    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+      //    if (email.trim() == '' && password.trim() == '' && name.trim() == '') {
+      //       setNameError('* This is required Field');
+      //       setEmailError('* This is required Field');
+      //       setPassError('* This is required Field');
+      //       setShow(true);
+
+      //    } else if(emailRegex.test(email.trim())) {
+      //       console.log("Register Details:", email,password,name);
+
+      //       register(name,email,password).then((res) => {
+      //          if (res?.status === 200) {
+      //              console.log("Response from auth:", res);  
+
+      //              localStorage.setItem("signedUpUser", JSON.stringify({name, email, password}));
+      //              localStorage.setItem("user_id", "user-id");
+
+      //              dispatch({ type: SIGNUP_USER_SUCCESS, payload: localStorage.getItem('user_id') });
+      //              history.push('/signin');
+      //              setShow(false);
+      //              setNameError('');
+      //              setEmailError('');
+      //              setPassError('');
+      //          } else if(res?.status === 400) { 
+      //             setShow(false);
+      //             setNameError('');
+      //             setEmailError('');
+      //             setPassError('');
+      //             console.log("Response from auth:", res); 
+      //           }
+      //          else {
+      //             setShow(false);
+      //             setNameError('');
+      //             setEmailError('');
+      //             setPassError('');
+      //           console.log("Response from auth:", res);
+      //          }
+      //      }).catch(err => {
+      //       console.log("Registration error :",err?.response);
+      //   });
+
+      //    } else {
+      //       setShow(true);
+      //       setNameError('');
+      //       setPassError('');
+      //       setEmailError("* Please Enter Valid Email address");
+      //    }
    }
 
    return (
@@ -215,8 +242,8 @@ if (name.trim() == ''  && email.trim() == '' && password.trim() == '' && comfpas
                      <div className="d-flex justify-content-between align-items-center">
                         <div className="session-logo">
                            <Link to="/signin">
-                           
-                              <img src={AppConfig.appLogo} className="img-fluid" alt="session-logo"  width="250"/>
+
+                              <img src={AppConfig.appLogo} className="img-fluid" alt="session-logo" width="250" />
                            </Link>
                         </div>
                         <div className='d-flex align-items-center'>
@@ -227,7 +254,7 @@ if (name.trim() == ''  && email.trim() == '' && password.trim() == '' && comfpas
                               variant="contained "
                               className="text-white theme-background"
                            >
-                             {str.LoginText}
+                              {str.LoginText}
                            </Button>
                         </div>
                      </div>
@@ -236,17 +263,17 @@ if (name.trim() == ''  && email.trim() == '' && password.trim() == '' && comfpas
             </AppBar>
             <div className="session-inner-wrapper">
                <div className="container">
-               <div className="row row-eq-height justify-content-center" style={{ marginTop: '40px' }} >
+                  <div className="row row-eq-height justify-content-center" style={{ marginTop: '40px' }} >
                      <div className="col-sm-7 col-md-7 col-lg-8">
                         <div className="session-body text-center">
                            <div className="session-head mb-30">
-                              <h2 className="font-weight-bold " style={{textTransform: 'capitalize'}}>{str.createAccountText} </h2>
+                              <h2 className="font-weight-bold " style={{ textTransform: 'capitalize' }}>{str.createAccountText} </h2>
                            </div>
                            <Form>
-                              <div style={{textAlign:"start"}}>
-                              <p className="text-dark">  {str.NameField} <span className="has-icon"><i className="ti-star" style={{color:"red"}}></i></span> </p>
+                              <div style={{ textAlign: "start" }}>
+                                 <p className="text-dark">  {str.NameField} <span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
                               </div>
-                               
+
                               <FormGroup className="has-wrapper">
                                  <Input
                                     type="text"
@@ -263,8 +290,8 @@ if (name.trim() == ''  && email.trim() == '' && password.trim() == '' && comfpas
                               {
                                  show && <p className='error'>{nameError}</p>
                               }
-                              <div style={{textAlign:"start"}}>
-                              <p className="text-dark"> {str.emailField} <span className="has-icon"><i className="ti-star" style={{color:"red"}}></i></span> </p>
+                              <div style={{ textAlign: "start" }}>
+                                 <p className="text-dark"> {str.emailField} <span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
                               </div>
                               <FormGroup className="has-wrapper">
                                  <Input
@@ -276,43 +303,43 @@ if (name.trim() == ''  && email.trim() == '' && password.trim() == '' && comfpas
                                     // placeholder="Company/User Email"
                                     onChange={(e) => setEmail(e.target.value)}
                                  />
-                                    
-                                 <span className="has-icon"><i  className="ti-email"></i></span>
+
+                                 <span className="has-icon"><i className="ti-email"></i></span>
                               </FormGroup>
 
                               {
                                  show && <p className='error'>{emailError}</p>
                               }
-                              <div style={{textAlign:"start"}}>
-                              <p className="text-dark">{str.PasswardField}<span className="has-icon"><i className="ti-star" style={{color:"red"}}></i></span> </p>
+                              <div style={{ textAlign: "start" }}>
+                                 <p className="text-dark">{str.PasswardField}<span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
                               </div>
                               <FormGroup className="has-wrapper">
                                  <Input
                                     value={password}
-                                    type={passToggle ? "text":"password"}
+                                    type={passToggle ? "text" : "password"}
                                     name="user-pwd"
                                     id="pwd"
                                     className="has-input input-lg"
                                     // placeholder="Password"
                                     onChange={(event) => setPassword(event.target.value)}
                                  />
-                              
+
                                  {/* <span className="has-icon"><i className="ti-lock"></i></span> */}
-                                 
-                                 <span onClick={()=> setpassToggle(!passToggle)} className="has-icon"><i className="ti-eye"></i></span>
-                                
+
+                                 <span onClick={() => setpassToggle(!passToggle)} className="has-icon"><i className="ti-eye"></i></span>
+
                               </FormGroup>
 
                               {
                                  show && <p className='error'>{passError}</p>
                               }
-                              <div style={{textAlign:"start"}}>
-                              <p className="text-dark">{str.ComfompasField} <span className="has-icon"><i className="ti-star" style={{color:"red"}}></i></span> </p>
+                              <div style={{ textAlign: "start" }}>
+                                 <p className="text-dark">{str.ComfompasField} <span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
                               </div>
                               <FormGroup className="has-wrapper">
                                  <Input
                                     value={comfpass}
-                                    type={comfpassToggle ? "text":"password"}
+                                    type={comfpassToggle ? "text" : "password"}
                                     name="user-pwd"
                                     id="pwd2"
                                     className="has-input input-lg"
@@ -320,32 +347,32 @@ if (name.trim() == ''  && email.trim() == '' && password.trim() == '' && comfpas
                                     onChange={(event) => setComfpass(event.target.value)}
                                  />
                                  {/* <span className="has-icon"><i className="ti-lock"></i></span> */}
-                                 <span onClick={()=> setComfpassToggle(!comfpassToggle)} className="has-icon"><i className="ti-eye"></i></span>
+                                 <span onClick={() => setComfpassToggle(!comfpassToggle)} className="has-icon"><i className="ti-eye"></i></span>
                               </FormGroup>
                               {
                                  show && <p className='error'>{comfpassError}</p>
                               }
-                              
+
                               <FormGroup className="mb-15">
                                  <Button
                                     color="primary"
                                     className="btn-block text-white w-50 theme-background"
-                                     variant="contained"
+                                    variant="contained"
                                     size="large"
                                     onClick={onUserSignUp}
                                  >
-                                   {str.SignupText}
+                                    {str.SignupText}
                                  </Button>
 
                               </FormGroup>
-                             
+
                               {/* <a style={{ cursor: "pointer" }} className="text-theme" onClick={goToForgotPassword}>Forgot Password?</a> */}
-                             <p style={{marginTop:"8px"}}>{str.PrivacyPolicyText}</p>
+                              <p style={{ marginTop: "8px" }}>{str.PrivacyPolicyText}</p>
                            </Form>
-                          
+
                         </div>
                      </div>
-                     
+
                   </div>
                </div>
             </div>

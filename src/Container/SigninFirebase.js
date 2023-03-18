@@ -39,7 +39,7 @@ const auth = new Auth();
 function Signin(props) {
 
    const history = useHistory();
-   const [check,setChecked]=useState(false);
+   const [check, setChecked] = useState(false);
    const [name, setName] = useState('');
    const [password, setPassword] = useState('');
    const dispatch = useDispatch();
@@ -47,10 +47,10 @@ function Signin(props) {
    const [show, setShow] = useState(false);
    const [nameError, setNameError] = useState('');
    const [passError, setPassError] = useState('');
-   const [passToggle,setpassToggle]=  useState(false);
+   const [passToggle, setpassToggle] = useState(false);
 
    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-   const regexname = /^[a-zA-Z '.-]*$/ ;
+   const regexname = /^[a-zA-Z '.-]*$/;
    const regexpassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 
@@ -62,7 +62,7 @@ function Signin(props) {
          history.push("/signin")
       }
    }, [])
-   
+
    const onUserSignUp = () => {
       props.history.push('/signup');
    }
@@ -71,7 +71,7 @@ function Signin(props) {
       props.history.push('/forgotpwd');
    }
 
-   
+
 
 
 
@@ -79,6 +79,7 @@ function Signin(props) {
    const onUserLogin = () => {
       setNameError('');
       setPassError('');
+      setShow(true);
       if (name.trim() == '' && password.trim() == '') {
          setNameError(str.MandotoryField);
          setPassError(str.MandotoryField);
@@ -86,38 +87,44 @@ function Signin(props) {
 
       } else {
 
-         if(regexname.test(name.trim()) != true ){
-            setNameError(str.InvalidName);
-           }else if(regexpassword.test(password.trim()) != true){
-             setPassError(str.InvalidEmail) 
-           }else if(check != true){
-            NotificationManager.warning(str.checkedboxWarning);
-          }else{
-           
-             login(name, password).then((res) => {
-                   if (res?.data?.token) {
-                      localStorage.setItem('token', JSON.stringify(res.data.token));
-                      localStorage.setItem("isLoggedIn", JSON.stringify(true))
-                      localStorage.setItem("user_id", "user-id");
-                      localStorage.setItem("user_type", JSON.stringify("admin"));
-    
-                      dispatch({ type: LOGIN_USER_SUCCESS, payload: localStorage.getItem('user_id') });
-                      history.push('/app/dashboard/saas');
-                      NotificationManager.success('User Login Successfully!');
-                      setShow(false);
-                      setNameError('');
-                      setPassError('');
-                   }else if(res?.data?.error){
-                     NotificationManager.error(res?.data?.error);
+         // if(regexname.test(name.trim()) != true ){
+         //    setNameError(str.InvalidName);
+         //   }else
+         if (regexpassword.test(password.trim()) != true) {
+            setPassError(str.InvalidPassword)
+         } else {
 
-                   }else{
-                      setShow(false);
-               
-                   }
-             }).catch(err => {
-                NotificationManager.error(err?.response?.data?.non_field_errors?.[0]);
-             });
-           }
+            login(name, password).then((res) => {
+               if (res?.data?.token) {
+                  localStorage.setItem('token', JSON.stringify(res.data.token));
+                  localStorage.setItem("isLoggedIn", JSON.stringify(true))
+                  localStorage.setItem("user_id", "user-id");
+                  localStorage.setItem("user_type", JSON.stringify("admin"));
+
+                  dispatch({ type: LOGIN_USER_SUCCESS, payload: localStorage.getItem('user_id') });
+                  history.push('/app/dashboard/saas');
+                  NotificationManager.success('User Login Successfully!');
+                  setShow(false);
+                  setNameError('');
+                  setPassError('');
+               } else if (res?.data?.error) {
+                  NotificationManager.error(res?.data?.error);
+
+               } else {
+                  setShow(false);
+
+               }
+            }).catch(err => {
+               console.log("err:", err)
+               if (err?.response?.data?.non_field_errors?.[0]) {
+
+                  NotificationManager.error(err?.response?.data?.non_field_errors?.[0]);
+               } else {
+                  NotificationManager.error("login failed");
+
+               }
+            });
+         }
 
 
       }
@@ -131,18 +138,18 @@ function Signin(props) {
             <title>Automaton | Sign-In</title>
             <meta name="description" content="Automaton Widgets" />
          </Helmet>
-        <div className="rct-session-wrapper">
+         <div className="rct-session-wrapper">
             {loading &&
                <LinearProgress />
             }
             <AppBar position="static" className="session-header">
-            <Toolbar>
+               <Toolbar>
                   <div className="container">
                      <div className="d-flex justify-content-between align-items-center">
                         <div className="session-logo">
                            <Link to="/signin">
-                          
-                              <img src={AppConfig.appLogo} className="img-fluid" alt="session-logo"  width="250"/>
+
+                              <img src={AppConfig.appLogo} className="img-fluid" alt="session-logo" width="250" />
                            </Link>
                         </div>
                         <div className='d-flex align-items-center'>
@@ -153,7 +160,7 @@ function Signin(props) {
                               variant="contained "
                               className="text-white theme-background"
                            >
-                             {str.SignupText}
+                              {str.SignupText}
                            </Button>
                         </div>
                      </div>
@@ -169,10 +176,10 @@ function Signin(props) {
                               {/* <h2 className="font-weight-bold text-theme">{str.LoginText}</h2> */}
                            </div>
                            <Form>
-                           <div style={{textAlign:"start"}}>
-                              <p className="text-dark"> {str.NameField} <span className="has-icon"><i className="ti-star" style={{color:"red"}}></i></span> </p>
+                              <div style={{ textAlign: "start" }}>
+                                 <p className="text-dark"> {str.NameField} <span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
                               </div>
-                               
+
                               <FormGroup className="has-wrapper">
                                  <Input
                                     type="text"
@@ -190,40 +197,41 @@ function Signin(props) {
                                  show && <p className='error'>{nameError}</p>
                               }
 
-                              <div style={{textAlign:"start"}}>
-                              <p className="text-dark"> {str.PasswardField} <span className="has-icon"><i className="ti-star" style={{color:"red"}}></i></span> </p>
+                              <div style={{ textAlign: "start" }}>
+                                 <p className="text-dark"> {str.PasswardField} <span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
                               </div>
                               <FormGroup className="has-wrapper">
                                  <Input
                                     value={password}
-                                    type={passToggle ? "text":"password"}
+                                    type={passToggle ? "text" : "password"}
                                     name="user-pwd"
                                     id="pwd"
                                     className="has-input input-lg"
                                     // placeholder="Password"
                                     onChange={(event) => setPassword(event.target.value)}
                                  />
-                              
-                                
-                                 
-                                 <span onClick={()=> setpassToggle(!passToggle)} className="has-icon"><i className="ti-eye"></i></span>
-                                
+
+
+
+                                 <span onClick={() => setpassToggle(!passToggle)} className="has-icon"><i className="ti-eye"></i></span>
+
                               </FormGroup>
 
                               {
                                  show && <p className='error'>{passError}</p>
                               }
 
-                              <div style={{textAlign:"start"}}>
-                             
-                              <Checkbox
-                              checked={check}
-                               onChange={() => setChecked(!check)}
-                              
-                              color="default"
-                           />
+                              <div style={{ display: "flex" }}>
+
+                                 <Checkbox
+                                    checked={check}
+                                    onChange={() => setChecked(!check)}
+
+                                    color="default"
+                                 />
+                                 <h4 className="mt-2">Remember me</h4>
                               </div>
-                              
+
                               <FormGroup className="mb-15">
                                  <Button
                                     color="primary"
@@ -237,12 +245,12 @@ function Signin(props) {
 
                               </FormGroup>
                               <a style={{ cursor: "pointer" }} className="text-theme" onClick={goToForgotPassword}>{str.ForgotPassword}</a>
-                             
+
                            </Form>
-                          
+
                         </div>
                      </div>
-                     
+
                   </div>
                </div>
             </div>

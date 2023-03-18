@@ -37,6 +37,10 @@ const Dashboard = ({ match }) => (
          <Route path={`${match.url}/project`} component={AsyncProjectDashboardComponent} />
          <Route path={`${match.url}/userManagment`} component={AsyncUserManagmentDashboardComponent} />
 
+         {/* <Route path={`${match.url}/Admin/dashboard`} component={AsyncUserManagmentDashboardComponent} />
+         <Route path={`${match.url}/Admin/Coupon`} component={AsyncUserManagmentDashboardComponent} /> */}
+         
+
       </Switch>
    </div>
 );
