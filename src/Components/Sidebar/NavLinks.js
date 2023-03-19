@@ -225,9 +225,38 @@ let sidebarMenu = {
       //          "menu_title": "sidebar.500"
       //       }
       //    ]
-      // }
+      // }K
    ],
    category2: [
+      {
+         "menu_title": "sidebar.custmermangement",
+         "path": "/app/dashboard/Admin/CustomerManagement",
+         "new_item": false,
+         //  "menu_icon": "zmdi zmdi-accounts",
+
+      },
+      {
+         "menu_title": "sidebar.account",
+         "path": "/app/dashboard/Admin/account",
+         "new_item": false,
+         // "menu_icon": "zmdi zmdi-accounts",
+
+      },
+      {
+         "menu_title": "sidebar.project",
+         "path": "/app/dashboard/Admin/project",
+         "new_item": false,
+         //  "menu_icon": "zmdi zmdi-accounts",
+
+      },
+      {
+         "menu_title": "sidebar.report",
+         "path": "/app/dashboard/Admin/report",
+         "new_item": false,
+         //  "menu_icon": "zmdi zmdi-accounts",
+
+      },
+
       // {
       //    "menu_title": "sidebar.users",
       //    "menu_icon": "zmdi zmdi-accounts",

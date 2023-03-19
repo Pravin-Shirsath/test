@@ -32,9 +32,9 @@ function SidebarContent(){
  
   
    return (
-      <div className="rct-sidebar-nav mt-4">
+      <div className="rct-sidebar-nav mt-4 ">
          <nav className="navigation">
-            <List
+            {/* <List
                className="rct-mainMenu p-0 m-0 list-unstyled"
                // subheader={
                //    <ListSubheader className="side-title" component="li">
@@ -48,10 +48,10 @@ function SidebarContent(){
                      onToggleMenu={() => toggleMenu(menu, 'category1')}
                   />
                ))}
-            </List>
+            </List> */}
 
             {/******* Modal Category Created by us (still a copy of above, yet to work on) ***********/}
-            <List
+            {/* <List
                className="rct-mainMenu p-0 m-0 list-unstyled"
                // subheader={
                //    <ListSubheader className="side-title" component="li">
@@ -65,7 +65,22 @@ function SidebarContent(){
                      onToggleMenu={() => toggleMenu(menu, 'category7')}
                   />
                ))}
-            </List>
+            </List> */}
+           {
+            type == "customer" &&    <List
+            className="rct-mainMenu p-0 m-0 list-unstyled"
+            // subheader={<ListSubheader className="side-title" component="li"><IntlMessages id="sidebar.applications" /></ListSubheader>}
+         >
+            {sidebarMenus.category1.map((menu, key) => (
+               <NavMenuItem
+                  menu={menu}
+                  key={key}
+                  onToggleMenu={() => toggleMenu(menu, 'category2')}
+               />
+            ))}
+         </List> 
+           }
+         
            {
             type == "admin" &&    <List
             className="rct-mainMenu p-0 m-0 list-unstyled"
@@ -80,7 +95,6 @@ function SidebarContent(){
             ))}
          </List> 
            }
-         
             {/***********************************************/}
 
             {/* <List

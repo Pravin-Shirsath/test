@@ -178,7 +178,7 @@ function Header(props) {
             </ul>
           )}
         </div>
-        <ul className="navbar-right list-inline mb-0">
+        <ul className=" list-inline mb-0">
          
           <li
             className="list-inline-item summary-icon"

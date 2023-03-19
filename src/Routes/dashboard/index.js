@@ -15,17 +15,40 @@ import {
    AsyncAccountDashboardComponent,
    AsyncReportDashboardComponent,
    AsyncProjectDashboardComponent,
-   AsyncUserManagmentDashboardComponent
+   AsyncUserManagmentDashboardComponent,
+   AsyncAdminDashboardComponent,
+   AsyncAddCoupansComponent,
+   AsyncCustomerManagementComponent,
+   AsyncAdminAccountComponent,
+   AsyncAdminreportComponent,
+   AsyncAdminProjectComponent
 
 } from 'Components/AsyncComponent/AsyncComponent';
 
 
-const Dashboard = ({ match }) => (
+const Dashboard = ({ match }) =>{
+
+   const type = JSON.parse(localStorage.getItem('user_type'));
+
+
+return(
+      
+     
+
    <div className="dashboard-wrapper">
    
       <Switch>
          {/* <Redirect exact from={`${match.url}/`} to={`${match.url}/ecommerce`} /> */}
-         <Redirect exact from={`${match.url}/`} to={`${match.url}/saas`} />
+         
+        
+         {
+            type === "customer" && <Redirect exact from={`${match.url}/`} to={`${match.url}/saas`} />
+          
+         }
+
+         {
+            type === "admin"   && <Redirect exact from={`${match.url}/`} to={`${match.url}/Admin/Dashboard`} />
+         }
          <Route path={`${match.url}/saas`} component={AsyncSaasDashboardComponent} />
          <Route path={`${match.url}/scenarioplanning`} component={AsyncScenarioPlanningDashboardComponent} />
          <Route path={`${match.url}/ecommerce`} component={AsyncEcommerceDashboardComponent} />
@@ -36,13 +59,18 @@ const Dashboard = ({ match }) => (
          <Route path={`${match.url}/report`} component={AsyncReportDashboardComponent} />
          <Route path={`${match.url}/project`} component={AsyncProjectDashboardComponent} />
          <Route path={`${match.url}/userManagment`} component={AsyncUserManagmentDashboardComponent} />
+         
 
-         {/* <Route path={`${match.url}/Admin/dashboard`} component={AsyncUserManagmentDashboardComponent} />
-         <Route path={`${match.url}/Admin/Coupon`} component={AsyncUserManagmentDashboardComponent} /> */}
+         <Route path={`${match.url}/Admin/Dashboard`} component={AsyncAdminDashboardComponent} />
+         <Route path={`${match.url}/Admin/Coupons`} component={AsyncAddCoupansComponent} />
+         <Route path={`${match.url}/Admin/CustomerManagement`} component={AsyncCustomerManagementComponent} />
+         <Route path={`${match.url}/Admin/Account`} component={AsyncAdminAccountComponent} />
+         <Route path={`${match.url}/Admin/Report`} component={AsyncAdminreportComponent} />
+         <Route path={`${match.url}/Admin/Project`} component={AsyncAdminProjectComponent} />
          
 
       </Switch>
    </div>
-);
+)};
 
 export default Dashboard;

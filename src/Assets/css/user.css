@@ -43,10 +43,53 @@
 
 
 }
+/* my user image name aand dropdown */
+.userInfoMainWrapper{
+    /* background-color: yellow; */
+    display: flex;
+    height: 60px;
+}
+.userNameWrapper{
+    /* background-color: aquamarine; */
+  
+    width: 210px;
+    display: flex;
+}
+.userNameText{
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-wrap: anywhere;
+}
+.DropDownIcon{
+    margin-left: 3px;
+    width: 17px;
+    height: 17px;
+    /* background-color: black; */
+}
 .myprofile-block100{
     padding: 10px  !important;
-    background-color: #3d76a8 !important;
+    background-color: #1a4d79 !important;
     border-radius: 8px !important; 
+    width: 250px;;
+    /* max-width: fit-content; */
+    height: 50px;
+  
+}
+.userProfileWrapper{
+    /* background-color: green; */
+    width: 27%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.userEmailWrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .rct-sidebar .user-profile > img {

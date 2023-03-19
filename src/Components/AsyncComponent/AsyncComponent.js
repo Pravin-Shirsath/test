@@ -36,10 +36,49 @@ const AsyncProjectDashboardComponent = Loadable({
 	loader: () => import("Routes/dashboard/project"),
 	loading: () => <RctPageLoader />,
 });
+
 const AsyncUserManagmentDashboardComponent = Loadable({
 	loader: () => import("Routes/dashboard/userManagment"),
 	loading: () => <RctPageLoader />,
 });
+
+// Admin Dashboard 
+
+const AsyncAdminDashboardComponent = Loadable({
+	loader: () => import("Routes/dashboard/Admin/AdminDashboard"),
+	loading: () => <RctPageLoader />,
+});
+
+const AsyncAddCoupansComponent = Loadable({
+	loader: () => import("Routes/dashboard/Admin/AddCoupans"),
+	loading: () => <RctPageLoader />,
+});
+
+
+
+const AsyncCustomerManagementComponent = Loadable({
+	loader: () => import("Routes/dashboard/Admin/CustomerManagement"),
+	loading: () => <RctPageLoader />,
+});
+
+const AsyncAdminAccountComponent = Loadable({
+	loader: () => import("Routes/dashboard/Admin/account"),
+	loading: () => <RctPageLoader />,
+});
+
+const AsyncAdminreportComponent = Loadable({
+	loader: () => import("Routes/dashboard/Admin/report"),
+	loading: () => <RctPageLoader />,
+});
+
+
+const AsyncAdminProjectComponent = Loadable({
+	loader: () => import("Routes/dashboard/Admin/project"),
+	loading: () => <RctPageLoader />,
+});
+
+
+
 
 // agency dashboard
 const AsyncSaasDashboardComponent = Loadable({
@@ -677,5 +716,11 @@ export {
 	AsyncAccountDashboardComponent,
    AsyncReportDashboardComponent,
    AsyncProjectDashboardComponent,
-   AsyncUserManagmentDashboardComponent
+   AsyncUserManagmentDashboardComponent,
+   AsyncAdminDashboardComponent,
+   AsyncAddCoupansComponent,
+   AsyncCustomerManagementComponent,
+AsyncAdminAccountComponent,
+AsyncAdminreportComponent,
+AsyncAdminProjectComponent
 };

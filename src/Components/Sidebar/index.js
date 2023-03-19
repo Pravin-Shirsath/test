@@ -58,7 +58,7 @@ class Sidebar extends Component {
 		return (
 			<Fragment>
 				<div
-					className={classNames('rct-sidebar', { 'background-none': !enableSidebarBackgroundImage })}
+					className={classNames('rct-sidebar ', { 'background-none': !enableSidebarBackgroundImage })}
 					// style={{ backgroundImage: enableSidebarBackgroundImage ? `url(${selectedSidebarImage})` : 'none' }}
 				>
 					<div className={classNames("rct-sidebar-content", { "sidebar-overlay-dark": isDarkSidenav, 'sidebar-overlay-light': !isDarkSidenav })}>
@@ -73,7 +73,7 @@ class Sidebar extends Component {
 						</div>
 						<div className="rct-sidebar-wrap">
 							<Scrollbars
-								className="rct-scroll"
+								className="rct-scroll "
 								autoHide
 								autoHideDuration={100}
 								style={{ height: 'calc(100vh - 60px)' }}

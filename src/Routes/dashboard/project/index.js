@@ -30,7 +30,14 @@
      FollowersWidget,
      Notes
  } from "Components/Widgets";
- 
+ import { Progress ,Button,
+	Form,
+	FormGroup,
+	Label,
+	Input,
+	FormText,
+	Col,
+	FormFeedback} from 'reactstrap';
  // widgets data
  import {
      visitorsData,
@@ -39,6 +46,7 @@
      topSellingProducts,
      trafficStatus
  } from './data';
+import DoughnutChart from 'Components/Charts/DoughnutChart';
  
  export default function Project(props) {
     const { match } = props;
@@ -48,109 +56,49 @@
              <title>Project Dashboard</title>
              <meta name="description" content="Automaton Ecommerce Dashboard" />
           </Helmet>
-          <PageTitleBar title={<IntlMessages id="sidebar.ecommerce" />} match={match} />
-          <div className="row">
-             <div className="col-sm-6 col-md-4 w-xs-half-block">
-                <VisitorAreaChartWidget
-                   data={visitorsData}
-                />
-             </div>
-             <div className="col-sm-12 col-md-4 w-xs-half-block">
-                <OrdersAreaChartWidget
-                   data={ordersData}
-                />
-             </div>
-             <div className="col-sm-6 col-md-4 w-xs-full">
-                <SalesAreaChartWidget
-                   data={salesData}
-                />
-             </div>
-          </div>
-          <div className="row">
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-4 col-lg-4 w-xs-full"
-                heading={<IntlMessages id="widgets.supportRequest" />}
-                collapsible
-                reloadable
-                closeable
+          {/* <PageTitleBar title={<IntlMessages id="sidebar.ecommerce" />} match={match} /> */}
+             
+          <div className="row ">
+         {
+          [1,2,3].map((item,i)=>{
+             return <RctCollapsibleCard
+                
+                colClasses="col-sm-12 col-md-6 col-lg-4 "
+                heading={<section className=""> 
+                <h3>Project {i}</h3>
+                <p>Created by ABS on 04/03/22</p>
+                
+                </section>}
+                
                 fullBlock
-                customClasses="overflow-hidden"
+                key={i}
              >
-                <SupportRequest />
+             <section className="d-flex flex-direction: column align-items-center justify-content-between px-3">
+             <div className="">
+               <DoughnutChart />
+               </div>
+               <div>
+                 <h4>Dtaset details <span className="square border border-5 border-dark  px-4 py-1">05</span></h4>
+                 <h4 >Status <span className="square border border-5 border-dark  px-3 py-1 bg-info mx-5"></span></h4>
+               </div>
+
+             </section>
+             <section className="d-flex flex-direction: column align-items-center justify-content-center px-5 py-5 ">
+             <Button variant="contained" color="primary" className="text-white mx-5"  >Edit</Button>
+             <Button variant="contained" color="primary" className="text-white mx-5"  >view</Button>
+             <Button variant="contained" color="danger" className="text-white mx-5"  >delet</Button>
+
+             </section>
+              
              </RctCollapsibleCard>
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-8 col-lg-8 w-xs-full"
-                heading={<IntlMessages id="widgets.RecentOrders" />}
-                collapsible
-                reloadable
-                closeable
-                fullBlock
-             >
-                <RecentOrdersWidget />
-             </RctCollapsibleCard>
-          </div>
-          <div className="row">
-             <RctCollapsibleCard
-                customClasses="trafic-bar-chart"
-                colClasses="col-sm-12 col-md-12 col-lg-5 d-sm-full"
-                heading={<IntlMessages id="widgets.overallTrafficStatus" />}
-                collapsible
-                reloadable
-                closeable
-                fullBlock
-             >
-                <OverallTrafficStatusWidget
-                   chartData={trafficStatus}
-                />
-             </RctCollapsibleCard>
-             <div className="col-sm-12 col-md-12 col-lg-7 d-sm-full">
-                <div className="row">
-                   <div className="col-sm-6 col-md-6 col-lg-6">
-                      <div className="dash-cards">
-                         <Notes />
-                      </div>
-                      <NewOrderCountdown />
-                      <TodayOrdersStatsWidget />
-                   </div>
-                   <div className="col-sm-6 col-md-6 col-lg-6">
-                      <div className="dash-cards-lg">
-                         <OnlineVisitorsWidget />
-                      </div>
-                      <FollowersWidget />
-                      <BookingInfo />
-                   </div>
-                </div>
-             </div>
-          </div>
-          <div className="row">
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-4 col-lg-4 w-xs-full"
-                heading={<IntlMessages id="widgets.productReports" />}
-                collapsible
-                reloadable
-                closeable
-                fullBlock
-             >
-                <ProductReportsWidget />
-             </RctCollapsibleCard>
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-4 col-lg-4 w-xs-full"
-                fullBlock
-                customClasses="overflow-hidden"
-             >
-                <Notifications />
-             </RctCollapsibleCard>
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-4 col-lg-4 w-xs-full"
-                heading={<IntlMessages id="widgets.topSellings" />}
-                collapsible
-                reloadable
-                closeable
-                fullBlock
-             >
-                <TopSellingWidget data={topSellingProducts} />
-             </RctCollapsibleCard>
-          </div>
+          })
+         }
+       
+            
+           
+       </div>
+        
+         
        </div>
     )
  }

@@ -1,7 +1,11 @@
 .app-header .rct-header {
-    background-color: #0b3d45cf !important;
+    background-color: #0b3d45cf !important; 
 }
 
 .humburger, .header-icon {
     color:#fff !important;
 }
+/* 
+    background-color: #0b3d45cf !important;
+
+*/

@@ -3,6 +3,7 @@ module.exports = {
    "sidebar.account": "Account",
    "sidebar.project": "Project",
    "sidebar.usermangement": "User Management",
+   "sidebar.custmermangement": "Customer Management",
    "sidebar.news": "News",
    "sidebar.horizontal": "Horizontal",
    "sidebar.horizontalMenu": "Horizontal Menu",

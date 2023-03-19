@@ -50,14 +50,53 @@ function Signin(props) {
    const [passToggle, setpassToggle] = useState(false);
 
    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-   const regexname = /^[a-zA-Z '.-]*$/;
+   const regexname = /^[a-zA-Z0-9/@/./+/-/_]*$/
    const regexpassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  
+   let type = JSON.parse(localStorage.getItem('user_type'));
+
+  
+
+
 
 
    useEffect(() => {
+
+      const checkCredentials = JSON.parse(localStorage.getItem('rememberMe'));
+  
+
+      if (checkCredentials) {
+      
+      if (checkCredentials?.username !== "" && checkCredentials?.password !== "") {
+      
+         setName(checkCredentials.username);
+      
+         setPassword(checkCredentials.password)
+      
+      }
+      
+      }
+
+
+
+
       const isLoggedInBool = localStorage.getItem("isLoggedIn")
+     
       if (isLoggedInBool === "true") {
-         history.push('/app/dashboard/saas');
+        
+         if(type === "admin"){
+      
+            history.push("/app/dashboard/Admin/Dashboard")
+          }
+         
+          
+          if(type === "customer"){
+      
+            history.push('/app/dashboard/saas');
+          }
+          
+        
+    
       } else {
          history.push("/signin")
       }
@@ -87,22 +126,38 @@ function Signin(props) {
 
       } else {
 
-         // if(regexname.test(name.trim()) != true ){
-         //    setNameError(str.InvalidName);
-         //   }else
+         if(regexname.test(name.trim()) != true ){
+            setNameError('User name must contain only  alpha-numeric character and no spacings!');
+           }else
          if (regexpassword.test(password.trim()) != true) {
             setPassError(str.InvalidPassword)
          } else {
+
+            if (check == true) {
+
+               localStorage.setItem('rememberMe', JSON.stringify({ "username": name, "password": password }))
+               // NotificationManager.success('save the credentials!');
+               }
 
             login(name, password).then((res) => {
                if (res?.data?.token) {
                   localStorage.setItem('token', JSON.stringify(res.data.token));
                   localStorage.setItem("isLoggedIn", JSON.stringify(true))
                   localStorage.setItem("user_id", "user-id");
-                  localStorage.setItem("user_type", JSON.stringify("admin"));
+                  localStorage.setItem("user_type", JSON.stringify(res?.data?.user?.user_type));
 
                   dispatch({ type: LOGIN_USER_SUCCESS, payload: localStorage.getItem('user_id') });
-                  history.push('/app/dashboard/saas');
+                  
+                  if(res?.data?.user?.user_type === "admin"){
+                   history.push("app/dashboard/Admin/Dashboard")
+                  
+                  }
+
+                   if(res?.data?.user?.user_type === "customer"){
+                     history.push('/app/dashboard/saas');
+                   }
+
+                  
                   NotificationManager.success('User Login Successfully!');
                   setShow(false);
                   setNameError('');
@@ -153,7 +208,8 @@ function Signin(props) {
                            </Link>
                         </div>
                         <div className='d-flex align-items-center'>
-                           <Link to="/signup" className="mr-15 text-theme">{str.NewUser}</Link>
+                           
+                           <h4  className="mr-15 mt-2 text-theme">{str.NewUser}</h4>
                            <Button
                               component={Link}
                               to="/signup"
@@ -177,7 +233,7 @@ function Signin(props) {
                            </div>
                            <Form>
                               <div style={{ textAlign: "start" }}>
-                                 <p className="text-dark"> {str.NameField} <span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
+                                 <p className="text-dark"> {str.NameField} <span style={{ color: "red" }}>*</span> </p>
                               </div>
 
                               <FormGroup className="has-wrapper">
@@ -198,7 +254,7 @@ function Signin(props) {
                               }
 
                               <div style={{ textAlign: "start" }}>
-                                 <p className="text-dark"> {str.PasswardField} <span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
+                                 <p className="text-dark"> {str.PasswardField} <span style={{ color: "red" }}>*</span></p>
                               </div>
                               <FormGroup className="has-wrapper">
                                  <Input

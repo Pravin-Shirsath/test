@@ -51,6 +51,7 @@ const handleAuthentication = ({ location }) => {
       auth.handleAuthentication();
    }
 }
+
 /**
  * Initial Path To Check Whether User Is Logged In Or Not
  */
@@ -101,11 +102,22 @@ function App(props) {
    //    }
    // })
 // conditional rendring
+
+
+const type = JSON.parse(localStorage.getItem('user_type'));
+   
    if (location.pathname === '/') {
       if (user === null && accessToken === null) {
          return (<Redirect to={'/signin'} />);
       } else {
-         return (<Redirect to={'/app/dashboard/saas'} />);
+          
+          if(type === "customer"){
+
+             return (  <Redirect to={'/app/dashboard/saas'} /> );
+          }else  if(type === "admin"){
+
+            return (  <Redirect to={'/app/dashboard/Admin/Dashboard'} /> );
+         }
       }
    }
    return (

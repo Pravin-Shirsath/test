@@ -48,6 +48,9 @@ function UserBlockHorizontal(props) {
 
    const logoutUser = () => {
       const accessToken = JSON.parse(localStorage.getItem('token'));
+      const checkCredentials = JSON.parse(localStorage.getItem('rememberMe'));
+    
+
       // console.log("Token", accessToken)
       if (accessToken !== null) {
          logOut(accessToken)
@@ -61,6 +64,8 @@ function UserBlockHorizontal(props) {
                   localStorage.removeItem('user_type');
                   localStorage.removeItem('isLoggedIn');
                   localStorage.clear();
+                   localStorage.setItem('rememberMe', JSON.stringify(checkCredentials))
+
                   NotificationManager.success('User Logout Successfully');
                }
                else {
@@ -70,7 +75,7 @@ function UserBlockHorizontal(props) {
                }
 
             }).catch(err => {
-               console.log("errr====",err)
+               console.log("errr====", err)
                dispatch({ type: LOGIN_USER_FAILURE });
                NotificationManager.error('Unable to logout');
                console.log(err);
@@ -96,7 +101,7 @@ function UserBlockHorizontal(props) {
    }
 
    useEffect(() => {
-      getProfileInfo();     
+      getProfileInfo();
    }, [])
 
 
@@ -146,7 +151,7 @@ function UserBlockHorizontal(props) {
       console.log(open, "open");
       setOpen(true);
 
-      
+
    };
 
    const handleClose = () => {
@@ -156,7 +161,7 @@ function UserBlockHorizontal(props) {
       setOpen(false);
    };
 
- 
+
    // const authKey = localStorage.getItem("auth_key");
    const resetPassword = () => {
       let regexFormat = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/
@@ -193,7 +198,7 @@ function UserBlockHorizontal(props) {
                      history.push("/signin");
                      //  NotificationManager.success('Password changed successfully!');   
                      NotificationManager.success(res?.data?.detail);
-                    
+
                      setOldPassword("");
                      setNewPassword("");
                      setRePassword("");
@@ -241,7 +246,7 @@ function UserBlockHorizontal(props) {
 
    return (
       <div className="top-sidebar">
-      <div className="sidebar-user-block profile-block" >
+         <div className="sidebar-user-block profile-block" >
             <Dropdown
                isOpen={userDropdownMenu}
                toggle={() => toggleUserDropdownMenu()}
@@ -251,28 +256,36 @@ function UserBlockHorizontal(props) {
                   tag="div"
                   className="d-flex align-items-center g-2  myprofile-block100"
                >
-                  <div className="user-profile">
-                     <img
-                         src={`${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg`}
-                         alt="user profile"
-                         className="img-fluid rounded-circle"
-                         width="50"
-                         height="100"
-                      />
-                  </div>
-                  <div className="user-info flex-column d-flex">
-                     <span className="user-name ml-4 text-white">{profileData?.first_name} {profileData?.last_name}</span>
-                     <span className="user-name ml-4 text-white">{profileData?.email}</span>
+                  <div className="userInfoMainWrapper" >
 
-                  </div>
-                  <i className="zmdi zmdi-chevron-down dropdown-icon text-white" style={{ marginLeft: '16px' }} ></i>
+                        <div className="userProfileWrapper">
 
+
+                        <img
+                           src={`${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg`}
+                           alt="user profile"
+                           className="img-fluid rounded-circle"
+                           width={40}
+                           height={40}
+                        />
+                         </div>
+                   
+
+                     <div className="userNameWrapper">
+                        {/* <span className="user-name ml-4 text-white">{profileData?.first_name} {profileData?.last_name}</span> */}
+                        
+                      <span className="userEmailWrap">  <span className="userNameText" >{profileData?.username}</span> </span>
+                      
+                     </div>
+                  </div>
+
+                  <i className="zmdi zmdi-chevron-down dropdown-icon text-white DropDownIcon "></i> 
                </DropdownToggle>
                <DropdownMenu style={{ left: '65px', top: '5px' }}>
                   <ul className="list-unstyled mb-0 profile-block-wrap" >
                      <li className="p-15 border-bottom user-profile-top userBlockHorizontalDropdown">
                         <p className="text-white mb-0 fs-14">{profileData?.username}</p>
-                        <span className="text-white fs-14">{profileData?.email}</span>
+                        <span className="text-white fs-14">k</span>
                      </li>
                      <li>
                         <Link to={{
@@ -320,7 +333,7 @@ function UserBlockHorizontal(props) {
                   <Form>
                      <FormGroup>
                         <Label for="oldPassword">Old Password</Label>
-                        <Input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} type="password" name="password" id="oldPassword" placeholder="old password" className="py-3"/>
+                        <Input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} type="password" name="password" id="oldPassword" placeholder="old password" className="py-3" />
                         <Label>{validateOld ? "" : <span style={{ color: "red", marginLeft: "15px" }}>old password not matched</span>}</Label>
                      </FormGroup>
 

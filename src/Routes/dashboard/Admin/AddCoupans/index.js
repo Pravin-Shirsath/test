@@ -3,7 +3,7 @@ import React from 'react'
 const AddCoupan = () => {
   return (
     <div>
-      create coupon
+      create couponap
     </div>
   )
 }

@@ -2,7 +2,7 @@
  * Ecommerce Dashboard
  */
 
- import React from 'react'
+ import React ,{useEffect}from 'react'
  import { Helmet } from "react-helmet";
 //  import Button from '@material-ui/core/Button';
  import { Progress ,Button,
@@ -44,11 +44,30 @@ import { str } from 'Constants/stringConst';
 import { OverallTrafficStatusWidget, SupportRequest } from 'Components/Widgets';
 import ProjectCard from '../ReuseComponent/ProjectCard';
 import DoughnutChart from 'Components/Charts/DoughnutChart';
+import { useHistory } from 'react-router';
 
  
  export default function SaasDashbaord(props) {
     const { match } = props;
-    return (
+    const history = useHistory();
+   
+    const type = JSON.parse(localStorage.getItem('user_type'));
+    if(type === "admin"){
+      
+      history.push("app/dashboard/Admin/Dashboard")
+    }
+
+
+
+
+
+   //  alert("hello")
+    useEffect(() => {
+
+     
+      console.log("type", type);
+    }, [])
+     return (
        <div className="ecom-dashboard-wrapper">
           <Helmet>
              <title>user Dashboard</title>

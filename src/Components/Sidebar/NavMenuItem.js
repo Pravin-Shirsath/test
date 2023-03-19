@@ -30,8 +30,8 @@ function NavMenuItem(props){
    
    if (menu.child_routes != null) {
       return (
-         <Fragment>
-            <ListItem button component="li" onClick={onToggleMenu} className={`list-item ${classNames({ 'item-active': menu.open })}`}>
+         <Fragment >
+            <ListItem button component="li" onClick={onToggleMenu} className={`list-item   ${classNames({ 'item-active': menu.open })}`}>
                <ListItemIcon className="menu-icon">
                   <i className={menu.menu_icon}></i>
                </ListItemIcon>
@@ -113,16 +113,22 @@ function NavMenuItem(props){
       )
    }
    return (
+      <div >
+
+
       <ListItem button component="li">
-         <NavLink activeClassName="item-active" to={menu.path}>
+         <NavLink activeClassName="item-active " to={menu.path}>
+          <div style={{padding:"15px"}}>
             <ListItemIcon className="menu-icon">
                <i className={menu.menu_icon}></i>
             </ListItemIcon>
             <span className="menu">
                <IntlMessages id={menu.menu_title} />
             </span>
+            </div>
          </NavLink>
       </ListItem>
+      </div>
    );
 }
 

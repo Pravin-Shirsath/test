@@ -51,7 +51,7 @@ function SignupFirebase(props) {
    const [comfpassToggle, setComfpassToggle] = useState(false);
 
    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-   const regexname = /^[a-zA-Z]{1,30}$/;
+   const regexname = /^[a-zA-Z0-9/@/./+/-/_]*$/;
    const regexpassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
    const history = useHistory();
@@ -77,9 +77,9 @@ function SignupFirebase(props) {
         
        
         
-         // if (regexname.test(name.trim()) != true) {
-         //    setNameError('User name must contain only alphabet and no spacings!');
-         // } else 
+         if (regexname.test(name.trim()) != true) {
+            setNameError('User name must contain only  alpha-numeric character and no spacings!');
+         } else 
          if (emailRegex.test(email.trim()) != true) {
             setEmailError(str.InvalidEmail);
          } else if (regexpassword.test(password.trim()) != true) {
@@ -246,8 +246,8 @@ function SignupFirebase(props) {
                               <img src={AppConfig.appLogo} className="img-fluid" alt="session-logo" width="250" />
                            </Link>
                         </div>
-                        <div className='d-flex align-items-center'>
-                           <Link to="/signin" className="mr-15 text-theme">{str.AlreadyAccountText}</Link>
+                        <div className='d-flex align-items-center justify-contain-center'>
+                           <h4  className="mr-15 mt-2 text-theme">{str.AlreadyAccountText}</h4>
                            <Button
                               component={Link}
                               to="/signin"
@@ -271,7 +271,7 @@ function SignupFirebase(props) {
                            </div>
                            <Form>
                               <div style={{ textAlign: "start" }}>
-                                 <p className="text-dark">  {str.NameField} <span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
+                                 <p className="text-dark">  {str.NameField} <span style={{ color: "red" }}>*</span> </p>
                               </div>
 
                               <FormGroup className="has-wrapper">
@@ -291,7 +291,7 @@ function SignupFirebase(props) {
                                  show && <p className='error'>{nameError}</p>
                               }
                               <div style={{ textAlign: "start" }}>
-                                 <p className="text-dark"> {str.emailField} <span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
+                                 <p className="text-dark"> {str.emailField} <span style={{ color: "red" }}>*</span> </p>
                               </div>
                               <FormGroup className="has-wrapper">
                                  <Input
@@ -311,7 +311,7 @@ function SignupFirebase(props) {
                                  show && <p className='error'>{emailError}</p>
                               }
                               <div style={{ textAlign: "start" }}>
-                                 <p className="text-dark">{str.PasswardField}<span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
+                                 <p className="text-dark">{str.PasswardField}<span style={{ color: "red" }}>*</span> </p>
                               </div>
                               <FormGroup className="has-wrapper">
                                  <Input
@@ -334,7 +334,7 @@ function SignupFirebase(props) {
                                  show && <p className='error'>{passError}</p>
                               }
                               <div style={{ textAlign: "start" }}>
-                                 <p className="text-dark">{str.ComfompasField} <span className="has-icon"><i className="ti-star" style={{ color: "red" }}></i></span> </p>
+                                 <p className="text-dark">{str.ComfompasField} <span style={{ color: "red" }}>*</span> </p>
                               </div>
                               <FormGroup className="has-wrapper">
                                  <Input

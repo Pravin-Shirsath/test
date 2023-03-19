@@ -256,13 +256,24 @@ export default function UserProfile(props) {
   const onViewGraph = (model) => {
     const selectedModalRefNo = model?.ref_no
     const accessToken = JSON.parse(localStorage.getItem('token'))
-
+    const type = JSON.parse(localStorage.getItem('user_type'));
     // console.log(selectedModalRefNo)
     handleClickOpenLoadingBox();
     plotGraph(accessToken, selectedModalRefNo)
       .then(res => {
         handleCloseLoadingBox();
-        history.push('/app/dashboard/saas');
+        if(type === "admin"){
+      
+          history.push("/app/dashboard/Admin/Dashboard")
+        }
+       
+        
+        if(type === "customer"){
+    
+          history.push('/app/dashboard/saas');
+        }
+        
+       
         // console.log("res from plot graph on view click", res.data);
         localStorage.setItem("graphData", JSON.stringify(res.data))
       })
