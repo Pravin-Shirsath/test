@@ -63,51 +63,52 @@ export default function UserProfile(props) {
   )
   //==================== MY update profile ====================//
 
-const ProfileApiCall=()=>{  
+const ProfileApiCall=(ProfileDetails)=>{  
+  console.log("Profile_Details==",ProfileDetails)
   const accessToken = JSON.parse(localStorage.getItem('token'))
-
+    
     if (accessToken !== null) {
 
       NotificationManager.success('Profile Updated Successfully!');
+    
+  updateProfileInfo(firstName, lastName, email.toLowerCase(), phone, accessToken)
+    .then((res) => {
+      if (res?.status === 200) {
+        console.log('Response from update profile:', res)
+        setShow(false)
+        setFirstNameError('')
+        setLastNameError('')
+        setEmailError('')
+        setPhoneError('')
+        setCompanyNameError("")
+        setTaxNumberError("")
+        setBillingAddressError("")
 
-  // updateProfileInfo(firstName, lastName, email.toLowerCase(), phone, accessToken)
-  //   .then((res) => {
-  //     if (res?.status === 200) {
-  //       console.log('Response from update profile:', res)
-  //       setShow(false)
-  //       setFirstNameError('')
-  //       setLastNameError('')
-  //       setEmailError('')
-  //       setPhoneError('')
-  //       setCompanyNameError("")
-  //       setTaxNumberError("")
-  //       setBillingAddressError("")
+        setFirstName('')
+        setLastName('')
+        setPhone('')
+        setEmail('')
 
-  //       setFirstName('')
-  //       setLastName('')
-  //       setPhone('')
-  //       setEmail('')
-
-  //       setCountry('')
-  //       setZipCode('')
-  //       setState('')
-  //       setCompanyName('')
-  //       setBillingAddress('')
-  //       setTaxNumber('')
-  //       setCompanyAddress('')
-  //       NotificationManager.success('Profile Updated Successfully!');
-  //       history.push('/app/dashboard/saas');
-  //       window.location.reload();
-  //     }
-  //   })
-  //   .catch((err) => {
+        setCountry('')
+        setZipCode('')
+        setState('')
+        setCompanyName('')
+        setBillingAddress('')
+        setTaxNumber('')
+        setCompanyAddress('')
+        NotificationManager.success('Profile Updated Successfully!');
+        history.push('/app/dashboard/saas');
+        window.location.reload();
+      }
+    })
+    .catch((err) => {
    
-  //     console.log('Update profile error :', err?.response)
-  //     console.log(err?.response?.data, "error data from user profile");
-  //     if (err?.response?.status === 400) {
-  //       NotificationManager.error(err?.response?.data?.email?.[0]);
-  //     }
-  //   })
+      console.log('Update profile error :', err?.response)
+      console.log(err?.response?.data, "error data from user profile");
+      if (err?.response?.status === 400) {
+        NotificationManager.error(err?.response?.data?.email?.[0]);
+      }
+    })
 }else{
   NotificationManager.error("accessToken not found");
 }
@@ -116,6 +117,7 @@ const ProfileApiCall=()=>{
 
 
   const updateProfile = () => {
+    const Profile_Details = {}
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const phoneRegex = /^\d{10}$/;  // /^[6789]\d{9}$/ (previous rule)
     const regexName = /^[a-zA-Z]{1,30}$/; // only alpha, no space, min-1, max-30
@@ -133,8 +135,18 @@ const ProfileApiCall=()=>{
       setBillingAddressError("")
      
      
-      // const phoneNumbervalidation = parsePhoneNumber(phone+"")
- 
+      if(country != ""){
+        Profile_Details.country = country
+      }
+      if( state != "" ) {
+        Profile_Details.state =state
+      }
+      if(zipCode != ""){
+        Profile_Details.zip_code = zipCode
+      }
+      if (companyAddress != ""){
+        Profile_Details.company_address = companyAddress
+      }
 
       if (regexName.test(firstName.trim())) {
         if (regexName.test(lastName.trim())) {
@@ -143,18 +155,22 @@ const ProfileApiCall=()=>{
             
             if (emailRegex.test(email.trim(""))) {
              if(TaxnumberRegex.test(taxNumber+"".trim(""))){
-             
-              if(zipCode != ""){
-                if(isValidZip.test(zipCode.trim(""))){
-                NotificationManager.error("Invalid Zip-Code format!");
+              
 
-                }else{
-                  ProfileApiCall()
-                }
-              }else{
-                ProfileApiCall()
-              }
-          
+
+
+              Profile_Details.first_name=firstName
+              Profile_Details.last_name=lastName
+              Profile_Details.mobile_number=phone
+              Profile_Details.email= email
+              Profile_Details.company_name= companyName
+              Profile_Details.billing_address=billingAddress
+              Profile_Details.tax_number=taxNumber
+
+
+              
+              
+              ProfileApiCall(Profile_Details)
              }else{
               NotificationManager.error("Invalid Tax format!");
              }
@@ -242,9 +258,9 @@ const ProfileApiCall=()=>{
               <Col sm={6} >
                 <Col sm={12} className="d-flex ">
                   <Label for="firstName" sm={3} className="d-flex">
-                    First Name
+                    First Name <span className="text-danger">*</span>
                   </Label>
-                  <span className="text-danger">*</span>
+                 
                   <Input
                     type="text"
                     name="firstname"
@@ -264,9 +280,9 @@ const ProfileApiCall=()=>{
               <Col sm={6} >
                 <Col sm={12} className="d-flex ">
                   <Label for="lastName" sm={3} className="d-flex">
-                    Last Name
+                    Last Name <span className="text-danger">*</span>
                   </Label>
-                  <span className="text-danger">*</span>
+                 
                   <Input
                     type="text"
                     name="lastName"
@@ -291,9 +307,9 @@ const ProfileApiCall=()=>{
               <Col sm={6} >
                 <Col sm={12} className="d-flex ">
                   <Label for="email" sm={3} className="d-flex">
-                    Email Id
+                    Email Id <span className="text-danger">*</span>
                   </Label>
-                  <span className="text-danger">*</span>
+                 
                   <Input
                     type="text"
                     name="email"
@@ -315,8 +331,8 @@ const ProfileApiCall=()=>{
                     State
                   </Label>
                   <RegionDropdown
-                    classes="w-100 form-control form-control-lg"
-                    style={{ fontSize: '19px', type: "text" }}
+                    classes="w-100 form-control form-control-lg text-md"
+                     style={{ fontSize: '16px', type: "text" }}
                     country={country}
                     value={state}
                     onChange={(val) => (setState(val), console.log(val))} />
@@ -379,6 +395,7 @@ const ProfileApiCall=()=>{
                     value={zipCode}
                     onChange={(e) => setZipCode(e.target.value)}
                     sm={9}
+                    disabled={ state.length > 0 ? false : true}
                   />
                 </Col>
                 <div className="d-flex align-item-center justify-content-center">
@@ -394,9 +411,9 @@ const ProfileApiCall=()=>{
               <Col sm={6} >
                 <Col sm={12} className="d-flex ">
                   <Label for="phone" sm={3} className="d-flex">
-                    Phone
+                    Phone <span className="text-danger">*</span>
                   </Label>
-                  <span className="text-danger">*</span>
+                 
                   <PhoneInput
                     placeholder="Enter phone number"
                     value={phone}
@@ -446,9 +463,9 @@ const ProfileApiCall=()=>{
               <Col sm={6} >
                 <Col sm={12} className="d-flex ">
                   <Label for="companyName" sm={3} className="d-flex">
-                    Company Name
+                    Company Name <span className="text-danger">*</span>
                   </Label>
-                  <span className="text-danger">*</span>
+                 
                   <Input
                     type="text"
                     name="companyName"
@@ -468,9 +485,9 @@ const ProfileApiCall=()=>{
               <Col sm={6} >
                 <Col sm={12} className="d-flex ">
                   <Label for="billingAddress" sm={3} className="d-flex">
-                    Billing Address
+                    Billing Address <span className="text-danger">*</span>
                   </Label>
-                  <span className="text-danger">*</span>
+                 
                   <Input
                     // type="text"
                     style={{ height: 120 }}
@@ -497,9 +514,9 @@ const ProfileApiCall=()=>{
               <Col sm={6} >
                 <Col sm={12} className="d-flex ">
                   <Label for="taxNumber" sm={3} className="d-flex">
-                    Tax Number
+                    Tax Number <span className="text-danger">*</span>
                   </Label>
-                  <span className="text-danger">*</span>
+                 
                   <Input
                     type="text"
                     name="taxNumber"
@@ -518,7 +535,7 @@ const ProfileApiCall=()=>{
               <Col sm={6} >
                 <Col sm={12} className="d-flex ">
                   <Label for="companyAddress" sm={3}>
-                    company Address
+                    Company Address
                   </Label>
                   <Input
                     // type="text"

@@ -285,10 +285,10 @@ function UserBlockHorizontal(props) {
                   <i className="zmdi zmdi-chevron-down dropdown-icon text-white DropDownIcon "></i> 
                </DropdownToggle>
                <DropdownMenu style={{ left: '65px', top: '5px' }}>
-                  <ul className="list-unstyled mb-0 profile-block-wrap" >
-                     <li className="p-15 border-bottom user-profile-top userBlockHorizontalDropdown">
-                        <p className="text-white mb-0 fs-14">{profileData?.username}</p>
-                        <span className="text-white fs-14">{profileData?.email}</span>
+                  <ul className="list-unstyled mb-0 profile-block-wrap " >
+                     <li className="p-15 border-bottom user-profile-top userBlockHorizontalDropdown ">
+                        <p className="text-white mb-0 fs-14 userNameText">{profileData?.username}</p>
+                        <span className="text-white fs-14 userNameText">{profileData?.email}</span>
                      </li>
                      <li>
                         <Link to={{
