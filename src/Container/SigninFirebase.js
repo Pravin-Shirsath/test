@@ -277,7 +277,8 @@ function Signin(props) {
                                  show && <p className='error'>{passError}</p>
                               }
 
-                              <div style={{ display: "flex" }}>
+                              <div style={{ display: "flex" ,alignItems:"center"}}>
+                                  <div >
 
                                  <Checkbox
                                     checked={check}
@@ -285,7 +286,8 @@ function Signin(props) {
 
                                     color="default"
                                  />
-                                 <h4 className="mt-2">Remember me</h4>
+                                  </div>
+                                <div> Remember me</div>
                               </div>
 
                               <FormGroup className="mb-15">

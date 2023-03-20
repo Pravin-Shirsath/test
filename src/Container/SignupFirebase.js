@@ -114,16 +114,16 @@ function SignupFirebase(props) {
                   console.log("Response from auth:", res);
 
 
-                   const emailErr= res?.data?.email[0]
-                   const usernameErr = res?.data?.username[0]
+                   const emailErr= res?.data?.email
+                   const usernameErr = res?.data?.username
+                  
+                   if(emailErr != undefined){
 
-                  if(emailErr){
-
-                     NotificationManager.error(emailErr);
+                     NotificationManager.error(emailErr[0]);
                   }
-                  if(usernameErr){
-
-                     NotificationManager.error(usernameErr);
+                  if(usernameErr !=undefined){
+    
+                     NotificationManager.error(usernameErr[0]);
                   }
                }
                else {
@@ -139,16 +139,16 @@ function SignupFirebase(props) {
                }
             }).catch(err => {
                console.log("Registration error :", err?.response);
-               const emailErr= err?.response?.data?.email[0]
-               const usernameErr = err?.response?.data?.username[0]
+               const emailErr= err?.response?.data?.email
+               const usernameErr = err?.response?.data?.username
 
-              if(emailErr){
+              if(emailErr != undefined){
 
-                 NotificationManager.error(emailErr);
+                 NotificationManager.error(emailErr[0]);
               }
-              if(usernameErr){
+              if(usernameErr !=undefined){
 
-                 NotificationManager.error(usernameErr);
+                 NotificationManager.error(usernameErr[0]);
               }
             });
 

@@ -114,7 +114,7 @@ import { useHistory } from 'react-router';
              <section className="d-flex flex-direction: column align-items-center justify-content-center px-5 py-5 ">
              <Button variant="contained" color="primary" className="text-white mx-5"  >Edit</Button>
              <Button variant="contained" color="primary" className="text-white mx-5"  >view</Button>
-             <Button variant="contained" color="danger" className="text-white mx-5"  >delet</Button>
+             <Button variant="contained" color="danger" className="text-white mx-5"  >delete</Button>
 
              </section>
               

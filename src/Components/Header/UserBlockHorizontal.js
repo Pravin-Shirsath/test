@@ -220,17 +220,20 @@ function UserBlockHorizontal(props) {
 
                   // console.log(err?.response?.data[0]?.new_password2[0], "yooo errrr")
                   // const oldPasswordError = err?.response?.data[0]?.old_password[0]
-                  const newPasswordError = err?.response?.data?.[0]?.new_password2?.[0]
+                  const newPasswordError = err?.response?.data?.[0]?.new_password2
                   // console.log(newPasswordError, "newww passswordd errrr")
 
-                  const oldPasswordError = err?.response?.data[0]?.old_password?.[0]
+                  const oldPasswordError =err?.response?.data?.[0]?.old_password
                   // console.log(oldPasswordError, "ollddd pwwddd errrrr")
 
                   if (oldPasswordError) {
-                     NotificationManager.error(oldPasswordError)
-                  } else if (newPasswordError) {
-                     NotificationManager.error(newPasswordError)
+                     NotificationManager.error(`Old Password is ${oldPasswordError[0]}`)
+                  } 
+                   if (newPasswordError) {
+                     NotificationManager.error(`New Password is ${newPasswordError[0]}`)
                   }
+
+                 
                });
          } else {
             NotificationManager.error('Password should have one uppercase, one number, one symbol!');
@@ -285,7 +288,7 @@ function UserBlockHorizontal(props) {
                   <ul className="list-unstyled mb-0 profile-block-wrap" >
                      <li className="p-15 border-bottom user-profile-top userBlockHorizontalDropdown">
                         <p className="text-white mb-0 fs-14">{profileData?.username}</p>
-                        <span className="text-white fs-14">k</span>
+                        <span className="text-white fs-14">{profileData?.email}</span>
                      </li>
                      <li>
                         <Link to={{

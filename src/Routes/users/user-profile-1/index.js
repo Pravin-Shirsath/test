@@ -10,7 +10,7 @@ import { Form, FormGroup, Input, Label, Col } from 'reactstrap'
 import { useHistory } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
 import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
+import PhoneInput,{parsePhoneNumber,isValidPhoneNumber} from 'react-phone-number-input'
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 // rct card box
 import { RctCard } from 'Components/RctCard'
@@ -62,12 +62,66 @@ export default function UserProfile(props) {
   }
   )
   //==================== MY update profile ====================//
+
+const ProfileApiCall=()=>{  
+  const accessToken = JSON.parse(localStorage.getItem('token'))
+
+    if (accessToken !== null) {
+
+      NotificationManager.success('Profile Updated Successfully!');
+
+  // updateProfileInfo(firstName, lastName, email.toLowerCase(), phone, accessToken)
+  //   .then((res) => {
+  //     if (res?.status === 200) {
+  //       console.log('Response from update profile:', res)
+  //       setShow(false)
+  //       setFirstNameError('')
+  //       setLastNameError('')
+  //       setEmailError('')
+  //       setPhoneError('')
+  //       setCompanyNameError("")
+  //       setTaxNumberError("")
+  //       setBillingAddressError("")
+
+  //       setFirstName('')
+  //       setLastName('')
+  //       setPhone('')
+  //       setEmail('')
+
+  //       setCountry('')
+  //       setZipCode('')
+  //       setState('')
+  //       setCompanyName('')
+  //       setBillingAddress('')
+  //       setTaxNumber('')
+  //       setCompanyAddress('')
+  //       NotificationManager.success('Profile Updated Successfully!');
+  //       history.push('/app/dashboard/saas');
+  //       window.location.reload();
+  //     }
+  //   })
+  //   .catch((err) => {
+   
+  //     console.log('Update profile error :', err?.response)
+  //     console.log(err?.response?.data, "error data from user profile");
+  //     if (err?.response?.status === 400) {
+  //       NotificationManager.error(err?.response?.data?.email?.[0]);
+  //     }
+  //   })
+}else{
+  NotificationManager.error("accessToken not found");
+}
+
+}
+
+
   const updateProfile = () => {
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const phoneRegex = /^\d{10}$/;  // /^[6789]\d{9}$/ (previous rule)
     const regexName = /^[a-zA-Z]{1,30}$/; // only alpha, no space, min-1, max-30
-
-    if (email.trim() !== '' && (phone !== null) && firstName.trim() !== '' && lastName.trim() !== '' && companyName.trim() !== '' && billingAddress.trim() !== '' && taxNumber.trim() !== '') {
+    const TaxnumberRegex=/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/
+    const  isValidZip = /^[1-9][0-9]{5}$/
+    if (email.trim() !== '' && (phone !== null || phone !== undefined) && firstName.trim() !== '' && lastName.trim() !== '' && companyName.trim() !== '' && billingAddress.trim() !== '' && taxNumber.trim() !== '') {
       setShow(false)
       setFirstNameError('')
       setLastNameError('')
@@ -77,53 +131,36 @@ export default function UserProfile(props) {
       setCompanyNameError("")
       setTaxNumberError("")
       setBillingAddressError("")
+     
+     
+      // const phoneNumbervalidation = parsePhoneNumber(phone+"")
+ 
 
       if (regexName.test(firstName.trim())) {
         if (regexName.test(lastName.trim())) {
-          if (phoneRegex.test(phone.trim(""))) {
+         
+          if ((isValidPhoneNumber(phone+"".trim("")))) {
+            
             if (emailRegex.test(email.trim(""))) {
-              NotificationManager.success('Profile Updated Successfully!');
-              const accessToken = JSON.parse(localStorage.getItem('token'))
-              if (accessToken !== null) {
-                updateProfileInfo(firstName, lastName, email.toLowerCase(), phone, accessToken)
-                  .then((res) => {
-                    if (res?.status === 200) {
-                      console.log('Response from update profile:', res)
-                      setShow(false)
-                      setFirstNameError('')
-                      setLastNameError('')
-                      setEmailError('')
-                      setPhoneError('')
-                      setCompanyNameError("")
-                      setTaxNumberError("")
-                      setBillingAddressError("")
+             if(TaxnumberRegex.test(taxNumber+"".trim(""))){
+             
+              if(zipCode != ""){
+                if(isValidZip.test(zipCode.trim(""))){
+                NotificationManager.error("Invalid Zip-Code format!");
 
-                      setFirstName('')
-                      setLastName('')
-                      setPhone('')
-                      setEmail('')
-
-                      setCountry('')
-                      setZipCode('')
-                      setState('')
-                      setCompanyName('')
-                      setBillingAddress('')
-                      setTaxNumber('')
-                      setCompanyAddress('')
-                      NotificationManager.success('Profile Updated Successfully!');
-                      history.push('/app/dashboard/saas');
-                      window.location.reload();
-                    }
-                  })
-                  .catch((err) => {
-                 
-                    console.log('Update profile error :', err?.response)
-                    console.log(err?.response?.data, "error data from user profile");
-                    if (err?.response?.status === 400) {
-                      NotificationManager.error(err?.response?.data?.email?.[0]);
-                    }
-                  })
+                }else{
+                  ProfileApiCall()
+                }
+              }else{
+                ProfileApiCall()
               }
+          
+             }else{
+              NotificationManager.error("Invalid Tax format!");
+             }
+              
+            
+            
             } else {
               NotificationManager.error("Invalid email format!");
             }
@@ -522,7 +559,7 @@ export default function UserProfile(props) {
                        onClick={updateProfile}
                       style={{ maxWidth: "150px" }}
                     >
-                      changeText
+                      Save
                     </Button>
 
                   </Col>
@@ -535,7 +572,7 @@ export default function UserProfile(props) {
                       // onClick={()=>{ history.push("/signin")}}
                       style={{ maxWidth: "150px" }}
                     >
-                      CancelText
+                      Cancel
                     </Button>
                   </Col>
 
