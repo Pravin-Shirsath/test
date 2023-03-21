@@ -2,7 +2,7 @@
  * Ecommerce Dashboard
  */
 
- import React from 'react'
+ import React,{useEffect,useState} from 'react'
  import { Helmet } from "react-helmet";
 
  import { Progress ,Button,
@@ -41,10 +41,51 @@ import IntlMessages from '../../../Util/IntlMessages';
 import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import { str } from 'Constants/stringConst';
+import { UserAccountStatus } from 'Api';
 
  
  export default function Account(props) {
     const { match } = props;
+const[ Accout,setAccout]=useState()
+const[ useData,setUseData]=useState(0)
+const[ totalData,setTotalData]=useState(0)
+
+
+const GetAccountStatus=()=>{
+   const accessToken = JSON.parse(localStorage.getItem('token'))
+   if (accessToken !== null) {
+   UserAccountStatus(accessToken).then((res)=>{
+      if (res?.status === 200) {
+         if(res?.data){
+            setAccout(res?.data)
+            const Tdata=res?.data["total_allowed_size"]
+            const Udata=res?.data["total_size_consumed"]
+                if(Udata){
+                  setUseData(parseInt(Udata))
+                }
+
+               if(Tdata) {
+              
+              setTotalData(parseInt(Tdata))
+           }
+         }
+       } else {
+        
+       }
+   })
+}
+}
+
+
+useEffect(()=>{
+
+
+   GetAccountStatus()
+
+
+},[])
+
+
     return (
        <div className="ecom-dashboard-wrapper">
           <Helmet>
@@ -60,13 +101,13 @@ import { str } from 'Constants/stringConst';
                  
          >
         <div className="w-100 d-flex justify-content-between px-40"> 
-        <h3>used </h3> <h3>Available </h3>
+        <h3>Used </h3> <h3>Available </h3>
         </div>
 
         <div>
         <Progress multi style={{ height: "50px" }}>
-        <Progress bar color="danger" value="80" ><h2 style={{marginTop:"6px"}}>80%</h2></Progress>
-        <Progress bar color="success" value="20" ><h2 style={{marginTop:"6px"}}>20%</h2></Progress>
+        <Progress bar color="danger" value={useData} ><h2 style={{marginTop:"6px"}}>{useData}GB</h2></Progress>
+        <Progress bar color="success" value={totalData-useData}  ><h2 style={{marginTop:"6px"}}>{totalData-useData}GB </h2></Progress>
       </Progress>
         </div>
             <div className="d-flex justify-content-center mt-50">

@@ -93,33 +93,32 @@ export const profileInfo = (token) => {
 
 
 /**
- * 
+ * This Api Updated  Profile Info 
  * @param {*} name 
  * @param {*} email 
  * @param {*} phone 
  * @param {*} token 
+ * @param {*} id
  * @returns 
  */
-export const updateProfileInfo = (firstname, lastname, email,phone,token) => { 
 
-    return axios.put(`${BASE_URL}/version_0/users/profile-update/`, { 
-        email: email,
-        first_name: firstname,
-        last_name: lastname,
-        mobile_number: phone
-    },
-    {
-    headers: {
-        Authorization:`Token ${token}`
-        }
-    })
-    .then( res => {
-        // console.log("Update Profile :",res);
-        return res;
-    
-    })
-}
-
+ export const updateProfileInfo = (FormData,token,id) => { 
+   
+     return axios.patch(`${BASE_URL}/api/version_0/admin/customer/update/${id}/`, FormData,
+     {
+     headers: {
+           "Accept": "application/json",
+           'Content-Type': 'multipart/form-data',
+           "Authorization":`Token ${token}`
+         }
+     })
+     .then( res => {
+         // console.log("Update Profile :",res);
+         return res;
+     
+     })
+ }
+ 
 
 /**
  * 
@@ -138,6 +137,39 @@ export const logOut = (token) => {
         return res;    
     })
 }
+
+
+
+
+/**
+ *  Get user Account Status
+ * @param {*} token 
+ * @returns 
+ */
+
+ export const UserAccountStatus = (token) => {
+    return axios.get(`${BASE_URL}/api/version_0/users/account-status/`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+    }
+    })
+    .then(res => {
+        // console.log("Log out :",res);
+        return res;    
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

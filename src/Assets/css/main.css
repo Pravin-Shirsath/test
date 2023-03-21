@@ -1,3 +1,17 @@
+
+.c-primary{
+background-color: #3d4A9E;
+}
+.light-primary{
+background-color: #C4C8E1;
+}
+.dark-primary{
+background-color: #181D3F;
+}
+
+
+
+
 .activity_wrap {
     gap: 10px;
 }
@@ -7,16 +21,22 @@
 }
 
 .rct-session-wrapper .has-wrapper .has-input {
-    border: 1px solid #3D76a8;
+    /* border: 1px solid #3D76a8; */
+    border: 1px solid #3d4A9E ;
+
 }
 
 
 .text-theme {
-    color:#1c868d !important;
+    /* color:#1c868d !important; */
+    color:#3d4A9E !important;
+
 }
 
 .theme-background {
-    background-color: #1c868d !important;
+    /* background-color: #1c868d !important; */
+    background-color: #3d4A9E !important;
+
 }
 
 .error {
@@ -30,6 +50,7 @@
 .edit-form {
     padding: 32px 25px;
 }
+
 .update-btn {
     padding: 7px 20px;
     border: none;
@@ -72,23 +93,25 @@
 
 .model-form .form-control {
     border: none;
-    border-bottom: 1px solid #0b3d45;
+    /* border-bottom: 1px solid #0b3d45; */
+    border-bottom: 1px solid #181D3F;
+
     box-shadow: none;
     border-radius: 0;
     padding: 0;
 }
 
 .model-form .btn-primary , .model-form .MuiButton-contained, .model-form .btn-primary:hover{
-    background:#0b3d45 ;
-    border-color: #0b3d45;
+    background:#181D3F;
+    border-color:#181D3F;
 }
 
 .model-form label {
-    color: #0b3d45;
+    color: #181D3F;
 }
 
 .userBlockHorizontalDropdown {
-    background-color: #0b3d45cf;
+    background-color: #181D3F;;
 }
 
 .financialChartPrice, .financialChartPrice > div {
@@ -135,8 +158,10 @@
 }
 
 .rangeslider-horizontal .rangeslider__fill{
-    background-color: #0b3d45cf !important;
+    background-color: #181D3F !important;
 }
 
 
-
+/* 
+    background-color: #0b3d45cf !important;
+ */

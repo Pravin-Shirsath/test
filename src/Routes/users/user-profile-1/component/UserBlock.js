@@ -1,11 +1,15 @@
 /**
  * User Block
  */
+import { BASE_URL } from 'Api/APIConst';
 import React,{useEffect,useState} from 'react';
+import { NotificationManager } from 'react-notifications';
 import { profileInfo } from '../../../../Api/index';
 
-function UserBlock(){
-   const [profileData, setProfileData] = useState();
+function UserBlock({GettingImage}){
+   
+   const [profileData, setProfileData] = useState({});
+   const [image, setImage] = useState(null);
 
    useEffect(() => {
       getProfileInfo();
@@ -35,7 +39,44 @@ function UserBlock(){
       }
     }
 
- 
+   
+      const handleImageUpload = e => {
+
+         const [file] = e.target.files;
+         
+         if (e.target.files.length) {
+         
+         var Obj = {
+         
+         preview: URL.createObjectURL(e.target.files[0]),
+         
+         raw: e.target.files[0]
+         
+         };
+         console.log("newimg", Obj.raw);
+        if( Obj?.raw?.type?.includes("image") ){
+        
+         setImage(Obj.preview)
+         GettingImage(Obj?.raw)
+       
+
+        }else{
+          NotificationManager.error("Only image format file upload ");
+
+        }
+       
+         
+     
+         
+         // setProfilePic(Obj.raw);
+         
+         
+         
+         
+         }
+         
+         };
+   
 
    return (
       
@@ -43,7 +84,7 @@ function UserBlock(){
             <div className="profile-content">
                <div className="media align-items-center">
                <div style={{ position:"relative"}}>
-               <img src={ profileData?.profile_image == null ?  `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : profileData.profile_image } alt="user profile" className="rounded-circle bordered" width="140" height="140" />
+               <img src={ profileData?.profile_image == null ?  `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` :`${BASE_URL+profileData.profile_image}`  } alt="user profile" className="rounded-circle bordered" width="140" height="140" />
                <i className="ti-pencil rounded-circle bordered text-white" style={{position:"absolute",bottom:"6px",right:"20%",backgroundColor:"#464D69"}} > </i>
                <input type='file' className="rounded-circle bordered"  style={{position:"absolute",bottom:"6px",right:"20%",backgroundColor:"#464D69", width:"30px", height:"30px",opacity:0}}/>
            

@@ -50,8 +50,121 @@
  export default function UserManagement(props) {
    const history = useHistory();
    const deleteConfirmationDialog = useRef()
-   const [users, setUsers] = useState()
-   const [filteredUsers, setFilteredUsers] = useState()
+  //  const [users, setUsers] = useState() // use when data is coming from api
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      user: "Ram",
+      email: "ram123@gmail.com",
+      phone: "1234567890",
+    },
+    {
+      id: 2,
+      user: "Shyam",
+      email: "shyam123@gmail.com",
+      phone: "5678123450",
+    },
+    {
+      id: 3,
+      user: "Arjun",
+      email: "arjun123@gmail.com",
+      phone: "9101112764",
+    },
+    {
+      id: 4,
+      user: "Shree",
+      email: "shree123@gmail.com",
+      phone: "0123410238",
+    },
+    {
+      id: 5,
+      user: "Laxmi",
+      email: "laxmi123@gmail.com",
+      phone: "4321347629",
+    },
+    {
+      id: 6,
+      user: "Laxman",
+      email: "laxman123@gmail.com",
+      phone: "4321347629",
+    },
+    {
+      id: 7,
+      user: "Vishnu",
+      email: "vishnu123@gmail.com",
+      phone: "4321347629",
+    },
+    {
+      id: 8,
+      user: "Ganesh",
+      email: "ganesh123@gmail.com",
+      phone: "4321347629",
+    },
+    {
+      id: 9,
+      user: "Mahesh",
+      email: "mahesh123@gmail.com",
+      phone: "4321347629",
+    }
+   ])
+  //  const [filteredUsers, setFilteredUsers] = useState() // use when the data is coming fom api
+   const [filteredUsers, setFilteredUsers] = useState(
+    [
+      {
+        id: 1,
+        user: "Ram",
+        email: "ram123@gmail.com",
+        phone: "1234567890",
+      },
+      {
+        id: 2,
+        user: "Shyam",
+        email: "shyam123@gmail.com",
+        phone: "5678123450",
+      },
+      {
+        id: 3,
+        user: "Arjun",
+        email: "arjun123@gmail.com",
+        phone: "9101112764",
+      },
+      {
+        id: 4,
+        user: "Shree",
+        email: "shree123@gmail.com",
+        phone: "0123410238",
+      },
+      {
+        id: 5,
+        user: "Laxmi",
+        email: "laxmi123@gmail.com",
+        phone: "4321347629",
+      },
+      {
+        id: 6,
+        user: "Laxman",
+        email: "laxman123@gmail.com",
+        phone: "4321347629",
+      },
+      {
+        id: 7,
+        user: "Vishnu",
+        email: "vishnu123@gmail.com",
+        phone: "4321347629",
+      },
+      {
+        id: 8,
+        user: "Ganesh",
+        email: "ganesh123@gmail.com",
+        phone: "4321347629",
+      },
+      {
+        id: 9,
+        user: "Mahesh",
+        email: "mahesh123@gmail.com",
+        phone: "4321347629",
+      }
+     ])
  
    const [selectedUser, setSelectedUser] = useState(null)
    const [loading, setLoading] = useState(false)
@@ -76,6 +189,8 @@
      mobile_number: '',
    })
  
+
+   
    const [openViewUserDialog, setOpenViewUserDialog] = useState(false)
    const [editUser, setEditUser] = useState(null)
    const [selectedUsers, setSelectedUsers] = useState(0)
@@ -450,10 +565,10 @@
          <title>Automaton | Customers List</title>
          <meta name="description" content="Automaton Widgets" />
        </Helmet>
-       <PageTitleBar
+       {/* <PageTitleBar
          title={<IntlMessages id="sidebar.userManagement" />}
          match={props.match}
-       />
+       /> */}
        <RctCollapsibleCard fullBlock>
          <div className="table-responsive">
            <div className="d-flex py-20 px-10 border-bottom" style={{justifyContent:'space-between'}}>
@@ -468,46 +583,43 @@
                    style={{backgroundColor: "#0b3d45", color:"#fff", borderRadius: "6px", cursor: "pointer"}} 
                    className='py-2 px-2'
                  >
-                 <i className="zmdi zmdi-plus"></i> Add New Customer
+                 <i className="zmdi zmdi-plus"></i> Users
                </button>
- 
            
            </div>
            <table className="table table-middle table-hover mb-0">
              <thead>
                <tr>
                  <th></th>
-                 <th>Username</th>
-                 <th>Email Address</th>
-                 <th>First name</th>
-                 <th>Last name</th>
-                 <th>Contact No</th>
+                 <th>No</th>
+                 <th>User</th>
+                 <th>Email</th>
+                 <th>Phone</th>
                  <th>Action</th>
                </tr>
              </thead>
  
              {/****** mine filtered Table body, without ternary conditional value  *****/}
              <tbody>
-               {filteredUsers &&
+             {filteredUsers &&
                  filteredUsers.map((user, id) => (
                    <tr key={id}>
                      <td></td>
+                     <td>{user?.id}</td>
                      <td>
                        <div className="media">
                          <div className="media-body">
-                           <h5 className="mb-5 fw-bold">{user?.username}</h5>
+                           <h5 className="mb-5 fw-bold">{user?.user}</h5>
                          </div>
                        </div>
                      </td>
                      <td>{user?.email ? user?.email : '-'}</td>
-                     <td>{user?.first_name}</td>
-                     <td>{user?.last_name}</td>
-                     <td style={{ padding: '0px 45px' }}>
-                       {user?.mobile_number ? user?.mobile_number : '-'}
+                     <td>
+                       {user?.phone ? user?.phone : '-'}
                      </td>
  
-                     <td className="list-action">
-                       <button
+                     <td className="list-action" style={{display:"flex", gap:"3px"}}>
+                       {/* <button
                          type="button"
                          className="rct-link-btn"
                          onClick={() => viewUserDetail(user)}
@@ -528,7 +640,11 @@
                          onClick={() => onDelete(user)}
                        >
                          <i className="ti-close"></i>
-                       </button>
+                       </button> */}
+
+                       <a href='#' style={{cursor:"pointer", color:"blue", fontSize:"15px"}}>Unable</a>
+                       <span>/</span>
+                       <a href='#' style={{cursor:"pointer", color:"blue", fontSize:"15px"}}>Disable</a>
                      </td>
                    </tr>
                  ))}
@@ -563,7 +679,7 @@
          className="addCustomerModal"
        >
          <ModalHeader toggle={() => onAddUpdateUserModalClose()}>
-           Add New Customer
+           <strong>Welcome</strong>
          </ModalHeader>
          <ModalBody>
            <AddNewUserForm
@@ -571,11 +687,10 @@
              onChangeAddNewUserDetails={onChangeAddNewUserDetails}
            />
          </ModalBody>
-         <ModalFooter>
-          
+         <ModalFooter style={{display:"flex", justifyContent:"space-between", padding:"20px 50px"}}>
  
            <Button variant="contained" onClick={() => addNewUser()} className="py-2" style={{backgroundColor: "#0b3d45", color:"#fff", borderRadius: "6px"}} >
-               Add
+               Send
            </Button>
            <Button variant="contained"  onClick={() => onAddUpdateUserModalClose()} className="py-2 px-3" style={{backgroundColor: "#E0E0E0", color:"#000", borderRadius: "6px", cursor:"pointer"}}>
                Cancel

@@ -64,32 +64,35 @@ import DoughnutChart from 'Components/Charts/DoughnutChart';
              return <RctCollapsibleCard
                 
                 colClasses="col-sm-12 col-md-6 col-lg-4 "
-                heading={<section className=""> 
-                <h3>Project {i}</h3>
-                <p>Created by ABS on 04/03/22</p>
-                
-                </section>}
+               
                 
                 fullBlock
                 key={i}
              >
+             <div>
+             <section className="bg-secondary text-white px-2 pt-1"> 
+                <h3>Project {i}</h3>
+                <p>Created by ABS on 04/03/22</p>
+                
+                </section>
              <section className="d-flex flex-direction: column align-items-center justify-content-between px-3">
+             
              <div className="">
                <DoughnutChart />
                </div>
                <div>
-                 <h4>Dtaset details <span className="square border border-5 border-dark  px-4 py-1">05</span></h4>
+                 <h4>Dataset Details <span className="square border border-5 border-dark  px-4 py-1">05</span></h4>
                  <h4 >Status <span className="square border border-5 border-dark  px-3 py-1 bg-info mx-5"></span></h4>
                </div>
 
              </section>
              <section className="d-flex flex-direction: column align-items-center justify-content-center px-5 py-5 ">
              <Button variant="contained" color="primary" className="text-white mx-5"  >Edit</Button>
-             <Button variant="contained" color="primary" className="text-white mx-5"  >view</Button>
-             <Button variant="contained" color="danger" className="text-white mx-5"  >delete</Button>
+             <Button variant="contained" color="primary" className="text-white mx-5"  >View</Button>
+             <Button variant="contained" color="danger" className="text-white mx-5"  >Delete</Button>
 
              </section>
-              
+              </div>
              </RctCollapsibleCard>
           })
          }

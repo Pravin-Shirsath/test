@@ -74,93 +74,88 @@ function SignupFirebase(props) {
          setShow(true);
 
       } else {
-        
-       
-        
+
+
+
          if (regexname.test(name.trim()) != true) {
             setNameError('User name must contain only  alpha-numeric character and no spacings!');
-         } else 
-         if (emailRegex.test(email.trim()) != true) {
-            setEmailError(str.InvalidEmail);
-         } else if (regexpassword.test(password.trim()) != true) {
-            setPassError(str.InvalidPassword)
-         } else if (password.trim() != comfpass.trim()) {
-            setComfpassError(str.InvalidComfimpass);
-         } else {
-           
-            // NotificationManager.success('start');
-            register(name, email.toLowerCase(), password).then((res) => {
-               if (res?.status === 200) {
-                  console.log("Response from auth:", res);
+         } else
+            if (emailRegex.test(email.trim()) != true) {
+               setEmailError(str.InvalidEmail);
+            } else if (regexpassword.test(password.trim()) != true) {
+               setPassError(str.InvalidPassword)
+            } else if (password.trim() != comfpass.trim()) {
+               setComfpassError(str.InvalidComfimpass);
+            } else {
 
-                  localStorage.setItem("signedUpUser", JSON.stringify({ name, email, password }));
-                  localStorage.setItem("user_id", "user-id");
+               // NotificationManager.success('start');
+               register(name, email.toLowerCase(), password).then((res) => {
+                  if (res?.status === 200) {
+                     console.log("Response from auth:", res);
 
-                  dispatch({ type: SIGNUP_USER_SUCCESS, payload: localStorage.getItem('user_id') });
-                  NotificationManager.success('User Registration Successfully!');
-                  history.push('/signin');
-                  setShow(false);
-                  setNameError('');
-                  setEmailError('');
-                  setPassError('');
-                  setComfpassError('');
+                     localStorage.setItem("signedUpUser", JSON.stringify({ name, email, password }));
+                     localStorage.setItem("user_id", "user-id");
 
-               } else if (res?.status === 400) {
-                  setShow(false);
-                  setNameError('');
-                  setEmailError('');
-                  setPassError('');
-                  setComfpassError('');
-                  console.log("Response from auth:", res);
+                     dispatch({ type: SIGNUP_USER_SUCCESS, payload: localStorage.getItem('user_id') });
+                     NotificationManager.success('User Registration Successfully!');
+                     history.push('/signin');
+                     setName()
+                     setEmail()
+                     setPassword()
+                     setComfpass()
+                     setShow(false);
+                     setNameError('');
+                     setEmailError('');
+                     setPassError('');
+                     setComfpassError('');
+
+                  } else if (res?.status === 400) {
+                     setShow(false);
+                     setNameError('');
+                     setEmailError('');
+                     setPassError('');
+                     setComfpassError('');
+                     console.log("Response from auth:", res);
 
 
-                   const emailErr= res?.data?.email
-                   const usernameErr = res?.data?.username
-                  
-                   if(emailErr != undefined){
+                     const emailErr = res?.data?.email
+                     const usernameErr = res?.data?.username
+
+                     if (emailErr != undefined) {
+
+                        NotificationManager.error(emailErr[0]);
+                     }
+                     if (usernameErr != undefined) {
+
+                        NotificationManager.error(usernameErr[0]);
+                     }
+                  }
+                  else {
+                     setShow(false);
+                     setNameError('');
+                     setEmailError('');
+                     setPassError('');
+                     setComfpassError('');
+                     console.log("Response from auth:", res);
+
+
+                     //   NotificationManager.error('User Registration Successfully!');
+                  }
+               }).catch(err => {
+                  console.log("Registration error :", err?.response);
+                  const emailErr = err?.response?.data?.email
+                  const usernameErr = err?.response?.data?.username
+
+                  if (emailErr != undefined) {
 
                      NotificationManager.error(emailErr[0]);
                   }
-                  if(usernameErr !=undefined){
-    
+                  if (usernameErr != undefined) {
+
                      NotificationManager.error(usernameErr[0]);
                   }
-               }
-               else {
-                  setShow(false);
-                  setNameError('');
-                  setEmailError('');
-                  setPassError('');
-                  setComfpassError('');
-                  console.log("Response from auth:", res);
-
-
-                  //   NotificationManager.error('User Registration Successfully!');
-               }
-            }).catch(err => {
-               console.log("Registration error :", err?.response);
-               const emailErr= err?.response?.data?.email
-               const usernameErr = err?.response?.data?.username
-
-              if(emailErr != undefined){
-
-                 NotificationManager.error(emailErr[0]);
-              }
-              if(usernameErr !=undefined){
-
-                 NotificationManager.error(usernameErr[0]);
-              }
-            });
-
-
-
-
-
-         }
-
-
-
-
+               });
+            }
 
       }
 
@@ -247,7 +242,7 @@ function SignupFirebase(props) {
                            </Link>
                         </div>
                         <div className='d-flex align-items-center justify-contain-center'>
-                           <h4  className="mr-15 mt-2 text-theme">{str.AlreadyAccountText}</h4>
+                           <h4 className="mr-15 mt-2 text-theme">{str.AlreadyAccountText}</h4>
                            <Button
                               component={Link}
                               to="/signin"
@@ -278,8 +273,8 @@ function SignupFirebase(props) {
                                  <Input
                                     type="text"
                                     value={name}
-                                    name="user-name"
-                                    id="user-name"
+                                    // name="user-name"
+                                    // id="user-name"
                                     className="has-input input-lg"
                                     // placeholder="Company/User Name"
                                     onChange={(e) => setName(e.target.value)}
@@ -297,8 +292,8 @@ function SignupFirebase(props) {
                                  <Input
                                     type="text"
                                     value={email}
-                                    name="user-email"
-                                    id="user-email"
+                                    // name="user-email"
+                                    // id="user-email"
                                     className="has-input input-lg"
                                     // placeholder="Company/User Email"
                                     onChange={(e) => setEmail(e.target.value)}
@@ -317,8 +312,8 @@ function SignupFirebase(props) {
                                  <Input
                                     value={password}
                                     type={passToggle ? "text" : "password"}
-                                    name="user-pwd"
-                                    id="pwd"
+                                    // name="user-pwd"
+                                    // id="pwd"
                                     className="has-input input-lg"
                                     // placeholder="Password"
                                     onChange={(event) => setPassword(event.target.value)}
@@ -340,8 +335,8 @@ function SignupFirebase(props) {
                                  <Input
                                     value={comfpass}
                                     type={comfpassToggle ? "text" : "password"}
-                                    name="user-pwd"
-                                    id="pwd2"
+                                    // name="user-pwd"
+                                    // id="pwd2"
                                     className="has-input input-lg"
                                     // placeholder="Confirm password"
                                     onChange={(event) => setComfpass(event.target.value)}

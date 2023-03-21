@@ -45,7 +45,7 @@ export default function UserProfile(props) {
   const [lastNameError, setLastNameError] = useState('')
   const [emailError, setEmailError] = useState('')
   const [phoneError, setPhoneError] = useState('')
-
+  const [image,setImage]=useState(null)
   const [countryError, setCountryError] = useState("")
   const [zipCodeError, setZipCodeError] = useState("")
   const [stateError, setStateError] = useState("")
@@ -63,18 +63,32 @@ export default function UserProfile(props) {
   )
   //==================== MY update profile ====================//
 
+  // getting image from user block component
+const GettingImage=(pic)=>{
+  
+  if(pic != null && pic != undefined){
+    console.log("pic=========",pic)
+    setImage(pic)
+  }
+}
+
+
+
+
 const ProfileApiCall=(ProfileDetails)=>{  
   console.log("Profile_Details==",ProfileDetails)
   const accessToken = JSON.parse(localStorage.getItem('token'))
-    
+  const userId = JSON.parse(localStorage.getItem('ProfileData')) 
     if (accessToken !== null) {
 
-      NotificationManager.success('Profile Updated Successfully!');
+     
     
-  updateProfileInfo(firstName, lastName, email.toLowerCase(), phone, accessToken)
-    .then((res) => {
+  updateProfileInfo(ProfileDetails,accessToken,userId.id).then((res) => {
       if (res?.status === 200) {
         console.log('Response from update profile:', res)
+        
+   
+
         setShow(false)
         setFirstNameError('')
         setLastNameError('')
@@ -98,7 +112,7 @@ const ProfileApiCall=(ProfileDetails)=>{
         setCompanyAddress('')
         NotificationManager.success('Profile Updated Successfully!');
         history.push('/app/dashboard/saas');
-        window.location.reload();
+        // window.location.reload();
       }
     })
     .catch((err) => {
@@ -118,34 +132,44 @@ const ProfileApiCall=(ProfileDetails)=>{
 
   const updateProfile = () => {
     const Profile_Details = {}
+    const fd = new FormData();
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const phoneRegex = /^\d{10}$/;  // /^[6789]\d{9}$/ (previous rule)
     const regexName = /^[a-zA-Z]{1,30}$/; // only alpha, no space, min-1, max-30
     const TaxnumberRegex=/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/
     const  isValidZip = /^[1-9][0-9]{5}$/
+   
     if (email.trim() !== '' && (phone !== null || phone !== undefined) && firstName.trim() !== '' && lastName.trim() !== '' && companyName.trim() !== '' && billingAddress.trim() !== '' && taxNumber.trim() !== '') {
+     
       setShow(false)
       setFirstNameError('')
       setLastNameError('')
       setEmailError('')
       setPhoneError('')
-      
       setCompanyNameError("")
       setTaxNumberError("")
       setBillingAddressError("")
      
      
       if(country != ""){
-        Profile_Details.country = country
+      
+        fd.append('country', country)
       }
       if( state != "" ) {
-        Profile_Details.state =state
+      
+        fd.append('state', state)
       }
       if(zipCode != ""){
-        Profile_Details.zip_code = zipCode
+      
       }
       if (companyAddress != ""){
-        Profile_Details.company_address = companyAddress
+      
+        fd.append('company_address', companyAddress)
+      }
+      
+      if(image != null){
+        Profile_Details.profile_image = image
+        fd.append('profile_image', image)
       }
 
       if (regexName.test(firstName.trim())) {
@@ -154,29 +178,24 @@ const ProfileApiCall=(ProfileDetails)=>{
           if ((isValidPhoneNumber(phone+"".trim("")))) {
             
             if (emailRegex.test(email.trim(""))) {
-             if(TaxnumberRegex.test(taxNumber+"".trim(""))){
-              
+            
+              if(TaxnumberRegex.test(taxNumber+"".trim(""))){
+                                
+              // fd.append('parcel_id', parcelID)              
+              fd.append('first_name', firstName)
+              fd.append('last_name', lastName)
+              fd.append('mobile_number', phone)
+              fd.append('email', email.toLowerCase())
+              fd.append('billing_address', billingAddress)
+              fd.append('tax_number',taxNumber);
+                                      
+               ProfileApiCall(fd)
 
-
-
-              Profile_Details.first_name=firstName
-              Profile_Details.last_name=lastName
-              Profile_Details.mobile_number=phone
-              Profile_Details.email= email
-              Profile_Details.company_name= companyName
-              Profile_Details.billing_address=billingAddress
-              Profile_Details.tax_number=taxNumber
-
-
-              
-              
-              ProfileApiCall(Profile_Details)
              }else{
               NotificationManager.error("Invalid Tax format!");
              }
-              
             
-            
+                       
             } else {
               NotificationManager.error("Invalid email format!");
             }
@@ -245,7 +264,7 @@ const ProfileApiCall=(ProfileDetails)=>{
         match={props.match}
       />
       <RctCard data-bs-spy="scroll">
-        <UserBlock />
+        <UserBlock GettingImage={GettingImage}/>
 
         <Form className="border">
           <section className="border border-5 py-10 d-flex align-item-center justify-content-center bg-dark text-white">
@@ -562,7 +581,7 @@ const ProfileApiCall=(ProfileDetails)=>{
 
             <FormGroup className="row mt-50">
               <Col sm={6}>
-                <h4>   <span className="text-danger">*</span> Compulsory Field</h4>
+                <h4>   <span className="text-danger">*</span> Mandatory Field</h4>
               </Col>
               <Col sm={6}>
                 <section className="row " >
@@ -586,7 +605,7 @@ const ProfileApiCall=(ProfileDetails)=>{
                       className="btn-block px-50 py-2 text-white fw-bold btn-danger"
                       variant="contained"
                       size="medium"
-                      // onClick={()=>{ history.push("/signin")}}
+                      onClick={()=>{ history.push("/")}}
                       style={{ maxWidth: "150px" }}
                     >
                       Cancel
