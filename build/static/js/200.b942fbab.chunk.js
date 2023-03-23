@@ -1,0 +1,2 @@
+(this.webpackJsonpreactify=this.webpackJsonpreactify||[]).push([[200],{2404:function(e,t,c){"use strict";c.r(t);c(1);var n=c(0);t.default=function(){return Object(n.jsx)("div",{children:Object(n.jsx)("h1",{children:" Customer Management "})})}}}]);
+//# sourceMappingURL=200.b942fbab.chunk.js.map
