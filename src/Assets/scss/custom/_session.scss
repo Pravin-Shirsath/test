@@ -1,6 +1,7 @@
 /*=========== Session Style =========*/
 .session-wrapper {
-  background-image: url("../../img/Background.jpg");
+  // background-image: url("../../img/Background.jpg");
+  background-color: #C4C8E1;
   background-repeat: no-repeat;
   background-size: cover;
   left: 0;
@@ -76,9 +77,10 @@
   }
   header {
     height: 90px;
-    background: rgba(255, 255, 2555, 0.9) !important;
+    background-color: #181D3F !important;
     justify-content: space-around;
     box-shadow: none;
+    color: white;
   }
   .session-inner-wrapper {
     .session-body {

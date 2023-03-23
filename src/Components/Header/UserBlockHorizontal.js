@@ -3,7 +3,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, Modal, ModalHeader, ModalBody, 
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Badge } from 'reactstrap';
-
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import { NotificationManager } from 'react-notifications';
 import {
    LOGOUT_USER,
@@ -257,9 +257,40 @@ function UserBlockHorizontal(props) {
             >
                <DropdownToggle
                   tag="div"
-                  className="d-flex align-items-center g-2  myprofile-block100"
+                  className="d-flex align-items-center g-2  "
                >
-                  <div className="userInfoMainWrapper" >
+  <div className="userProfileWrapper">
+
+<div className="text-white mx-3 text-align-center justify-content-center mt-1">
+
+  <NotificationsIcon/>
+</div>
+<img
+  src={ profileData?.profile_image == null ?  `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : `${BASE_URL+profileData.profile_image}`}
+   alt="user profile"
+   className=" rounded-circle"
+   width={40}
+   height={40}
+/>
+ </div>
+                   {/* <div className="user-profile">
+
+                     <img
+                         src={ profileData?.profile_image == null ?  `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : `${BASE_URL+profileData.profile_image}`}
+                         alt="user profile"
+                         className="img-fluid rounded-circle"
+                         width={40}
+                         height={40}
+                      />
+                  </div> */}
+               
+                  <div className="user-info flex-column d-flex">
+                     <span className="user-name ml-4 text-white">{profileData?.first_name} {profileData?.last_name}</span>
+                     {/* <span className="user-name ml-4 text-white">{profileData?.email}</span> */}
+                   
+                     </div>
+                     <i className="zmdi zmdi-chevron-down dropdown-icon text-white" style={{ marginLeft: '16px' }} ></i>
+                  {/* <div className="userInfoMainWrapper" >
 
                         <div className="userProfileWrapper">
 
@@ -275,14 +306,14 @@ function UserBlockHorizontal(props) {
                    
 
                      <div className="userNameWrapper">
-                        {/* <span className="user-name ml-4 text-white">{profileData?.first_name} {profileData?.last_name}</span> */}
+                        <span className="user-name ml-4 text-white">{profileData?.first_name} {profileData?.last_name}</span>
                         
                       <span className="userEmailWrap">  <span className="userNameText" >{profileData?.username}</span> </span>
                       
                      </div>
-                  </div>
+                  </div> */}
 
-                  <i className="zmdi zmdi-chevron-down dropdown-icon text-white DropDownIcon "></i> 
+                  {/* <i className="zmdi zmdi-chevron-down dropdown-icon text-white DropDownIcon "></i>  */}
                </DropdownToggle>
                <DropdownMenu style={{ left: '65px', top: '5px' }}>
                   <ul className="list-unstyled mb-0 profile-block-wrap " >

@@ -6,6 +6,8 @@
  import FormControlLabel from '@material-ui/core/FormControlLabel'
  import Button from '@material-ui/core/Button'
  import Checkbox from '@material-ui/core/Checkbox'
+import Switch from 'react-toggle-switch';
+
  import {
    
    Modal,
@@ -45,126 +47,18 @@
    deleteCustomerDetails,
    updateCustomerDetails,
    getSearchedCustomer,
+   CustomerDisable,
+   CustomerEnable,
+   
  } from '../../../Api/'
  
  export default function UserManagement(props) {
    const history = useHistory();
    const deleteConfirmationDialog = useRef()
   //  const [users, setUsers] = useState() // use when data is coming from api
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      user: "Ram",
-      email: "ram123@gmail.com",
-      phone: "1234567890",
-    },
-    {
-      id: 2,
-      user: "Shyam",
-      email: "shyam123@gmail.com",
-      phone: "5678123450",
-    },
-    {
-      id: 3,
-      user: "Arjun",
-      email: "arjun123@gmail.com",
-      phone: "9101112764",
-    },
-    {
-      id: 4,
-      user: "Shree",
-      email: "shree123@gmail.com",
-      phone: "0123410238",
-    },
-    {
-      id: 5,
-      user: "Laxmi",
-      email: "laxmi123@gmail.com",
-      phone: "4321347629",
-    },
-    {
-      id: 6,
-      user: "Laxman",
-      email: "laxman123@gmail.com",
-      phone: "4321347629",
-    },
-    {
-      id: 7,
-      user: "Vishnu",
-      email: "vishnu123@gmail.com",
-      phone: "4321347629",
-    },
-    {
-      id: 8,
-      user: "Ganesh",
-      email: "ganesh123@gmail.com",
-      phone: "4321347629",
-    },
-    {
-      id: 9,
-      user: "Mahesh",
-      email: "mahesh123@gmail.com",
-      phone: "4321347629",
-    }
-   ])
+  const [users, setUsers] = useState([])
   //  const [filteredUsers, setFilteredUsers] = useState() // use when the data is coming fom api
-   const [filteredUsers, setFilteredUsers] = useState(
-    [
-      {
-        id: 1,
-        user: "Ram",
-        email: "ram123@gmail.com",
-        phone: "1234567890",
-      },
-      {
-        id: 2,
-        user: "Shyam",
-        email: "shyam123@gmail.com",
-        phone: "5678123450",
-      },
-      {
-        id: 3,
-        user: "Arjun",
-        email: "arjun123@gmail.com",
-        phone: "9101112764",
-      },
-      {
-        id: 4,
-        user: "Shree",
-        email: "shree123@gmail.com",
-        phone: "0123410238",
-      },
-      {
-        id: 5,
-        user: "Laxmi",
-        email: "laxmi123@gmail.com",
-        phone: "4321347629",
-      },
-      {
-        id: 6,
-        user: "Laxman",
-        email: "laxman123@gmail.com",
-        phone: "4321347629",
-      },
-      {
-        id: 7,
-        user: "Vishnu",
-        email: "vishnu123@gmail.com",
-        phone: "4321347629",
-      },
-      {
-        id: 8,
-        user: "Ganesh",
-        email: "ganesh123@gmail.com",
-        phone: "4321347629",
-      },
-      {
-        id: 9,
-        user: "Mahesh",
-        email: "mahesh123@gmail.com",
-        phone: "4321347629",
-      }
-     ])
+   const [filteredUsers, setFilteredUsers] = useState([])
  
    const [selectedUser, setSelectedUser] = useState(null)
    const [loading, setLoading] = useState(false)
@@ -268,34 +162,65 @@
    }
  
    // API Call For delete User
-   const handleDeleteUser = () => {
-     const { id } = selectedUser
+   const handleToggleUser = (user,e) => {
+   
  
      const accessToken = JSON.parse(localStorage.getItem('token'))
      if (accessToken !== null) {
-       deleteCustomerDetails(accessToken, id)
-         .then((res) => {
-           if (res?.status === 200) {
-             setdeleteUserModal(false)
-             setLoading(true)
-             // console.log('Response', res)
-             setTimeout(() => {
-               setLoading(false)
-               getCustomersListData()
-               NotificationManager.success('User successfully deleted !! ')
-             }, 2000)
-           } else if (res?.status === 400) {
-             setdeleteUserModal(false)
-             NotificationManager.error('Error while deleting customer')
-           } else {
-             setdeleteUserModal(false)
-             NotificationManager.error('Error while deleting customer')
-           }
-         })
-         .catch((err) => {
-           setdeleteUserModal(false)
-           NotificationManager.error('Error while deleting customer')
-         })
+      
+        if(user?.is_active){
+         
+          CustomerDisable(accessToken,user.id)
+          .then((res) => {
+            if (res?.status === 200) {
+              setdeleteUserModal(false)
+              setLoading(true)
+               console.log('Response', res)
+              setTimeout(() => {
+                setLoading(false)
+                getCustomersListData()
+                NotificationManager.success('User disable successfully  !! ')
+              }, 2000)
+            } else if (res?.status === 400) {
+              setdeleteUserModal(false)
+              NotificationManager.error('Error while disable user')
+            } else {
+              setdeleteUserModal(false)
+              NotificationManager.error('Error while disable user')
+            }
+          })
+          .catch((err) => {
+            setdeleteUserModal(false)
+            NotificationManager.error('Error while disable user')
+          })
+        }else{
+         
+          CustomerEnable(accessToken,user.id)
+          .then((res) => {
+            if (res?.status === 200) {
+              setdeleteUserModal(false)
+              setLoading(true)
+               console.log('Response', res)
+              setTimeout(() => {
+                setLoading(false)
+                getCustomersListData()
+                NotificationManager.success('User enable successfully  !! ')
+              }, 2000)
+            } else if (res?.status === 400) {
+              setdeleteUserModal(false)
+              NotificationManager.error('Error while enable user')
+            } else {
+              setdeleteUserModal(false)
+              NotificationManager.error('Error while enable user')
+            }
+          })
+          .catch((err) => {
+            setdeleteUserModal(false)
+            NotificationManager.error('Error while enable user')
+          })
+        }
+
+    
      }
    }
  
@@ -555,7 +480,7 @@
        setActivePage(pageNumber)
      } 
    }
- 
+  const [t,setT]=useState(false)
    // console.log(addNewUserDetail, "addNewUserDetail data")
    // console.log(users, "usersss")
    // console.log(filteredUsers, "filtered user")
@@ -574,17 +499,13 @@
            <div className="d-flex py-20 px-10 border-bottom" style={{justifyContent:'space-between'}}>
            <div className='search-row'>
                <input type="text" placeholder='Search' className='search-input py-2' style={{border:"none", borderBottom:"1px solid black"}} value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
-               <button style={{backgroundColor: "#0b3d45", color:"#fff", borderRadius: "6px", cursor: "pointer"}} className='btn-block py-2 m-auto' onClick={getSearchedCustomerData}>Search</button>
-             </div> 
+               <Button variant="contained" color="primary" className="text-white mx-5"  style={{ cursor: "pointer"}}  onClick={getSearchedCustomerData}>Search</Button>
+                 </div> 
          
+                 <Button variant="contained" color="primary" className="text-white mx-5"  style={{ cursor: "pointer"}}   onClick={(e) => opnAddNewUserModal(e)}> <i className="zmdi zmdi-plus mx-2"></i>Users</Button>
  
-               <button
-                   onClick={(e) => opnAddNewUserModal(e)}
-                   style={{backgroundColor: "#0b3d45", color:"#fff", borderRadius: "6px", cursor: "pointer"}} 
-                   className='py-2 px-2'
-                 >
-                 <i className="zmdi zmdi-plus"></i> Users
-               </button>
+                
+               
            
            </div>
            <table className="table table-middle table-hover mb-0">
@@ -602,8 +523,11 @@
              {/****** mine filtered Table body, without ternary conditional value  *****/}
              <tbody>
              {filteredUsers &&
-                 filteredUsers.map((user, id) => (
-                   <tr key={id}>
+                 filteredUsers.map((user, i,data) => {
+                   let active = user?.is_active  
+                 return(
+
+                   <tr key={i}>
                      <td></td>
                      <td>{user?.id}</td>
                      <td>
@@ -619,35 +543,16 @@
                      </td>
  
                      <td className="list-action" style={{display:"flex", gap:"3px"}}>
-                       {/* <button
-                         type="button"
-                         className="rct-link-btn"
-                         onClick={() => viewUserDetail(user)}
-                       >
-                         <i className="ti-eye"></i>
-                       </button>
-                       <button
-                         type="button"
-                         className="rct-link-btn"
-                         onClick={() => opnUpdateUserModal(user)}
-                         // onClick={() => onEditUser(user)}
-                       >
-                         <i className="ti-pencil"></i>
-                       </button>
-                       <button
-                         type="button" 
-                         className="rct-link-btn"
-                         onClick={() => onDelete(user)}
-                       >
-                         <i className="ti-close"></i>
-                       </button> */}
-
-                       <a href='#' style={{cursor:"pointer", color:"blue", fontSize:"15px"}}>Unable</a>
-                       <span>/</span>
-                       <a href='#' style={{cursor:"pointer", color:"blue", fontSize:"15px"}}>Disable</a>
+                   
+                       <Switch
+                         onClick={()=>handleToggleUser(user)}
+                        on={active}
+                        className={user?.is_active==true?"bg-primary":"bg-danger"}
+                     />
+                      
                      </td>
                    </tr>
-                 ))}
+                 )})}
              </tbody>
  
            </table> 
@@ -676,7 +581,8 @@
        <Modal
          isOpen={addNewUserModal}
          toggle={() => onAddUpdateUserModalClose()}
-         className="addCustomerModal"
+         className="addCustomerModal "
+         
        >
          <ModalHeader toggle={() => onAddUpdateUserModalClose()}>
            <strong>Welcome</strong>
@@ -689,10 +595,10 @@
          </ModalBody>
          <ModalFooter style={{display:"flex", justifyContent:"space-between", padding:"20px 50px"}}>
  
-           <Button variant="contained" onClick={() => addNewUser()} className="py-2" style={{backgroundColor: "#0b3d45", color:"#fff", borderRadius: "6px"}} >
+           <Button variant="contained" color="primary" onClick={() => addNewUser()} className="py-2" style={{ color:"#fff",}} >
                Send
            </Button>
-           <Button variant="contained"  onClick={() => onAddUpdateUserModalClose()} className="py-2 px-3" style={{backgroundColor: "#E0E0E0", color:"#000", borderRadius: "6px", cursor:"pointer"}}>
+           <Button variant="contained"  onClick={() => onAddUpdateUserModalClose()} className="py-2 px-3 bg-danger text-white" style={{ cursor:"pointer"}}>
                Cancel
            </Button>
          </ModalFooter>
@@ -777,7 +683,7 @@
              // color="primary"
              style={{backgroundColor: "#0b3d45", color:"#fff", borderRadius: "6px"}} 
              className="text-white"
-             onClick={handleDeleteUser}
+            //  onClick={handleDeleteUser}
            >
              Delete
            </Button>

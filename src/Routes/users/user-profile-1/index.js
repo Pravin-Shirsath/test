@@ -31,6 +31,7 @@ export default function UserProfile(props) {
   const [lastName, setLastName] = useState(JSON.parse(localStorage.getItem("ProfileData")).last_name);
   const [email, setEmail] = useState(JSON.parse(localStorage.getItem("ProfileData")).email);
   const [phone, setPhone] = useState(JSON.parse(localStorage.getItem("ProfileData")).mobile_number);
+  
 
   const [country, setCountry] = useState("")
   const [zipCode, setZipCode] = useState("")
@@ -86,8 +87,8 @@ const ProfileApiCall=(ProfileDetails)=>{
   updateProfileInfo(ProfileDetails,accessToken,userId.id).then((res) => {
       if (res?.status === 200) {
         console.log('Response from update profile:', res)
+       
         
-   
 
         setShow(false)
         setFirstNameError('')
@@ -110,9 +111,16 @@ const ProfileApiCall=(ProfileDetails)=>{
         setBillingAddress('')
         setTaxNumber('')
         setCompanyAddress('')
+
+        
         NotificationManager.success('Profile Updated Successfully!');
-        history.push('/app/dashboard/saas');
-        // window.location.reload();
+       
+        //  alert("done")
+        setTimeout(()=>{
+    history.push('/');
+        },1000)
+        //  history.push('/');
+        //  window.location.reload();
       }
     })
     .catch((err) => {
@@ -120,7 +128,19 @@ const ProfileApiCall=(ProfileDetails)=>{
       console.log('Update profile error :', err?.response)
       console.log(err?.response?.data, "error data from user profile");
       if (err?.response?.status === 400) {
-        NotificationManager.error(err?.response?.data?.email?.[0]);
+        if(err?.response?.data){
+           let data = err?.response?.data
+          for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+              NotificationManager.error(data[key]);
+                // console.log(key + " -> " + data[key]);
+            }
+        }
+          // err?.response?.data.forEach(item=>{
+
+          //   NotificationManager.error(item);
+          // })
+        }
       }
     })
 }else{
@@ -267,7 +287,7 @@ const ProfileApiCall=(ProfileDetails)=>{
         <UserBlock GettingImage={GettingImage}/>
 
         <Form className="border">
-          <section className="border border-5 py-10 d-flex align-item-center justify-content-center bg-dark text-white">
+          <section className="border border-5 py-10 d-flex align-item-center justify-content-center dark-primary text-white">
             <h2>Personal Details</h2>
           </section>
           <div className="edit-form">
@@ -472,7 +492,7 @@ const ProfileApiCall=(ProfileDetails)=>{
 
 
           </div>
-          <section className="border border-5 py-10 d-flex align-item-center justify-content-center bg-dark text-white">
+          <section className="border border-5 py-10 d-flex align-item-center justify-content-center dark-primary text-white">
             <h2>Company Details</h2>
           </section>
           <div className="edit-form">

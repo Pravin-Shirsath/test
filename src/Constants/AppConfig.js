@@ -23,7 +23,7 @@ const AppConfig = {
    copyRightText: 'Automaton © 2022 All Rights Reserved.',      // Copy Right Text
    // light theme colors
    themeColors: {
-      'primary': '#5D92F4',
+      'primary': '#3d4A9E',
       'secondary': '#677080',
       'success': '#00D014',
       'danger': '#FF3739',

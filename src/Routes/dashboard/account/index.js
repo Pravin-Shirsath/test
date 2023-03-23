@@ -97,7 +97,7 @@ useEffect(()=>{
           <div className="charts-widgets-wrapper">
          {/* <PageTitleBar title={<IntlMessages id="sidebar.charts" />} match={props.match} /> */}
          <RctCollapsibleCard
-            heading={<center> <h2>Account</h2></center> }
+            heading={<center > <h2>Account</h2></center> }
                  
          >
         <div className="w-100 d-flex justify-content-between px-40"> 
@@ -115,7 +115,7 @@ useEffect(()=>{
                <h2>{str.askRechargeText} <span className="mx-5 font-weight-bold ">{str.recharge} ?</span></h2>
                
             </div>
-            <div className=" d-flex justify-content-center">
+            <div className=" d-flex justify-content-center" style={{marginTop:"30px"}}>
 
             <FormGroup tag="fieldset" className="d-flex justify-content-between my-100 " >
                        

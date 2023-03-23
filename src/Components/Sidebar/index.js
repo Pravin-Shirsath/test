@@ -62,7 +62,7 @@ class Sidebar extends Component {
 					// style={{ backgroundImage: enableSidebarBackgroundImage ? `url(${selectedSidebarImage})` : 'none' }}
 				>
 					<div className={classNames("rct-sidebar-content", { "sidebar-overlay-dark": isDarkSidenav, 'sidebar-overlay-light': !isDarkSidenav })}>
-						<div className="site-logo justify-content-center" style={{backgroundColor:'#FFF'}}>
+						<div className="site-logo justify-content-center">
 							<Link to="/" className="logo-mini">
 							<img src={AppConfig.appLogo} alt="session-logo" className="img-fluid"  style={{height:'54px'}}/>
 							</Link>
@@ -71,9 +71,9 @@ class Sidebar extends Component {
                         <img src={`${process.env.PUBLIC_URL}/assets/images/img/appLogoText.png`} className="img-fluid" alt="site-logo" width="67" height="17" />
 							</Link> */}
 						</div>
-						<div className="rct-sidebar-wrap">
+						<div className="rct-sidebar-wrap dark-primary">
 							<Scrollbars
-								className="rct-scroll "
+								className="dark-primary"
 								autoHide
 								autoHideDuration={100}
 								style={{ height: 'calc(100vh - 60px)' }}

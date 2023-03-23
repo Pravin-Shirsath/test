@@ -164,6 +164,49 @@ export const logOut = (token) => {
 
 
 
+/**
+ * 
+ * @param {*} token 
+ * @param {*} userid 
+ * @returns 
+ */
+ export const  CustomerDisable= (token,userid) => {
+
+    return axios.get(`${BASE_URL}/api/version_0/admin/customer/delete/${userid}/`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+        }
+    })
+    .then( res => {
+        console.log("Delete customer details :",res);
+        return res;
+    
+    })
+}
+
+
+/**
+ * 
+ * @param {*} token 
+ * @param {*} userid 
+ * @returns 
+ */
+ export const CustomerEnable = (token,userid) => {
+
+    return axios.post(`${BASE_URL}/api/version_0/admin/customer/delete/${userid}/`, {},
+    {
+    headers: {
+        Authorization:`Token ${token}`
+        }
+    })
+    .then( res => {
+        console.log("Delete customer details :",res);
+        return res;
+    
+    })
+}
+
 
 
 
@@ -179,7 +222,7 @@ export const logOut = (token) => {
  * @returns 
  */
 export const getCustomerList = (token,pageNumber) => {
-    return axios.get(`${BASE_URL}/version_0/admin/customer/list/?page=${pageNumber}`, 
+    return axios.get(`${BASE_URL}/api/version_0/admin/customer/list/?page=${pageNumber}`, 
     {
     headers: {
         Authorization:`Token ${token}`
@@ -200,17 +243,62 @@ export const getCustomerList = (token,pageNumber) => {
  * @returns 
  */
 export const getSearchedCustomer = (token, searchItem) => {
-    return axios.get(`${BASE_URL}/version_0/admin/customer/list/?search=${searchItem}`, 
+    return axios.get(`${BASE_URL}/api/version_0/admin/customer/list/?search=${searchItem}`, 
     {
     headers: {
         Authorization:`Token ${token}`
     }
     })
     .then(res => {
-        console.log("Log out :",res);
+       
         return res;    
     })
 }
+
+
+
+
+
+
+
+
+/**
+ * 
+ * @param {*} token 
+ * @param {*} userid 
+ * @returns 
+ */
+
+ export const GetAlLProjectList = (token,userid) => {
+
+    return axios.post(`${BASE_URL}/api/version_0/admin/customer/delete/${userid}/`, {},
+    {
+    headers: {
+        Authorization:`Token ${token}`
+        }
+    })
+    .then( res => {
+        console.log("Delete customer details :",res);
+        return res;
+    
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -298,15 +386,16 @@ export const updateCustomerDetails = (token,firstname,lastname,mobilenumber,user
 
 
 
+
 /**
  * 
  * @param {*} token 
  * @param {*} userid 
  * @returns 
  */
-export const deleteCustomerDetails = (token,userid) => {
+ export const deleteCustomerDetails = (token,userid) => {
 
-    return axios.get(`${BASE_URL}/version_0/admin/customer/delete/${userid}/`, 
+    return axios.get(`${BASE_URL}/api/version_0/admin/customer/delete/${userid}/`, 
     {
     headers: {
         Authorization:`Token ${token}`

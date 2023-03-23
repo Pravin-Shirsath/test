@@ -1,7 +1,7 @@
 /**
  * Sign Up With Firebase
  */
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 
 import { Button, AppBar, Toolbar } from '@material-ui/core';
 
@@ -34,6 +34,7 @@ import { register } from '../Api/index';
 import { NotificationManager } from 'react-notifications';
 
 
+
 function SignupFirebase(props) {
    const [name, setName] = useState('');
    const [email, setEmail] = useState('');
@@ -56,6 +57,13 @@ function SignupFirebase(props) {
 
    const history = useHistory();
 
+useEffect(()=>{
+   alert("useeffect")
+   setName("")
+   setEmail("")
+   setPassword("")
+   setComfpass("")
+},[])
 
    // Sign Up API Call
    const onUserSignUp = () => {
@@ -99,10 +107,10 @@ function SignupFirebase(props) {
                      dispatch({ type: SIGNUP_USER_SUCCESS, payload: localStorage.getItem('user_id') });
                      NotificationManager.success('User Registration Successfully!');
                      history.push('/signin');
-                     setName()
-                     setEmail()
-                     setPassword()
-                     setComfpass()
+                     setName("")
+                     setEmail("")
+                     setPassword("")
+                     setComfpass("")
                      setShow(false);
                      setNameError('');
                      setEmailError('');
@@ -242,7 +250,7 @@ function SignupFirebase(props) {
                            </Link>
                         </div>
                         <div className='d-flex align-items-center justify-contain-center'>
-                           <h4 className="mr-15 mt-2 text-theme">{str.AlreadyAccountText}</h4>
+                           <h4 className="mr-15 mt-2 ">{str.AlreadyAccountText}</h4>
                            <Button
                               component={Link}
                               to="/signin"
@@ -278,6 +286,7 @@ function SignupFirebase(props) {
                                     className="has-input input-lg"
                                     // placeholder="Company/User Name"
                                     onChange={(e) => setName(e.target.value)}
+                                    autoComplete="off"
                                  />
 
                                  <span className="has-icon"><i className="ti-user"></i></span>
@@ -288,6 +297,7 @@ function SignupFirebase(props) {
                               <div style={{ textAlign: "start" }}>
                                  <p className="text-dark"> {str.emailField} <span style={{ color: "red" }}>*</span> </p>
                               </div>
+                            
                               <FormGroup className="has-wrapper">
                                  <Input
                                     type="text"
@@ -297,6 +307,7 @@ function SignupFirebase(props) {
                                     className="has-input input-lg"
                                     // placeholder="Company/User Email"
                                     onChange={(e) => setEmail(e.target.value)}
+                                    autoComplete="off"
                                  />
 
                                  <span className="has-icon"><i className="ti-email"></i></span>
@@ -317,6 +328,7 @@ function SignupFirebase(props) {
                                     className="has-input input-lg"
                                     // placeholder="Password"
                                     onChange={(event) => setPassword(event.target.value)}
+                                    autoComplete="off"
                                  />
 
                                  {/* <span className="has-icon"><i className="ti-lock"></i></span> */}
@@ -340,6 +352,7 @@ function SignupFirebase(props) {
                                     className="has-input input-lg"
                                     // placeholder="Confirm password"
                                     onChange={(event) => setComfpass(event.target.value)}
+                                    autoComplete="off"
                                  />
                                  {/* <span className="has-icon"><i className="ti-lock"></i></span> */}
                                  <span onClick={() => setComfpassToggle(!comfpassToggle)} className="has-icon"><i className="ti-eye"></i></span>

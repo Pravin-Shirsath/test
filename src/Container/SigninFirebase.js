@@ -209,7 +209,7 @@ function Signin(props) {
                         </div>
                         <div className='d-flex align-items-center'>
                            
-                           <h4  className="mr-15 mt-2 text-theme">{str.NewUser}</h4>
+                           <h4  className="mr-15 mt-2 ">{str.NewUser}</h4>
                            <Button
                               component={Link}
                               to="/signup"
