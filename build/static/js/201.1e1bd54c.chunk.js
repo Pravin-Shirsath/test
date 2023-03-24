@@ -1,2 +1,0 @@
-(this.webpackJsonpreactify=this.webpackJsonpreactify||[]).push([[201],{2405:function(t,c,e){"use strict";e.r(c);e(1);var i=e(0);c.default=function(){return Object(i.jsx)("div",{children:"Account"})}}}]);
-//# sourceMappingURL=201.1e1bd54c.chunk.js.map

@@ -1,1 +1,0 @@
-{"version":3,"sources":["Routes/dashboard/Admin/AddCoupans/index.js"],"names":["AddCoupan"],"mappings":"yGAAA,uBAUeA,UARG,WAChB,OACE,8BAAK,mBAIT,C","file":"static/js/198.ccc52a31.chunk.js","sourcesContent":["import React from 'react'\n\nconst AddCoupan = () => {\n  return (\n    <div>\n      create couponap\n    </div>\n  )\n}\n\nexport default AddCoupan\n"],"sourceRoot":""}

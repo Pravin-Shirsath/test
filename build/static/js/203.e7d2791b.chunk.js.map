@@ -1,1 +1,0 @@
-{"version":3,"sources":["Routes/dashboard/Admin/report/index.js"],"names":["Report"],"mappings":"yGAAA,uBAUeA,UARA,WACb,OACE,8BACE,6BAAI,YAGV,C","file":"static/js/203.e7d2791b.chunk.js","sourcesContent":["import React from 'react'\n\nconst Report = () => {\n  return (\n    <div>\n      <h1>Report</h1>\n    </div>\n  )\n}\n\nexport default Report\n"],"sourceRoot":""}
