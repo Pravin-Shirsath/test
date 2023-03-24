@@ -59,15 +59,16 @@ import Switch from 'react-toggle-switch';
   const [users, setUsers] = useState([])
   //  const [filteredUsers, setFilteredUsers] = useState() // use when the data is coming fom api
    const [filteredUsers, setFilteredUsers] = useState([])
- 
+   const [searchText, setSearchText] = useState('');
+   const [activePage , setActivePage] = useState(1)
+   const [totalPageCount, setTotalPageCount] = useState('');
+   
    const [selectedUser, setSelectedUser] = useState(null)
    const [loading, setLoading] = useState(false)
    const [addNewUserModal, setAddNewUserModal] = useState(false)
    const [updateNewUserModal, setupdateNewUserModal] = useState(false)
    const [deleteUserModal, setdeleteUserModal] = useState(false)
-   const [searchText, setSearchText] = useState('');
-   const [activePage , setActivePage] = useState(1)
-   const [totalPageCount, setTotalPageCount] = useState('');
+  
  
    const [addNewUserDetail, setAddNewUserDetail] = useState({
      username: '',
@@ -480,7 +481,7 @@ import Switch from 'react-toggle-switch';
        setActivePage(pageNumber)
      } 
    }
-  const [t,setT]=useState(false)
+  
    // console.log(addNewUserDetail, "addNewUserDetail data")
    // console.log(users, "usersss")
    // console.log(filteredUsers, "filtered user")
@@ -490,10 +491,10 @@ import Switch from 'react-toggle-switch';
          <title>Automaton | Customers List</title>
          <meta name="description" content="Automaton Widgets" />
        </Helmet>
-       {/* <PageTitleBar
-         title={<IntlMessages id="sidebar.userManagement" />}
+       <PageTitleBar
+         title={<IntlMessages id="sidebar.usermangement" />}
          match={props.match}
-       /> */}
+       />
        <RctCollapsibleCard fullBlock>
          <div className="table-responsive">
            <div className="d-flex py-20 px-10 border-bottom" style={{justifyContent:'space-between'}}>

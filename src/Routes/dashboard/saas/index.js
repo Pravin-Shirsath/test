@@ -2,7 +2,9 @@
  * Ecommerce Dashboard
  */
 
- import React ,{useEffect}from 'react'
+ import React ,{useEffect,useState}from 'react'
+ import { NotificationManager } from 'react-notifications'
+ import Pagination from "react-js-pagination";
  import { Helmet } from "react-helmet";
 //  import Button from '@material-ui/core/Button';
  import { Progress ,Button,
@@ -45,26 +47,112 @@ import { OverallTrafficStatusWidget, SupportRequest } from 'Components/Widgets';
 import ProjectCard from '../ReuseComponent/ProjectCard';
 import DoughnutChart from 'Components/Charts/DoughnutChart';
 import { useHistory } from 'react-router';
+import { GetAlLProjectList, GetSearchProjectList } from 'Api';
+import { getFormatDate2 } from 'Constants/DateFormator';
+import { BASE_URL } from 'Api/APIConst';
 
  
  export default function SaasDashbaord(props) {
     const { match } = props;
     const history = useHistory();
+     const [project, setProject] = useState([])
+    //  const [filteredUsers, setFilteredProject] = useState() // use when the data is coming fom api
+     const [filterProject, setFilteredProject] = useState([])
+     const [searchText, setSearchText] = useState('');
+     const [activePage , setActivePage] = useState(1)
+     const [totalPageCount, setTotalPageCount] = useState('');
    
     const type = JSON.parse(localStorage.getItem('user_type'));
-    if(type === "admin"){
+   //  if(type === "admin"){
       
-      history.push("app/dashboard/Admin/Dashboard")
+   //    history.push("app/dashboard/Admin/Dashboard")
+   //  }
+
+
+
+    const ProjectList = () => {
+      const accessToken = JSON.parse(localStorage.getItem('token'))
+      if (accessToken !== null) {
+         GetAlLProjectList(accessToken, activePage)
+          .then((res) => {
+            if (res?.status === 200) {
+               setProject(res?.data?.results);
+               setFilteredProject(res?.data?.results);
+              setTotalPageCount(parseInt(res?.data?.count));
+               console.log('Response from PROJECTlist :', res)
+            } else {
+              // console.log('Response from customerlist:', res)
+            }
+          })
+          .catch((err) => {
+            // console.log("status of invalid token", err?.response?.data, err?.response?.status)
+            if(err?.response?.status == 401){
+            // conditional rendring
+              // localStorage.clear();
+              // history.push("/signin");
+              // window.location.reload();
+            } else {
+              // console.log('Response from customerlist:', err)
+            }
+          })
+      }
     }
 
 
 
 
+    const handlePageChange = (pageNumber) => {
+      // console.log("pagination", pageNumber)
+         if (activePage !== pageNumber) {
+          const accessToken = JSON.parse(localStorage.getItem('token'))
+          if (accessToken !== null) {
+            GetAlLProjectList(accessToken, pageNumber)
+              .then((res) => {
+                if (res?.status === 200) {
+                  setProject(res?.data?.results);
+                  setFilteredProject(res?.data?.results);
+                  setTotalPageCount(parseInt(res?.data?.count));
+                   console.log('Response from handle change :', res)
+                } else {
+                  // console.log('Response from customerlist:', res)
+                }
+              })
+              .catch((err) => {
+                // console.log('Response from customerlist:', err)
+              })
+          }
+       
+        setActivePage(pageNumber)
+      } 
+    }
+
+
+   const getSearchedProjectData = () => {
+      const accessToken = JSON.parse(localStorage.getItem('token'))
+      if (accessToken !== null) {
+         GetSearchProjectList(accessToken, searchText)
+          .then((res) => {
+            if (res?.status === 200 && res?.data?.results.length>0) {
+               setFilteredProject(res?.data?.results);
+              setSearchText('')
+              console.log('Response from search  :', res)
+            } else {
+              // console.log('Response from customerlist:', res)
+              setFilteredProject(project);
+              setSearchText('');
+              NotificationManager.error("No Project found!")
+            }
+          })
+          .catch((err) => {
+            // console.log('Response from customerlist:', err)
+          })
+      }
+    }
 
    //  alert("hello")
     useEffect(() => {
 
-     
+      ProjectList()
       console.log("type", type);
     }, [])
      return (
@@ -74,7 +162,9 @@ import { useHistory } from 'react-router';
              <meta name="description" content="user Dashboard" />
           </Helmet>
           <div className="charts-widgets-wrapper">
-         {/* <PageTitleBar title={<IntlMessages id="sidebar.charts" />} match={props.match} /> */}
+         
+         <PageTitleBar title={<IntlMessages id="sidebar.dashboard" />} match={props.match} />
+        
          <RctCollapsibleCard
             // heading={<center> <h2>user Dashboard</h2></center> }
                 
@@ -82,7 +172,7 @@ import { useHistory } from 'react-router';
        <div className="d-flex pb-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
                <div className='search-row'>
                   <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} />
-                  <Button variant="contained" color="primary" className="text-white mx-5"  >Search</Button>
+                  <Button variant="contained" color="primary" className="text-white mx-5" onClick={getSearchedProjectData} >Search</Button>
                </div>
 
                {/* <Button variant="contained" color="primary" className="text-white mx-5"  
@@ -94,143 +184,89 @@ import { useHistory } from 'react-router';
 
 
          </RctCollapsibleCard>
-        
-         <div className="row ">
-         {
-          [1,2,3].map((item,i)=>{
+        <div>
+
+        <div className="row ">
+         {filterProject &&
+            filterProject.map((item,i)=>{
+
+             let created =  getFormatDate2(item.date_created)
              return <RctCollapsibleCard
                 
-                colClasses="col-sm-12 col-md-6 col-lg-4 shadow p-3 mb-5  rounded"
+                colClasses="col-sm-12 col-md-6 col-lg-4  rounded"
                               
                 fullBlock
                 key={i}
              >
-           
-                <section className="dark-primary text-white px-2 py-2 shadow p-3 mb-5 rounded"> 
-                <h3>Project {i}</h3>
-                <p>Created by ABS on 04/03/22</p>
+             <div className="shadow project-card-shadow">
+                <section className="dark-primary text-white px-3 shadow rounded d-flex  align-items-center "> 
+
+<img
+  src={ item?.project_image == null ?  `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : `${BASE_URL+item.project_image}`}
+   alt="user profile"
+   className=" rounded-circle"
+   width={50}
+   height={50}
+/>
+             <div className="ml-4  align-items-center ">
+                <p className="project-heading">{item.project_name}</p>
+                <p className="project-date"> Created by {item.username} on {created}</p>
+             </div>
+         
                 
                 </section>
-             <section className="d-flex flex-direction: column align-items-center justify-content-between px-3 mt-2">
-             <div className="">
+                <section className="Project-Card-Main ">
+                <section className="d-flex flex-direction: column align-items-center justify-content-between">
+             <div className="Doughnut-in-Project-cart">
                <DoughnutChart />
                </div>
                <div>
-                 <h4>Dataset Details <span className="square border border-5 border-dark  px-4 py-1">05</span></h4>
-                 <h4 >Status <span className="square border border-5 border-dark  px-3 py-1 bg-info mx-5"></span></h4>
+                 <p className="project-card-dataset-text">Dataset Details <span className="project-card-dataset-box">05</span></p>
+                 <p className="project-card-dataset-text">Status <span className="project-card-Status-box  "></span></p>
                </div>
 
              </section>
-             <section className="d-flex flex-direction: column align-items-center justify-content-center px-5  " style={{marginBottom:"30px",marginTop:"10px"}}>
-             <Button variant="contained" color="primary" className="text-white mx-5"  >Edit</Button>
-             <Button variant="contained" color="primary" className="text-white mx-5"  >View</Button>
-             <Button variant="contained" color="danger" className="text-white mx-5"  >Delete</Button>
+             <section className="d-flex flex-direction: column align-items-center justify-content-center   " >
+             <Button variant="contained" color="primary" className="projectCardButton mx-2"  >Edit</Button>
+             <Button variant="contained" color="primary" className="projectCardButton mx-2"  >View</Button>
+             <Button variant="contained" color="danger" className="projectCardButton mx-2"  >Delete</Button>
 
              </section>
-              
+
+                </section>
+            
+                </div>
+            
              </RctCollapsibleCard>
           })
          }
        
-            
+       
            
        </div>
+       <div>
+       {
+               project?.length > 0 &&
+               <div className='paginationDiv'>
+                 <Pagination
+                             activePage={activePage}
+                             itemsCountPerPage={6}
+                             pageRangeDisplayed={5}
+                             onChange={(e) => handlePageChange(e)}
+                              itemClass="page-item"
+                             linkClass="page-link"
+                             hideFirstLastPages={true}
+                             totalItemsCount={totalPageCount}
+                         />
+ 
+                    
+                   </div>
+             }
+       </div>
+        </div>
+       
       
  
-
-         {/* <div className="row">
-            
-            <RctCollapsibleCard
-               heading={<IntlMessages id="widgets.trafficChannel" />}
-               customClasses="overflow-hidden"
-               colClasses="col-sm-6 col-md-4 w-xs-half-block"
-               badge={{
-                  name: <IntlMessages id="widgets.today" />,
-                  class: 'danger'
-               }}
-               collapsible
-               reloadable
-               closeable
-               fullBlock
-            >
-              
-            </RctCollapsibleCard>
-            <RctCollapsibleCard
-               heading={<IntlMessages id="widgets.campaignPerformance" />}
-               colClasses="col-sm-6 col-md-4 w-xs-full"
-               collapsible
-               reloadable
-               closeable
-            >
-             
-            </RctCollapsibleCard>
-         </div>
-          */}
-         {/* <div className="row">
-            <RctCollapsibleCard
-               colClasses="col-sm-12 col-md-5 col-lg-5 col-xl-4 w-8-full"
-               heading={<IntlMessages id="widgets.emailsStatistics" />}
-               customClasses="gradient-primary"
-               collapsible
-               reloadable
-               closeable
-               fullBlock
-            >
-              
-            </RctCollapsibleCard>
-            <RctCollapsibleCard
-               colClasses="col-sm-12 col-md-7 col-lg-7 col-xl-8 w-8-full"
-               heading={<IntlMessages id="widgets.totalEarns" />}
-               collapsible
-               fullBlock
-               reloadable
-               closeable
-            >
-             
-            </RctCollapsibleCard>
-         </div> */}
-         {/* <div className="row">
-            <div className="col-sm-12 col-md-6">
-             
-            </div>
-            <div className="col-sm-12 col-md-6">
-             
-            </div>
-         </div> */}
-         {/* <div className="row">
-            <RctCollapsibleCard
-               colClasses="col-md-7 col-xl-8 w-xs-half-block w-8-full"
-               heading={<IntlMessages id="widgets.productStats" />}
-               collapsible
-               reloadable
-               closeable
-            >
-              
-            </RctCollapsibleCard>
-            <RctCollapsibleCard
-               customClasses="gradient-primary"
-               colClasses="col-md-5 col-xl-4 w-xs-half-block w-8-full"
-               heading={<IntlMessages id="widgets.emailsStatistics" />}
-               collapsible
-               reloadable
-               closeable
-               fullBlock
-            >
-              
-            </RctCollapsibleCard>
-         </div>
-         <div className="row">
-            <RctCollapsibleCard
-               colClasses="col-sm-12 col-md-6 w-xs-full"
-               heading={<IntlMessages id="widgets.siteVisitors" />}
-               collapsible
-               reloadable
-               closeable
-               fullBlock
-            >
-            
-            </RctCollapsibleCard>
-         </div> */}
       </div>
          
        </div>

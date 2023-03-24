@@ -128,6 +128,66 @@
     padding-bottom: 30px;
 }
 
+.projectCardButton{
+    padding: 0.2rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+}
+
+.Project-Card-Main{
+padding: 20px;
+}
+.project-card-dataset-text{
+    font-size: 1rem;
+    word-spacing: 3px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 800;
+}
+.project-card-dataset-box{
+    padding: 1px 4px;
+    border: 1px solid #000000;
+  
+}
+
+.project-heading{
+    font-size: 1rem;
+    font-weight: 800;
+    word-spacing: 1rem;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-bottom: 0px;
+}
+.project-date{
+ 
+        font-size: 1rem;
+        font-weight: 500;
+        word-spacing: 0.1rem;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.project-card-Status-box{
+    padding: 1px 9px;
+    margin-left: 4px;
+    border: 1px solid #000000;
+    background-color: #525b96;
+}
+
+.project-card-shadow{
+    /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; */
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 .addCustomerModal .modal-title {
     font-size: 18px;
 }

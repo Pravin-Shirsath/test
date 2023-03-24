@@ -23,6 +23,7 @@ import IntlMessages from 'Util/IntlMessages'
 import '../../../Assets/css/main.css'
 import { updateProfileInfo } from '../../../Api/index'
 import Button from '@material-ui/core/Button'
+import { Zip_code_data } from 'Constants/Zipcodedata';
 
 export default function UserProfile(props) {
 
@@ -72,6 +73,9 @@ const GettingImage=(pic)=>{
     setImage(pic)
   }
 }
+
+
+
 
 
 
@@ -150,6 +154,9 @@ const ProfileApiCall=(ProfileDetails)=>{
 }
 
 
+
+
+
   const updateProfile = () => {
     const Profile_Details = {}
     const fd = new FormData();
@@ -157,7 +164,7 @@ const ProfileApiCall=(ProfileDetails)=>{
     const phoneRegex = /^\d{10}$/;  // /^[6789]\d{9}$/ (previous rule)
     const regexName = /^[a-zA-Z]{1,30}$/; // only alpha, no space, min-1, max-30
     const TaxnumberRegex=/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/
-    const  isValidZip = /^[1-9][0-9]{5}$/
+    const  isValidZip = /^[1-9][0-9]\d{6}$/
    
     if (email.trim() !== '' && (phone !== null || phone !== undefined) && firstName.trim() !== '' && lastName.trim() !== '' && companyName.trim() !== '' && billingAddress.trim() !== '' && taxNumber.trim() !== '') {
      
@@ -170,8 +177,7 @@ const ProfileApiCall=(ProfileDetails)=>{
       setTaxNumberError("")
       setBillingAddressError("")
      
-     
-      if(country != ""){
+       if(country != ""){
       
         fd.append('country', country)
       }
@@ -179,9 +185,9 @@ const ProfileApiCall=(ProfileDetails)=>{
       
         fd.append('state', state)
       }
-      if(zipCode != ""){
-      
-      }
+     
+     
+    
       if (companyAddress != ""){
       
         fd.append('company_address', companyAddress)
@@ -190,44 +196,104 @@ const ProfileApiCall=(ProfileDetails)=>{
       if(image != null){
         Profile_Details.profile_image = image
         fd.append('profile_image', image)
-      }
+      } 
 
-      if (regexName.test(firstName.trim())) {
-        if (regexName.test(lastName.trim())) {
+
+      if(zipCode != ""){
+        fd.append('zip_code', zipCode)
+  
+
+        const zipobjget= async (zipCode) => {
+        const Zip_obj = await Zip_code_data.find((item)=>item.Country.toLowerCase() == country.toLowerCase())
+        const  re = new RegExp(Zip_obj.Regex);
+          return re.test(zipCode+"".trim())
+        }
          
-          if ((isValidPhoneNumber(phone+"".trim("")))) {
-            
-            if (emailRegex.test(email.trim(""))) {
-            
-              if(TaxnumberRegex.test(taxNumber+"".trim(""))){
-                                
-              // fd.append('parcel_id', parcelID)              
-              fd.append('first_name', firstName)
-              fd.append('last_name', lastName)
-              fd.append('mobile_number', phone)
-              fd.append('email', email.toLowerCase())
-              fd.append('billing_address', billingAddress)
-              fd.append('tax_number',taxNumber);
-                                      
-               ProfileApiCall(fd)
-
-             }else{
-              NotificationManager.error("Invalid Tax format!");
-             }
-            
-                       
+      if(zipobjget(zipCode))  {
+        if (regexName.test(firstName.trim())) {
+          if (regexName.test(lastName.trim())) {
+           
+            if ((isValidPhoneNumber(phone+"".trim("")))) {
+              
+              if (emailRegex.test(email.trim(""))) {
+              
+                if(TaxnumberRegex.test(taxNumber+"".trim(""))){
+                                  
+                // fd.append('parcel_id', parcelID)              
+                fd.append('first_name', firstName)
+                fd.append('last_name', lastName)
+                fd.append('mobile_number', phone)
+                fd.append('email', email.toLowerCase())
+                fd.append('billing_address', billingAddress)
+                fd.append('tax_number',taxNumber);
+                                        
+                 ProfileApiCall(fd)
+  
+               }else{
+                NotificationManager.error("Invalid Tax format!");
+               }
+              
+                         
+              } else {
+                NotificationManager.error("Invalid email format!");
+              }
             } else {
-              NotificationManager.error("Invalid email format!");
+              NotificationManager.error("Phone number must be 10 digit long!");
             }
           } else {
-            NotificationManager.error("Phone number must be 10 digit long!");
+            NotificationManager.error('Last name must contain only alphabet and no spacings!');
           }
         } else {
-          NotificationManager.error('Last name must contain only alphabet and no spacings!');
+          NotificationManager.error('First name must contain only alphabet and no spacings!');
         }
-      } else {
-        NotificationManager.error('First name must contain only alphabet and no spacings!');
+       
+      }else{
+        NotificationManager.error('Invalid format Zip-code!');
+
       }
+
+        
+
+      }else{
+        if (regexName.test(firstName.trim())) {
+          if (regexName.test(lastName.trim())) {
+           
+            if ((isValidPhoneNumber(phone+"".trim("")))) {
+              
+              if (emailRegex.test(email.trim(""))) {
+              
+                if(TaxnumberRegex.test(taxNumber+"".trim(""))){
+                                  
+                // fd.append('parcel_id', parcelID)              
+                fd.append('first_name', firstName)
+                fd.append('last_name', lastName)
+                fd.append('mobile_number', phone)
+                fd.append('email', email.toLowerCase())
+                fd.append('billing_address', billingAddress)
+                fd.append('tax_number',taxNumber);
+                                        
+                 ProfileApiCall(fd)
+  
+               }else{
+                NotificationManager.error("Invalid Tax format!");
+               }
+              
+                         
+              } else {
+                NotificationManager.error("Invalid email format!");
+              }
+            } else {
+              NotificationManager.error("Phone number must be 10 digit long!");
+            }
+          } else {
+            NotificationManager.error('Last name must contain only alphabet and no spacings!');
+          }
+        } else {
+          NotificationManager.error('First name must contain only alphabet and no spacings!');
+        }
+      }
+
+     
     } else {
       setFirstNameError('')
       setLastNameError('')
@@ -240,7 +306,6 @@ const ProfileApiCall=(ProfileDetails)=>{
       
     if (email.trim() == ''){
       setEmailError('* This is required Field')
-
     } 
     if(firstName.trim() == '' ){
       setFirstNameError('* This is required Field')
@@ -287,9 +352,10 @@ const ProfileApiCall=(ProfileDetails)=>{
         <UserBlock GettingImage={GettingImage}/>
 
         <Form className="border">
-          <section className="border border-5 py-10 d-flex align-item-center justify-content-center dark-primary text-white">
+        <section className="border border-5 py-10 d-flex align-item-center justify-content-center dark-primary text-white">
             <h2>Personal Details</h2>
           </section>
+         
           <div className="edit-form">
 
             <FormGroup row >

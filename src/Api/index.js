@@ -269,9 +269,9 @@ export const getSearchedCustomer = (token, searchItem) => {
  * @returns 
  */
 
- export const GetAlLProjectList = (token,userid) => {
+ export const GetAlLProjectList = (token, pageNumber) => {
 
-    return axios.post(`${BASE_URL}/api/version_0/admin/customer/delete/${userid}/`, {},
+    return axios.get(`${BASE_URL}/api/automaton/projects/view/?page=${pageNumber}`, 
     {
     headers: {
         Authorization:`Token ${token}`
@@ -283,6 +283,35 @@ export const getSearchedCustomer = (token, searchItem) => {
     
     })
 }
+
+
+/**
+ * 
+ * @param {*} token 
+ * @param {*} userid 
+ * @returns 
+ */
+
+ export const GetSearchProjectList = (token, searchItem) => {
+
+    return axios.get(`${BASE_URL}/api/automaton/projects/view/?search=${searchItem}`,
+    {
+    headers: {
+        Authorization:`Token ${token}`
+        }
+    })
+    .then( res => {
+        console.log("Delete customer details :",res);
+        return res;
+    
+    })
+}
+
+
+
+
+
+
 
 
 

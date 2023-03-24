@@ -95,7 +95,7 @@ useEffect(()=>{
          
         
           <div className="charts-widgets-wrapper">
-         {/* <PageTitleBar title={<IntlMessages id="sidebar.charts" />} match={props.match} /> */}
+         <PageTitleBar title={<IntlMessages id="sidebar.account" />} match={props.match} />
          <RctCollapsibleCard
             heading={<center > <h2>Account</h2></center> }
                  
@@ -105,10 +105,16 @@ useEffect(()=>{
         </div>
 
         <div>
-        <Progress multi style={{ height: "50px" }}>
+
+         {
+            true? <Progress bar color="danger" value={100} style={{ height: "50px" }} ><h2 style={{marginTop:"6px"}}>0GB</h2></Progress>
+            :
+            <Progress multi style={{ height: "50px" }}>
         <Progress bar color="danger" value={useData} ><h2 style={{marginTop:"6px"}}>{useData}GB</h2></Progress>
         <Progress bar color="success" value={totalData-useData}  ><h2 style={{marginTop:"6px"}}>{totalData-useData}GB </h2></Progress>
       </Progress>
+         }
+       
         </div>
             <div className="d-flex justify-content-center mt-50">
               

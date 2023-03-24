@@ -249,7 +249,10 @@ function UserBlockHorizontal(props) {
 
    return (
       <div className="top-sidebar">
-         <div className="sidebar-user-block profile-block" >
+         <div className="sidebar-user-block profile-block d-flex text-align-center justify-content-center" >
+         <div style={{color:"#fff "}} className="mt-2">
+  <NotificationsIcon />
+  </div>
             <Dropdown
                isOpen={userDropdownMenu}
                toggle={() => toggleUserDropdownMenu()}
@@ -260,10 +263,10 @@ function UserBlockHorizontal(props) {
                   className="d-flex align-items-center g-2  "
                >
   <div className="userProfileWrapper">
+  
 
 <div className="text-white mx-3 text-align-center justify-content-center mt-1">
 
-  <NotificationsIcon/>
 </div>
 <img
   src={ profileData?.profile_image == null ?  `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : `${BASE_URL+profileData.profile_image}`}
@@ -336,7 +339,7 @@ function UserBlockHorizontal(props) {
                         {/* <Button variant="contained" className="btn-info text-white btn-block" onClick={handleClickOpen}>Open form dialog</Button> */}
                         <li className="border-top">
                            <a onClick={handleClickOpen}>
-                              <i class="zmdi zmdi-lock-outline mr-3 text-primary"></i>
+                              <i class="zmdi zmdi-lock-outline mr-3 primary-dark"></i>
                               <span>Change Password</span>
                            </a>
                         </li>
@@ -386,10 +389,10 @@ function UserBlockHorizontal(props) {
                </RctCollapsibleCard>
             </DialogContent>
             <DialogActions>
-               <Button variant="contained" onClick={resetPassword} className="py-2" style={{ backgroundColor: "#0b3d45", color: "#fff", borderRadius: "6px" }} >
+               <Button variant="contained" color="primary" onClick={resetPassword} className="py-2" style={{ cursor: "pointer"}} >
                   Change Password
                </Button>
-               <Button variant="contained" onClick={handleClose} className="py-2 px-3" style={{ backgroundColor: "#E0E0E0", color: "#000", borderRadius: "6px", cursor: "pointer" }}>
+               <Button variant="contained" color="danger" onClick={handleClose} className="py-2 px-3" style={{backgroundColor:"#FC443C", color: "#fff", cursor: "pointer" }}>
                   Cancel
                </Button>
             </DialogActions>

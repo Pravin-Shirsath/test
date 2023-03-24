@@ -48,40 +48,8 @@
              <title>Reports Dashboard</title>
              <meta name="description" content="Automaton Ecommerce Dashboard" />
           </Helmet>
-          <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-8 col-lg-8 w-xs-full"
-                heading={<IntlMessages id="widgets.RecentOrders" />}
-                collapsible
-                reloadable
-                closeable
-                fullBlock
-             >
-               <h1>Sample page </h1>
-                </RctCollapsibleCard>
-        
-          <div className="row">
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-4 col-lg-4 w-xs-full"
-                heading={<IntlMessages id="widgets.supportRequest" />}
-                collapsible
-                reloadable
-                closeable
-                fullBlock
-                customClasses="overflow-hidden"
-             >
-                <SupportRequest />
-             </RctCollapsibleCard>
-             <RctCollapsibleCard
-                colClasses="col-sm-12 col-md-8 col-lg-8 w-xs-full"
-                heading={<IntlMessages id="widgets.RecentOrders" />}
-                collapsible
-                reloadable
-                closeable
-                fullBlock
-             >
-                <RecentOrdersWidget />
-             </RctCollapsibleCard>
-          </div>
+          <PageTitleBar title={<IntlMessages id="sidebar.report" />} match={props.match} />
+          
          
        </div>
     )
