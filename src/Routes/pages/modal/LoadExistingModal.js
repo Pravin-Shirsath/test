@@ -268,7 +268,7 @@ export default function UserProfile(props) {
         }
        
         
-        if(type === "customer"){
+        if(type === "customer" || type === "company_admin"){
     
           history.push('/app/dashboard/saas');
         }

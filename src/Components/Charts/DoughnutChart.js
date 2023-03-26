@@ -32,7 +32,7 @@ const options = {
          }
       }  
    },   
-   cutout: 30,
+   cutout: 25,
    responsive: false,
    maintainAspectRatio:false
 };
@@ -40,7 +40,7 @@ const options = {
 export default class DoughnutChart extends Component {
    render() {
       return (
-         <Doughnut data={data} options={options} height={120} width={120}/>
+         <Doughnut data={data} options={options} height={100} width={100}/>
       );
    }
 }

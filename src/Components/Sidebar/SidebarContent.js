@@ -75,7 +75,22 @@ function SidebarContent(){
                <NavMenuItem
                   menu={menu}
                   key={key}
-                  onToggleMenu={() => toggleMenu(menu, 'category2')}
+                  onToggleMenu={() => toggleMenu(menu, 'category1')}
+               />
+            ))}
+         </List> 
+           }
+
+           {
+            type == "company_admin" &&    <List
+            className="rct-mainMenu p-0 m-0 list-unstyled"
+            // subheader={<ListSubheader className="side-title" component="li"><IntlMessages id="sidebar.applications" /></ListSubheader>}
+         >
+            {sidebarMenus.category3.map((menu, key) => (
+               <NavMenuItem
+                  menu={menu}
+                  key={key}
+                  onToggleMenu={() => toggleMenu(menu, 'category3')}
                />
             ))}
          </List> 

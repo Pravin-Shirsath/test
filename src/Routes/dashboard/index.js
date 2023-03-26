@@ -21,7 +21,10 @@ import {
    AsyncCustomerManagementComponent,
    AsyncAdminAccountComponent,
    AsyncAdminreportComponent,
-   AsyncAdminProjectComponent
+   AsyncAdminProjectComponent,
+   AsyncViewProjectComponent,
+   AsyncCreateProjectComponent,
+   AsyncRechargeModalComponent
 
 } from 'Components/AsyncComponent/AsyncComponent';
 
@@ -42,7 +45,7 @@ return(
          
         
          {
-            type === "customer" && <Redirect exact from={`${match.url}/`} to={`${match.url}/saas`} />
+           ( type === "customer" || type === "company_admin")&& <Redirect exact from={`${match.url}/`} to={`${match.url}/saas`} />
           
          }
 
@@ -59,6 +62,9 @@ return(
          <Route path={`${match.url}/report`} component={AsyncReportDashboardComponent} />
          <Route path={`${match.url}/project`} component={AsyncProjectDashboardComponent} />
          <Route path={`${match.url}/userManagment`} component={AsyncUserManagmentDashboardComponent} />
+         <Route path={`${match.url}/viewProject`} component={AsyncViewProjectComponent} />
+         <Route path={`${match.url}/createProject`} component={AsyncCreateProjectComponent} />
+         <Route path={`${match.url}/rechargeModal`} component={AsyncRechargeModalComponent} />
          
 
          <Route path={`${match.url}/Admin/Dashboard`} component={AsyncAdminDashboardComponent} />

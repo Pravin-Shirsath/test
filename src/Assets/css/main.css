@@ -10,10 +10,22 @@ background-color: #181D3F !important;
 color: white;
 }
 
+.Project-cart-main{
+margin-bottom: 9px;
+}
+.dark-primary-text{
+    color:  #181D3F !important;
+}
 
+.border-box-shadow-image{
+    border: 1px solid rgb(211, 202, 202);
 
-
-
+    
+}
+/* create project css */
+.box-shadow-box{
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
 
 .activity_wrap {
     gap: 10px;

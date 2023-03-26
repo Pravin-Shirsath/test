@@ -111,7 +111,7 @@ const type = JSON.parse(localStorage.getItem('user_type'));
          return (<Redirect to={'/signin'} />);
       } else {
           
-          if(type === "customer"){
+          if(type === "customer"  || type === "company_admin"){
 
              return (  <Redirect to={'/app/dashboard/saas'} /> );
           }else  if(type === "admin"){

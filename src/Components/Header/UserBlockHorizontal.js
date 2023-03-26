@@ -64,8 +64,8 @@ function UserBlockHorizontal(props) {
                   localStorage.removeItem('user_type');
                   localStorage.removeItem('isLoggedIn');
                   localStorage.clear();
-                   localStorage.setItem('rememberMe', JSON.stringify(checkCredentials))
-
+                  localStorage.setItem('rememberMe', JSON.stringify(checkCredentials))
+                 
                   NotificationManager.success('User Logout Successfully');
                }
                else {
@@ -116,6 +116,7 @@ function UserBlockHorizontal(props) {
                if (res?.status === 200) {
                   setProfileData(res?.data);
                   localStorage.setItem("ProfileData", JSON.stringify(res?.data));
+                  localStorage.setItem("user_type", JSON.stringify(res?.data?.user_type));
                   console.log("Profile Info ResponseData", res?.data)
                } else if (res?.status === 400) {
                   console.log("Profile Info Response", res)
@@ -288,7 +289,7 @@ function UserBlockHorizontal(props) {
                   </div> */}
                
                   <div className="user-info flex-column d-flex">
-                     <span className="user-name ml-4 text-white">{profileData?.first_name} {profileData?.last_name}</span>
+                     <span className="user-name ml-4 text-white">{profileData?.username} </span>
                      {/* <span className="user-name ml-4 text-white">{profileData?.email}</span> */}
                    
                      </div>

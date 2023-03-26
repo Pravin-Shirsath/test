@@ -58,7 +58,7 @@ function SignupFirebase(props) {
    const history = useHistory();
 
 useEffect(()=>{
-   alert("useeffect")
+   
    setName("")
    setEmail("")
    setPassword("")
@@ -351,8 +351,8 @@ useEffect(()=>{
                                     // id="pwd2"
                                     className="has-input input-lg"
                                     // placeholder="Confirm password"
-                                    onChange={(event) => setComfpass(event.target.value)}
-                                    autoComplete="off"
+                                     onChange={(event) => setComfpass(event.target.value)}
+                                     autoComplete="on"
                                  />
                                  {/* <span className="has-icon"><i className="ti-lock"></i></span> */}
                                  <span onClick={() => setComfpassToggle(!comfpassToggle)} className="has-icon"><i className="ti-eye"></i></span>

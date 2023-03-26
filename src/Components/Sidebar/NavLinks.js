@@ -5,13 +5,13 @@ let sidebarMenu = {
    
     
 
-      {
-         "menu_title": "sidebar.usermangement",
-         "path": "/app/dashboard/userManagment",
-         "new_item": false,
-         //  "menu_icon": "zmdi zmdi-accounts",
+      // {
+      //    "menu_title": "sidebar.usermangement",
+      //    "path": "/app/dashboard/userManagment",
+      //    "new_item": false,
+      //    //  "menu_icon": "zmdi zmdi-accounts",
 
-      },
+      // },
       {
          "menu_title": "sidebar.account",
          "path": "/app/dashboard/account",
@@ -282,6 +282,35 @@ let sidebarMenu = {
       // }
    ],
    category3: [
+     { "menu_title": "sidebar.usermangement",
+      "path": "/app/dashboard/userManagment",
+      "new_item": false,
+      //  "menu_icon": "zmdi zmdi-accounts",
+
+   },
+   {
+      "menu_title": "sidebar.account",
+      "path": "/app/dashboard/account",
+      "new_item": false,
+      // "menu_icon": "zmdi zmdi-accounts",
+
+   },
+   {
+      "menu_title": "sidebar.project",
+      "path": "/app/dashboard/project",
+      "new_item": false,
+      //  "menu_icon": "zmdi zmdi-accounts",
+
+   },
+   {
+      "menu_title": "sidebar.report",
+      "path": "/app/dashboard/report",
+      "new_item": false,
+      //  "menu_icon": "zmdi zmdi-accounts",
+
+   },
+
+
       // {
       //    "menu_title": "sidebar.uiComponents",
       //    "menu_icon": "zmdi zmdi-wrench",

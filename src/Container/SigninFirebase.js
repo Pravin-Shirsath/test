@@ -86,11 +86,11 @@ function Signin(props) {
         
          if(type === "admin"){
       
-            history.push("/app/dashboard/Admin/Dashboard")
+            history.push("/app/dashboard/Admin/Dashboard" )
           }
          
           
-          if(type === "customer"){
+          if(type === "customer"  || type === "company_admin"){
       
             history.push('/app/dashboard/saas');
           }
@@ -153,7 +153,7 @@ function Signin(props) {
                   
                   }
 
-                   if(res?.data?.user?.user_type === "customer"){
+                   if(res?.data?.user?.user_type === "customer" || res?.data?.user?.user_type === "company_admin"){
                      history.push('/app/dashboard/saas');
                    }
 

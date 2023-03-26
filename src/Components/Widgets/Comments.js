@@ -67,7 +67,7 @@ function Comments() {
             <Button variant="contained" color="primary" className="px-3 btn-xs bg-primary">
                <IntlMessages id="button.viewAll" />
             </Button>
-         </RctCardFooter >
+         </RctCardFooter>
       </Fragment>
    );
 }

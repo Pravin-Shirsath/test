@@ -1,7 +1,10 @@
 module.exports = {
    "sidebar.app": "App",
    "sidebar.account": "Account",
+   "sidebar.viewpro": "View Project",
    "sidebar.project": "Project",
+   "sidebar.createproject": "Create Project",
+   "sidebar.AdminProfile":"Admin Profile",
    "sidebar.usermangement": "User Management",
    "sidebar.custmermangement": "Customer Management",
    "sidebar.news": "News",

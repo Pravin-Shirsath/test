@@ -212,8 +212,42 @@ export const logOut = (token) => {
 
 
 
+/**
+ * 
+ * @param {*} token 
+ * @returns 
+ */
+ export const getCompanyUserList = (token,pageNumber) => {
+    return axios.get(`${BASE_URL}/api/version_0/users/company-users/?page=${pageNumber}`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+    }
+    })
+    .then(res => {
+        // console.log("Log out :",res);
+        return res;    
+    })
+}
 
-
+/**
+ * 
+ * @param {*} token 
+ * @param {*} searchItem 
+ * @returns 
+ */
+ export const getsearchCompanyUser = (token, searchItem) => {
+    return axios.get(`${BASE_URL}/api/version_0/users/company-users/?search=${searchItem}`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+    }
+    })
+    .then(res => {
+       
+        return res;    
+    })
+}
 
 
 /**
@@ -308,6 +342,131 @@ export const getSearchedCustomer = (token, searchItem) => {
 }
 
 
+
+
+
+
+/**
+ * 
+ * @param {*} token 
+ * @param {*} projectId 
+ * @returns 
+ */
+
+ export const DeleteProject2= (token, projectId) => {
+    console.log(projectId,"projectId")
+     let payload ={ 
+         project_id : projectId+""
+        }
+    
+    return axios.delete(`${BASE_URL}/api/automaton/projects/delete/${52}`,
+        
+    
+    {
+        headers: {
+            "content-type": "application/json",
+            "accept": "application/json",
+            Authorization:`token ${token}`
+            }
+        
+    })
+    .then( res => {
+        console.log("Delete customer details :",res);
+        return res;
+    
+    })
+}
+
+
+
+/**
+ * 
+ * @param {*} token 
+ * @param {*} projectId 
+
+ * @returns 
+ */
+export const DeleteProject = (token, projectId) => {
+
+  let params = {
+    project_id : projectId+""
+  };
+
+  return fetch(`${BASE_URL}/api/automaton/projects/delete/`, {
+
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `token ${token}`
+    },
+    body: JSON.stringify(params),
+  }).then((res) => res)
+
+}
+
+
+
+
+/**
+ * 
+ * @param {*} token 
+ * @param {*} formdata 
+ * @returns 
+ */
+
+ export const EditProjectDetails = (token,formdata,projectId) => {
+  
+    return axios.patch(`${BASE_URL}/api/automaton/projects/update/${projectId}/`, formdata,
+    {
+    headers: {
+        Authorization:`Token ${token}`
+        }
+    })
+    .then( res => {
+        console.log("EditProjectDetails :",res);
+        return res;
+    })
+}
+
+
+/**
+ *  create project
+ * @param {*} token 
+ * @returns 
+ */
+
+ export const CreateNewProject = (token,projectName,dataset,projectDes,objImage) => {
+
+    const fd = new FormData();
+    if (projectName != "") {
+     
+        fd.append('project_name', projectName)   
+    }
+    if (dataset != "") {
+        fd.append('dataset_name', dataset)
+    }
+    if (projectDes != "") {
+        fd.append('project_description', projectDes)
+    }
+    if (objImage != null) {
+        fd.append('project_image', objImage)
+    }
+
+console.log(JSON.stringify(fd))
+
+    return axios.post(`${BASE_URL}/api/automaton/projects/create/`,fd, 
+    {
+    headers: {
+          
+            Authorization:`Token ${token}`,
+            'Content-Type': 'multipart/form-data',
+    }
+    })
+    .then(res => {
+        
+        return res;    
+    })
+}
 
 
 

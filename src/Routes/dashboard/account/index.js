@@ -42,9 +42,11 @@ import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import { str } from 'Constants/stringConst';
 import { UserAccountStatus } from 'Api';
+import { useHistory } from 'react-router';
 
  
  export default function Account(props) {
+   const history = useHistory();
     const { match } = props;
 const[ Accout,setAccout]=useState()
 const[ useData,setUseData]=useState(0)
@@ -126,14 +128,14 @@ useEffect(()=>{
             <FormGroup tag="fieldset" className="d-flex justify-content-between my-100 " >
                        
                         <FormGroup check className="d-flex align-item-center mx-50">
-                        <Input type="radio" name="radio1" style={{width:"30px" ,height:"30px"}} />
+                        <Input type="radio" name="radio1" style={{width:"30px" ,height:"30px"}} onClick={()=> history.push("/app/dashboard/rechargeModal")} />
           <Label check className="mx-20  mt-10">
              Yes
           </Label>
         </FormGroup>
             
         <FormGroup check className="d-flex align-item-center mx-50">
-                        <Input type="radio" name="radio1" style={{width:"30px" ,height:"30px"}} />
+                        <Input type="radio" name="radio1" style={{width:"30px" ,height:"30px"}} onClick={()=> history.push("/app/dashboard/saas")} />
           <Label check className="mx-20 mt-10">
              No
           </Label>

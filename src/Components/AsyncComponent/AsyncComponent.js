@@ -41,6 +41,18 @@ const AsyncUserManagmentDashboardComponent = Loadable({
 	loader: () => import("Routes/dashboard/userManagment"),
 	loading: () => <RctPageLoader />,
 });
+const AsyncViewProjectComponent = Loadable({
+	loader: () => import("Routes/dashboard/ViewProject"),
+	loading: () => <RctPageLoader />,
+});
+const AsyncCreateProjectComponent = Loadable({
+	loader: () => import("Routes/dashboard/CreateProject"),
+	loading: () => <RctPageLoader />,
+});
+const AsyncRechargeModalComponent = Loadable({
+	loader: () => import("Routes/dashboard/rechargeModal"),
+	loading: () => <RctPageLoader />,
+});
 
 // Admin Dashboard 
 
@@ -722,5 +734,8 @@ export {
    AsyncCustomerManagementComponent,
 AsyncAdminAccountComponent,
 AsyncAdminreportComponent,
-AsyncAdminProjectComponent
+AsyncAdminProjectComponent,
+AsyncViewProjectComponent,
+AsyncCreateProjectComponent,
+AsyncRechargeModalComponent
 };
