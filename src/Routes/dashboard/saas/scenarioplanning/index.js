@@ -378,13 +378,13 @@ export default function SaasDashbaord(props) {
       //       .catch((err) => {
       //          if (err?.response?.status == 401) {
       //             localStorage.clear();
-      //             history.push("/signin")
+      //             history.push("/login")
       //          } else {
       //          }
       //       })
       // } else {
       //    localStorage.clear();
-      //    history.push("/signin")
+      //    history.push("/login")
       // }
     
    }, [])
@@ -415,7 +415,7 @@ export default function SaasDashbaord(props) {
       //       })
       // } else {
       //    localStorage.clear();
-      //    history.push("/signin")
+      //    history.push("/login")
       // }
    }
 

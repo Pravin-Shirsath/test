@@ -106,7 +106,7 @@ useEffect(()=>{
 
                      dispatch({ type: SIGNUP_USER_SUCCESS, payload: localStorage.getItem('user_id') });
                      NotificationManager.success('User Registration Successfully!');
-                     history.push('/signin');
+                     history.push('/login');
                      setName("")
                      setEmail("")
                      setPassword("")
@@ -202,7 +202,7 @@ useEffect(()=>{
       //              localStorage.setItem("user_id", "user-id");
 
       //              dispatch({ type: SIGNUP_USER_SUCCESS, payload: localStorage.getItem('user_id') });
-      //              history.push('/signin');
+      //              history.push('/login');
       //              setShow(false);
       //              setNameError('');
       //              setEmailError('');
@@ -244,7 +244,7 @@ useEffect(()=>{
                   <div className="container">
                      <div className="d-flex justify-content-between align-items-center">
                         <div className="session-logo">
-                           <Link to="/signin">
+                           <Link to="/login">
 
                               <img src={AppConfig.appLogo} className="img-fluid" alt="session-logo" width="250" />
                            </Link>
@@ -253,7 +253,7 @@ useEffect(()=>{
                            <h4 className="mr-15 mt-2 ">{str.AlreadyAccountText}</h4>
                            <Button
                               component={Link}
-                              to="/signin"
+                              to="/login"
                               variant="contained "
                               className="text-white theme-background"
                            >
@@ -286,7 +286,7 @@ useEffect(()=>{
                                     className="has-input input-lg"
                                     // placeholder="Company/User Name"
                                     onChange={(e) => setName(e.target.value)}
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                  />
 
                                  <span className="has-icon"><i className="ti-user"></i></span>
@@ -307,7 +307,7 @@ useEffect(()=>{
                                     className="has-input input-lg"
                                     // placeholder="Company/User Email"
                                     onChange={(e) => setEmail(e.target.value)}
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                  />
 
                                  <span className="has-icon"><i className="ti-email"></i></span>
@@ -328,7 +328,7 @@ useEffect(()=>{
                                     className="has-input input-lg"
                                     // placeholder="Password"
                                     onChange={(event) => setPassword(event.target.value)}
-                                    autoComplete="off"
+                                    autoComplete="new-password"
                                  />
 
                                  {/* <span className="has-icon"><i className="ti-lock"></i></span> */}
@@ -352,7 +352,7 @@ useEffect(()=>{
                                     className="has-input input-lg"
                                     // placeholder="Confirm password"
                                      onChange={(event) => setComfpass(event.target.value)}
-                                     autoComplete="on"
+                                     autoComplete="new-password"
                                  />
                                  {/* <span className="has-icon"><i className="ti-lock"></i></span> */}
                                  <span onClick={() => setComfpassToggle(!comfpassToggle)} className="has-icon"><i className="ti-eye"></i></span>

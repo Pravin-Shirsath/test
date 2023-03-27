@@ -126,7 +126,7 @@ function UserBlockHorizontal(props) {
                }
             }).catch(err => {
                // localStorage.clear();
-               // history.push("/signin");
+               // history.push("/login");
                console.log("error from profile info in userblock horizontal..", err);
             });
       }
@@ -196,7 +196,7 @@ function UserBlockHorizontal(props) {
                      // history.push("/confirm-password") // currently not in use, confirm-password component is still there
                      localStorage.clear();
                      setOpen(false);
-                     history.push("/signin");
+                     history.push("/login");
                      //  NotificationManager.success('Password changed successfully!');   
                      NotificationManager.success(res?.data?.detail);
 

@@ -85,7 +85,7 @@ export default function UserProfile(props) {
     const isLoggedInBool = localStorage.getItem("isLoggedIn")
     // conditional rendring
     // if(isLoggedInBool !== "true"){
-    //   history.push("/signin")
+    //   history.push("/login")
     //     localStorage.clear();
     // } else {
       getCustomersListData();
@@ -111,7 +111,7 @@ export default function UserProfile(props) {
           if(err?.response?.status == 401){
           // conditional rendring
             // localStorage.clear();
-            // history.push("/signin");
+            // history.push("/login");
             // window.location.reload();
           } else {
             // console.log('Response from customerlist:', err)

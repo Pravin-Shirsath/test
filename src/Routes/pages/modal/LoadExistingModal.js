@@ -82,7 +82,7 @@ export default function UserProfile(props) {
   useEffect(() => {
     const isLoggedInBool = localStorage.getItem("isLoggedIn")
     // if (isLoggedInBool !== "true") {
-    //   history.push("/signin")
+    //   history.push("/login")
     //   localStorage.clear();
     // } else {
       getModalListData();
@@ -111,7 +111,7 @@ export default function UserProfile(props) {
           // conditional rendring
 
             // localStorage.clear();
-            // history.push("/signin");
+            // history.push("/login");
 
 
             // window.location.reload();

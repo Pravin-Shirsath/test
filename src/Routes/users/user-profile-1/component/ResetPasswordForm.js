@@ -89,7 +89,7 @@ const ResetPasswordForm = (props) => {
             console.log("Response from Chage Password:", res);
             // history.push("/confirm-password") // currently not in use, confirm-password component is still there
             localStorage.clear();
-            history.push("/signin");
+            history.push("/login");
 
             // localStorage.setItem("user_id", "user-id");
             // dispatch({ type: LOGIN_USER_SUCCESS, payload: localStorage.getItem('user_id') });

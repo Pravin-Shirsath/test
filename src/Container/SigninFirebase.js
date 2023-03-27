@@ -98,7 +98,7 @@ function Signin(props) {
         
     
       } else {
-         history.push("/signin")
+         history.push("/login")
       }
    }, [])
 
@@ -202,7 +202,7 @@ function Signin(props) {
                   <div className="container">
                      <div className="d-flex justify-content-between align-items-center">
                         <div className="session-logo">
-                           <Link to="/signin">
+                           <Link to="/login">
 
                               <img src={AppConfig.appLogo} className="img-fluid" alt="session-logo" width="250" />
                            </Link>

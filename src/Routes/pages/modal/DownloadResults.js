@@ -23,7 +23,7 @@ function CompareModals(props) {
    useEffect(() => {
       // const isLoggedInBool = localStorage.getItem("isLoggedIn")
       // if(isLoggedInBool !== "true"){
-      //    history.push("/signin")
+      //    history.push("/login")
       //    localStorage.clear();
       // }
 
@@ -37,7 +37,7 @@ function CompareModals(props) {
             console.log("status of invalid token", err?.response?.data, err?.response?.status)
             if(err?.response?.status == 401){
                // localStorage.clear();
-               // history.push("/signin");
+               // history.push("/login");
                // window.location.reload();
             } else {
                console.log('Response from createmdodal:', err)

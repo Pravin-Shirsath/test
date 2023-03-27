@@ -50,8 +50,8 @@ function SignupFirebase(props){
                            </Link>
                         </div>
                         <div className='d-flex align-items-center'>
-                           <Link to="/signin" className="mr-15 text-primary">Already have an account?</Link>
-                           <Button component={Link} to="/signin" variant="contained" className="btn-primary">Sign In</Button>
+                           <Link to="/login" className="mr-15 text-primary">Already have an account?</Link>
+                           <Button component={Link} to="/login" variant="contained" className="btn-primary">Sign In</Button>
                         </div>
                      </div>
                   </div>

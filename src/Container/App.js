@@ -63,7 +63,7 @@ const InitialPath = ({ component: Component, authUser, ...rest }) =>
             ? <Component {...props} />
             : <Redirect
                to={{
-                  pathname: '/signin',
+                  pathname: '/login',
                   state: { from: props.location }
                }}
             />}
@@ -93,7 +93,7 @@ function App(props) {
    //          console.log("status of invalid token from app.js", err?.response?.data, err?.response?.status)
    //          if(err?.response?.status == 401){
    //             localStorage.clear();
-   //             history.push("/signin");
+   //             history.push("/login");
    //             console.log("redirecting to sign-in bcause of this run in app.js")
    //          } else {
    //             console.log('Response from :', err)
@@ -108,7 +108,7 @@ const type = JSON.parse(localStorage.getItem('user_type'));
    
    if (location.pathname === '/') {
       if (user === null && accessToken === null) {
-         return (<Redirect to={'/signin'} />);
+         return (<Redirect to={'/login'} />);
       } else {
           
           if(type === "customer"  || type === "company_admin"){
@@ -132,7 +132,7 @@ const type = JSON.parse(localStorage.getItem('user_type'));
          <Route path="/agency" component={AgencyLayout} />
          <Route path="/boxed" component={RctBoxedLayout} />
          <Route path="/dashboard" component={CRMLayout} />
-         <Route path="/signin" component={AppSignIn} />
+         <Route path="/login" component={AppSignIn} />
          <Route path="/signup" component={AppSignUp} />
          <Route path="/forgotpwd" component={Forgotpwd} />
          <Route path="/confirm-password" component={ConfirmPassword} />

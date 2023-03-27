@@ -75,7 +75,7 @@ export default function ConfirmPwd() {
                         // history.push("/confirm-password") // currently not in use, confirm-password component is still there
                         NotificationManager.success('Password change successfully!');
                         localStorage.clear();
-                        history.push("/signin");
+                        history.push("/login");
 
                         // localStorage.setItem("user_id", "user-id");
                         /// dispatch({ type: LOGIN_USER_SUCCESS, payload: localStorage.getItem('user_id') });
@@ -191,7 +191,7 @@ export default function ConfirmPwd() {
                                             className="btn-block px-50 text-white fw-bold btn-danger"
                                             variant="contained"
                                             size="small"
-                                            onClick={()=>{ history.push("/signin")}}
+                                            onClick={()=>{ history.push("/login")}}
                                             style={{maxWidth:"150px"}}
                                         >
                                           {str.CancelText}
