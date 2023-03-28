@@ -22,6 +22,18 @@ margin-bottom: 9px;
 
     
 }
+
+
+
+/* create Coupan  */
+.d-coupan-box{
+    justify-content: center;
+   
+    font-weight: 800;
+}
+.d-coupan-heading{
+    font-size: 1.5rem;
+}
 /* create project css */
 .box-shadow-box{
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;

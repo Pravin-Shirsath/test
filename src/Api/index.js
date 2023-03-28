@@ -212,6 +212,89 @@ export const logOut = (token) => {
 
 
 
+/**  Admin Coupan List
+ * 
+ * 
+ * @param {*} token 
+ * @param {*} pageNumber 
+ * @returns 
+ */
+
+ export const AdminCoupanList = (token,pageNumber) => {
+
+    return axios.get(`${BASE_URL}/api/automaton/coupons/view/?page=${pageNumber}`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+        }
+    })
+    .then( res => {
+        console.log("coupan details :",res);
+        return res;
+    
+    })
+}
+
+
+
+/**  Admin Coupan List seach
+ * 
+ * 
+ * @param {*} token 
+ * @param {*} pageNumber 
+ * @returns 
+ */
+
+ export const AdminCoupanSearch = (token,searchItem) => {
+
+    return axios.get(`${BASE_URL}/api/automaton/coupons/view/?search=${searchItem}`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+        }
+    })
+    .then( res => {
+        console.log("coupan details SEARCH:",res);
+        return res;
+    
+    })
+}
+
+
+
+/**
+ * 
+ * @param {*} token 
+ *
+ * @returns 
+ */
+ export const CreateNewCoupan = (token,coupanCode,value,type,des) => {
+   let  params ={
+    "coupon_text":coupanCode,
+    "discount_value":value,
+    "discount_type":type,
+    "description":des
+}
+
+    return axios.post(`${BASE_URL}/api/automaton/coupons/create/`, params,
+    {
+    headers: {
+        Authorization:`Token ${token}`
+        }
+    })
+    .then( res => {
+        console.log("coupan create :",res);
+        return res;
+    
+    })
+}
+
+
+
+
+
+
+
 /**
  * 
  * @param {*} token 

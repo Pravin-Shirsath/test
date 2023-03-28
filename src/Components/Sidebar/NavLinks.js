@@ -5,13 +5,13 @@ let sidebarMenu = {
    
     
 
-      // {
-      //    "menu_title": "sidebar.usermangement",
-      //    "path": "/app/dashboard/userManagment",
-      //    "new_item": false,
-      //    //  "menu_icon": "zmdi zmdi-accounts",
+      {
+         "menu_title": "sidebar.dashboard",
+         "path": "/app/dashboard/saas",
+         "new_item": false,
+         //  "menu_icon": "zmdi zmdi-accounts",
 
-      // },
+      },
       {
          "menu_title": "sidebar.account",
          "path": "/app/dashboard/account",
@@ -229,8 +229,30 @@ let sidebarMenu = {
    ],
    category2: [
       {
+         "menu_title": "sidebar.dashboard",
+         "path": "/app/dashboard/Admin/Dashboard",
+         "new_item": false,
+         //  "menu_icon": "zmdi zmdi-accounts",
+
+      },
+      {
          "menu_title": "sidebar.custmermangement",
          "path": "/app/dashboard/Admin/CustomerManagement",
+         "new_item": false,
+         //  "menu_icon": "zmdi zmdi-accounts",
+
+      },
+      {
+         "menu_title": "sidebar.coupon",
+         "path": "/app/dashboard/Admin/Coupons",
+         "new_item": false,
+         // "menu_icon": "zmdi zmdi-accounts",
+
+      },
+   
+      {
+         "menu_title": "sidebar.report",
+         "path": "/app/dashboard/Admin/report",
          "new_item": false,
          //  "menu_icon": "zmdi zmdi-accounts",
 
@@ -240,20 +262,6 @@ let sidebarMenu = {
          "path": "/app/dashboard/Admin/account",
          "new_item": false,
          // "menu_icon": "zmdi zmdi-accounts",
-
-      },
-      {
-         "menu_title": "sidebar.project",
-         "path": "/app/dashboard/Admin/project",
-         "new_item": false,
-         //  "menu_icon": "zmdi zmdi-accounts",
-
-      },
-      {
-         "menu_title": "sidebar.report",
-         "path": "/app/dashboard/Admin/report",
-         "new_item": false,
-         //  "menu_icon": "zmdi zmdi-accounts",
 
       },
 
@@ -282,6 +290,13 @@ let sidebarMenu = {
       // }
    ],
    category3: [
+      {
+         "menu_title": "sidebar.dashboard",
+         "path": "/app/dashboard/saas",
+         "new_item": false,
+         //  "menu_icon": "zmdi zmdi-accounts",
+
+      },
      { "menu_title": "sidebar.usermangement",
       "path": "/app/dashboard/userManagment",
       "new_item": false,
