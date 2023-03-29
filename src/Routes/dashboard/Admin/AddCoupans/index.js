@@ -56,33 +56,21 @@ import { getFormatDate2 } from '../../../../Constants/DateFormator';
 import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
  
  export default function CustomerManagement(props) {
-   const history = useHistory();
-   const deleteConfirmationDialog = useRef()
-  //  const [coupans, setCoupans] = useState() // use when data is coming from api
-  const [coupans, setCoupans] = useState([])
-  //  const [filteredCoupans, setFilterCoupans] = useState() // use when the data is coming fom api
-   const [filteredCoupans, setFilterCoupans] = useState([])
+   const [coupans, setCoupans] = useState([])
+    const [filteredCoupans, setFilterCoupans] = useState([])
    const [searchText, setSearchText] = useState('');
    const [activePage , setActivePage] = useState(1)
    const [totalPageCount, setTotalPageCount] = useState('');
-   
-   const [selectedUser, setSelectedUser] = useState(null)
    const [loading, setLoading] = useState(false)
    const [creatCoupanModal, setCreatCoupanModal] = useState(false)
-   const [updateNewUserModal, setupdateNewUserModal] = useState(false)
    const [deleteUserModal, setdeleteUserModal] = useState(false)
   
 
  
    useEffect(() => {
-     const isLoggedInBool = localStorage.getItem("isLoggedIn")
-     // conditional rendring
-     // if(isLoggedInBool !== "true"){
-     //   history.push("/login")
-     //     localStorage.clear();
-     // } else {
+   
        getCoupanAllData();
-     // }
+    
    }, [])
  
    const getCoupanAllData = () => {
@@ -208,7 +196,6 @@ import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
      e.preventDefault()
      setCreatCoupanModal(true)
    }
- 
  
  
  
@@ -359,7 +346,7 @@ import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
                    </div>
              }
          </div>
-         {loading && <RctSectionLoader />}
+      
        </RctCollapsibleCard>
  
          <CreateCoupan  Modalopen={creatCoupanModal} close={()=>setCreatCoupanModal(false)} reloadlist={getCoupanAllData}/>
@@ -368,7 +355,7 @@ import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
          className="addCustomerModal"
        >
          <ModalBody>
-           Are you sure want to delete {selectedUser?.username} ?
+           Are you sure want to delete  ?
          </ModalBody>
          <ModalFooter>
            <Button

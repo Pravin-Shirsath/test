@@ -64,11 +64,11 @@ export default function UserProfile(props) {
 
   const [show, setShow] = useState(false)
   const history = useHistory();
-  console.log({
-    "firstName:": firstName, "lastName:": lastName, "email": email, "phone": phone, "country": country, "zipCode:": zipCode, "state:": state, "companyName:": companyName,
-    "billingAddress:": billingAddress, "taxNumber:": taxNumber, "companyAddress:": companyAddress
-  }
-  )
+  // console.log({
+  //   "firstName:": firstName, "lastName:": lastName, "email": email, "phone": phone, "country": country, "zipCode:": zipCode, "state:": state, "companyName:": companyName,
+  //   "billingAddress:": billingAddress, "taxNumber:": taxNumber, "companyAddress:": companyAddress
+  // }
+  // )
   //==================== MY update profile ====================//
 
   // getting image from user block component
@@ -99,6 +99,7 @@ export default function UserProfile(props) {
           console.log('Response from update profile:', res)
 
 
+          NotificationManager.success('Profile Updated Successfully!');
 
           setShow(false)
           setFirstNameError('')
@@ -122,13 +123,19 @@ export default function UserProfile(props) {
           setTaxNumber('')
           setCompanyAddress('')
 
+          if(type === "admin"){
+            history.push("/app/dashboard/Admin/Dashboard")
+           
+           }
 
-          NotificationManager.success('Profile Updated Successfully!');
+            if(type === "customer" || type === "company_admin"){
+              history.push('/app/dashboard/saas');
+            }
 
           //  alert("done")
-          setTimeout(() => {
-            history.push('/');
-          }, 1000)
+          // setTimeout(() => {
+          //   history.push('/');
+          // }, 1000)
           //  history.push('/');
           //  window.location.reload();
         }

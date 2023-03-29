@@ -51,6 +51,7 @@ import {
   getsearchCompanyUser,
   CustomerDisable,
   CustomerEnable,
+  AddUserIn_Company,
 
 } from '../../../Api/'
 
@@ -64,7 +65,10 @@ export default function UserManagement(props) {
   const [searchText, setSearchText] = useState('');
   const [activePage, setActivePage] = useState(1)
   const [totalPageCount, setTotalPageCount] = useState('');
-  const [ email,setEmail]=useState("")
+
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+ 
   const [selectedUser, setSelectedUser] = useState(null)
   const [loading, setLoading] = useState(false)
   const [addNewUserModal, setAddNewUserModal] = useState(false)
@@ -73,7 +77,6 @@ export default function UserManagement(props) {
 
 
 
-  const [openViewUserDialog, setOpenViewUserDialog] = useState(false)
   const [editUser, setEditUser] = useState(null)
   const [selectedUsers, setSelectedUsers] = useState(0)
   const [viewDetails, setViewDetails] = useState()
@@ -98,7 +101,7 @@ export default function UserManagement(props) {
             setUsers(res?.data?.results);
             setFilteredUsers(res?.data?.results);
             setTotalPageCount(parseInt(res?.data?.count));
-             console.log('Response from customerlist :', res)
+            console.log('Response from customerlist :', res)
           } else {
             // console.log('Response from customerlist:', res)
           }
@@ -129,7 +132,7 @@ export default function UserManagement(props) {
           if (res?.status === 200 && res?.data?.results.length > 0) {
             setFilteredUsers(res?.data?.results);
             setSearchText('')
-             console.log('Response from search company user :', res)
+            console.log('Response from search company user :', res)
           } else {
             // console.log('Response from customerlist:', res)
             setFilteredUsers(users);
@@ -221,11 +224,58 @@ export default function UserManagement(props) {
    */
   const addNewUser = () => {
     //  const {username, email, first_name, last_name, mobile_number} = addNewUserDetail;
-    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    let regexName = /^[a-zA-Z]{1,30}$/; // only alpha, no space, min-1, max-30
+    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const regexName = /^[a-zA-Z]{1,30}$/; // only alpha, no space, min-1, max-30
     let regexContact = /^\d{10}$/; // only number 0-9 length-10
+     
+    if(username != ""  && email != "" ){
+   
+
+     if( regexName.test(username.trim(""))){
+      if( regexEmail.test(email.trim(""))){
+        const accessToken = JSON.parse(localStorage.getItem('token'))
+        if (accessToken !== null) {
+          AddUserIn_Company(accessToken, email,username)
+            .then((res) => {
+             
+              console.log('Response from create in company :', res)
+    
+              if (res?.status === 200 ) {
+                NotificationManager.success(res?.data?.message)
+                getCustomersListData()
+              } else {
+               
+                NotificationManager.error("!")
+              }
+            })
+            .catch((err) => {
+              console.log("Add userIN company", err?.response);
+                  const emailErr = err?.response?.data?.email
+                  const usernameErr = err?.response?.data?.username
+
+                  if (emailErr != undefined) {
+
+                     NotificationManager.error(emailErr[0]);
+                  }
+                  if (usernameErr != undefined) {
+
+                     NotificationManager.error(usernameErr[0]);
+                  }
+            })
+        }
+          
 
 
+      }else{
+       NotificationManager.error('Enter valid email address')
+      }
+    }else{
+     NotificationManager.error('User name must contain only  alpha-numeric character and no spacings!')
+    }
+
+    }else{
+      NotificationManager.error('username and email required')
+    }
   }
 
 
@@ -233,8 +283,8 @@ export default function UserManagement(props) {
 
   const onAddUpdateUserModalClose = () => {
     setAddNewUserModal(false)
-
-
+    setUsername("")
+     setEmail("")
   }
 
 
@@ -313,7 +363,7 @@ export default function UserManagement(props) {
                       <td>
                         <div className="media">
                           <div className="media-body">
-                            <h5 className="mb-5 fw-bold">{user?.user}</h5>
+                            <h5 className="mb-5 fw-bold">{user?.username}</h5>
                           </div>
                         </div>
                       </td>
@@ -334,13 +384,13 @@ export default function UserManagement(props) {
                     </tr>
                   )
                 })
-                
-                }
-                
+
+              }
+
             </tbody>
-          
-       </table>
-       { filteredUsers.length == 0 && <center style={{color:"black"}}>  Data not available </center>   }
+
+          </table>
+          {filteredUsers.length == 0 && <center style={{ color: "black" }}>  Data not available </center>}
           {
             users?.length > 0 &&
             <div className='paginationDiv'>
@@ -369,30 +419,50 @@ export default function UserManagement(props) {
         className="addCustomerModal "
 
       >
-        {/* <ModalHeader toggle={() => onAddUpdateUserModalClose()}>
-           <strong>Welcome</strong>
-         </ModalHeader> */}
+        <ModalHeader toggle={() => onAddUpdateUserModalClose()}>
+          <strong>Welcome</strong>
+        </ModalHeader>
         <ModalBody>
           <FormGroup row >
 
-          
+
             <Col sm={12} className="d-flex  align-items-center justify-content-center">
               <Label for="firstName" sm={3} className="d-flex primary-dark">
 
-                <span> Email Id <span className="text-danger">*</span></span>
+                <span> Username <span className="text-danger madatory-field">*</span></span>
               </Label>
               <Input
                 type="text"
                 className="input-md"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                sm={10}
+              />
+            </Col>
+
+
+          </FormGroup>
+          <FormGroup row >
+
+
+            <Col sm={12} className="d-flex  align-items-center justify-content-center">
+              <Label for="firstName" sm={3} className="d-flex primary-dark">
+
+                <span> Email Id <span className="text-danger madatory-field">*</span></span>
+              </Label>
+              <Input
+                type="text"
+                className="input-md" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 sm={10}
               />
             </Col>
 
+
           </FormGroup>
         </ModalBody>
-        <div style={{ display: "flex", justifyContent: "center", padding: "20px 50px" }}>
+        <div style={{ display: "flex", justifyContent: "end" }}>
 
           <Button variant="contained" color="primary" onClick={() => addNewUser()} className="py-2 mx-10" style={{ color: "#fff", }} >
             Send
@@ -404,33 +474,6 @@ export default function UserManagement(props) {
       </Modal>
 
 
-      <Modal
-        isOpen={deleteUserModal}
-        className="addCustomerModal"
-      >
-        <ModalBody>
-          Are you sure want to delete {selectedUser?.username} ?
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            variant="contained"
-            // color="primary"
-            style={{ backgroundColor: "#0b3d45", color: "#fff", borderRadius: "6px" }}
-            className="text-white"
-          //  onClick={handleDeleteUser}
-          >
-            Delete
-          </Button>
-
-          <Button
-            variant="contained"
-            className="text-white btn-secondary"
-            onClick={() => setdeleteUserModal(false)}
-          >
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
 
 
       <Modal

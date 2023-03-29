@@ -27,7 +27,22 @@ const CreateCoupan = ({ selected, Modalopen, close, reloadlist }) => {
   const [coupan,setCoupan]  =useState("")
      
  
-      
+     
+//    const copyToClipboard = (content) => {
+
+//     const el = document.createElement('textarea');
+    
+//     el.value = content;
+    
+//     document.body.appendChild(el);
+    
+//     el.select();
+    
+//     document.execCommand('copy');
+    
+//     document.body.removeChild(el);
+    
+//     }; 
 
 
     useEffect(() => {
@@ -150,21 +165,21 @@ if(amtRadio === true && perRadio === false){
                             <div className=" d-flex align-items-center justify-content-center " style={{marginTop:"20px"}}>
 
 
-                        <FormGroup tag="fieldset" className="d-flex" >
+                        <FormGroup tag="fieldset" className="d-flex mt-2" >
                         
-                            <FormGroup check className="d-flex align-item-center ">
-                                <Input type="radio" name="radio1" style={{ width: "20px", height: "20px" , marginTop:"10px"}} value={perRadio} onChange={(e) => (setPerRadio(e.target.checked),setAmtRadio(false))} />
+                            <FormGroup check className="d-flex  ">
+                                <Input type="radio" name="radio1" style={{ width: "20px", height: "20px" , marginTop:"6px"}} value={perRadio} onChange={(e) => (setPerRadio(e.target.checked),setAmtRadio(false))} />
                                 <Label check className="mx-20  d-flex">
-                                <Input type="number" name="" style={{ width: "97px", height: "41px",border:"1px solid black"  }} value={percentage} disabled={!perRadio}  onChange={(e) => setPercentage(e.target.value)} />   
+                                <Input type="number" name="" style={{ width: "97px", height: "34px",border:"1px solid black"  }} value={percentage} disabled={!perRadio}  onChange={(e) => setPercentage(e.target.value)} />   
                               <span className='mx-2 align-items-center justify-content-center' style={{fontSize:'23px'}}>%</span>  </Label>
                             </FormGroup>
-                         <p className="mx-25 mt-10 dark-primary-text">
+                         <p className="mx-25 mt-1 dark-primary-text">
                              OR
                          </p>
-                            <FormGroup check className="d-flex align-item-center  ">
-                                <Input type="radio" name="radio1" style={{ width: "20px", height: "20px", marginTop:"10px"}} value={amtRadio}  onChange={(e) => (setAmtRadio(e.target.checked),setPerRadio(false))}  />
+                            <FormGroup check className="d-flex   ">
+                                <Input type="radio" name="radio1" style={{ width: "20px", height: "20px", marginTop:"6px"}} value={amtRadio}  onChange={(e) => (setAmtRadio(e.target.checked),setPerRadio(false))}  />
                                 <Label check className="mx-20 d-flex">
-                                <Input type="number" name="" style={{ width: "97px", height: "41px",border:"1px solid black" }} value={amount} onChange={(e) => setAmount(e.target.value)} disabled={!amtRadio}/>   
+                                <Input type="number" name="" style={{ width: "97px", height: "34px",border:"1px solid black" }} value={amount} onChange={(e) => setAmount(e.target.value)} disabled={!amtRadio}/>   
                                <span className="mx-2 align-items-center justify-content-center"  style={{fontSize:'23px'}}> ₹ </span>  
                                 </Label>
                             </FormGroup>
@@ -175,8 +190,8 @@ if(amtRadio === true && perRadio === false){
 
                     </FormGroup>
                    <div className="d-flex align-items-end justify-content-end ">
-                               <Button variant="contained" color="primary" className="projectCardButton mx-2" onClick={CreateCoupanApi} >Save</Button>
-                                <Button variant="contained" color="danger" className="projectCardButton mx-2" onClick={() => (close(false), setOpen(false))}>Cancel</Button>
+                               <Button variant="contained"  size="medium" color="primary" className="projectCardButton mx-2" onClick={CreateCoupanApi} >Save</Button>
+                                <Button variant="contained"  size="medium" color="danger" className="projectCardButton mx-2" onClick={() => (close(false), setOpen(false))}>Cancel</Button>
                    </div>
                 </section>
             </DialogContent>

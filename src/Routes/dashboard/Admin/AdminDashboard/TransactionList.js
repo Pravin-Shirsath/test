@@ -1,18 +1,22 @@
 /**
  * Transaction table section
  */
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
 import { AppBar, Tabs, Tab, Typography, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Pagination from "react-js-pagination";
+import { NotificationManager } from 'react-notifications'
+
 import {
    Button,
   
  } from 'reactstrap';
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
+import { AdminCoupanList, AdminCoupanSearch,SearchLowDataAvilableUser ,LowDataAvilableUser, getSearchedCustomer, getCustomerList} from 'Api';
+import { getFormatDate2 } from 'Constants/DateFormator';
 
 function TabContainer({ children, dir }) {
    return (
@@ -22,14 +26,18 @@ function TabContainer({ children, dir }) {
    );
 }
 
-const TransactionColumns = ['No', 'user', 'email', 'phone', 'GST No', 'Data Available'];
-const TransferColumns =['No', 'user', 'email', 'phone', 'GST No', 'Data Available'];
-const ExpenseColumns = ['Sr No', 'Coupon Id', 'Discount', 'is Utilized', 'Utilized by', 'Discount Amt','Action'];
+const NewUserheading = ['No','user', 'email', 'phone', 'GST No', 'Data Available'];
+const LowDataUser =['No', 'user', 'email', 'phone', 'GST No', 'Data Available'];
+const CoupansHeding = ['Sr No', 'Coupon Id','Created Date', 'Discount', 'is Utilized', 'Utilized by', 'Discount Amt','Action'];
 
 function TransactionList(props){
 
    const [value,setValue] = useState(0);
-   
+   // Coupan State
+ 
+
+
+
    const handleChange = (event, value) => {
       setValue(value);
    };
@@ -40,9 +48,301 @@ function TransactionList(props){
    const { theme, listData, transferreport, expenseCategory } = props;
 
 
-const handlePageChange=(e)=>{
 
+ 
+   useEffect(() => {
+    getNew_UserData()
+    getLDU_AllData()
+    getCoupanAllData();
+     
+   
+  }, [])
+
+
+
+   const [coupans, setCoupans] = useState([])
+   const [filteredCoupans, setFilterCoupans] = useState([])
+   const [searchText, setSearchText] = useState('');
+   const [activePage , setActivePage] = useState(1)
+   const [totalPageCount, setTotalPageCount] = useState('');
+   const [loading, setLoading] = useState(false)
+
+// Coupan section Start
+
+  const getCoupanAllData = () => {
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+    if (accessToken !== null) {
+     AdminCoupanList(accessToken, activePage)
+        .then((res) => {
+          if (res?.status === 200) {
+            setCoupans(res?.data?.results);
+            setFilterCoupans(res?.data?.results);
+            setTotalPageCount(parseInt(res?.data?.count));
+            // console.log('Response from customerlist :', res)
+          } else {
+            // console.log('Response from customerlist:', res)
+          }
+        })
+        .catch((err) => {
+          // console.log("status of invalid token", err?.response?.data, err?.response?.status)
+          if(err?.response?.status == 401){
+          // conditional rendring
+            // localStorage.clear();
+            // history.push("/login");
+            // window.location.reload();
+          } else {
+            // console.log('Response from customerlist:', err)
+          }
+        })
+    }
+  }
+
+
+
+  const getSearchedCustomerData = () => {
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+    if (accessToken !== null) {
+     AdminCoupanSearch(accessToken, searchText)
+        .then((res) => {
+          if (res?.status === 200 && res?.data?.results.length>0) {
+            setFilterCoupans(res?.data?.results);
+            setSearchText('')
+            // console.log('Response from customerlist :', res)
+          } else {
+            // console.log('Response from customerlist:', res)
+            setFilterCoupans(coupans);
+            setSearchText('');
+            NotificationManager.error("No user found!")
+          }
+        })
+        .catch((err) => {
+          // console.log('Response from customerlist:', err)
+        })
+    }
+  }
+
+  const handlePageChange = (pageNumber) => {
+   // console.log("pagination", pageNumber)
+      if (activePage !== pageNumber) {
+       const accessToken = JSON.parse(localStorage.getItem('token'))
+       if (accessToken !== null) {
+        AdminCoupanList(accessToken, pageNumber)
+           .then((res) => {
+             if (res?.status === 200) {
+               setCoupans(res?.data?.results);
+               setFilterCoupans(res?.data?.results);
+               setTotalPageCount(res?.data?.count);
+               // console.log('Response from customerlist :', res)
+             } else {
+               // console.log('Response from customerlist:', res)
+             }
+           })
+           .catch((err) => {
+             // console.log('Response from customerlist:', err)
+           })
+       }
+    
+     setActivePage(pageNumber)
+   } 
+ }
+
+// Coupan section end
+
+
+
+// Low Data Avilable User   ldu / LDU
+
+const [lowDataUser, setLowDataUser] = useState([])
+const [filteredlowDataUser, setFilterLowDataUser] = useState([])
+const [ldu_searchText, setLdu_searchText] = useState('');
+const [ldu_activePage , setLdu_activePage] = useState(1)
+const [ldu_totalPageCount, setLdu_totalPageCount] = useState('');
+const [ldu_loading, setLdu_Loading] = useState(false)
+
+// Coupan section Start
+
+const getLDU_AllData = () => {
+ const accessToken = JSON.parse(localStorage.getItem('token'))
+ if (accessToken !== null) {
+  LowDataAvilableUser(accessToken, activePage)
+     .then((res) => {
+       if (res?.status === 200) {
+        setLowDataUser(res?.data?.results);
+        setFilterLowDataUser(res?.data?.results);
+        setLdu_totalPageCount(parseInt(res?.data?.count));
+         // console.log('Response from customerlist :', res)
+       } else {
+         // console.log('Response from customerlist:', res)
+       }
+     })
+     .catch((err) => {
+       // console.log("status of invalid token", err?.response?.data, err?.response?.status)
+       if(err?.response?.status == 401){
+       // conditional rendring
+         // localStorage.clear();
+         // history.push("/login");
+         // window.location.reload();
+       } else {
+         // console.log('Response from customerlist:', err)
+       }
+     })
+ }
 }
+
+
+
+const getSearchedLDUData = () => {
+ const accessToken = JSON.parse(localStorage.getItem('token'))
+ if (accessToken !== null) {
+  SearchLowDataAvilableUser(accessToken, ldu_searchText)
+     .then((res) => {
+       if (res?.status === 200 && res?.data?.results.length>0) {
+        setFilterLowDataUser(res?.data?.results);
+        setLdu_searchText('')
+         // console.log('Response from customerlist :', res)
+       } else {
+         // console.log('Response from customerlist:', res)
+         setFilterLowDataUser(lowDataUser);
+         setLdu_searchText('');
+         NotificationManager.error("No user found!")
+       }
+     })
+     .catch((err) => {
+       // console.log('Response from customerlist:', err)
+     })
+ }
+}
+
+const LDUhandlePageChange = (pageNumber) => {
+// console.log("pagination", pageNumber)
+   if (ldu_activePage !== pageNumber) {
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+    if (accessToken !== null) {
+      LowDataAvilableUser(accessToken, pageNumber)
+        .then((res) => {
+          if (res?.status === 200) {
+            setLowDataUser(res?.data?.results);
+            setFilterLowDataUser(res?.data?.results);
+            setLdu_totalPageCount(res?.data?.count);
+            // console.log('Response from customerlist :', res)
+          } else {
+            // console.log('Response from customerlist:', res)
+          }
+        })
+        .catch((err) => {
+          // console.log('Response from customerlist:', err)
+        })
+    }
+ 
+    setLdu_activePage(pageNumber)
+} 
+}
+
+
+
+
+//  New Coustomer List 
+
+const [newDataUser, setNewDataUser] = useState([])
+const [filteredNewDataUser, setFilterNewDataUser] = useState([])
+const [new_searchText, setNew_searchText] = useState('');
+const [new_activePage , setNew_activePage] = useState(1)
+const [new_totalPageCount, setNew_totalPageCount] = useState('');
+const [new_loading, setNew_Loading] = useState(false)
+
+
+
+const getNew_UserData = () => {
+ const accessToken = JSON.parse(localStorage.getItem('token'))
+ if (accessToken !== null) {
+  getCustomerList(accessToken, new_activePage)
+     .then((res) => {
+       if (res?.status === 200) {
+        setNewDataUser(res?.data?.results);
+        setFilterNewDataUser(res?.data?.results);
+        setNew_totalPageCount(parseInt(res?.data?.count));
+         // console.log('Response from customerlist :', res)
+       } else {
+         // console.log('Response from customerlist:', res)
+       }
+     })
+     .catch((err) => {
+       // console.log("status of invalid token", err?.response?.data, err?.response?.status)
+       if(err?.response?.status == 401){
+       // conditional rendring
+         // localStorage.clear();
+         // history.push("/login");
+         // window.location.reload();
+       } else {
+         // console.log('Response from customerlist:', err)
+       }
+     })
+ }
+}
+
+
+
+const getSearchNewUserData= () => {
+ const accessToken = JSON.parse(localStorage.getItem('token'))
+ if (accessToken !== null) {
+
+  console.log( new_searchText ," new_searchText")
+  getSearchedCustomer(accessToken, new_searchText)
+     .then((res) => {
+       if (res?.status === 200 && res?.data?.results.length>0) {
+        setFilterNewDataUser(res?.data?.results);
+        setNew_searchText('')
+         console.log('Response search from customerlist :', res)
+       } else {
+         // console.log('Response from customerlist:', res)
+         setFilterNewDataUser(newDataUser);
+         setNew_searchText('');
+         NotificationManager.error("No user found!")
+       }
+     })
+     .catch((err) => {
+       // console.log('Response from customerlist:', err)
+     })
+ }
+}
+
+const NewhandlePageChange = (pageNumber) => {
+
+   if (new_activePage !== pageNumber) {
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+    if (accessToken !== null) {
+      getCustomerList(accessToken, pageNumber)
+        .then((res) => {
+          if (res?.status === 200) {
+            setNewDataUser(res?.data?.results);
+            setFilterNewDataUser(res?.data?.results);
+            setNew_totalPageCount(res?.data?.count);
+            // console.log('Response from customerlist :', res)
+          } else {
+            // console.log('Response from customerlist:', res)
+          }
+        })
+        .catch((err) => {
+          // console.log('Response from customerlist:', err)
+        })
+    }
+ 
+    setNew_activePage(pageNumber)
+} 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -55,13 +355,15 @@ const handlePageChange=(e)=>{
                indicatorColor="primary"
                textColor="primary"
                variant="scrollable"
+               
             >
-               <Tab label="New customer list"  />
-               <Tab label="Low data availability customer list" />
-               <Tab label="Coupons"/>
+               <Tab label={<p className="dark-primary-text p-0 tab-Heading" >New customer list </p>} />
+               <Tab label={<p className="dark-primary-text p-0 tab-Heading" >Low data availability customer list </p>} />
+               <Tab label={<p className="dark-primary-text p-0 tab-Heading" >Coupons</p>} />
+               
             </Tabs>
          </AppBar>
-         <Scrollbars className="rct-scroll" autoHeight autoHeightMin={200} autoHeightMax={820} autoHide>
+         <Scrollbars autoHeight autoHeightMin={200} autoHeightMax={820} autoHide>
             <SwipeableViews
                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                index={value}
@@ -69,173 +371,167 @@ const handlePageChange=(e)=>{
                <div className="card mb-0 transaction-box">
                   <TabContainer dir={theme.direction}>
                   <div className="d-flex  px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
-            <div className='search-row'>
-              <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} />
-              <Button variant="contained" color="primary" className="text-white mx-5 "  size="small">Search</Button>
+            <div className='search-row search-Box-Table'>
+              <input type="text" placeholder='Search'  className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} onChange={(e)=>setNew_searchText(e.target.value)} />
+              <Button variant="contained" color="primary" className="text-white mx-5 "  size="medium"  onClick={getSearchNewUserData}>Search</Button>
             </div>
             </div>
-                     <Table className="table-wrap">
+                     <Table className="table table-middle table-hover mb-0">
                   
                         <TableHead>
                            <TableRow>
-                              {TransactionColumns.map((th, index) => (
+                              {NewUserheading.map((th, index) => (
                                  <TableCell key={index} className="fw-bold">{th}</TableCell>
                               ))}
                            </TableRow>
                         </TableHead>
                         <TableBody>
                       
-                        {/* 
-                         No: "01",
-       User: "Pravin s",
-       Email: "pravin@yopmail.com",
-       Phone: "+911234567890",
-       GST_No: "ASFH#DJK8DDJDDDD",
-       Data_Available: "2000", */}
-                           {listData.map((list, index) => (
+                 
+                           {filteredNewDataUser.length >0 && filteredNewDataUser.map((user, index) => (
                               <TableRow key={index}>
-                                 <TableCell>{list.No}</TableCell>
-                                 <TableCell>{list.User}</TableCell>
-                                 <TableCell>{list.Email}</TableCell>
-                                 {/* <TableCell><Badge color={list.typeColor}>{list.type}</Badge></TableCell> */}
-                                 <TableCell>{list.Phone}</TableCell>
-                                 <TableCell>{list.GST_No}</TableCell>
-                                 <TableCell>{list.Data_Available}</TableCell>
-                                 {/* <TableCell>{list.balance}</TableCell> */}
+                                 <TableCell>{index+1}</TableCell>
+                                 <TableCell>{user?.username?user?.username:"-"}</TableCell>
+                                 <TableCell>{user?.email ? user?.email : '-'}</TableCell>
+                              
+                                 <TableCell>{user?.phone ? user?.phone : '-'}</TableCell>
+                                 <TableCell>{user?.gst_number != null ? user?.gst_number : '-'}</TableCell>
+                                 <TableCell>{user?.total_size_consumed != null ? user?.total_size_consumed :0}</TableCell>
+                                 
                               </TableRow>
                            ))}
                 
                         </TableBody>
+                     </Table>
                         {
-                           listData?.length > 0 &&
+                          filteredNewDataUser.length >0 && 
                            
-              <div className='paginationDiv '>
+              <div className='paginationDiv d-flex align-items-end justify-content-end ml-2 mt-10 '>
                 <Pagination
-                  activePage={1}
+                  activePage={new_activePage}
                   itemsCountPerPage={6}
                   pageRangeDisplayed={5}
-                  onChange={(e) => handlePageChange(e)}
+                  onChange={(e) => NewhandlePageChange(e)}
                   itemClass="page-item"
                   linkClass="page-link"
                   hideFirstLastPages={true}
-                  totalItemsCount={10}
+                  totalItemsCount={new_totalPageCount}
                 />
 
 
               </div>
             }
-                     </Table>
                   </TabContainer>
                </div>
                <div className="card mb-0 transaction-box">
                   <TabContainer dir={theme.direction}>
                   <div className="d-flex  px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
-            <div className='search-row'>
-              <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} />
-              <Button variant="contained" color="primary" className="text-white mx-5 "  size="small">Search</Button>
+            <div className='search-row search-Box-Table'>
+              <input type="text" placeholder='Search' onChange={(e)=>{setLdu_searchText(e.target.value)}} className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} />
+              <Button variant="contained" color="primary" className="text-white mx-5 "  size="medium" onClick={getSearchedLDUData}>Search</Button>
             </div>
             </div>
-                     <Table className="table-wrap" >
+                     <Table className="table table-middle table-hover mb-0" >
                         <TableHead>
                            <TableRow>
-                              {TransferColumns.map((th, index) => (
+                              {LowDataUser.map((th, index) => (
                                  <TableCell key={index} className="fw-bold">{th}</TableCell>
                               ))}
                            </TableRow>
                         </TableHead>
                         <TableBody>
-                           {transferreport.map((list, index) => (
+
+
+                     
+                           {filteredlowDataUser.length>0 && filteredlowDataUser.map((list, index) => (
                               <TableRow key={index}>
-                              <TableCell>{list.No}</TableCell>
-                                 <TableCell>{list.User}</TableCell>
-                                 <TableCell>{list.Email}</TableCell>
+                              <TableCell>{index+1}</TableCell>
+                                 <TableCell>{list?.username}</TableCell>
+                                 <TableCell>{list?.email}</TableCell>
                                  {/* <TableCell><Badge color={list.typeColor}>{list.type}</Badge></TableCell> */}
-                                 <TableCell>{list.Phone}</TableCell>
-                                 <TableCell>{list.GST_No}</TableCell>
-                                 <TableCell>{list.Data_Available}</TableCell>
+                                 <TableCell>{list?.mobile_number != null ? list.mobile_number :"-"}</TableCell>
+                                 <TableCell>{list?.gst_number != null ? list?.gst_number :"-" }</TableCell>
+                                 <TableCell>{list?.total_size_consumed}</TableCell>
                                  {/* <TableCell>{list.balance}</TableCell> */}
                               </TableRow>
                            ))}
                         </TableBody>
+                     </Table>
                         {
-                           listData?.length > 0 &&
-              <div className='paginationDiv '>
+                          filteredlowDataUser.length>0 && 
+              <div className='paginationDiv d-flex align-items-end justify-content-end ml-2 mt-10'>
                 <Pagination
-                  activePage={1}
+                  activePage={ldu_activePage}
                   itemsCountPerPage={6}
                   pageRangeDisplayed={5}
-                  onChange={(e) => handlePageChange(e)}
+                  onChange={(e) => LDUhandlePageChange(e)}
                   itemClass="page-item"
                   linkClass="page-link"
                   hideFirstLastPages={true}
-                  totalItemsCount={10}
+                  totalItemsCount={ldu_totalPageCount}
                 />
 
 
               </div>
             }
-                     </Table>
                   </TabContainer>
                </div>
                <div className="card mb-0 transaction-box">
                   <TabContainer dir={theme.direction}>
                   <div className="d-flex  px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
-            <div className='search-row'>
-              <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} />
-              <Button variant="contained" color="primary" className="text-white mx-5 "  size="small">Search</Button>
+            <div className='search-row search-Box-Table'>
+              <input type="text" placeholder='Search' onChange={(e)=>setSearchText(e.target.value)} className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} />
+              <Button variant="contained" color="primary" className="text-white mx-5 "  size="medium" onClick={getSearchedCustomerData}>Search</Button>
             </div>
             </div>
-                     <Table className="table-wrap" >
+                     <Table className="table table-middle table-hover mb-0" >
                         <TableHead>
                            <TableRow>
-                              {ExpenseColumns.map((th, index) => (
+                              {CoupansHeding.map((th, index) => (
                                  <TableCell key={index} className="fw-bold">{th}</TableCell>
                               ))}
                            </TableRow>
                         </TableHead>
                         <TableBody>
-                        {/* 
-                         Sr_no: "01",
-        Coupon_Id: "12018",
-        Discount: 100,
-         is_Utilized: false,
-        discount_Amt: 50,
-        Action: "",
-       */}
-                           {expenseCategory.map((list, index) => (
+              
+                           {filteredCoupans.length > 0 && filteredCoupans.map((item, index) =>{
+                              let created_Date = getFormatDate2((item?.date_created))
+                               return(
                               <TableRow key={index}>
-                                 <TableCell>{list.Sr_no}</TableCell>
-                                 <TableCell>{list.Coupon_Id}</TableCell>
-                                 {/* <TableCell><Badge color={list.typeColor}>{list.type}</Badge></TableCell> */}
-                                 <TableCell>{list.Discount}</TableCell>
-                                 <TableCell>{list.is_Utilized}</TableCell>
-                                 <TableCell>{list?.Utilise_by}</TableCell>
-                                 <TableCell>{list.discount_Amt}</TableCell>
-                                 <TableCell>{list.Action+""}</TableCell>
+                                 <TableCell>{index+1}</TableCell>
+                                 <TableCell>{item?.coupon_text}</TableCell>
+                                 <TableCell>{created_Date?created_Date:"-"}</TableCell>
+                                 <TableCell>{`${item?.discount_value} ${item?.discount_type == "amount"? "₹" : "%"} `}</TableCell>
+                                 <TableCell>{item?.is_utilized+""}</TableCell>
+                                 <TableCell>{item?.utilized_by == null ? "-":item?.utilized_by}</TableCell>
+                                 <TableCell>{item?.discount_value }</TableCell>
+                                 <TableCell><i className="zmdi zmdi-copy"></i></TableCell>
 
                                  {/* <TableCell><Badge color={list.statusColor}>{list.status}</Badge></TableCell> */}
                               </TableRow>
-                           ))}
+                           )}
+                           )}
                           
                         </TableBody>
-                        {
-                           listData?.length > 0 &&
-              <div className='paginationDiv'>
+                        
+                     </Table>
+                     {
+                      filteredCoupans.length > 0 &&
+              <div className='paginationDiv d-flex align-items-end justify-content-end ml-2 mt-10'>
                 <Pagination
-                  activePage={1}
+                  activePage={activePage}
                   itemsCountPerPage={6}
                   pageRangeDisplayed={5}
                   onChange={(e) => handlePageChange(e)}
                   itemClass="page-item"
                   linkClass="page-link"
                   hideFirstLastPages={true}
-                  totalItemsCount={10}
+                  totalItemsCount={totalPageCount}
                 />
 
 
               </div>
             }
-                     </Table>
                   </TabContainer>
                </div>
             </SwipeableViews>

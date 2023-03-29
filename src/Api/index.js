@@ -141,25 +141,6 @@ export const logOut = (token) => {
 
 
 
-/**
- *  Get user Account Status
- * @param {*} token 
- * @returns 
- */
-
- export const UserAccountStatus = (token) => {
-    return axios.get(`${BASE_URL}/api/version_0/users/account-status/`, 
-    {
-    headers: {
-        Authorization:`Token ${token}`
-    }
-    })
-    .then(res => {
-        // console.log("Log out :",res);
-        return res;    
-    })
-}
-
 
 
 
@@ -237,6 +218,130 @@ export const logOut = (token) => {
 
 
 
+
+
+/**    Company Admin SECTION  Start*/
+
+
+
+
+/**
+ * 
+ * @param {*} token 
+ *
+ * @returns 
+ */
+ export const AddUserIn_Company= (token,email,username) => {
+    let  params ={
+        "email":email,
+        "username":username
+    }
+ 
+     return axios.post(`${BASE_URL}/api/version_0//users/create-company-users/`, params,
+     {
+     headers: {
+         Authorization:`Token ${token}`
+         }
+     })
+     .then( res => {
+         console.log("coupan create :",res);
+         return res;
+     
+     })
+ }
+ 
+
+
+
+
+
+
+
+
+
+/**
+ * 
+ * @param {*} token 
+ * @returns 
+ */
+ export const getCompanyUserList = (token,pageNumber) => {
+    return axios.get(`${BASE_URL}/api/version_0/users/company-users/?page=${pageNumber}`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+    }
+    })
+    .then(res => {
+        // console.log("Log out :",res);
+        return res;    
+    })
+}
+
+/**
+ * 
+ * @param {*} token 
+ * @param {*} searchItem 
+ * @returns 
+ */
+ export const getsearchCompanyUser = (token, searchItem) => {
+    return axios.get(`${BASE_URL}/api/version_0/users/company-users/?search=${searchItem}`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+    }
+    })
+    .then(res => {
+       
+        return res;    
+    })
+}
+
+
+/**    Company Admin SECTION END */
+
+
+/**    Admin SECTION */
+
+/**
+ * 
+ * @param {*} token 
+ * @returns 
+ */
+export const getCustomerList = (token,pageNumber) => {
+    return axios.get(`${BASE_URL}/api/version_0/admin/customer/list/?page=${pageNumber}`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+    }
+    })
+    .then(res => {
+        // console.log("Log out :",res);
+        return res;    
+    })
+}
+
+
+
+/**
+ * 
+ * @param {*} token 
+ * @param {*} searchItem 
+ * @returns 
+ */
+export const getSearchedCustomer = (token, searchItem) => {
+    return axios.get(`${BASE_URL}/api/version_0/admin/customer/list/?search=${searchItem}`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+    }
+    })
+    .then(res => {
+       
+        return res;    
+    })
+}
+
+
 /**  Admin Coupan List seach
  * 
  * 
@@ -293,15 +398,74 @@ export const logOut = (token) => {
 
 
 
+/**  Admin Low Data  Available user List     
+ * 
+ * 
+ * @param {*} token 
+ * @param {*} pageNumber 
+ * @returns 
+ */
+
+ export const LowDataAvilableUser = (token,pageNumber) => {
+
+    return axios.get(`${BASE_URL}/api/version_0/admin/customer/low-data-list/?page=${pageNumber}`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+        }
+    })
+    .then( res => {
+        console.log("low data use details :",res);
+        return res;
+    
+    })
+}
+
+
+
+/**  Admin Coupan List Search 
+ * 
+ * 
+ * @param {*} token 
+ * @param {*} pageNumber 
+ * @returns 
+ */
+
+ export const SearchLowDataAvilableUser = (token,searchItem) => {
+
+    return axios.get(`${BASE_URL}/api/version_0/admin/customer/low-data-list/?search=${searchItem}`, 
+    {
+    headers: {
+        Authorization:`Token ${token}`
+        }
+    })
+    .then( res => {
+        console.log("low data user details SEARCH:",res);
+        return res;
+    
+    })
+}
+
+
+/**    Admin SECTION END */
+
+
+
+
+
+
+
+/**    Customer SECTION Start */
 
 
 /**
- * 
+ *  Get user Account Status
  * @param {*} token 
  * @returns 
  */
- export const getCompanyUserList = (token,pageNumber) => {
-    return axios.get(`${BASE_URL}/api/version_0/users/company-users/?page=${pageNumber}`, 
+
+ export const UserAccountStatus = (token) => {
+    return axios.get(`${BASE_URL}/api/version_0/users/account-status/`, 
     {
     headers: {
         Authorization:`Token ${token}`
@@ -312,70 +476,6 @@ export const logOut = (token) => {
         return res;    
     })
 }
-
-/**
- * 
- * @param {*} token 
- * @param {*} searchItem 
- * @returns 
- */
- export const getsearchCompanyUser = (token, searchItem) => {
-    return axios.get(`${BASE_URL}/api/version_0/users/company-users/?search=${searchItem}`, 
-    {
-    headers: {
-        Authorization:`Token ${token}`
-    }
-    })
-    .then(res => {
-       
-        return res;    
-    })
-}
-
-
-/**
- * 
- * @param {*} token 
- * @returns 
- */
-export const getCustomerList = (token,pageNumber) => {
-    return axios.get(`${BASE_URL}/api/version_0/admin/customer/list/?page=${pageNumber}`, 
-    {
-    headers: {
-        Authorization:`Token ${token}`
-    }
-    })
-    .then(res => {
-        // console.log("Log out :",res);
-        return res;    
-    })
-}
-
-
-
-/**
- * 
- * @param {*} token 
- * @param {*} searchItem 
- * @returns 
- */
-export const getSearchedCustomer = (token, searchItem) => {
-    return axios.get(`${BASE_URL}/api/version_0/admin/customer/list/?search=${searchItem}`, 
-    {
-    headers: {
-        Authorization:`Token ${token}`
-    }
-    })
-    .then(res => {
-       
-        return res;    
-    })
-}
-
-
-
-
-
 
 
 
@@ -555,7 +655,7 @@ console.log(JSON.stringify(fd))
 
 
 
-
+/**    Customer SECTION END */
 
 
 

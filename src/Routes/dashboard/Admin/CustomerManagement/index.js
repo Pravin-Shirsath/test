@@ -578,32 +578,7 @@ import Switch from 'react-toggle-switch';
          {loading && <RctSectionLoader />}
        </RctCollapsibleCard>
  
-       {/* Modal for Add New Customer */}
-       {/* <Modal
-         isOpen={addNewUserModal}
-         toggle={() => onAddUpdateUserModalClose()}
-         className="addCustomerModal "
-         
-       >
-         <ModalHeader toggle={() => onAddUpdateUserModalClose()}>
-           <strong>Welcome</strong>
-         </ModalHeader>
-         <ModalBody>
-           <AddNewUserForm
-             addNewUserDetails={addNewUserDetail}
-             onChangeAddNewUserDetails={onChangeAddNewUserDetails}
-           />
-         </ModalBody>
-         <ModalFooter style={{display:"flex", justifyContent:"space-between", padding:"20px 50px"}}>
- 
-           <Button variant="contained" color="primary" onClick={() => addNewUser()} className="py-2" style={{ color:"#fff",}} >
-               Send
-           </Button>
-           <Button variant="contained"  onClick={() => onAddUpdateUserModalClose()} className="py-2 px-3 bg-danger text-white" style={{ cursor:"pointer"}}>
-               Cancel
-           </Button>
-         </ModalFooter>
-       </Modal> */}
+      
  
        {/* Modal for update customer */}
        <Modal
