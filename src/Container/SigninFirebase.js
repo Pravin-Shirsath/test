@@ -204,7 +204,7 @@ function Signin(props) {
                         <div className="session-logo">
                            <Link to="/login">
 
-                              <img src={AppConfig.appLogo} className="img-fluid" alt="session-logo" width="250" />
+                              <img src={AppConfig.appLogo} className="img-fluid" alt="session-logo" width="170" />
                            </Link>
                         </div>
                         <div className='d-flex align-items-center'>

@@ -1,2 +1,0 @@
-(this.webpackJsonpreactify=this.webpackJsonpreactify||[]).push([[203],{2409:function(t,c,e){"use strict";e.r(c);e(1);var i=e(0);c.default=function(){return Object(i.jsx)("div",{children:"create couponap"})}}}]);
-//# sourceMappingURL=203.196be8a7.chunk.js.map

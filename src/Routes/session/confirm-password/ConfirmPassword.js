@@ -123,7 +123,7 @@ export default function ConfirmPwd() {
                                 <div className="d-flex justify-content-between">
                                     <div className="session-logo">
                                         <Link to="/">
-                                            <img src={AppConfig.appLogo} alt="session-logo" className="img-fluid" width="250" />
+                                            <img src={AppConfig.appLogo} alt="session-logo" className="img-fluid" width="170" />
                                         </Link>
                                     </div>
                                 </div>
