@@ -230,6 +230,7 @@ export default function SaasDashbaord(props) {
 
         >
           <div className="d-flex pb-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
+          
             <div className='search-row'>
               <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} />
               <Button variant="contained" color="primary" className="text-white mx-5" onClick={getSearchedProjectData} >Search</Button>
@@ -241,6 +242,7 @@ export default function SaasDashbaord(props) {
                >Add New Customer</Button> */}
 
           </div>
+          
            <EditProject selected={selected} Modalopen={openEditProject} close={()=>setOpenEditProject(false)} reloadlist={ProjectList}/>
 
         </RctCollapsibleCard>

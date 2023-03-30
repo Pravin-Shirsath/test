@@ -55,6 +55,7 @@ import {
 
 } from '../../../Api/'
 
+
 export default function UserManagement(props) {
   const history = useHistory();
   const deleteConfirmationDialog = useRef()
@@ -325,6 +326,7 @@ export default function UserManagement(props) {
         match={props.match}
       />
       <RctCollapsibleCard fullBlock>
+     
         <div className="table-responsive">
           <div className="d-flex py-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
             <div className='search-row'>

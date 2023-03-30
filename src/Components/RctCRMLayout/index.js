@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Sidebar from 'react-sidebar';
 import { Scrollbars } from 'react-custom-scrollbars';
+
+
 import classnames from 'classnames';
 
 // Components
@@ -23,14 +25,17 @@ import AppConfig from 'Constants/AppConfig';
 
 // actions
 import { collapsedSidebarAction, startUserTour } from 'Store/Actions';
+// import Tus from '@uppy/tus'
+
 
 class MainApp extends Component {
 
 	state = {
 		loadingHeader: true,
-		loadingSidebar: true
+		loadingSidebar: true,
+		
 	}
-
+	
 	UNSAFE_componentWillMount() {
 		this.updateDimensions();
 	}
@@ -124,6 +129,8 @@ class MainApp extends Component {
 	render() {
 		const { navCollapsed, rtlLayout, miniSidebar } = this.props.settings;
 		const { windowWidth } = this.state;
+
+	
 		return (
 			<div className="app">
 				<div className="app-main-container crm-layout">
@@ -139,6 +146,12 @@ class MainApp extends Component {
 						<div className="app-container">
 							<div className="rct-app-content">
 								<div className="app-header">
+								{/* <button onClick={this.handleModalClick} >
+										{this.state.open === undefined ? "Show" : this.state.open ? "Hide": "Show"}
+									</button> */}
+							
+
+									
 									{this.renderHeader()}
 								</div>
 								<div className="rct-page">
