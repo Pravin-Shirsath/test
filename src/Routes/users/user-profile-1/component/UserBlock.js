@@ -86,16 +86,15 @@ function UserBlock({GettingImage}){
       
         
             <div className="profile-content">
-               <div className="media align-items-center">
-               <div style={{ position:"relative"}}>
-               <img src={ profileData?.profile_image == null ?  `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : image == null ? `${BASE_URL+profileData.profile_image}`:image  } alt="user profile" className="rounded-circle bordered" width="140" height="140" />
-               <i className="ti-pencil rounded-circle bordered text-white" style={{position:"absolute",bottom:"6px",right:"20%",backgroundColor:"#464D69"}} > </i>
-               <input type='file' className="rounded-circle bordered" onChange={handleImageUpload}  style={{position:"absolute",bottom:"6px",right:"20%",backgroundColor:"#464D69", width:"30px", height:"30px",opacity:0}}/>
-            
-               </div>
-                  <div className="media-body pt-25">
+               <div className="media d-flex justify-content-center align-items-center">
+                  <div style={{ position:"relative"}}>
+                     <img src={ profileData?.profile_image == null ?  `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : image == null ? `${BASE_URL+profileData.profile_image}`:image  } alt="user profile" className="rounded-circle bordered" width="140" height="140" />
+                     <i className="ti-pencil rounded-circle bordered text-white" style={{position:"absolute",bottom:"6px",right:"20%",backgroundColor:"#464D69"}} > </i>
+                     <input type='file' className="rounded-circle bordered" onChange={handleImageUpload}  style={{position:"absolute",bottom:"6px",right:"20%",backgroundColor:"#464D69", width:"30px", height:"30px",opacity:0}}/>
+                  </div>
+                  <div className="media-body">
                         <div className="d-flex flex-column align-items-baseline">
-                           <h2 className="user-name text-white">{profileData?.first_name} {profileData?.last_name}</h2>
+                           {/* <h2 className="user-name text-white">{profileData?.first_name} {profileData?.last_name}</h2> */}
                            <h2>{profileData?.username}</h2>
                            <p>{profileData?.email}</p>
                         </div>

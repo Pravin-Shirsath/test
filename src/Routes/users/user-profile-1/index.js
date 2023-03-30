@@ -80,19 +80,11 @@ export default function UserProfile(props) {
     }
   }
 
-
-
-
-
-
-
   const ProfileApiCall = (ProfileDetails) => {
     console.log("Profile_Details==", ProfileDetails)
     const accessToken = JSON.parse(localStorage.getItem('token'))
     const userId = JSON.parse(localStorage.getItem('ProfileData'))
     if (accessToken !== null) {
-
-
 
       updateProfileInfo(ProfileDetails, accessToken, userId.id).then((res) => {
         if (res?.status === 200) {
@@ -219,10 +211,6 @@ export default function UserProfile(props) {
                    
 
                     ProfileApiCall(fd)
-
-                  
-
-
                 } else {
                   NotificationManager.error("Invalid email format!");
                 }
@@ -294,11 +282,7 @@ export default function UserProfile(props) {
 
       setShow(true)
     }
-
-
   }
-
-
 
   const updateProfile = () => {
     const Profile_Details = {}
@@ -496,18 +480,16 @@ export default function UserProfile(props) {
         <UserBlock GettingImage={GettingImage} />
 
         <Form className="border">
-          <section className="border border-5 py-10 d-flex align-item-center justify-content-center dark-primary text-white">
-            <h2>Personal Details</h2>
+          <section className="bg-danger border border-5 py-10 d-flex align-items-center justify-content-center dark-primary text-white">
+            <h2 className='m-auto'>Personal Details</h2>
           </section>
 
           <div className="edit-form">
-
             <FormGroup row >
-
               <Col sm={6} >
-                <Col sm={12} className="d-flex ">
+                <Col sm={12} className="d-flex justify-content-center align-items-center">
                   <Label for="firstName" sm={3} className="d-flex">
-                    First Name <span className="text-danger">*</span>
+                    First Name <span className="text-danger madatory-field">*</span>
                   </Label>
 
                   <Input
@@ -527,9 +509,9 @@ export default function UserProfile(props) {
 
 
               <Col sm={6} >
-                <Col sm={12} className="d-flex ">
+                <Col sm={12} className="d-flex justify-content-center align-items-center" >
                   <Label for="lastName" sm={3} className="d-flex">
-                    Last Name <span className="text-danger">*</span>
+                    Last Name <span className="text-danger madatory-field">*</span>
                   </Label>
 
                   <Input
@@ -554,9 +536,9 @@ export default function UserProfile(props) {
             <FormGroup row>
 
               <Col sm={6} >
-                <Col sm={12} className="d-flex ">
-                  <Label for="email" sm={3} className="d-flex">
-                    Email Id <span className="text-danger">*</span>
+                <Col sm={12} className="d-flex justify-content-center align-items-center">
+                  <Label for="email" sm={3} className="d-flex ">
+                    Email Id <span className="text-danger madatory-field">*</span>
                   </Label>
 
                   <Input
@@ -575,7 +557,7 @@ export default function UserProfile(props) {
               </Col>
 
               <Col sm={6} >
-                <Col sm={12} className="d-flex ">
+                <Col sm={12} className="d-flex justify-content-center align-items-center">
                   <Label for="state" sm={3}>
                     State
                   </Label>
@@ -604,7 +586,7 @@ export default function UserProfile(props) {
 
             <FormGroup row>
               <Col sm={6} >
-                <Col sm={12} className="d-flex ">
+                <Col sm={12} className="d-flex justify-content-center align-items-center">
                   <Label for="country" sm={3}>
                     Country
                   </Label>
@@ -614,8 +596,6 @@ export default function UserProfile(props) {
                     onChange={(val) => (setCountry(val))}
                     style={{ fontSize: '17px', type: "text" }}
                   />
-
-
 
                   {/* <Input
                     type="text"
@@ -633,7 +613,7 @@ export default function UserProfile(props) {
               </Col>
 
               <Col sm={6} >
-                <Col sm={12} className="d-flex ">
+                <Col sm={12} className="d-flex justify-content-center align-items-center">
                   <Label for="zipCode" sm={3}>
                     Zip-code
                   </Label>
@@ -658,9 +638,9 @@ export default function UserProfile(props) {
             <FormGroup row>
 
               <Col sm={6} >
-                <Col sm={12} className="d-flex ">
+                <Col sm={12} className="d-flex justify-content-center align-items-center">
                   <Label for="phone" sm={3} className="d-flex">
-                    Phone <span className="text-danger">*</span>
+                    Phone <span className="text-danger madatory-field">*</span>
                   </Label>
 
                   <PhoneInput
@@ -699,56 +679,43 @@ export default function UserProfile(props) {
 
 
             </FormGroup>
-
-
-
-
             {type == "admin" && <>
-              <FormGroup className="row mt-50">
-                <Col sm={6}>
-                  <h4>   <span className="text-danger">*</span> Mandatory Field</h4>
-                </Col>
-                <Col sm={6}>
-                  <section className="row " >
+            <FormGroup className="row mt-50">
+                  <Col sm={6}>
+                    <h4>   <span className="text-danger madatory-field">*</span> Mandatory Field</h4>
+                  </Col>
+                  <Col sm={6}>
+                    <section  style={{display:"flex", justifyContent:"flex-end", alignItems:"center", gap:"0px"}} >
 
-                    <Col sm={6}>
-                      <Button
-                        color="primary"
-                        className="btn-block text-white px-50 fw-bold bg-primary.bg-gradient"
-                        variant="contained"
-                        size="medium"
-                        onClick={AdminupdateProfile}
-                        style={{ maxWidth: "150px" }}
-                      >
-                        Save
-                      </Button>
+                      <Col sm={6} lg={3} className="d-flex justify-content-center align-item-center">
+                        <Button
+                          color="primary"
+                          className="btn-block text-white px-50 fw-bold bg-primary.bg-gradient"
+                          variant="contained"
+                          size="medium"
+                          onClick={updateProfile}
+                          style={{ maxWidth: "150px" }}
+                        >
+                          Save
+                        </Button>
 
-                    </Col>
-                    <Col sm={6}>
-                      <Button
-                        color="primary"
-                        className="btn-block px-50 py-2 text-white fw-bold btn-danger"
-                        variant="contained"
-                        size="medium"
-                        onClick={() => { history.push("/") }}
-                        style={{ maxWidth: "150px" }}
-                      >
-                        Cancel
-                      </Button>
-                    </Col>
+                      </Col>
+                      <Col sm={6} lg={3} className="d-flex justify-content-center align-item-center">
+                        <Button
+                          color="primary"
+                          className="btn-block px-50 text-white fw-bold btn-danger"
+                          variant="contained"
+                          size="medium"
+                          onClick={() => { history.push("/") }}
+                          style={{ maxWidth: "150px" }}
+                        >
+                          Cancel
+                        </Button>
+                      </Col>
 
-                  </section>
-
-
-                </Col>
-
-
-
-
-
-
-              </FormGroup>
-
+                    </section>
+                  </Col>
+                </FormGroup>
             </>}
 
           </div>
@@ -756,16 +723,16 @@ export default function UserProfile(props) {
 
             (<>
               <section className="border border-5 py-10 d-flex align-item-center justify-content-center dark-primary text-white">
-                <h2>Company Details</h2>
+                <h2 className='m-auto'>Company Details</h2>
               </section>
               <div className="edit-form">
 
                 <FormGroup row >
 
                   <Col sm={6} >
-                    <Col sm={12} className="d-flex ">
+                    <Col sm={12} className="d-flex justify-content-center align-items-center">
                       <Label for="companyName" sm={3} className="d-flex">
-                        Company Name <span className="text-danger">*</span>
+                        Company Name <span className="text-danger madatory-field">*</span>
                       </Label>
 
                       <Input
@@ -785,14 +752,14 @@ export default function UserProfile(props) {
 
 
                   <Col sm={6} >
-                    <Col sm={12} className="d-flex ">
+                    <Col sm={12} className="d-flex justify-content-center align-items-center">
                       <Label for="billingAddress" sm={3} className="d-flex">
-                        Billing Address <span className="text-danger">*</span>
+                        Billing Address <span className="text-danger madatory-field">*</span>
                       </Label>
 
                       <Input
                         // type="text"
-                        style={{ height: 120 }}
+                        style={{ height: 55 }}
                         type="textarea"
                         name="billingAddress"
                         className="input-lg"
@@ -814,9 +781,9 @@ export default function UserProfile(props) {
                 <FormGroup row>
 
                   <Col sm={6} >
-                    <Col sm={12} className="d-flex ">
+                    <Col sm={12} className="d-flex justify-content-center align-items-center">
                       <Label for="taxNumber" sm={3} className="d-flex">
-                        Tax Number <span className="text-danger">*</span>
+                        Tax Number <span className="text-danger madatory-field">*</span>
                       </Label>
 
                       <Input
@@ -835,7 +802,7 @@ export default function UserProfile(props) {
                   </Col>
 
                   <Col sm={6} >
-                    <Col sm={12} className="d-flex ">
+                    <Col sm={12} className="d-flex justify-content-center align-items-center">
                       <Label for="companyAddress" sm={3}>
                         Company Address
                       </Label>
@@ -843,7 +810,7 @@ export default function UserProfile(props) {
                         // type="text"
                         type="textarea"
                         // rows={15}
-                        style={{ height: 120 }}
+                        style={{ height: 55 }}
                         name="companyAddress"
                         className="input-lg"
                         value={companyAddress}
@@ -867,9 +834,9 @@ export default function UserProfile(props) {
                     <h4>   <span className="text-danger">*</span> Mandatory Field</h4>
                   </Col>
                   <Col sm={6}>
-                    <section className="row " >
+                    <section  style={{display:"flex", justifyContent:"flex-end", alignItems:"center", gap:"0px"}} >
 
-                      <Col sm={6}>
+                      <Col sm={6} lg={3} className="d-flex justify-content-center align-item-center">
                         <Button
                           color="primary"
                           className="btn-block text-white px-50 fw-bold bg-primary.bg-gradient"
@@ -882,10 +849,10 @@ export default function UserProfile(props) {
                         </Button>
 
                       </Col>
-                      <Col sm={6}>
+                      <Col sm={6} lg={3} className="d-flex justify-content-center align-item-center">
                         <Button
                           color="primary"
-                          className="btn-block px-50 py-2 text-white fw-bold btn-danger"
+                          className="btn-block px-50 text-white fw-bold btn-danger"
                           variant="contained"
                           size="medium"
                           onClick={() => { history.push("/") }}
@@ -896,22 +863,13 @@ export default function UserProfile(props) {
                       </Col>
 
                     </section>
-
-
                   </Col>
-
-
-
-
-
-
                 </FormGroup>
               </div>
 
 
             </>)
-
-          }
+}
 
         </Form>
       </RctCard>
