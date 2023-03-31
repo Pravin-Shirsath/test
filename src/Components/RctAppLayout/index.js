@@ -26,6 +26,11 @@ import AppConfig from 'Constants/AppConfig';
 // actions
 import { collapsedSidebarAction, startUserTour } from 'Store/Actions';
 
+// import Uppy from  "@uppy/core";
+// import { Dashboard } from "@uppy/react";
+
+
+
 class MainApp extends Component {
 
 	state = {
@@ -126,6 +131,11 @@ class MainApp extends Component {
 	render() {
 		const { navCollapsed, rtlLayout, miniSidebar } = this.props.settings;
 		const { windowWidth } = this.state;
+
+
+		
+	
+
 		return (
 			<div className="app">
 				<div className="app-main-container">

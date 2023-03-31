@@ -62,6 +62,7 @@ import ViewProject from '../ViewProject';
 import { isNotEmpty } from '@amcharts/amcharts4/.internal/core/utils/Utils';
 
 
+
 export default function SaasDashbaord(props) {
   const { match } = props;
   const history = useHistory();
@@ -214,6 +215,61 @@ export default function SaasDashbaord(props) {
    
   history.push("/app/dashboard/viewProject",{BackPath:"/app/dashboard/saas",pathname:"Dashboard"})
  }
+
+
+
+//  const UPLOADER = "tus";
+//  const XHR_ENDPOINT = "";
+ 
+//  const RESTORE = false;
+ 
+//  const uppyDashboard = new Uppy({ logger: debugLogger })
+//    .use(Dashboard, {
+//    inline: true,
+//   //  target: "Upp",
+//    showProgressDetails: true,
+//    proudlyDisplayPoweredByUppy: true
+//    })
+ 
+ 
+//  switch (UPLOADER) {
+//     case "xhr":
+//    uppyDashboard.use(XHRUpload, {
+//      endpoint: XHR_ENDPOINT,
+//      limit: 6,
+//      bundle: true
+//    });
+//    break;
+//    default:
+//  }
+ 
+//  if (RESTORE) {
+//    uppyDashboard.use(GoldenRetriever, { serviceWorker: true });
+//  }
+ 
+// //  window.uppy = uppyDashboard;
+ 
+//  uppyDashboard.on("complete", (result) => {
+//    if (result.failed.length === 0) {
+//    console.log("Upload successful");
+//    } else {
+//    console.warn("Upload failed");
+//    }
+//    console.log("successful files:", result.successful);
+//    console.log("failed files:", result.failed);
+//  });
+
+
+
+
+
+
+
+
+
+
+
+
   
   return (
     <div className="ecom-dashboard-wrapper">
@@ -246,7 +302,7 @@ export default function SaasDashbaord(props) {
            <EditProject selected={selected} Modalopen={openEditProject} close={()=>setOpenEditProject(false)} reloadlist={ProjectList}/>
 
         </RctCollapsibleCard>
-       
+       	
         <div>
 
           <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
