@@ -1,0 +1,488 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,300&display=swap');
+/* font-family: 'IBM Plex Sans', sans-serif; */
+
+.rechargeBoxContainer {
+    /* height: 70vh; */
+    /* border: 2px solid #000000; */
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    padding: 30px 30px;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/**************** COMMON STYLINGS ***********/
+.recharge-modal-row {
+    background-color: lightgray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    padding: 8px 10px;
+}
+
+.recharge-modal-row .left {
+    /* background-color: yellow; */
+    /* width: 600px; */
+    width: 65%;
+}
+
+.recharge-modal-row .left p {
+    /* background-color: red; */
+    font-size: 25px;
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.recharge-modal-row .mid {
+    /* background-color: aqua; */
+    /* width: 80px; */
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.recharge-modal-row .mid p {
+    font-size: 35px;
+    margin: auto;
+}
+
+.recharge-modal-row .right {
+    /* background-color: blue; */
+    /* width: 400px; */
+    width: 15%;
+}
+
+.recharge-modal-row .right p {
+    width: 100%;
+    font-size: 25px;
+    margin: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+/************ COMMON STYLINGS OVER *************/
+
+.rechargeBoxContainer .heading {
+    background-color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    padding: 10px;
+
+    margin-bottom: 40px;
+}
+
+.rechargeBoxContainer .heading h1 {
+    font-size: 35px;
+    color: #fff;
+    margin: auto;
+}
+
+/* FIRST ROW STYLING */
+.firstRow {
+    margin-bottom: 30px;
+}
+
+
+.firstRow .left .wrapper {
+    /* background-color: orange; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.firstRow .left .wrapper .text {
+    /* background-color: pink; */
+    margin: 0;
+}
+
+
+.firstRow .left .wrapper .inputMaterial {
+    display: flex;
+    gap: 20px;
+}
+
+.firstRow .left .wrapper .inputMaterial input {
+    width: 100px;
+    margin-left: 40px;
+    margin-right: 10px;
+    font-size: 18px;
+    padding: 2px;
+    padding-left: 10px;
+}
+
+.firstRow .left .wrapper .inputMaterial .diff {
+    font-style: italic;
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+/* Second Row Styling */
+.secondRow {
+    margin-bottom: 30px;
+ }
+
+.secondRow .left p {
+    display: flex;
+    gap: 30px;
+ }
+
+.secondRow .left p .inputContainer {
+    /* background-color: magenta; */
+    padding: 5px 8px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    display: flex;
+ }
+
+.secondRow .left p input {
+   width: 200px;
+   height: 30px;
+   border-radius: 5px;
+   border: 1px solid black;
+   padding-left: 10px;
+   font-size: 14px;
+   margin: auto;
+}
+ 
+.secondRow .left p button {
+    background-color: blue;
+    color: #fff;
+    font-size: 17px;
+    width: 160px;
+    height: 35px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.secondRow .right p .operator {
+    margin-right: 10px;
+}
+
+/* Third Row Styling */
+.thirdRow{
+    margin-bottom: 70px;
+}
+
+/* Fourth Row */
+.fourthRow{
+    margin-bottom: 90px;
+}
+
+.fourthRow p {
+    /* background-color: red; */
+    margin: auto;
+    font-size: 25px;
+}
+
+.fourthRow p span {
+    margin-left: 20px;
+    width: 100px;
+    font-size: 23px;
+    border: 2px solid black;
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+/* Fifth Row */
+.fifthRow p {
+   margin: auto;
+}
+
+.fifthRow p button {
+   background-color: blue;
+   padding: 5px 15px;
+   color: #fff;
+   font-size: 17px;
+   border-radius: 7px;
+   cursor: pointer;
+ }
+
+
+
+/************ Below is handling media queries ************/
+/* mobile devices */
+@media (min-width: 320px) and (max-width: 480px) {
+    /* .rechargeBoxContainer {
+        height: 70vh;
+        border: 2px solid #000000;
+        padding: 25px 15px;
+        transition: all 1s;
+    } */
+
+    .rechargeBoxContainer .heading h1 {
+        font-size: 30px;
+        transition: all 1s;
+    }
+    
+    .recharge-modal-row .left {
+        width: 73%;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .mid {
+        width: max-content;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .right {
+        width: 20%;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .left p {
+        /* background-color: aqua; */
+        font-size: 18px;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .mid p {
+        /* background-color: aqua; */
+        font-size: 22px;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .right p {
+        /* background-color: aqua; */
+        font-size: 16px;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .left {
+        width: 65%;
+    }
+
+    .recharge-modal-row .right {
+        width: 30%;
+    }
+
+    .firstRow .left p {
+        flex-direction: column;
+    }
+
+
+    .firstRow .left p p {
+       /* background-color: orange; */
+       width: 100%;
+       display: flex;
+    }
+
+    .firstRow .left p .text {
+        /* background-color: pink; */
+        text-align: start;
+        justify-content: flex-start;
+        align-items: flex-start;
+     }
+
+     .firstRow .left .wrapper .inputMaterial {
+        /* background-color: beige; */
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+     }
+
+     .firstRow .left .wrapper .inputMaterial input {
+        width: 70px;
+        margin-left: 0px;
+        margin-right: 10px;
+        font-size: 18px;
+        padding: 2px;
+        padding-left: 10px;
+    }
+
+    .firstRow .left .wrapper .inputMaterial .diff {
+        /* background-color: red; */
+        margin-left: 0;
+        font-size: 15px;
+    }
+
+    .firstRow .left p input {
+        margin: 0;
+    }
+
+    .secondRow .left .inputContainer{
+        width: 90%;
+    }
+
+    .secondRow .left .inputContainer input{
+        width: 100%;
+    }
+
+    .secondRow .left p{
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+
+}
+
+/* tablets or ipad */
+@media (min-width: 480px) and (max-width: 768px) {
+    .rechargeBoxContainer {
+        height: 70vh;
+        border: 2px solid #000000;
+        padding: 25px 15px;
+        transition: all 1s;
+    }
+
+    .rechargeBoxContainer .heading h1 {
+        font-size: 30px;
+        transition: all 1s;
+    }
+    
+    .recharge-modal-row .left {
+        width: 73%;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .mid {
+        width: max-content;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .right {
+        width: 20%;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .left p {
+        /* background-color: aqua; */
+        font-size: 18px;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .mid p {
+        /* background-color: aqua; */
+        font-size: 22px;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .right p {
+        /* background-color: aqua; */
+        font-size: 16px;
+        transition: all 1s;
+    }
+
+    .firstRow {
+        margin-bottom: 20px;
+    }
+/* 
+    .firstRow .left {
+        font-size: 18px;
+    } */
+
+    .firstRow .left .wrapper .inputMaterial {
+        /* background-color: aqua; */
+        gap: 10px;
+    }
+
+    .firstRow .left .wrapper .inputMaterial input {
+        font-size: 15px;
+        padding-left: 8px;
+        margin-left: 5px;
+        transition: all 1s;
+
+        width: 80px;
+        margin-left: 1.5rem;
+        margin-right: 8px;
+        font-size: 16px;
+    }
+
+    .firstRow .left .wrapper .inputMaterial .diff {
+        margin-left: 0px;
+        font-size: 15px;
+        transition: all 1s;
+    }
+
+
+
+    .secondRow {
+        margin-bottom: 20px;
+    }
+
+    .secondRow .left p {
+        display: flex;
+        gap: 20px;
+        transition: all 1s;
+     }
+
+     .secondRow .left p .inputContainer {
+        /* background-color: yellow; */
+        width: 70%;
+     }
+
+     .secondRow .left p .inputContainer input {
+        width: 100%;
+     }
+
+    .secondRow .left p button {
+        background-color: blue;
+        color: #fff;
+        font-size: 14px;
+        width: auto;
+        height: auto;
+        transition: all 1s;
+    }
+
+    .thirdRow{
+        margin-bottom: 50px;
+        transition: all 1s;
+    }
+
+    .fourthRow p {
+        font-size: 20px;
+        transition: all 1s;
+    }
+
+    .fourthRow{
+        margin-bottom: 80px;
+        transition: all 1s;
+    }
+    
+}
+
+/* laptop or small size screen */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .recharge-modal-row .left p {
+        /* background-color: magenta; */
+        font-size: 20px;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .mid p {
+        /* background-color: magenta; */
+        font-size: 25px;
+        transition: all 1s;
+    }
+
+    .recharge-modal-row .right p {
+        /* background-color: magenta; */
+        font-size: 20px;
+        transition: all 1s;
+    }
+
+    .firstRow .left p .diff {
+        margin-left: 10px;
+        font-size: 15px;
+        transition: all 1s;
+    }
+
+    .thirdRow{
+        margin-bottom: 50px;
+        transition: all 1s;
+    }
+
+    .fourthRow{
+        margin-bottom: 80px;
+        transition: all 1s;
+    }
+
+    .fourthRow p {
+        font-size: 20px;
+        transition: all 1s;
+    }
+    
+}
