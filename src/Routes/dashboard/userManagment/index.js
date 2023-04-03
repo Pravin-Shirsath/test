@@ -505,16 +505,6 @@ export default function UserManagement(props) {
           </Button>
         </ModalFooter>
       </Modal>
-
-
-
-
-
-
-
-
-
-
     </div>
   )
 }
