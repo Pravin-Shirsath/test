@@ -623,6 +623,12 @@ const AsyncAdminComponent = Loadable({
   loading: () => <RctPageLoader />,
 });
 
+// Create Task added by vish
+const AsyncCreateTaskComponent = Loadable({
+  loader: () => import("Routes/dashboard/CreateTask"),
+  loading: () => <RctPageLoader />,
+})
+
 export {
   AsyncUserWidgetComponent,
   AsyncUserChartsComponent,
@@ -729,4 +735,5 @@ export {
   AsyncCreateProjectComponent,
   AsyncRechargeModalComponent,
   AsyncCreateDatasetComponent,
+  AsyncCreateTaskComponent
 };

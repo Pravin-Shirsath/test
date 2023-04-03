@@ -780,5 +780,6 @@ module.exports = {
    // Admin Added by Vish
    "sidebar.adminManagement": "Admin",
    "sidebar.createDataset" : "Create Dataset",
-   "sidebar.viewProject" : "View Project"
+   "sidebar.viewProject" : "View Project",
+   "sidebar.createTask": "Create Task"
 }

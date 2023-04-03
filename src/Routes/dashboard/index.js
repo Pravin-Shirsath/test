@@ -25,7 +25,8 @@ import {
    AsyncViewProjectComponent,
    AsyncCreateProjectComponent,
    AsyncRechargeModalComponent,
-   AsyncCreateDatasetComponent
+   AsyncCreateDatasetComponent,
+   AsyncCreateTaskComponent
 
 } from 'Components/AsyncComponent/AsyncComponent';
 
@@ -67,6 +68,7 @@ return(
          <Route path={`${match.url}/createProject`} component={AsyncCreateProjectComponent} />
          <Route path={`${match.url}/rechargeModal`} component={AsyncRechargeModalComponent} />
          <Route path={`${match.url}/createDataset`} component={AsyncCreateDatasetComponent} />
+         <Route path={`${match.url}/createTask`}  component={AsyncCreateTaskComponent} />
          
          <Route path={`${match.url}/Admin/Dashboard`} component={AsyncAdminDashboardComponent} />
          <Route path={`${match.url}/Admin/Coupons`} component={AsyncAddCoupansComponent} />
@@ -74,6 +76,7 @@ return(
          <Route path={`${match.url}/Admin/Account`} component={AsyncAdminAccountComponent} />
          <Route path={`${match.url}/Admin/Report`} component={AsyncAdminreportComponent} />
          <Route path={`${match.url}/Admin/Project`} component={AsyncAdminProjectComponent} />
+         
          
 
       </Switch>
