@@ -203,8 +203,6 @@ export default function SaasDashbaord(props) {
   }
 
 
-
-
   const EditModal = (item) => {
     setSelectedItem(item)
   
@@ -212,7 +210,8 @@ export default function SaasDashbaord(props) {
   }
 
  const ViewProject=(item)=>{
-   
+   console.log(item,'viewProject iteeemmm in  saaasss aka dashboard' )
+   localStorage.setItem("projId", item?.id)
   history.push("/app/dashboard/viewProject",{BackPath:"/app/dashboard/saas",pathname:"Dashboard"})
  }
 

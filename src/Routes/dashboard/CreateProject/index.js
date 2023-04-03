@@ -23,9 +23,12 @@ import { Avatar } from '@material-ui/core';
 import { BASE_URL } from 'Api/APIConst';
 import { NotificationManager } from 'react-notifications'
 import { CreateNewProject } from 'Api'
+import AddIcon from '@mui/icons-material/Add';
 
 
 const CreateProject = (props) => {
+    const history = useHistory();
+
     const [projectName, setProjectName] = useState("")
     const [dataset, setDataset] = useState("")
     const [projectDes, setProjectDes] = useState("")
@@ -196,8 +199,6 @@ const CreateProject = (props) => {
 
                             </FormGroup>
                             <FormGroup row >
-
-
                                 <Col sm={12} className="d-flex  align-items-center justify-content-center">
                                     <Label for="firstName" sm={3} className="d-flex primary-dark">
                                        <span> Project description<span className="text-danger">*</span></span>
@@ -214,25 +215,20 @@ const CreateProject = (props) => {
                             </FormGroup>
                             <div className="d-flex align-items-center justify-content-center" style={{ marginTop: '30px', marginBottom: "30px" }}>
                                 <Button variant="contained" color="primary" className="projectCardButton mx-2" onClick={NewProject}>Save</Button>
-
+                                <Button variant="contained" color="primary" className="projectCardButton mx-2 d-flex justify-content-center align-item-center" onClick={()=> history.push("/app/dashboard/createDataset")}><AddIcon />Dataset</Button>
                             </div>
 
-                            <FormGroup row >
-
-
+                            {/* <FormGroup row >
                                 <Col sm={12} className="d-flex  align-items-center justify-content-center">
                                     <Label for="firstName" sm={3} className="d-flex primary-dark">
                                         File Browse
                                     </Label>
                                     <CustomInput type="file" id="exampleCustomFileBrowser" name="customFile" sm={10} />
-
                                 </Col>
-
-                            </FormGroup>
-                            <div className="d-flex align-items-center justify-content-center" style={{ marginTop: '30px', marginBottom: "30px" }}>
+                            </FormGroup> */}
+                            {/* <div className="d-flex align-items-center justify-content-center" style={{ marginTop: '30px', marginBottom: "30px" }}>
                                 <Button variant="contained" color="primary" className="projectCardButton mx-2" >Upload</Button>
-
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>

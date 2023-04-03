@@ -206,7 +206,8 @@ export default function SaasDashbaord(props) {
   }
 
  const ViewProject=(item)=>{
-   
+  console.log(item, "viewProject iteeemmm in project")
+  localStorage.setItem("projId", item?.id)
   history.push("/app/dashboard/viewProject",{BackPath:match?.path,pathname:"Project"})
  }
  const NavigateTo=()=>{
@@ -299,9 +300,7 @@ export default function SaasDashbaord(props) {
                         <Button variant="contained" color="primary" className="projectCardButton mx-2" onClick={()=>EditModal(item)} >Edit</Button>
                         <Button variant="contained" color="primary" className="projectCardButton mx-2" onClick={()=>ViewProject(item)} >View</Button>
                         <Button variant="contained" color="danger" className="projectCardButton mx-2" onClick={()=>DeletModalOpen(item)} >Delete</Button>
-
                       </section>
-
                     </section>
 
                   </div>
@@ -310,8 +309,7 @@ export default function SaasDashbaord(props) {
               })
             }
 
-
-
+            
           </div>
           <div>
             {
