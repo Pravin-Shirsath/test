@@ -135,6 +135,10 @@ const CreateDataset = (props) => {
   const UploadFile= async()=>{
     const accessToken = JSON.parse(localStorage.getItem('token'))
 
+
+
+
+
     if (open === undefined) {
        const uppy3 = await new Uppy({
         id: "uppy3",
@@ -147,17 +151,20 @@ const CreateDataset = (props) => {
         exposedHeaders: ["Access-Control-Allow-Headers"],
        
       })
-      .use(XHR, { endpoint: `${BASE_URL}/api/automaton/file-uploads/upload/92/`,
+      .use(XHR, { endpoint: `${BASE_URL}/api/automaton/file-uploads/upload/${143}`,
                   headers:{
+                  
                     Authorization:accessToken,
-                    "Content-Type": "multipart/form-data"
-
+                    "Content-Type": "multipart/form-data",
+                  
                   },
-                
+                  bundle :true,
                   formData:true,
-                  fieldName:'images[]'
+                  fieldName:'images',
+                
                 
                 })
+               
       // .on('complete', (result) => {
       //   console.log('Upload result:', result)
       // });
@@ -173,8 +180,17 @@ const CreateDataset = (props) => {
           // 	  });
           // 	}
           //   );
-        });
+        }).on('upload-error', (file, error, response) => {
+          console.log("error===",file, error, response)
+          if (error.isNetworkError) {
+            // Let your users know that file upload could have failed
+            // due to firewall or ISP issues
+          console.log("error===",error)
+          }
+        })
 
+
+       
 //  document.getElementById("upload-button").addEventListener('click',()=>{
 //   uppy3.getFile().forEach((file)=>{
 //     const formData = new FormData();
