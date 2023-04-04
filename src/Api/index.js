@@ -616,9 +616,10 @@ export const CreateNewProject = (
   }
 
   console.log(JSON.stringify(fd));
-
+///api/automaton/projects/create/`
+  // /api/automaton/projects/create-v1/
   return axios
-    .post(`${BASE_URL}/api/automaton/projects/create/`, fd, {
+    .post(`${BASE_URL}/api/automaton/projects/create-v1/`, fd, {
       headers: {
         Authorization: `Token ${token}`,
         "Content-Type": "multipart/form-data",
@@ -1216,6 +1217,27 @@ export const scnerioPlanningPostData = (token, jsonSendFormat) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // API FOR CREATE DATASET
 /**
  *
@@ -1248,6 +1270,76 @@ export const createDataset = (authToken, projectId, datasetName) => {
       return res;
     });
 };
+
+
+/**
+ * 
+ * @param {*} token 
+ * @param {*} DatesetId
+
+ * @returns 
+ */
+ export const DeleteDataset = (token, DatesetId,projectId) => {
+   console.log(token, DatesetId,projectId)
+  let params = {
+    "project_id":projectId,
+    "dataset_id":DatesetId
+}
+
+  return fetch(`${BASE_URL}/api/automaton/datasets/delete/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `token ${token}`,
+    },
+    body: JSON.stringify(params),
+  }).then((res) => res);
+
+};
+
+
+
+/**
+ * This Api Updated  Dataset
+ * @param {*} datasetName
+ 
+ * @param {*} token
+ * @param {*} id
+ * @returns
+ */
+
+ export const UpadatDataset = (token,id,datasetName,comment) => {
+  let params = {}
+ 
+   if(datasetName != ""){
+    params["dataset_name"]=datasetName
+   }
+   if(comment != ""){
+    params["comment"]= comment
+   }
+   
+  
+  return axios
+    .patch(`${BASE_URL}/api/automaton/datasets/update/${id}/`,params , {
+      headers: {
+        Accept: "application/json",
+      
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((res) => {
+       console.log("Update dataset :",res);
+      return res;
+    });
+};
+
+
+
+
+
+
+
+
 
 
 // API FOR VIEW PROJECT DATASET LIST VIEW

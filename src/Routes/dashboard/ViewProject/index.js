@@ -20,7 +20,7 @@ import {
 import Pagination from "react-js-pagination";
 
 import { useHistory } from 'react-router-dom';
-
+import { NotificationManager } from 'react-notifications'
 // delete confirmation dialog
 import DeleteConfirmationDialog from 'Components/DeleteConfirmationDialog/DeleteConfirmationDialog'
 // update user form
@@ -35,14 +35,16 @@ import RctCollapsibleCard from '../../../Components/RctCollapsibleCard/RctCollap
 import RctSectionLoader from '../../../Components/RctSectionLoader/RctSectionLoader'
 import '../../../Assets/css/user.css'
 import {
+  DeleteDataset,
   getViewProjectDatasets
 } from '../../../Api/'
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
+import EditDataset from '../ReuseComponent/EditDataset';
 export default function ViewProject(props) {
   const history = useHistory();
-  const deleteConfirmationDialog = useRef()
+ 
   //  const [users, setUsers] = useState() // use when data is coming from api
   const [users, setUsers] = useState([])
   //  const [filteredUsers, setFilteredUsers] = useState() // use when the data is coming fom api
@@ -60,12 +62,13 @@ export default function ViewProject(props) {
   const [updateNewUserModal, setupdateNewUserModal] = useState(false)
   const [deleteUserModal, setdeleteUserModal] = useState(false)
 
-
+  const deleteConfirmationDialog = useRef()
+  const [selected, setSelectedItem] = useState({})
 
   const [editUser, setEditUser] = useState(null)
   const [selectedUsers, setSelectedUsers] = useState(0)
   const [viewDetails, setViewDetails] = useState()
-
+const [openEditDataset,setOpenEditDataset] = useState(false)
 
   const [datasets, setDatasets] = useState([]);
   const [filteredDatasets,setFilteredDatasets] = useState([])
@@ -96,9 +99,53 @@ export default function ViewProject(props) {
         } else {
           console.log('Response from View project Datasets lists api:', res)
         }
+      }).catch((error)=>{
+        console.log("error=",error)
       })
     }
   }
+
+
+  const EditModal = (item) => {
+    setSelectedItem(item)
+  
+    setOpenEditDataset(true)
+  }
+
+  const DeletModalOpen = (item) => {
+    setSelectedItem(item)
+    deleteConfirmationDialog.current.open()
+  }
+
+  const Delete_Datset = () => {
+
+
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+    if (accessToken !== null) {
+     
+      DeleteDataset(accessToken, selected?.id,selected?.project_id)
+        .then((res) => {
+          if (res?.status === 200) {
+            deleteConfirmationDialog.current.close()
+            getViewProjectData();
+            NotificationManager.success(" Datset deleted !")
+            console.log('Response from dataset  :', res)
+
+          } else {
+
+
+            NotificationManager.error("Delete_Datset deleting process unsucess!")
+          }
+        })
+        .catch((err) => {
+          console.log('Response from err dataset  :', err)
+          NotificationManager.error("Delete_Datset deleting process unsucess!")
+        })
+    }
+  }
+
+
+
 
 
   const handlePageChange = (pageNumber) => {
@@ -141,6 +188,10 @@ export default function ViewProject(props) {
         title={<IntlMessages id="sidebar.viewProject" />}
         match={props.match}
       />
+                <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
+             message="This will delete your Dataset permanently."
+             onConfirm={() => Delete_Datset()}
+             ref={deleteConfirmationDialog} />
       <RctCollapsibleCard fullBlock>
      
         <div className="table-responsive">
@@ -190,8 +241,8 @@ export default function ViewProject(props) {
                       <td className="list-action d-flex ">
                     
                       <VisibilityIcon />
-                      <EditIcon className="mx-2" /> 
-                     <DeleteIcon/>
+                      <EditIcon className="mx-2" onClick={()=> EditModal(dataset)}/> 
+                     <DeleteIcon onClick={()=>{DeletModalOpen(dataset)}}/>
                    
                     </td>
                     </tr>
@@ -224,6 +275,9 @@ export default function ViewProject(props) {
         </div>
         {loading && <RctSectionLoader />}
       </RctCollapsibleCard>
+
+      <EditDataset selected={selected} Modalopen={openEditDataset} close={()=>setOpenEditDataset(false)} reloadlist={getViewProjectData}/>
+
 
       {/* Modal for Add New Customer */}
       <Modal

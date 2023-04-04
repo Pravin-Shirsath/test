@@ -80,7 +80,7 @@ const EditProject = ({ selected, Modalopen, close,reloadlist }) => {
                                  if(close){
                                     close()
                                     }
-
+                                    NotificationManager.success(" Project update suceesfull !") 
                              }
                                 console.log('Response from search  :', res)
                             } else {
@@ -164,7 +164,7 @@ const EditProject = ({ selected, Modalopen, close,reloadlist }) => {
                                 </Col>
 
                             </FormGroup>
-                            <div className="d-flex align-items-center justify-content-center" style={{ marginTop: '30px', marginBottom: "30px" }}>
+                            <div className="d-flex align-items-center justify-content-end" style={{ marginTop: '30px', marginBottom: "30px" }}>
                                 <Button variant="contained" color="primary" className="projectCardButton mx-2" onClick={SaveEditDetails} >Change</Button>
                                 <Button variant="contained" color="danger" className="projectCardButton mx-2" onClick={() => (close(false), setOpen(false))}>Cancel</Button>
                             </div>
