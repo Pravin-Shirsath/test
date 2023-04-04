@@ -1132,8 +1132,8 @@ export const createDataset = (authToken, projectId, datasetName) => {
 
 
 // API FOR VIEW PROJECT DATASET LIST VIEW
-export const getViewProjectDatasets = (authToken, projectId) => {
-    return axios.post( `${BASE_URL}/api/automaton/datasets/view/`,
+export const getViewProjectDatasets = (authToken, projectId, pageNumber) => {
+    return axios.post( `${BASE_URL}/api/automaton/datasets/view/?page=${pageNumber}`,
     {
         "project_id": projectId
     },

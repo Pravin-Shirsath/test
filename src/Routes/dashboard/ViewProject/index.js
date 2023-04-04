@@ -47,8 +47,7 @@ export default function ViewProject(props) {
   //  const [filteredUsers, setFilteredUsers] = useState() // use when the data is coming fom api
   const [filteredUsers, setFilteredUsers] = useState([])
   const [searchText, setSearchText] = useState('');
-  const [activePage, setActivePage] = useState(1)
-  const [totalPageCount, setTotalPageCount] = useState('');
+  
 
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
@@ -59,15 +58,15 @@ export default function ViewProject(props) {
   const [updateNewUserModal, setupdateNewUserModal] = useState(false)
   const [deleteUserModal, setdeleteUserModal] = useState(false)
 
-
-
   const [editUser, setEditUser] = useState(null)
   const [selectedUsers, setSelectedUsers] = useState(0)
   const [viewDetails, setViewDetails] = useState()
 
-
-  const [datasets, setDatasets] = useState([]);
+  // States getting used in this file
+  const [datasets, setDatasets] = useState(null);
   const [filteredDatasets,setFilteredDatasets] = useState([])
+  const [activePage, setActivePage] = useState(1)
+  const [totalPageCount, setTotalPageCount] = useState('');
 
   useEffect(() => {
     const isLoggedInBool = localStorage.getItem("isLoggedIn")
@@ -86,12 +85,15 @@ export default function ViewProject(props) {
     const projectId = localStorage?.getItem("projId")
 
     if(authToken !== null){
-      getViewProjectDatasets(authToken, projectId)
+      getViewProjectDatasets(authToken, projectId, activePage)
       .then(res => {
         if(res?.status == 200){
-          // console.log(res?.data?.results)
+          console.log(res?.data?.results, "project's all lists")
           setDatasets(res?.data?.results)
           setFilteredDatasets(res?.data?.results);
+
+          console.log(res?.data?.count, "total counts of datasets of projects")
+          setTotalPageCount(parseInt(res?.data?.count));
         } else {
           console.log('Response from View project Datasets lists api:', res)
         }
@@ -101,28 +103,29 @@ export default function ViewProject(props) {
 
 
   const handlePageChange = (pageNumber) => {
-    // console.log("pagination", pageNumber)
-    // if (activePage !== pageNumber) {
-    //   const accessToken = JSON.parse(localStorage.getItem('token'))
-    //   if (accessToken !== null) {
-    //     getCompanyUserList(accessToken, pageNumber)
-    //       .then((res) => {
-    //         if (res?.status === 200) {
-    //           setUsers(res?.data?.results);
-    //           setFilteredUsers(res?.data?.results);
-    //           setTotalPageCount(res?.data?.count);
-    //           console.log('Response from customerlist :', res)
-    //         } else {
-    //           // console.log('Response from customerlist:', res)
-    //         }
-    //       })
-    //       .catch((err) => {
-    //         // console.log('Response from customerlist:', err)
-    //       })
-    //   }
+    console.log("pagination", pageNumber)
+    if (activePage !== pageNumber) {
+      const authToken = JSON.parse(localStorage.getItem('token'))
+      const projectId = localStorage?.getItem("projId")
 
-    //   setActivePage(pageNumber)
-    // }
+      if (authToken !== null) {
+        getViewProjectDatasets(authToken, projectId, pageNumber)
+          .then((res) => {
+            if (res?.status === 200) {
+              setDatasets(res?.data?.results);
+              setFilteredDatasets(res?.data?.results);
+              setTotalPageCount(res?.data?.count);
+              console.log('Response from customerlist :', res)
+            } else {
+              // console.log('Response from customerlist:', res)
+            }
+          })
+          .catch((err) => {
+            // console.log('Response from customerlist:', err)
+          })
+      }
+      setActivePage(pageNumber)
+    }
   }
 
   const handleView = () => {
@@ -219,11 +222,11 @@ export default function ViewProject(props) {
           </table>
           {filteredDatasets.length == 0 && <center style={{ color: "black" }}>  Data not available </center>}
           {
-            users?.length > 0 &&
+            datasets?.length > 0 &&
             <div className='paginationDiv'>
               <Pagination
                 activePage={activePage}
-                itemsCountPerPage={10}
+                itemsCountPerPage={5}
                 pageRangeDisplayed={5}
                 onChange={(e) => handlePageChange(e)}
                 itemClass="page-item"
@@ -231,8 +234,6 @@ export default function ViewProject(props) {
                 hideFirstLastPages={true}
                 totalItemsCount={totalPageCount}
               />
-
-
             </div>
           }
         </div>
@@ -240,7 +241,7 @@ export default function ViewProject(props) {
       </RctCollapsibleCard>
 
       {/* Modal for Add New Customer */}
-      <Modal
+      {/* <Modal
         isOpen={addNewUserModal}
         // toggle={() => onAddUpdateUserModalClose()}
         className="addCustomerModal "
@@ -304,12 +305,12 @@ export default function ViewProject(props) {
             Cancel
           </Button>
         </div>
-      </Modal>
+      </Modal> */}
 
 
 
 
-      <Modal
+      {/* <Modal
         isOpen={deleteUserModal}
         className="addCustomerModal"
       >
@@ -335,7 +336,7 @@ export default function ViewProject(props) {
             Cancel
           </Button>
         </ModalFooter>
-      </Modal>
+      </Modal> */}
     </div>
   )
 }
