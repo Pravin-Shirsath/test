@@ -291,7 +291,7 @@ export default function SaasDashbaord(props) {
                           <DoughnutChart />
                         </div>
                         <div>
-                          <p className="project-card-dataset-text">Dataset Details <span className="project-card-dataset-box">05</span></p>
+                          <p className="project-card-dataset-text">Dataset Details <span className="project-card-dataset-box">{item?.project_dataset}</span></p>
                           <p className="project-card-dataset-text">Status <span className="project-card-Status-box  "></span></p>
                         </div>
 

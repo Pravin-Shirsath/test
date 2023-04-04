@@ -26,16 +26,41 @@ import AppConfig from 'Constants/AppConfig';
 // actions
 import { collapsedSidebarAction, startUserTour } from 'Store/Actions';
 
-// import Uppy from  "@uppy/core";
-// import { Dashboard } from "@uppy/react";
 
+
+// Don't forget the CSS: core and the UI components + plugins you are using.
+// import { Dashboard } from "@uppy/react";
+import Uppy from  "@uppy/core";
+import '@uppy/core/dist/style.min.css';
+import '@uppy/dashboard/dist/style.min.css';
+import '@uppy/webcam/dist/style.min.css';
+import { DragDrop, StatusBar ,Dashboard} from '@uppy/react';
+import Tus from '@uppy/tus'
+const {	DashboardModal} = require("@uppy/react");
+// Don’t forget to keep the Uppy instance outside of your component.
+// const uppy = new Uppy()
+// // .use(RemoteSources, { companionUrl: 'https://companion.uppy.io' })
+// // .use(Webcam, { target: Dashboard })
+// // .use(ImageEditor, { target: Dashboard })
+// .use(Tus, { endpoint: 'https://tusd.tusdemo.net/files/' })
+// .on('complete', (result) => {
+//   console.log('Upload result:', result)
+// });
 
 
 class MainApp extends Component {
 
 	state = {
 		loadingHeader: true,
-		loadingSidebar: true
+		loadingSidebar: true,
+		open:undefined
+	}
+
+
+	handleModalClick = () => {
+		this.setState({
+			open: !this.state.open,
+		});
 	}
 
 	UNSAFE_componentWillMount() {
@@ -130,10 +155,45 @@ class MainApp extends Component {
 
 	render() {
 		const { navCollapsed, rtlLayout, miniSidebar } = this.props.settings;
-		const { windowWidth } = this.state;
+		const { windowWidth ,open} = this.state;
 
 
-		
+		if (open === undefined) {
+			this.uppy3 = new Uppy({
+				id: "uppy3",
+				autoProceed: false,
+				debug: true,
+				methods: ["OPTIONS", "GET", "POST", "PATCH", "PUT"],
+				exposedHeaders: ["Access-Control-Allow-Headers"],
+				allowedHeaders: [
+					"uppy-auth-token",
+					"Content-Type",
+					"Authorization",
+					"Uppy-Versions",
+					"Accept",
+					"project_id",
+					"folder_id",
+				],
+			})
+			.use(Tus, { endpoint: 'https://tusd.tusdemo.net/files/' })
+			// .on('complete', (result) => {
+			//   console.log('Upload result:', result)
+			// });
+				.on("upload-success", (file, response) => {
+					console.log("upload-success");
+					// alert(JSON.stringify(file,response))
+					//   this.props.projectSpecificDetails(
+					// 	this.props.match.params.id,
+					// 	(res, err) => {
+					// 	  console.log("res");
+					// 	  this.setState({
+					// 		open: !this.state.open,
+					// 	  });
+					// 	}
+					//   );
+				});
+		}
+	
 	
 
 		return (
@@ -152,6 +212,22 @@ class MainApp extends Component {
 						<div className="app-container">
 							<div className="rct-app-content">
 								<div className="app-header">
+								{/* <DashboardModal
+										uppy={uppy}
+										open={true}
+										// target={document.body}
+										// onRequestClose={() => this.setState({ open: false })}
+									/> */}
+									{/* <button onClick={this.handleModalClick}>
+										{this.state.open === undefined ? "Show" : this.state.open ? "Hide": "Show"}
+									</button> */}
+									<DashboardModal
+										uppy={this.uppy3}
+										open={this.state.open}
+										target={document.body}
+										onRequestClose={() => this.setState({ open: false })}
+									/>
+
 									{this.renderHeader()}
 								</div>
 								<div className="rct-page">

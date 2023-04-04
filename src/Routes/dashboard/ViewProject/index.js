@@ -37,8 +37,9 @@ import '../../../Assets/css/user.css'
 import {
   getViewProjectDatasets
 } from '../../../Api/'
-
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import EditIcon from '@mui/icons-material/Edit';
 export default function ViewProject(props) {
   const history = useHistory();
   const deleteConfirmationDialog = useRef()
@@ -189,27 +190,12 @@ export default function ViewProject(props) {
                         </div>
                       </td>
                       <td>{dataset?.date_created ? dataset?.date_created : '-'}</td>
-                      <td className="list-action">
-                      <button
-                        type="button"
-                        className="rct-link-btn"
-                        onClick={() => handleView()}
-                      >
-                        <i className="ti-eye"></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="rct-link-btn"
-
-                      >
-                        <i className="ti-pencil"></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="rct-link-btn"
-                      >
-                        <i className="ti-close"></i>
-                      </button>
+                      <td className="list-action d-flex ">
+                    
+                      <VisibilityIcon />
+                      <EditIcon className="mx-2" /> 
+                     <DeleteIcon/>
+                   
                     </td>
                     </tr>
                   )

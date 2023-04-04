@@ -134,6 +134,10 @@ export const logOut = (token) => {
     });
 };
 
+
+
+
+
 /**
  *
  * @param {*} token
@@ -264,7 +268,51 @@ export const getsearchCompanyUser = (token, searchItem) => {
 
 /**    Company Admin SECTION END */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**    Admin SECTION */
+
+
+
+/**
+ * 
+ * @param {*} token 
+ * @param {*} projectId 
+
+ * @returns 
+ */
+export const DeleteCoupon = (token, projectId) => {
+  let params = {
+    "id":projectId
+}
+
+  return fetch(`${BASE_URL}/api/automaton/coupons/delete/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `token ${token}`,
+    },
+    body: JSON.stringify(params),
+  }).then((res) => res);
+};
+
+
+
+
+
 
 /**
  *
@@ -581,7 +629,64 @@ export const CreateNewProject = (
     });
 };
 
+
+
+/**
+ *
+ * @param {*} token
+ * @param {*} userid
+ * @returns
+ */
+
+ export const GetRechargedPlan = (token, searchItem) => {
+  return axios
+    .get(`${BASE_URL}/api/automaton/recharge/get-price/`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((res) => {
+      console.log("recharge plan details :", res);
+      return res;
+    });
+};
+
+
+
+
+
+
 /**    Customer SECTION END */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  *
@@ -1097,6 +1202,20 @@ export const scnerioPlanningPostData = (token, jsonSendFormat) => {
     });
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // API FOR CREATE DATASET
 /**
  *
@@ -1108,9 +1227,9 @@ export const scnerioPlanningPostData = (token, jsonSendFormat) => {
 
 
 export const createDataset = (authToken, projectId, datasetName) => {
-  console.log("Before creating dataset :", typeof(authToken), projectId, datasetName);
+  console.log("Before creating dataset :", typeof (authToken), projectId, datasetName);
 
- return axios
+  return axios
     .post(
       `${BASE_URL}/api/automaton/datasets/create/`,
       {
@@ -1135,17 +1254,26 @@ export const createDataset = (authToken, projectId, datasetName) => {
 export const getViewProjectDatasets = (authToken, projectId, pageNumber) => {
     return axios.post( `${BASE_URL}/api/automaton/datasets/view/?page=${pageNumber}`,
     {
-        "project_id": projectId
+      "project_id": projectId
     },
     {
-        headers:{
-            "Content-Type": "application/json",
-            Authorization: `token ${authToken}`
-        }
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `token ${authToken}`
+      }
     }
-    )
+  )
     .then(res => {
-        console.log("view projects datasets list:", res)
-        return res
+      console.log("view projects datasets list:", res)
+      return res
     })
 }
+
+
+
+
+
+
+
+
+// Recharge Api
