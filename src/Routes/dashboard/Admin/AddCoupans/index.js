@@ -23,7 +23,8 @@ import { getFormatDate2 } from '../../../../Constants/DateFormator';
  import DialogContent from '@material-ui/core/DialogContent'
  import { NotificationManager } from 'react-notifications'
  import Pagination from "react-js-pagination";
- 
+ import DeleteIcon from '@mui/icons-material/Delete';
+ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
  import { Link, useHistory } from 'react-router-dom';
  
  // delete confirmation dialog
@@ -50,10 +51,12 @@ import { getFormatDate2 } from '../../../../Constants/DateFormator';
    CustomerDisable,
    CustomerEnable,
    AdminCoupanList,
-   AdminCoupanSearch
+   AdminCoupanSearch,
+   DeleteCoupon
    
  } from '../../../.././Api/'
 import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
+import { copyToClipboard } from 'Constants/CopyToClipboard'
  
  export default function CustomerManagement(props) {
    const [coupans, setCoupans] = useState([])
@@ -64,8 +67,8 @@ import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
    const [loading, setLoading] = useState(false)
    const [creatCoupanModal, setCreatCoupanModal] = useState(false)
    const [deleteUserModal, setdeleteUserModal] = useState(false)
-  
-
+   const deleteConfirmationDialog = useRef()
+   const [selected, setSelectedItem] = useState({})
  
    useEffect(() => {
    
@@ -227,6 +230,38 @@ import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
      } 
    }
 
+
+
+
+   const DeletModalOpen = (item) => {
+    setSelectedItem(item)
+    deleteConfirmationDialog.current.open()
+  }
+  const Delete_Coupan = () => {
+
+
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+    if (accessToken !== null) {
+      DeleteCoupon(accessToken, selected?.id)
+        .then((res) => {
+          if (res?.status === 200) {
+            deleteConfirmationDialog.current.close()
+            getCoupanAllData();
+            NotificationManager.success("coupan deleted !")
+            console.log('Response from search  :', res)
+
+          } else {
+
+
+            NotificationManager.error("Coupan deleting process unsucess!")
+          }
+        })
+        .catch((err) => {
+          NotificationManager.error("Coupan deleting process unsucess!")
+        })
+    }
+  }
+
    return (
      <div className="user-management">
        <Helmet>
@@ -237,6 +272,11 @@ import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
          title={<IntlMessages id="sidebar.coupon" />}
          match={props.match}
        />
+
+          <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
+             message="This will delete your Coupan permanently."
+             onConfirm={() => Delete_Coupan()}
+             ref={deleteConfirmationDialog} />
        <RctCollapsibleCard fullBlock>
          <div className="table-responsive">
            <div className="d-flex py-20 px-10 border-bottom" style={{justifyContent:'space-between'}}>
@@ -315,7 +355,9 @@ import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
                      </td>
 
                      <td className="list-action" style={{display:"flex", gap:"3px"}}>
-                     <i className="zmdi zmdi-copy"></i>
+                     <ContentCopyIcon onClick={()=>copyToClipboard(item?.coupon_text)}/>
+                     <DeleteIcon  onClick={()=>DeletModalOpen(item)}/>
+
                        {/* <Switch
                          onClick={()=>handleToggleUser(item)}
                         on={active}
@@ -333,7 +375,7 @@ import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
                <div className='paginationDiv'>
                  <Pagination
                              activePage={activePage}
-                             itemsCountPerPage={10}
+                             itemsCountPerPage={6}
                              pageRangeDisplayed={5}
                              onChange={(e) => handlePageChange(e)}
                               itemClass="page-item"

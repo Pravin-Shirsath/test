@@ -181,7 +181,7 @@ class MainApp extends Component {
 			// });
 				.on("upload-success", (file, response) => {
 					console.log("upload-success");
-					alert(JSON.stringify(file,response))
+					// alert(JSON.stringify(file,response))
 					//   this.props.projectSpecificDetails(
 					// 	this.props.match.params.id,
 					// 	(res, err) => {

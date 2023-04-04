@@ -1,22 +1,25 @@
 /**
  * Transaction table section
  */
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
 import { AppBar, Tabs, Tab, Typography, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Pagination from "react-js-pagination";
 import { NotificationManager } from 'react-notifications'
-
+import DeleteIcon from '@mui/icons-material/Delete';
+ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import {
    Button,
   
  } from 'reactstrap';
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
-import { AdminCoupanList, AdminCoupanSearch,SearchLowDataAvilableUser ,LowDataAvilableUser, getSearchedCustomer, getCustomerList} from 'Api';
+import { AdminCoupanList, AdminCoupanSearch,SearchLowDataAvilableUser ,LowDataAvilableUser, getSearchedCustomer, getCustomerList, DeleteCoupon} from 'Api';
 import { getFormatDate2 } from 'Constants/DateFormator';
+import { copyToClipboard } from 'Constants/CopyToClipboard';
+import DeleteConfirmationDialog from 'Components/DeleteConfirmationDialog/DeleteConfirmationDialog';
 
 function TabContainer({ children, dir }) {
    return (
@@ -66,7 +69,8 @@ function TransactionList(props){
    const [activePage , setActivePage] = useState(1)
    const [totalPageCount, setTotalPageCount] = useState('');
    const [loading, setLoading] = useState(false)
-
+   const deleteConfirmationDialog = useRef()
+   const [selected, setSelectedItem] = useState({})
 // Coupan section Start
 
   const getCoupanAllData = () => {
@@ -145,6 +149,46 @@ function TransactionList(props){
      setActivePage(pageNumber)
    } 
  }
+
+
+
+
+
+
+ const DeletModalOpen = (item) => {
+  setSelectedItem(item)
+  deleteConfirmationDialog.current.open()
+}
+const Delete_Coupan = () => {
+
+
+  const accessToken = JSON.parse(localStorage.getItem('token'))
+  if (accessToken !== null) {
+    DeleteCoupon(accessToken, selected?.id)
+      .then((res) => {
+        if (res?.status === 200) {
+          deleteConfirmationDialog.current.close()
+          getCoupanAllData();
+          NotificationManager.success("coupan deleted !")
+          console.log('Response from search  :', res)
+
+        } else {
+
+
+          NotificationManager.error("Coupan deleting process unsucess!")
+        }
+      })
+      .catch((err) => {
+        NotificationManager.error("Coupan deleting process unsucess!")
+      })
+  }
+}
+
+
+
+
+
+
 
 // Coupan section end
 
@@ -344,8 +388,6 @@ const NewhandlePageChange = (pageNumber) => {
 
 
 
-
-
    return (
       <div className="Transaction-table-wrap Tab-wrap">
          <AppBar position="static" color="default">
@@ -363,6 +405,10 @@ const NewhandlePageChange = (pageNumber) => {
                
             </Tabs>
          </AppBar>
+         <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
+             message="This will delete your Coupan permanently."
+             onConfirm={() => Delete_Coupan()}
+             ref={deleteConfirmationDialog} />
          <Scrollbars autoHeight autoHeightMin={200} autoHeightMax={820} autoHide>
             <SwipeableViews
                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -505,7 +551,10 @@ const NewhandlePageChange = (pageNumber) => {
                                  <TableCell>{item?.is_utilized+""}</TableCell>
                                  <TableCell>{item?.utilized_by == null ? "-":item?.utilized_by}</TableCell>
                                  <TableCell>{item?.discount_value }</TableCell>
-                                 <TableCell><i className="zmdi zmdi-copy"></i></TableCell>
+                                 <TableCell> 
+                                       <ContentCopyIcon onClick={()=>copyToClipboard(item?.coupon_text)}/>
+                                       <DeleteIcon onClick={()=>DeletModalOpen(item)} />
+                                  </TableCell>
 
                                  {/* <TableCell><Badge color={list.statusColor}>{list.status}</Badge></TableCell> */}
                               </TableRow>

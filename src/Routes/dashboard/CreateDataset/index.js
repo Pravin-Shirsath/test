@@ -39,11 +39,38 @@ import { NotificationManager } from 'react-notifications'
 import { createDataset } from 'Api'
 import AddIcon from '@mui/icons-material/Add';
 
+
+
+import Uppy from  "@uppy/core";
+import '@uppy/core/dist/style.min.css';
+import '@uppy/dashboard/dist/style.min.css';
+import '@uppy/webcam/dist/style.min.css';
+import { DragDrop, StatusBar ,Dashboard} from '@uppy/react';
+import Tus from '@uppy/tus'
+import XHR from '@uppy/xhr-upload';
+const {	DashboardModal} = require("@uppy/react");
+// Don’t forget to keep the Uppy instance outside of your component.
+// const uppy = new Uppy()
+// // .use(RemoteSources, { companionUrl: 'https://companion.uppy.io' })
+// // .use(Webcam, { target: Dashboard })
+// // .use(ImageEditor, { target: Dashboard })
+// .use(Tus, { endpoint: 'https://tusd.tusdemo.net/files/' })
+// .on('complete', (result) => {
+//   console.log('Upload result:', result)
+// });
+
+
+
+
+
+
 const CreateDataset = (props) => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [datasetName, setDatasetName] = useState("");
   const [comment, setComment] = useState("");
+  const [open,setOpen]=useState()
+  const [instance,setInstance] =useState()
 
   const handleDatasetName = (e) => {
     setDatasetName(e.target.value)
@@ -80,6 +107,85 @@ const CreateDataset = (props) => {
   console.log(datasetName, "Dataset name")
   console.log(comment, "Commmenttt")
 
+
+
+
+
+  const UploadFile= async()=>{
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+
+    if (open === undefined) {
+       const uppy3 = await new Uppy({
+        id: "uppy3",
+        autoProceed: false,
+        debug: true,
+        restrictions:{
+          allowedFileTypes:['image/*']
+        },
+        methods: ["OPTIONS", "GET", "POST", "PATCH", "PUT"],
+        exposedHeaders: ["Access-Control-Allow-Headers"],
+       
+      })
+      .use(XHR, { endpoint: `${BASE_URL}/api/automaton/file-uploads/upload/92/`,
+                  headers:{
+                    Authorization:accessToken,
+                    "Content-Type": "multipart/form-data"
+
+                  },
+                
+                  formData:true,
+                  fieldName:'images[]'
+                
+                })
+      // .on('complete', (result) => {
+      //   console.log('Upload result:', result)
+      // });
+        .on("upload-success", (file, response) => {
+          console.log("upload-success");
+          // alert(JSON.stringify(file,response))
+          //   this.props.projectSpecificDetails(
+          // 	this.props.match.params.id,
+          // 	(res, err) => {
+          // 	  console.log("res");
+          // 	  this.setState({
+          // 		open: !this.state.open,
+          // 	  });
+          // 	}
+          //   );
+        });
+
+//  document.getElementById("upload-button").addEventListener('click',()=>{
+//   uppy3.getFile().forEach((file)=>{
+//     const formData = new FormData();
+//     formData.append(file.id,formData)
+//     uppy3.UploadFile(file.id,formData)
+//   })
+//  })
+       
+        
+
+
+        setInstance(uppy3);
+        setOpen(true)
+    }else{
+      setOpen(true)
+    }
+   
+  }
+
+
+
+
+
+
+
+
+
+
+
+console.log(open,"open")
+
+
   return (
     <>
       <Helmet>
@@ -90,7 +196,16 @@ const CreateDataset = (props) => {
         title={<IntlMessages id="sidebar.createDataset" />}
         match={props.match}
       />
+      {
+        instance != undefined && 
+        <DashboardModal
+										uppy={instance}
+										open={open}
+										target={document.body}
+										onRequestClose={() => setOpen(false)}
+									/>
 
+      }
       <RctCollapsibleCard fullBlock>
       <div style={{padding:"80px", alignItems: "center", justifyContent: 'center', display: "flex", }}>
                 <div className="user-profile-widget box-shadow-box" style={{ width: "60%", backgroundColor: "white" }}>
@@ -121,7 +236,7 @@ const CreateDataset = (props) => {
                                         <span> Comment<span className="text-danger madatory-field">*</span></span>
                                     </Label>
                                     <Input
-                                        type="text"
+                                        type="text"Dataset
                                         // className="input-lg"
                                         style={{height:"100px"}}
                                         value={comment}
@@ -133,7 +248,7 @@ const CreateDataset = (props) => {
                             </FormGroup>
                             <div className="d-flex align-items-center justify-content-center" style={{ marginTop: '30px', marginBottom: "30px" }}>
                                 <Button variant="contained" color="primary" style={{width:"100px", padding:"7px 5px"}} className="projectCardButton mx-2" onClick={handleSave}>Save</Button>
-                                <Button variant="contained" color="primary" style={{width:"100px", padding:"7px 5px"}}  className="mx-2 d-flex justify-content-center align-items-center"><AddIcon/>Upload</Button>
+                                <Button variant="contained" color="primary" style={{width:"100px", padding:"7px 5px"}}  className="mx-2 d-flex justify-content-center align-items-center" onClick={()=>UploadFile()}><AddIcon/>Upload</Button>
                                 <Button variant="contained" color="danger" style={{width:"100px", padding:"7px 5px"}}  className="mx-2 d-flex justify-content-center align-items-center" onClick={()=> history.push("/app/dashboard/project")}>Cancel</Button>
                                 
                             </div>
