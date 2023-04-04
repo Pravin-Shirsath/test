@@ -50,8 +50,7 @@ export default function ViewProject(props) {
   //  const [filteredUsers, setFilteredUsers] = useState() // use when the data is coming fom api
   const [filteredUsers, setFilteredUsers] = useState([])
   const [searchText, setSearchText] = useState('');
-  const [activePage, setActivePage] = useState(1)
-  const [totalPageCount, setTotalPageCount] = useState('');
+  
 
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
@@ -72,6 +71,8 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 
   const [datasets, setDatasets] = useState([]);
   const [filteredDatasets,setFilteredDatasets] = useState([])
+  const [activePage, setActivePage] = useState(1)
+  const [totalPageCount, setTotalPageCount] = useState('');
 
   useEffect(() => {
     const isLoggedInBool = localStorage.getItem("isLoggedIn")
@@ -90,12 +91,15 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     const projectId = localStorage?.getItem("projId")
 
     if(authToken !== null){
-      getViewProjectDatasets(authToken, projectId)
+      getViewProjectDatasets(authToken, projectId, activePage)
       .then(res => {
         if(res?.status == 200){
-          // console.log(res?.data?.results)
+          console.log(res?.data?.results, "project's all lists")
           setDatasets(res?.data?.results)
           setFilteredDatasets(res?.data?.results);
+
+          console.log(res?.data?.count, "total counts of datasets of projects")
+          setTotalPageCount(parseInt(res?.data?.count));
         } else {
           console.log('Response from View project Datasets lists api:', res)
         }
@@ -149,28 +153,29 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 
 
   const handlePageChange = (pageNumber) => {
-    // console.log("pagination", pageNumber)
-    // if (activePage !== pageNumber) {
-    //   const accessToken = JSON.parse(localStorage.getItem('token'))
-    //   if (accessToken !== null) {
-    //     getCompanyUserList(accessToken, pageNumber)
-    //       .then((res) => {
-    //         if (res?.status === 200) {
-    //           setUsers(res?.data?.results);
-    //           setFilteredUsers(res?.data?.results);
-    //           setTotalPageCount(res?.data?.count);
-    //           console.log('Response from customerlist :', res)
-    //         } else {
-    //           // console.log('Response from customerlist:', res)
-    //         }
-    //       })
-    //       .catch((err) => {
-    //         // console.log('Response from customerlist:', err)
-    //       })
-    //   }
+    console.log("pagination", pageNumber)
+    if (activePage !== pageNumber) {
+      const authToken = JSON.parse(localStorage.getItem('token'))
+      const projectId = localStorage?.getItem("projId")
 
-    //   setActivePage(pageNumber)
-    // }
+      if (authToken !== null) {
+        getViewProjectDatasets(authToken, projectId, pageNumber)
+          .then((res) => {
+            if (res?.status === 200) {
+              setDatasets(res?.data?.results);
+              setFilteredDatasets(res?.data?.results);
+              setTotalPageCount(res?.data?.count);
+              console.log('Response from customerlist :', res)
+            } else {
+              // console.log('Response from customerlist:', res)
+            }
+          })
+          .catch((err) => {
+            // console.log('Response from customerlist:', err)
+          })
+      }
+      setActivePage(pageNumber)
+    }
   }
 
   const handleView = () => {
@@ -256,11 +261,11 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
           </table>
           {filteredDatasets.length == 0 && <center style={{ color: "black" }}>  Data not available </center>}
           {
-            users?.length > 0 &&
+            datasets?.length > 0 &&
             <div className='paginationDiv'>
               <Pagination
                 activePage={activePage}
-                itemsCountPerPage={10}
+                itemsCountPerPage={5}
                 pageRangeDisplayed={5}
                 onChange={(e) => handlePageChange(e)}
                 itemClass="page-item"
@@ -268,8 +273,6 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
                 hideFirstLastPages={true}
                 totalItemsCount={totalPageCount}
               />
-
-
             </div>
           }
         </div>
@@ -280,7 +283,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 
 
       {/* Modal for Add New Customer */}
-      <Modal
+      {/* <Modal
         isOpen={addNewUserModal}
         // toggle={() => onAddUpdateUserModalClose()}
         className="addCustomerModal "
@@ -344,12 +347,12 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
             Cancel
           </Button>
         </div>
-      </Modal>
+      </Modal> */}
 
 
 
 
-      <Modal
+      {/* <Modal
         isOpen={deleteUserModal}
         className="addCustomerModal"
       >
@@ -375,7 +378,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
             Cancel
           </Button>
         </ModalFooter>
-      </Modal>
+      </Modal> */}
     </div>
   )
 }
