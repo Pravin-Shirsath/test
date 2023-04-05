@@ -629,6 +629,12 @@ const AsyncCreateTaskComponent = Loadable({
   loading: () => <RctPageLoader />,
 })
 
+// ViewDataset
+const AsyncViewDataset = Loadable({
+  loader: () => import("Routes/dashboard/ViewDataset"),
+  loading: () => <RctPageLoader />,
+})
+
 export {
   AsyncUserWidgetComponent,
   AsyncUserChartsComponent,
@@ -735,5 +741,6 @@ export {
   AsyncCreateProjectComponent,
   AsyncRechargeModalComponent,
   AsyncCreateDatasetComponent,
-  AsyncCreateTaskComponent
+  AsyncCreateTaskComponent,
+  AsyncViewDataset
 };

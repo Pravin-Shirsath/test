@@ -616,9 +616,10 @@ export const CreateNewProject = (
   }
 
   console.log(JSON.stringify(fd));
-
+///api/automaton/projects/create/`
+  // /api/automaton/projects/create-v1/
   return axios
-    .post(`${BASE_URL}/api/automaton/projects/create/`, fd, {
+    .post(`${BASE_URL}/api/automaton/projects/create-v1/`, fd, {
       headers: {
         Authorization: `Token ${token}`,
         "Content-Type": "multipart/form-data",
@@ -1216,6 +1217,27 @@ export const scnerioPlanningPostData = (token, jsonSendFormat) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // API FOR CREATE DATASET
 /**
  *
@@ -1250,6 +1272,76 @@ export const createDataset = (authToken, projectId, datasetName) => {
 };
 
 
+/**
+ * 
+ * @param {*} token 
+ * @param {*} DatesetId
+
+ * @returns 
+ */
+ export const DeleteDataset = (token, DatesetId,projectId) => {
+   console.log(token, DatesetId,projectId)
+  let params = {
+    "project_id":projectId,
+    "dataset_id":DatesetId
+}
+
+  return fetch(`${BASE_URL}/api/automaton/datasets/delete/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `token ${token}`,
+    },
+    body: JSON.stringify(params),
+  }).then((res) => res);
+
+};
+
+
+
+/**
+ * This Api Updated  Dataset
+ * @param {*} datasetName
+ 
+ * @param {*} token
+ * @param {*} id
+ * @returns
+ */
+
+ export const UpadatDataset = (token,id,datasetName,comment) => {
+  let params = {}
+ 
+   if(datasetName != ""){
+    params["dataset_name"]=datasetName
+   }
+   if(comment != ""){
+    params["comment"]= comment
+   }
+   
+  
+  return axios
+    .patch(`${BASE_URL}/api/automaton/datasets/update/${id}/`,params , {
+      headers: {
+        Accept: "application/json",
+      
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((res) => {
+       console.log("Update dataset :",res);
+      return res;
+    });
+};
+
+
+
+
+
+
+
+
+
+
 // API FOR VIEW PROJECT DATASET LIST VIEW
 export const getViewProjectDatasets = (authToken, projectId, pageNumber) => {
     return axios.post( `${BASE_URL}/api/automaton/datasets/view/?page=${pageNumber}`,
@@ -1270,10 +1362,54 @@ export const getViewProjectDatasets = (authToken, projectId, pageNumber) => {
 }
 
 
+// API FOR VIEW FILES IN VIEW DATASET PAGE i.e; VIEWDATASET 
+
+/**
+ * 
+ * @param {*} authToken 
+ * @param {*} datasetId 
+ * @returns 
+ */
+
+export const ViewFiles = (authToken, datasetId) => {
+  console.log(authToken, datasetId, "authToken and datasetId on ViewFiles Api call")
+
+  return axios.post( `${BASE_URL}/api/automaton/file-uploads/view-files/`,
+    {
+    "dataset_id": datasetId
+  },
+  {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `token ${authToken}`
+    }
+  }
+)
+  .then(res => {
+    console.log("res view datasets file in API:", res)
+    return res
+  })
+}
 
 
-
-
-
-
-// Recharge Api
+// NOT WORKING  KA ORIGINAL
+// export const ViewFiles = (authToken, datasetId) => {
+//   console.log(authToken, datasetId, "authToken and datasetId on ViewFiles Api call")
+//   // return axios.get(`${BASE_URL}/api/automaton/file-uploads/view-files/`,
+//   return axios.get("https://api-automaton.progfeel.co.in/api/automaton/file-uploads/view-files/",
+//   {
+//     "dataset_id":146
+//   },
+//   {
+//     headers: {
+//       Authorization:"token 8dc73b64bb85197e90abba84517bc1e04e91a83a096e9e35b8fbcf928a5065a9",
+//       "Content-Type": "application/json"
+//     }
+//   })
+//   .then(res => {
+//     console.log("res view datasets file in API", res)
+//   })
+//   .catch(err => {
+//     console.log("err in ViewFiles API call", err)
+//   })
+// }

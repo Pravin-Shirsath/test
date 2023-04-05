@@ -11,7 +11,7 @@ import "./createDataset.css"
 
 // rct section loader
 import RctSectionLoader from "../../../Components/RctSectionLoader/RctSectionLoader";
-
+import UploadIcon from '@mui/icons-material/Upload';
 // import { Button } from "reactstrap";
 
 import PageTitleBar from 'Components/PageTitleBar/PageTitleBar'
@@ -71,7 +71,7 @@ const CreateDataset = (props) => {
   const [comment, setComment] = useState("");
   const [open,setOpen]=useState()
   const [instance,setInstance] =useState()
-
+  const [disabled,setDisabled]= useState(true)
   const handleDatasetName = (e) => {
     setDatasetName(e.target.value)
   }
@@ -90,14 +90,35 @@ const CreateDataset = (props) => {
           console.log(authToken, typeof authToken, "autthhh token")
           createDataset(authToken, projectId, datasetName)
           .then(res => {
+
+           
+
             console.log(res, "resss in handle save function")
             console.log(res?.data, "ress dataaa i n handle save function")
 
-            if(res.status == "200"){
-              // NotificationManager.success("dataset created !")
-              setDatasetName("")
-              setComment("");
+            if(res?.status == 200){
+
+                   if(typeof(res?.data?.message) == "string") {
+                    NotificationManager.error(res?.data?.message)
+                   }else if(res?.data?.message?.Dataset_created){
+                    localStorage.setItem("projId", res?.data?.message?.Dataset_created?.project_id)
+                    localStorage.setItem("datasetid", res?.data?.message?.Dataset_created?.id)
+                    setDisabled(false)
+                    NotificationManager.success("Dataset created !")
+                    setDatasetName("")
+                    setComment("");
+                   }else{
+                    NotificationManager.error("Dataset create process failed!")
+                   }
+                   
+                   
+               
+            }else{
+          
+              NotificationManager.error("Dataset create process failed!")
             }
+          }).catch((error)=>{
+            console.log("Dataset create error",error)
           })
         }
       }
@@ -233,10 +254,10 @@ console.log(open,"open")
                                 <Col sm={12} className="d-flex  align-items-center justify-content-center">
                                     <Label for="firstName" sm={3} className="d-flex primary-dark">
                                        
-                                        <span> Comment<span className="text-danger madatory-field">*</span></span>
+                                        <span> Comment</span>
                                     </Label>
                                     <Input
-                                        type="text"Dataset
+                                        type="text"
                                         // className="input-lg"
                                         style={{height:"100px"}}
                                         value={comment}
@@ -246,10 +267,10 @@ console.log(open,"open")
                                 </Col>
 
                             </FormGroup>
-                            <div className="d-flex align-items-center justify-content-center" style={{ marginTop: '30px', marginBottom: "30px" }}>
+                            <div className="d-flex align-items-center justify-content-end" style={{ marginTop: '30px', marginBottom: "30px" }}>
                                 <Button variant="contained" color="primary" style={{width:"100px", padding:"7px 5px"}} className="projectCardButton mx-2" onClick={handleSave}>Save</Button>
-                                <Button variant="contained" color="primary" style={{width:"100px", padding:"7px 5px"}}  className="mx-2 d-flex justify-content-center align-items-center" onClick={()=>UploadFile()}><AddIcon/>Upload</Button>
                                 <Button variant="contained" color="danger" style={{width:"100px", padding:"7px 5px"}}  className="mx-2 d-flex justify-content-center align-items-center" onClick={()=> history.push("/app/dashboard/project")}>Cancel</Button>
+                                <Button variant="contained" color="primary" style={{width:"100px", padding:"7px 5px"}} disabled={disabled}  className="mx-2 d-flex justify-content-center align-items-center" onClick={()=>UploadFile()}><UploadIcon/>Upload</Button>
                                 
                             </div>
                         </div>

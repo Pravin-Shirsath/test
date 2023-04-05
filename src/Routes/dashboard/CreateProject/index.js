@@ -44,7 +44,7 @@ const CreateProject = (props) => {
 
         const accessToken = JSON.parse(localStorage.getItem('token'))
      
-        if (projectName != "" && dataset != "" && projectDes!="") {
+        if (projectName != "" ) {
           
            
             if (accessToken !== null) {
@@ -60,14 +60,16 @@ const CreateProject = (props) => {
                             if(typeof(data) == "string"){
                                  NotificationManager.error(data)
 
-                            }else{
-
+                            }else if(data?.project_created){
+                                localStorage.setItem("projId", data?.project_created?.id)
                                 NotificationManager.success("Project created !")
+                            }else{
+                                NotificationManager.error("Project create process failed!")
                             }
                                                       
                         } else {
 
-                            NotificationManager.error("Project create failed!")
+                            NotificationManager.error("Project create process failed!")
                         }
                     })
                     .catch((err) => {
@@ -92,7 +94,7 @@ const CreateProject = (props) => {
                     })
             }
         } else {
-            NotificationManager.error("Project name, Dataset name , descrption is required !")
+            NotificationManager.error("Project name is required !")
         }
 
 
@@ -180,42 +182,40 @@ const CreateProject = (props) => {
                                 </Col>
 
                             </FormGroup>
+                         
                             <FormGroup row >
 
 
-                                <Col sm={12} className="d-flex  align-items-center justify-content-center">
+
+                            <Col sm={12} className="d-flex  align-items-center justify-content-center">
                                     <Label for="firstName" sm={3} className="d-flex primary-dark">
                                        
-                                        <span> Dataset Name<span className="text-danger">*</span></span>
+                                        <span> Comment</span>
                                     </Label>
                                     <Input
                                         type="text"
-                                        className="input-md"
-                                        value={dataset}
-                                        onChange={(e) => setDataset(e.target.value)}
-                                        sm={10}
-                                    />
-                                </Col>
-
-                            </FormGroup>
-                            <FormGroup row >
-                                <Col sm={12} className="d-flex  align-items-center justify-content-center">
-                                    <Label for="firstName" sm={3} className="d-flex primary-dark">
-                                       <span> Project description<span className="text-danger">*</span></span>
-                                    </Label>
-                                    <Input
-                                        type="text"
-                                        className="input-md"
+                                        // className="input-lg"
+                                        style={{height:"100px"}}
                                         value={projectDes}
-                                        onChange={(e) => setProjectDes(e.target.value)}
+                                        onChange= {(e)=> setProjectDes(e.target.value)}
                                         sm={10}
                                     />
                                 </Col>
 
+
+
+
+
+
+                             
+
                             </FormGroup>
-                            <div className="d-flex align-items-center justify-content-center" style={{ marginTop: '30px', marginBottom: "30px" }}>
-                                <Button variant="contained" color="primary" className="projectCardButton mx-2" onClick={NewProject}>Save</Button>
-                                <Button variant="contained" color="primary" className="projectCardButton mx-2 d-flex justify-content-center align-item-center" onClick={()=> history.push("/app/dashboard/createDataset")}><AddIcon />Dataset</Button>
+                            <div className="d-flex align-items-center justify-content-end" style={{ marginTop: '30px', marginBottom: "30px" }}>
+                                
+                                <Button variant="contained" color="primary" className=" mx-2" onClick={NewProject}>Save</Button>
+                                <Button variant="contained" color="danger"  className="mx-2 d-flex justify-content-center align-items-center" onClick={()=> history.push("/app/dashboard/project")}>Cancel</Button>
+                                <Button variant="contained" color="primary" className=" mx-2 d-flex justify-content-center align-item-center" onClick={()=> history.push("/app/dashboard/createDataset")}>Create Dataset</Button>
+
                             </div>
 
                             {/* <FormGroup row >
