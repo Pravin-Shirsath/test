@@ -34,6 +34,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import FolderIcon from '@mui/icons-material/Folder';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import ImageIcon from '@mui/icons-material/Image';
 import EditDataset from '../ReuseComponent/EditDataset';
 
 
@@ -194,7 +195,9 @@ const getDatasetFiles = () => {
                 >Search</Button>
             </div>
 
-            <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} onClick={()=> history.push("/app/dashboard/createDataset")}>New Task</Button>
+            <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} 
+            // onClick={()=> history.push("/app/dashboard/createDataset")}
+            >New Task</Button>
             </div>
 
             <div className='viewDatasetFilesContainer'>
@@ -203,9 +206,8 @@ const getDatasetFiles = () => {
                         return(
                                 <div className='imageContainer' key={ind} onClick={()=>handleFileSelect(file)}>
                                     {
-                                      file.selectedFile ? <CheckBoxIcon className="folderIcon" /> : <FolderIcon className="folderIcon"/>
+                                      file.selectedFile ? <CheckBoxIcon className="folderIcon" /> : (file.file_type == "png" ? <ImageIcon className="folderIcon" /> : <FolderIcon className="folderIcon" />)
                                     }
-                                    
                                     <div className="fileName">{file.file_name}</div>
                                 </div>
                         )
