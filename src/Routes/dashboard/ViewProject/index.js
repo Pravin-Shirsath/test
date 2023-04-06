@@ -6,7 +6,6 @@ import { Helmet } from 'react-helmet'
 import Button from '@material-ui/core/Button'
 
 import {
-
   Modal,
   ModalHeader,
   ModalBody,
@@ -108,7 +107,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
         console.log("error in viewdataset:",error)
         const status = error?.response?.status
         if(status == 401){
-          NotificationManager.error("Something went wong !");
+          NotificationManager.error("Something went wrong !");
           localStorage.clear();
           history.push("/login")
         } else if(status == 500){
@@ -189,7 +188,9 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     }
   }
 
-  const handleView = () => {
+  const handleView = (dataset) => {
+    console.log(dataset?.id, "selected dataset ID")
+    localStorage.setItem("datasetId", dataset?.id);
     history.push("/app/dashboard/viewDataset")
   }
 
@@ -256,7 +257,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
                       <td>{dataset?.date_created ? dataset?.date_created : '-'}</td>
                       <td className="list-action d-flex ">
                     
-                      <VisibilityIcon onClick={handleView} />
+                      <VisibilityIcon onClick={()=>handleView(dataset)} />
                       <EditIcon className="mx-2" onClick={()=> EditModal(dataset)}/> 
                      <DeleteIcon onClick={()=>{DeletModalOpen(dataset)}}/>
                    

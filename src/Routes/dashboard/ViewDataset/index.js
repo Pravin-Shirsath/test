@@ -109,8 +109,8 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 
 const getDatasetFiles = () => {
     const authToken = JSON.parse(localStorage.getItem("token"));
-    const datasetId = localStorage?.getItem("dId") || 146
-    // const datasetId = 146;
+    // const datasetId = localStorage?.getItem("datasetId") || 146;
+    const datasetId = 146
 
     if(authToken !== null){
         ViewFiles(authToken, datasetId)
@@ -134,7 +134,7 @@ const getDatasetFiles = () => {
             console.log("error in viewdataset:",error)
             const status = error?.response?.status
             if(status == 401){
-              NotificationManager.error(error?.message);
+              NotificationManager.error("Something went wrong !");
               localStorage.clear();
               history.push("/login")
             } else if(status == 500){
@@ -175,7 +175,37 @@ const getDatasetFiles = () => {
 
   const handleFileSelect = (file) => {
     console.log(file, "selecteddd filee");
+
+    const ifAlreadyExists = selectedFiles.find(obj=> {
+      return obj.file_name == file.file_name
+    });
+
+    if(!ifAlreadyExists){
+      const updatedFile = {...file, selectedFile: true}
+      const copySelectedFiles = [...selectedFiles];
+      copySelectedFiles.push(updatedFile);
+      setSelectedFiles(copySelectedFiles);
+
+      const copyFilteredDatasetFiles = [...filteredDatasetFiles]
+      const indexOfSelectedFile = copyFilteredDatasetFiles.indexOf(file);
+      copyFilteredDatasetFiles[indexOfSelectedFile] = updatedFile
+      setFilteredDatasetFiles(copyFilteredDatasetFiles)
+    } else {
+      const updatedFile = {...file, selectedFile: false}
+      const copySelectedFiles = [...selectedFiles];
+      const indexOfSelectedFileInSelected = selectedFiles.findIndex(item=> {
+        return item.id == file.id
+      });
+      copySelectedFiles.splice(indexOfSelectedFileInSelected, 1)
+      setSelectedFiles(copySelectedFiles)
+
+      const copyFilteredDatasetFiles = [...filteredDatasetFiles];
+      const indexOfSelectedFile = copyFilteredDatasetFiles.indexOf(file);
+      copyFilteredDatasetFiles[indexOfSelectedFile] = updatedFile;
+      setFilteredDatasetFiles(copyFilteredDatasetFiles)
+    }
   }
+   
   
 
   console.log(filteredDatasetFiles, "filteredd datasets")
