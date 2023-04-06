@@ -103,12 +103,23 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
         } else {
           console.log('Response from View project Datasets lists api:', res)
         }
-      }).catch((error)=>{
-        console.log("error=",error)
       })
+      .catch((error)=>{
+        console.log("error in viewdataset:",error)
+        const status = error?.response?.status
+        if(status == 401){
+          NotificationManager.error("Something went wong !");
+          localStorage.clear();
+          history.push("/login")
+        } else if(status == 500){
+          NotificationManager.error("Temporary connectivity issues.");
+        }
+      })
+    } else {
+      localStorage.clear();
+      history.push("/login")
     }
   }
-
 
   const EditModal = (item) => {
     setSelectedItem(item)

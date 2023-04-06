@@ -118,23 +118,33 @@ const getDatasetFiles = () => {
             console.log(res, "resss in viewDataset file")
             if(res?.status == 200){
                 console.log(res?.data?.results, "dataaa of filesss in view datasetfile")
-                
                 const results = res?.data?.results;
                 const updatedResults = results.map(result=> {
                     return {...result, selectedFile: false}
                 })
-                console.log(updatedResults, "updaattedd resultsss")
 
                 setDatasetFiles(updatedResults)
                 setFilteredDatasetFiles(updatedResults)
                 setTotalPageCount(parseInt(res?.data?.count));
             }else {
-                console.log('Response from View project Datasets lists api:', res)
+                console.log('Response from View project Datasets lists api in view project:', res)
             }
-        }).catch((error)=>{
-            console.log("error=",error)
         })
-    } 
+        .catch((error)=>{
+            console.log("error in viewdataset:",error)
+            const status = error?.response?.status
+            if(status == 401){
+              NotificationManager.error(error?.message);
+              localStorage.clear();
+              history.push("/login")
+            } else if(status == 500){
+              NotificationManager.error("Temporary connectivity issues.");
+            }
+        })
+    } else {
+      localStorage.clear();
+      history.push("/login")
+    }
 }
 
   const handlePageChange = (pageNumber) => {
@@ -166,6 +176,7 @@ const getDatasetFiles = () => {
   const handleFileSelect = (file) => {
     console.log(file, "selecteddd filee");
   }
+  
 
   console.log(filteredDatasetFiles, "filteredd datasets")
   console.log(datasetFiles, "daaaaset Filesss")
