@@ -1,0 +1,62 @@
+.viewDatasetFilesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    transition: all 0.3s;
+    padding: 30px 10px;
+}
+
+.viewDatasetFilesContainer .imageContainer {
+    width: 23%;
+    /* height: 200px; */
+    padding: 3px;
+    margin: 5px;
+    transition: all 0.3s;
+    /* background-color: pink; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.folderIcon {
+    /* background-color: red; */
+    width: 90% !important;
+    height: 90% !important;
+    transition: all 0.3s; 
+}
+
+.viewDatasetFilesContainer .fileName {
+    /* background-color: aqua; */
+    width: 80%;
+    height: 20px;
+    text-align: center;
+    margin-top: 10px;
+
+    overflow: hidden;
+    text-overflow: clip; 
+}
+
+/************** Media Queries **********/
+/* Media Query for Mobile Devices */
+@media (min-width: 320px) and (max-width: 480px) {
+    .viewDatasetFilesContainer .imageContainer {
+        width: 45%;
+        padding: 2px;
+        margin: 5px;
+        transition: all 0.3s;
+    }
+}
+  
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+    .viewDatasetFilesContainer .imageContainer {
+        width: 45%;
+        padding: 2px;
+        margin: 5px;
+        transition: all 0.3s;
+    }
+}

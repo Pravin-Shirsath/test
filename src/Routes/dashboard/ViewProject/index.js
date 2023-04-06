@@ -179,7 +179,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   }
 
   const handleView = () => {
-    history.push("/app/dashboard/createTask")
+    history.push("/app/dashboard/viewDataset")
   }
 
   console.log(filteredDatasets, "filteredd datasets")
@@ -245,7 +245,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
                       <td>{dataset?.date_created ? dataset?.date_created : '-'}</td>
                       <td className="list-action d-flex ">
                     
-                      <VisibilityIcon />
+                      <VisibilityIcon onClick={handleView} />
                       <EditIcon className="mx-2" onClick={()=> EditModal(dataset)}/> 
                      <DeleteIcon onClick={()=>{DeletModalOpen(dataset)}}/>
                    
@@ -253,7 +253,6 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
                     </tr>
                   )
                 })
-
               }
 
             </tbody>

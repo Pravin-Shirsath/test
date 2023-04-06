@@ -1402,10 +1402,54 @@ export const getViewProjectDatasets = (authToken, projectId, pageNumber) => {
 }
 
 
+// API FOR VIEW FILES IN VIEW DATASET PAGE i.e; VIEWDATASET 
+
+/**
+ * 
+ * @param {*} authToken 
+ * @param {*} datasetId 
+ * @returns 
+ */
+
+export const ViewFiles = (authToken, datasetId) => {
+  console.log(authToken, datasetId, "authToken and datasetId on ViewFiles Api call")
+
+  return axios.post( `${BASE_URL}/api/automaton/file-uploads/view-files/`,
+    {
+    "dataset_id": datasetId
+  },
+  {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `token ${authToken}`
+    }
+  }
+)
+  .then(res => {
+    console.log("res view datasets file in API:", res)
+    return res
+  })
+}
 
 
-
-
-
-
-// Recharge Api
+// NOT WORKING  KA ORIGINAL
+// export const ViewFiles = (authToken, datasetId) => {
+//   console.log(authToken, datasetId, "authToken and datasetId on ViewFiles Api call")
+//   // return axios.get(`${BASE_URL}/api/automaton/file-uploads/view-files/`,
+//   return axios.get("https://api-automaton.progfeel.co.in/api/automaton/file-uploads/view-files/",
+//   {
+//     "dataset_id":146
+//   },
+//   {
+//     headers: {
+//       Authorization:"token 8dc73b64bb85197e90abba84517bc1e04e91a83a096e9e35b8fbcf928a5065a9",
+//       "Content-Type": "application/json"
+//     }
+//   })
+//   .then(res => {
+//     console.log("res view datasets file in API", res)
+//   })
+//   .catch(err => {
+//     console.log("err in ViewFiles API call", err)
+//   })
+// }
