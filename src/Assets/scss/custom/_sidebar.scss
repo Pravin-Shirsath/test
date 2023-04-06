@@ -35,7 +35,7 @@
       }
    }
    &.background-none .rct-sidebar-content:before {
-      opacity: 1 !important;
+      // opacity: 1 !important;
    }
    .site-logo {
       padding: 12px 1.5rem; //15px 30px;
@@ -313,3 +313,18 @@
 		z-index: 1209 !important;
 	}
 }
+
+// test added by vish for sidebar active
+.item-active {
+   background:rgba(255,255,255, 0.3) !important ;
+   width: 100% !important;
+   height: 100% !important;
+   opacity: 0.7 !important;
+   transition: 0.4s;
+}
+ li.MuiListItem-button a{
+   width: 100% !important;
+   // height: 100%;
+   // background-color: #e53935 !important;
+ }
+
