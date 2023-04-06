@@ -22,14 +22,14 @@ import { useHistory } from 'react-router'
 import IntlMessages from 'Util/IntlMessages'
 import React, { useEffect, useState } from 'react'
 import {
-    Progress, Button,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    FormText,
-    Col,
-    FormFeedback, CustomInput
+  Progress, Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Col,
+  FormFeedback, CustomInput
 } from 'reactstrap';
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -41,14 +41,14 @@ import AddIcon from '@mui/icons-material/Add';
 
 
 
-import Uppy from  "@uppy/core";
+import Uppy from "@uppy/core";
 import '@uppy/core/dist/style.min.css';
 import '@uppy/dashboard/dist/style.min.css';
 import '@uppy/webcam/dist/style.min.css';
-import { DragDrop, StatusBar ,Dashboard} from '@uppy/react';
+import { DragDrop, StatusBar, Dashboard } from '@uppy/react';
 import Tus from '@uppy/tus'
 import XHR from '@uppy/xhr-upload';
-const {	DashboardModal} = require("@uppy/react");
+const { DashboardModal } = require("@uppy/react");
 // Don’t forget to keep the Uppy instance outside of your component.
 // const uppy = new Uppy()
 // // .use(RemoteSources, { companionUrl: 'https://companion.uppy.io' })
@@ -69,9 +69,9 @@ const CreateDataset = (props) => {
   const [loading, setLoading] = useState(false);
   const [datasetName, setDatasetName] = useState("");
   const [comment, setComment] = useState("");
-  const [open,setOpen]=useState()
-  const [instance,setInstance] =useState()
-  const [disabled,setDisabled]= useState(true)
+  const [open, setOpen] = useState()
+  const [instance, setInstance] = useState()
+  const [disabled, setDisabled] = useState(true)
   const handleDatasetName = (e) => {
     setDatasetName(e.target.value)
   }
@@ -84,42 +84,42 @@ const CreateDataset = (props) => {
     const authToken = JSON.parse(localStorage.getItem("token"));
     const projectId = localStorage.getItem("projId");
 
-    if(authToken !== null){
-      if(projectId){
-        if(datasetName){
+    if (authToken !== null) {
+      if (projectId) {
+        if (datasetName) {
           console.log(authToken, typeof authToken, "autthhh token")
           createDataset(authToken, projectId, datasetName)
-          .then(res => {
+            .then(res => {
 
-           
 
-            console.log(res, "resss in handle save function")
-            console.log(res?.data, "ress dataaa i n handle save function")
 
-            if(res?.status == 200){
+              console.log(res, "resss in handle save function")
+              console.log(res?.data, "ress dataaa i n handle save function")
 
-                   if(typeof(res?.data?.message) == "string") {
-                    NotificationManager.error(res?.data?.message)
-                   }else if(res?.data?.message?.Dataset_created){
-                    localStorage.setItem("projId", res?.data?.message?.Dataset_created?.project_id)
-                    localStorage.setItem("datasetid", res?.data?.message?.Dataset_created?.id)
-                    setDisabled(false)
-                    NotificationManager.success("Dataset created !")
-                    setDatasetName("")
-                    setComment("");
-                   }else{
-                    NotificationManager.error("Dataset create process failed!")
-                   }
-                   
-                   
-               
-            }else{
-          
-              NotificationManager.error("Dataset create process failed!")
-            }
-          }).catch((error)=>{
-            console.log("Dataset create error",error)
-          })
+              if (res?.status == 200) {
+
+                if (typeof (res?.data?.message) == "string") {
+                  NotificationManager.error(res?.data?.message)
+                } else if (res?.data?.message?.Dataset_created) {
+                  localStorage.setItem("projId", res?.data?.message?.Dataset_created?.project_id)
+                  localStorage.setItem("datasetid", res?.data?.message?.Dataset_created?.id)
+                  setDisabled(false)
+                  NotificationManager.success("Dataset created !")
+                  setDatasetName("")
+                  setComment("");
+                } else {
+                  NotificationManager.error("Dataset create process failed!")
+                }
+
+
+
+              } else {
+
+                NotificationManager.error("Dataset create process failed!")
+              }
+            }).catch((error) => {
+              console.log("Dataset create error", error)
+            })
         }
       }
     }
@@ -129,69 +129,276 @@ const CreateDataset = (props) => {
   console.log(comment, "Commmenttt")
 
 
+  // S3 BUCCEKET  
 
 
 
-  const UploadFile= async()=>{
+
+
+  // const UploadFile = async () => {
+  //   const accessToken = JSON.parse(localStorage.getItem('token'))
+  //   const projectId = JSON.parse(localStorage.getItem('projId'))
+   
+  //   if (open === undefined) {
+
+  //   const uppy3 =  new Uppy({
+  //       // id : res,e
+  //       id: projectId,
+  //       autoProceed: false,
+  //       debug: true,
+  //       allowMultipleUploads: true,
+  //       methods: ["OPTIONS", "GET", "POST", "PATCH", "PUT"],
+  //       exposedHeaders: ["Access-Control-Allow-Headers"],
+  //       allowedHeaders: [
+  //         "uppy-auth-token",
+  //         "Content-Type",
+  //         "Authorization",
+  //         "Uppy-Versions",
+  //         "Accept",
+  //         "project_id",
+  //         "folder_id",
+  //       ],
+  //     }).use(AwsS3Multipart, {
+       
+  //       companionHeaders: {
+  //         "uppy-auth-token":
+  //           localStorage.getItem('token') +
+  //           "@@1@@" +
+  //           localStorage.getItem('datasetid'),  
+  //         // this.state.proj_id,
+  //       },
+  //       companionUrl:
+          
+  //         "https://apiuat.fluidrobotics.com/api/v0/project/upload-project-video-uppy",
+      
+  //       }).on('file-added', (file) => {
+  //                 console.log('Added file', file);
+      
+  //                 // uppy3.setFileMeta("images",file );
+  //                 // uppy3.setFileState(file.id, { fieldName: 'images' });
+      
+  //               }).on('complete', (result) => {
+  //                 console.log('Upload result:', result)
+  //               })
+  //               .on("upload-success", (file, response) => {
+  //                 console.log("upload-success");
+      
+  //               }).on('upload-error', (file, error, response) => {
+  //                 console.log("error===", file, error, response)
+  //                 if (error.isNetworkError) {
+  //                   // Let your users know that file upload could have failed
+  //                   // due to firewall or ISP issues
+  //                   console.log("error===", error)
+  //                 }
+  //               })
+               
+  //               setInstance(uppy3);
+  //               setOpen(true)
+  //             } else {
+  //               setOpen(true)
+  //             }
+  // }
+
+  const UploadFile = async () => {
     const accessToken = JSON.parse(localStorage.getItem('token'))
 
-    if (open === undefined) {
-       const uppy3 = await new Uppy({
-        id: "uppy3",
-        autoProceed: false,
-        debug: true,
-        restrictions:{
-          allowedFileTypes:['image/*']
-        },
-        methods: ["OPTIONS", "GET", "POST", "PATCH", "PUT"],
-        exposedHeaders: ["Access-Control-Allow-Headers"],
-       
-      })
-      .use(XHR, { endpoint: `${BASE_URL}/api/automaton/file-uploads/upload/92/`,
-                  headers:{
-                    Authorization:accessToken,
-                    "Content-Type": "multipart/form-data"
+    try {
 
-                  },
-                
-                  formData:true,
-                  fieldName:'images[]'
-                
-                })
-      // .on('complete', (result) => {
-      //   console.log('Upload result:', result)
-      // });
-        .on("upload-success", (file, response) => {
-          console.log("upload-success");
-          // alert(JSON.stringify(file,response))
-          //   this.props.projectSpecificDetails(
-          // 	this.props.match.params.id,
-          // 	(res, err) => {
-          // 	  console.log("res");
-          // 	  this.setState({
-          // 		open: !this.state.open,
-          // 	  });
-          // 	}
-          //   );
+      if (open === undefined) {
+
+
+        // const uppy3 = new Uppy({
+        //   id: 'uppy',
+        //   autoProceed: false,
+        // });
+
+        //   uppy3.use(XHR, {
+        //   endpoint: '${BASE_URL}/api/automaton/file-uploads/upload/${143}/',
+        //   method: 'POST',
+        //   formData: true,
+        //   fieldName: 'file',
+        //   headers: {
+        //     'X-My-Custom-Header': 'header-value',
+        //   },
+        // });
+
+        // // Listen for events
+        // uppy3.on('file-added', (file) => {
+        //   console.log('Added file', file);
+        // });
+
+        // uppy3.on('upload', (data) => {
+        //   console.log('Started uploading');
+        // });
+
+        // uppy3.on('upload-success', (file, response) => {
+        //   console.log('Upload successful');
+        // });
+
+        // uppy3.on('upload-error', (file, error, response) => {
+        //   console.log('Upload failed', error);
+        // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        const uppy3 = await new Uppy({
+          id: "uppy3",
+          autoProceed: false,
+          debug: true,
+          restrictions: {
+            allowedFileTypes: ['image/*'],
+
+          },
+
+          methods: ["OPTIONS", "GET", "POST", "PATCH", "PUT"],
+          exposedHeaders: ["Access-Control-Allow-Headers"],
+
+
+        })
+          .use(XHR, {
+            endpoint: `https://httpbin.org/post`,
+            method: 'POST',
+            formData: true,
+            fieldName: 'file',
+
+            headers: {
+              Authorization: accessToken,
+              "Content-Type": "multipart/form-data"
+
+            },
+            formData: (file, formData) => {
+               console.log(file,"sfsdafsdfasdfasdfsd")
+                return {
+                  file:file
+                }
+              }
+
+          })
+          .on('before-send', (request) => {
+            console.log('Payload:', request);
+
+          }).on('file-added', (file) => {
+            console.log('Added file', file);
+
+            // uppy3.setFileMeta("images",file );
+            // uppy3.setFileState(file.id, { fieldName: 'images' });
+
+          }).on('complete', (result) => {
+            console.log('Upload result:', result)
+          })
+          .on("upload-success", (file, response) => {
+            console.log("upload-success");
+
+          }).on('upload-error', (file, error, response) => {
+            console.log("error===", file, error, response)
+            if (error.isNetworkError) {
+              // Let your users know that file upload could have failed
+              // due to firewall or ISP issues
+              console.log("error===", error)
+            }
+          })
+
+
+
+
+
+        // formData: (file, formData) => {
+        //   formData.append('file', file.data);
+        //   return formData;
+        // }
+
+
+        // uppy3.on('upload', (data) => {
+
+        //   const allFiles = uppy3.getFiles()
+        //   console.log(allFiles)
+
+
+
+
+          // const fileIDs = Object.keys(files)
+
+          // const formData = new FormData()
+
+          // const promises =  allFiles.map((fileID)=>{
+
+
+          //   formData.append('file',fileID)
+
+
+
+        //   const promises = allFiles.map(fileID => {
+        //     const file = allFiles[fileID.id]
+
+        //     console.log(file,">>>>file")
+
+        //     const formData = new FormData()
+        //     formData.append('file', file)
+        //     return fetch(`${BASE_URL}/api/automaton/file-uploads/upload/${143}/`, {
+        //       method: 'POST',
+        //       headers: {
+        //             Authorization: accessToken,
+        //             "Content-Type": "multipart/form-data",
+
+        //           },
+        //       body: formData
+        //     })
+        //       .then((response) => {
+
+        //         if (response.ok) {
+        //           return response.json()
+        //         } else {
+        //           console.log("failed to upload")
+
+        //           // throw new Error('Failed to upload file')
+        //         }
+        //       })
+        //   })
+        //   Promise.all(promises)
+        //     .then((results) => {
+        //       console.log('Upload complete:', results)
+        //     })
+        //     .catch((error) => {
+        //       console.error('Upload failed:', error)
+        //     })
+        // })
+
+
+        uppy3.on('before-send', (request) => {
+
+          console.log('Payload:', request.data);
         });
-
-//  document.getElementById("upload-button").addEventListener('click',()=>{
-//   uppy3.getFile().forEach((file)=>{
-//     const formData = new FormData();
-//     formData.append(file.id,formData)
-//     uppy3.UploadFile(file.id,formData)
-//   })
-//  })
-       
-        
-
 
         setInstance(uppy3);
         setOpen(true)
-    }else{
-      setOpen(true)
+      } else {
+        setOpen(true)
+      }
+    } catch (error) {
+      console.log("catch ", error)
     }
-   
+
+
+
+
   }
 
 
@@ -204,7 +411,7 @@ const CreateDataset = (props) => {
 
 
 
-console.log(open,"open")
+  console.log(open, "open")
 
 
   return (
@@ -218,65 +425,65 @@ console.log(open,"open")
         match={props.match}
       />
       {
-        instance != undefined && 
+        instance != undefined &&
         <DashboardModal
-										uppy={instance}
-										open={open}
-										target={document.body}
-										onRequestClose={() => setOpen(false)}
-									/>
+          uppy={instance}
+          open={open}
+          target={document.body}
+          onRequestClose={() => setOpen(false)}
+        />
 
       }
       <RctCollapsibleCard fullBlock>
-      <div style={{padding:"80px", alignItems: "center", justifyContent: 'center', display: "flex", }}>
-                <div className="user-profile-widget box-shadow-box" style={{ width: "60%", backgroundColor: "white" }}>
-                    <div className="p-20">
-                        <div style={{ marginTop: "30px" }}>
-                            <FormGroup row >
-                                <Col sm={12} className="d-flex  align-items-center justify-content-center">
-                                    <Label for="firstName" sm={3} className="d-flex ">
-                                      
-                                        <span>Dataset Name<span className="text-danger madatory-field">*</span></span>
-                                    </Label>
-                                    <Input
-                                        type="text"
-                                        className="input-md"
-                                        sm={10}
-                                        onChange={handleDatasetName}
-                                        value={datasetName}
-                                    />
-                                </Col>
+        <div style={{ padding: "80px", alignItems: "center", justifyContent: 'center', display: "flex", }}>
+          <div className="user-profile-widget box-shadow-box" style={{ width: "60%", backgroundColor: "white" }}>
+            <div className="p-20">
+              <div style={{ marginTop: "30px" }}>
+                <FormGroup row >
+                  <Col sm={12} className="d-flex  align-items-center justify-content-center">
+                    <Label for="firstName" sm={3} className="d-flex ">
 
-                            </FormGroup>
-                            <FormGroup row >
+                      <span>Dataset Name<span className="text-danger madatory-field">*</span></span>
+                    </Label>
+                    <Input
+                      type="text"
+                      className="input-md"
+                      sm={10}
+                      onChange={handleDatasetName}
+                      value={datasetName}
+                    />
+                  </Col>
+
+                </FormGroup>
+                <FormGroup row >
 
 
-                                <Col sm={12} className="d-flex  align-items-center justify-content-center">
-                                    <Label for="firstName" sm={3} className="d-flex primary-dark">
-                                       
-                                        <span> Comment</span>
-                                    </Label>
-                                    <Input
-                                        type="text"
-                                        // className="input-lg"
-                                        style={{height:"100px"}}
-                                        value={comment}
-                                        onChange= {handleComment}
-                                        sm={10}
-                                    />
-                                </Col>
+                  <Col sm={12} className="d-flex  align-items-center justify-content-center">
+                    <Label for="firstName" sm={3} className="d-flex primary-dark">
 
-                            </FormGroup>
-                            <div className="d-flex align-items-center justify-content-end" style={{ marginTop: '30px', marginBottom: "30px" }}>
-                                <Button variant="contained" color="primary" style={{width:"100px", padding:"7px 5px"}} className="projectCardButton mx-2" onClick={handleSave}>Save</Button>
-                                <Button variant="contained" color="danger" style={{width:"100px", padding:"7px 5px"}}  className="mx-2 d-flex justify-content-center align-items-center" onClick={()=> history.push("/app/dashboard/project")}>Cancel</Button>
-                                <Button variant="contained" color="primary" style={{width:"100px", padding:"7px 5px"}} disabled={disabled}  className="mx-2 d-flex justify-content-center align-items-center" onClick={()=>UploadFile()}><UploadIcon/>Upload</Button>
-                                
-                            </div>
-                        </div>
-                    </div>
+                      <span> Comment</span>
+                    </Label>
+                    <Input
+                      type="text"
+                      // className="input-lg"
+                      style={{ height: "100px" }}
+                      value={comment}
+                      onChange={handleComment}
+                      sm={10}
+                    />
+                  </Col>
+
+                </FormGroup>
+                <div className="d-flex align-items-center justify-content-end" style={{ marginTop: '30px', marginBottom: "30px" }}>
+                  <Button variant="contained" color="primary" style={{ width: "100px", padding: "7px 5px" }} className="projectCardButton mx-2" onClick={handleSave}>Save</Button>
+                  <Button variant="contained" color="danger" style={{ width: "100px", padding: "7px 5px" }} className="mx-2 d-flex justify-content-center align-items-center" onClick={() => history.push("/app/dashboard/project")}>Cancel</Button>
+                  <Button variant="contained" color="primary" style={{ width: "100px", padding: "7px 5px" }} disabled={disabled} className="mx-2 d-flex justify-content-center align-items-center" onClick={() => UploadFile()}><UploadIcon />Upload</Button>
+
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
 
         {loading && <RctSectionLoader />}
       </RctCollapsibleCard>

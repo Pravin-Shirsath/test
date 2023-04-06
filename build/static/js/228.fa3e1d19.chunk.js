@@ -1,2 +1,0 @@
-(this.webpackJsonpreactify=this.webpackJsonpreactify||[]).push([[228],{2484:function(t,e,a){"use strict";a.r(e),a.d(e,"default",(function(){return r}));a(1);var c=a(41),n=a(68),s=a(16),i=a(0);function r(t){return Object(i.jsxs)("div",{className:"blank-wrapper",children:[Object(i.jsxs)(c.a,{children:[Object(i.jsx)("title",{children:"Blank Page"}),Object(i.jsx)("meta",{name:"description",content:"Automaton Blank Page"})]}),Object(i.jsx)(n.a,{title:Object(i.jsx)(s.a,{id:"sidebar.blank"}),match:t.match})]})}}}]);
-//# sourceMappingURL=228.fa3e1d19.chunk.js.map

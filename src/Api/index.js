@@ -655,6 +655,46 @@ export const CreateNewProject = (
 
 
 
+/**
+ *
+ * @param {*} token
+ * @param {*} coupan
+ * 
+ * @returns
+ */
+ export const CuponValidCheck = (
+  token,
+  coupan
+) => {
+  return axios.post(`${BASE_URL}/api/automaton/coupons/valdiate-coupon/ `,
+  {
+    "coupon_code":coupan
+  },
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.log("coupan validity :", res);
+      return res;
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**    Customer SECTION END */
