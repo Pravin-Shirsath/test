@@ -28,7 +28,8 @@ import {
   Col,
   FormFeedback, CustomInput
 } from 'reactstrap';
-import { GetRechargedPlan } from "Api";
+import { CuponValidCheck, GetRechargedPlan } from "Api";
+import { NotificationManager } from 'react-notifications'
 
 export default function Recharge(props) {
   const history = useHistory();
@@ -41,9 +42,11 @@ export default function Recharge(props) {
  
   const [additionalspace,setAdditionalspace]=useState(0)
   const [paybleAmount,setPaybleAmount]=useState(0)
+  
+  // amount total is calculation space * per gb rate
   const [amountTotal,setAmountTotal]=useState(0)
-
-
+  const [couponText,setCouponText]=useState("")
+ const [discount,setDiscount]=useState(0)
 
   useEffect(() => {
     const isLoggedInBool = localStorage.getItem("isLoggedIn")
@@ -59,8 +62,6 @@ export default function Recharge(props) {
       GetRechargedPlan(accessToken, 1)
         .then((res) => {
           if (res?.status === 200) {
-
-
             if(res?.data?.results){
               if(res?.data?.results != undefined){
                 if(res?.data?.results.length == 1){
@@ -79,10 +80,7 @@ export default function Recharge(props) {
         .catch((err) => {
           // console.log("status of invalid token", err?.response?.data, err?.response?.status)
           if (err?.response?.status == 401) {
-            // conditional rendring
-            // localStorage.clear();
-            // history.push("/login");
-            // window.location.reload();
+           
           } else {
             // console.log('Response from customerlist:', err)
           }
@@ -94,18 +92,91 @@ export default function Recharge(props) {
  
   
   const AddspceEvent=(e)=>{
-    console.log(e ,typeof(e))
-    if(e != "NaN"){
-
-      setAdditionalspace(parseInt(e))
+    console.log(e ,typeof(e),isNaN(e))
+   
+// const regex = /^[-]?([1-9][0-9]*(?:[\.][0-9]*)?|0*\.0*[1-9][0-9]*)(?:[eE][+-][0-9]+)?$/
+    if (!isNaN(e) || e === '') {
+            
+        let Value = parseFloat(e);
+         if (Value < 0) {
+          setAmountTotal(0)
+          setAdditionalspace(0)
+          NotificationManager.error("Value cannot be negative. Please enter a valid Value.");
+          console.log("");
+        } else {
+          setAdditionalspace(e)
+          
+        }
+         
+        
       if(selectedPlan){
-    
-        setAmountTotal(parseInt(e)* parseInt(selectedPlan?.per_gb_rate) )
+      let Total = ( parseInt(e)* parseInt(selectedPlan?.per_gb_rate))
+      if(!isNaN(Total) ){
+        setAmountTotal(Total)
+      }else{
+        setAmountTotal(0)
       }
-    }else{
-      alert("f")
     }
   }
+    
+  }
+
+
+  
+
+  const CopanApplay = () => {
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+    if(couponText != ""){
+    if (accessToken !== null) {
+
+      
+      CuponValidCheck(accessToken, couponText)
+        .then((res) => {
+          console.log("coupan=",res)
+          if (res?.status === 200) {
+
+          } else {
+            console.log('Response from fromRecharged:', res)
+          }
+        })
+        .catch((err) => {
+          console.log('Response from customerlist:', err)
+          // console.log("status of invalid token", err?.response?.data, err?.response?.status)
+         
+          if (err?.response?.status === 403) {
+            if (err?.response?.data) {
+              let data = err?.response?.data
+              for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                  NotificationManager.error(data[key]);
+                  // console.log(key + " -> " + data[key]);
+                }
+              }
+              // err?.response?.data.forEach(item=>{
+
+              //   NotificationManager.error(item);
+              // })
+            }
+          }
+         
+         
+          if (err?.response?.status == 401) {
+            // conditional rendring
+            // localStorage.clear();
+            // history.push("/login");
+            // window.location.reload();
+          } else {
+            // console.log('Response from customerlist:', err)
+          }
+        })
+    }
+  }else{
+    NotificationManager.error("Coupon code is empty");
+
+  }
+  }
+
+
 
   return (
     <div className="user-management">
@@ -153,19 +224,6 @@ export default function Recharge(props) {
           </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
       <RctCollapsibleCard fullBlock>
         <div className="table-responsive dark-primary-text">
           <div className='rechargeBoxContainer'>
@@ -175,24 +233,24 @@ export default function Recharge(props) {
 
             <div className="firstRow recharge-modal-row light-primary">
               <div className="left">
-                <p className="wrapper"><p className="text">Additional Space</p> <p className="inputMaterial"><input type="number" onChange={(e)=>AddspceEvent(e.target.value)}/> GB <span className="diff">@{selectedPlan?.per_gb_rate} ₹ / GB</span></p></p>
+                <p className="wrapper"><p className="text">Additional Space</p> <p className="inputMaterial"><input type="number" value={additionalspace}   onChange={(e)=>AddspceEvent(e.target.value)}/> GB <span className="diff">@{selectedPlan?.per_gb_rate} ₹ / GB</span></p></p>
               </div>
 
               <div className="mid"><p>=</p></div> 
 
-              <div className="right"><p>{amountTotal} = 00</p></div>
+              <div className="right"><p>{amountTotal} ₹</p></div>
             </div>
 
             <div className="secondRow recharge-modal-row light-primary">
               <div className="left">
-                <p><span className="inputContainer"><input /></span> <Button color="primary" style={{display:"flex", justifyContent:"center", alignItems:"center"}}>Apply Coupon</Button></p>
+                <p><span className="inputContainer"><input   value={couponText}  onChange={(e)=> setCouponText(e.target.value)}/></span> <Button  onClick={CopanApplay} color="primary" style={{display:"flex", justifyContent:"center", alignItems:"center"}}>Apply Coupon</Button></p>
               </div>
 
               <div className="mid">
                 <p>=</p>
               </div>
 
-              <div className="right"><p><span className="operator">-</span>30 = 00</p></div>
+              <div className="right"><p><span className="operator">-</span>{discount} ₹</p></div>
             </div>
 
             <div className="thirdRow recharge-modal-row light-primary">
@@ -201,13 +259,13 @@ export default function Recharge(props) {
               <div className="mid"></div>
 
               <div className="right">
-                <p>220 = 00</p>
+                <p> {paybleAmount} ₹</p>
               </div>
             </div>
 
             <div className="fourthRow recharge-modal-row light-primary">
               <p>
-                Net Payable <span>{"220"}</span>
+                Net Payable <span>{paybleAmount} ₹</span>
               </p>
             </div>
 
