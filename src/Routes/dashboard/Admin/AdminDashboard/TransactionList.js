@@ -20,6 +20,7 @@ import { AdminCoupanList, AdminCoupanSearch,SearchLowDataAvilableUser ,LowDataAv
 import { getFormatDate2 } from 'Constants/DateFormator';
 import { copyToClipboard } from 'Constants/CopyToClipboard';
 import DeleteConfirmationDialog from 'Components/DeleteConfirmationDialog/DeleteConfirmationDialog';
+import { useHistory } from 'react-router';
 
 function TabContainer({ children, dir }) {
    return (
@@ -34,13 +35,10 @@ const LowDataUser =['No', 'user', 'email', 'phone', 'GST No', 'Data Available'];
 const CoupansHeding = ['Sr No', 'Coupon Id','Created Date', 'Discount', 'is Utilized', 'Utilized by', 'Discount Amt','Action'];
 
 function TransactionList(props){
-
+  const history = useHistory();
    const [value,setValue] = useState(0);
    // Coupan State
  
-
-
-
    const handleChange = (event, value) => {
       setValue(value);
    };
@@ -52,6 +50,15 @@ function TransactionList(props){
 
 
 
+
+// THIS FUNCTION NAVIGGATE TO PERTICULAR USE INFO
+     const  Navigate =(list)=>{
+     
+
+      
+            history.push("/app/dashboard/Admin/CustomerDetails",list)
+     }
+ 
  
    useEffect(() => {
     getNew_UserData()
@@ -492,8 +499,8 @@ const NewhandlePageChange = (pageNumber) => {
                            {filteredlowDataUser.length>0 && filteredlowDataUser.map((list, index) => (
                               <TableRow key={index}>
                               <TableCell>{index+1}</TableCell>
-                                 <TableCell>{list?.username}</TableCell>
-                                 <TableCell>{list?.email}</TableCell>
+                                 <TableCell onClick={()=>Navigate(list)}>{list?.username}</TableCell>
+                                 <TableCell onClick={()=>Navigate(list)}>{list?.email}</TableCell>
                                  {/* <TableCell><Badge color={list.typeColor}>{list.type}</Badge></TableCell> */}
                                  <TableCell>{list?.mobile_number != null ? list.mobile_number :"-"}</TableCell>
                                  <TableCell>{list?.gst_number != null ? list?.gst_number :"-" }</TableCell>

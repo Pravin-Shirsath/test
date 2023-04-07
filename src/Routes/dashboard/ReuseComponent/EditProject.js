@@ -152,7 +152,7 @@ const EditProject = ({ selected, Modalopen, close,reloadlist }) => {
 
                                 <Col sm={12} className="d-flex  align-items-center justify-content-center">
                                     <Label for="firstName" sm={3} className="d-flex primary-dark">
-                                        Project description:
+                                        comment:
                                     </Label>
                                     <Input
                                         type="text"

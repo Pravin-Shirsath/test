@@ -32,7 +32,7 @@ const CreateProject = (props) => {
     const [projectName, setProjectName] = useState("")
     const [dataset, setDataset] = useState("")
     const [projectDes, setProjectDes] = useState("")
-
+const [disable,setDisable]=useState(true)
     const [image, setImage] = useState(null)
     const [open, setOpen] = useState(false)
     const [objImage, setObjImage] = useState(null)
@@ -61,7 +61,11 @@ const CreateProject = (props) => {
                                  NotificationManager.error(data)
 
                             }else if(data?.project_created){
+
+                               console.log(res,"res create pro",data?.project_created?.id)
+                               setDisable(false)
                                 localStorage.setItem("projId", data?.project_created?.id)
+                                localStorage.setItem("project_name", data?.project_created?.project_name)
                                 NotificationManager.success("Project created !")
                             }else{
                                 NotificationManager.error("Project create process failed!")
@@ -214,7 +218,7 @@ const CreateProject = (props) => {
                                 
                                 <Button variant="contained" color="primary" className=" mx-2" onClick={NewProject}>Save</Button>
                                 <Button variant="contained" color="danger"  className="mx-2 d-flex justify-content-center align-items-center" onClick={()=> history.push("/app/dashboard/project")}>Cancel</Button>
-                                <Button variant="contained" color="primary" className=" mx-2 d-flex justify-content-center align-item-center" onClick={()=> history.push("/app/dashboard/createDataset")}>Create Dataset</Button>
+                                <Button variant="contained" color="primary" className=" mx-2 d-flex justify-content-center align-item-center" disabled={disable} onClick={()=> history.push("/app/dashboard/createDataset")}>Create Dataset</Button>
 
                             </div>
 

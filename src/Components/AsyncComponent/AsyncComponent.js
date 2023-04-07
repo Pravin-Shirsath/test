@@ -77,6 +77,10 @@ const AsyncAdminProjectComponent = Loadable({
   loader: () => import("Routes/dashboard/Admin/project"),
   loading: () => <RctPageLoader />,
 });
+const AsyncCoustomerDetailsComponent = Loadable({
+  loader: () => import("Routes/dashboard/Admin/CustomerDetails"),
+  loading: () => <RctPageLoader />,
+});
 
 const AsyncCreateDatasetComponent = Loadable({
   loader: () => import("Routes/dashboard/CreateDataset"),
@@ -742,5 +746,6 @@ export {
   AsyncRechargeModalComponent,
   AsyncCreateDatasetComponent,
   AsyncCreateTaskComponent,
-  AsyncViewDataset
+  AsyncViewDataset,
+  AsyncCoustomerDetailsComponent
 };

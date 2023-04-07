@@ -60,7 +60,7 @@ const { DashboardModal } = require("@uppy/react");
 //   console.log('Upload result:', result)
 // });
 
-
+;
 
 
 
@@ -106,8 +106,7 @@ const CreateDataset = (props) => {
                   localStorage.setItem("datasetid", res?.data?.message?.Dataset_created?.id)
                   setDisabled(false)
                   NotificationManager.success("Dataset created !")
-                  setDatasetName("")
-                  setComment("");
+
                 } else {
                   NotificationManager.error("Dataset create process failed!")
                 }
@@ -139,14 +138,15 @@ const CreateDataset = (props) => {
   const UploadFile = async () => {
     const accessToken = JSON.parse(localStorage.getItem('token'))
     const projectId = JSON.parse(localStorage.getItem('projId'))
-   
+
     if (open === undefined) {
 
-    const uppy3 =  new Uppy({
+      const uppy3 = new Uppy({
         // id : res,e
         // id: projectId,
         autoProceed: false,
         debug: true,
+        
         allowMultipleUploads: true,
         methods: ["OPTIONS", "GET", "POST", "PATCH", "PUT"],
         exposedHeaders: ["Access-Control-Allow-Headers"],
@@ -156,48 +156,56 @@ const CreateDataset = (props) => {
           "Authorization",
           "Uppy-Versions",
           "Accept",
-          "project_id",
-          "folder_id",
+          "dataset_id",
+          "id",
         ],
       }).use(AwsS3Multipart, {
-       
+        getChunkSize: () => 5 * 1024 * 1024, // 5MB
+        getUploadId: (file) => `${file.id}-${Date.now()}`,
+        partSize: 5 * 1024 * 1024, // 5MB
+        retryDelays: [0, 1000, 3000, 5000], // Milliseconds between retries
         companionHeaders: {
           "uppy-auth-token":
-          accessToken +
-            "@@1@@" +
-           108,  
+            accessToken +
+            "@@" + 252,
+
           // this.state.proj_id,
         },
-        companionUrl:
        
-          "https://api-automaton.progfeel.co.in/api/automaton/file-uploads/upload-project-video/s3/multipart",
-      
-        }).on('file-added', (file) => {
-                  console.log('Added file', file);
-      
-                  // uppy3.setFileMeta("images",file );
-                  // uppy3.setFileState(file.id, { fieldName: 'images' });
-      
-                }).on('complete', (result) => {
-                  console.log('Upload result:', result)
-                })
-                .on("upload-success", (file, response) => {
-                  console.log("upload-success");
-      
-                }).on('upload-error', (file, error, response) => {
-                  console.log("error===", file, error, response)
-                  if (error.isNetworkError) {
-                    // Let your users know that file upload could have failed
-                    // due to firewall or ISP issues
-                    console.log("error===", error)
-                  }
-                })
-               
-                setInstance(uppy3);
-                setOpen(true)
-              } else {
-                setOpen(true)
-              }
+        companionUrl:
+
+          "https://api-automaton.progfeel.co.in/api/automaton/file-uploads/upload-project-video/",
+
+      })
+      uppy3 .on('file-added', (file) => {
+        console.log('Added file', file);
+
+        // uppy3.setFileMeta("images",file );
+        // uppy3.setFileState(file.id, { fieldName: 'images' });
+
+      })
+      uppy3.on('complete', (result) => {
+        console.log('Upload result:', result)
+      })
+        
+      uppy3.on("upload-success", (file, response) => {
+          console.log("upload-success");
+         
+        })
+        uppy3.on('upload-error', (file, error, response) => {
+          console.log("error===", file, error, response)
+          if (error.isNetworkError) {
+            // Let your users know that file upload could have failed
+            // due to firewall or ISP issues
+            console.log("error===", error)
+          }
+        })
+
+      setInstance(uppy3);
+      setOpen(true)
+    } else {
+      setOpen(true)
+    }
   }
 
   // const UploadFile = async () => {
@@ -230,6 +238,7 @@ const CreateDataset = (props) => {
 
   //       // uppy3.on('upload', (data) => {
   //       //   console.log('Started uploading');
+ 
   //       // });
 
   //       // uppy3.on('upload-success', (file, response) => {

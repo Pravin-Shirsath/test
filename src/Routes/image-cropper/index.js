@@ -20,6 +20,7 @@ function ImageCropper(props) {
    const [cropResult, setCropResult] = useState(null);
    const cropper = useRef(null);
 
+   
    const onChange = (e) => {
       e.preventDefault();
       let files;
@@ -34,6 +35,7 @@ function ImageCropper(props) {
       };
       reader.readAsDataURL(files[0]);
    }
+
 
    const cropImage = () => {
       const imageElement = cropper.current;
