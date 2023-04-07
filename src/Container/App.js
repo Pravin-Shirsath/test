@@ -44,6 +44,7 @@ import {
 import Auth from 'Auth/Auth';
 // callback component
 import Callback from "Components/Callback/Callback";
+import LogIn from './LogIn';
 //Auth0 Handle Authentication
 const auth = new Auth();
 const handleAuthentication = ({ location }) => {
@@ -141,12 +142,11 @@ const type = JSON.parse(localStorage.getItem('user_type'));
          <Route path="/session/lock-screen" component={AsyncSessionLockScreenComponent} />
          <Route path="/selectactivity" component={SelectActivity} />
          <Route path="/selectanalytics" component={SelectAnalytics} />
-
-
          <Route
             path="/session/forgot-password"
             component={AsyncSessionForgotPasswordComponent}
          />
+         <Route path="/signIn" component={LogIn} />
          <Route path="/session/404" component={AsyncSessionPage404Component} />
          <Route path="/session/500" component={AsyncSessionPage500Component} />
          <Route path="/terms-condition" component={AsyncTermsConditionComponent} />
