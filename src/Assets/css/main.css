@@ -89,6 +89,14 @@
     text-align: left;
 }
 
+.errorText {
+    font-size: 16px !important;
+    color: red !important;
+    text-align: left;
+    padding-top: 6px;
+    margin-bottom: 0;
+}
+
 .edit-form {
     padding: 32px 25px;
     padding-bottom: 5px;
@@ -243,6 +251,10 @@
     object-fit: contain;
 }
 
+.loginInfoWrapper {
+    padding-top: 20px;
+}
+
 .loginInfoWrapper .loginMeta {
     font-family: 'IBM Plex Sans', sans-serif;
     color: #000000;
@@ -250,7 +262,7 @@
     line-height: 65px;
     font-weight: 500;
     margin-bottom: 0;
-    padding: 170px 0;
+    padding: 160px 0;
 }
 
 .loginInfoWrapper .metaDetails {
@@ -261,12 +273,15 @@
     font-weight: 400;
     border-bottom: 2px dashed #ABABAB;
     padding-bottom: 5px;
+    width: max-content;
 }
 
 .loginForm {
     background-color: #F2F2F2;
     border-radius: 10px;
-    padding: 105px 80px;
+    padding: 80px 70px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    max-width: 700px;
 }
 
 .loginForm-title {
@@ -294,4 +309,81 @@
 
 .loginForm .form-group {
     margin-bottom: 0;
+}
+
+.loginForm .forget-psw {
+    font-family: 'IBM Plex Sans', sans-serif;
+    text-align: right;
+    color: #3E4A9E;
+    font-size: 18px;
+    line-height: 32px;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.input-margin {
+    margin-bottom: 70px !important;
+}
+
+.loginForm .LogInBtn {
+    background-color: #393185 !important;
+    color: #fff;
+    border-radius: 35px;
+    border: none;
+    box-shadow: none;
+    padding: 13px 20px;
+    max-width: 450px;
+    width: 100%;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.loginForm .signUpTitle {
+    font-size: 20px;
+    color: #000;
+    text-align: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 32px;
+    opacity: 70%;
+    cursor: pointer;
+    text-decoration: underline;
+    padding-top: 20px;
+
+}
+
+.loginForm .checkBoxRow {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0 56px;
+}
+
+.loginForm .checkBoxRow p {
+    color: #000000;
+    font-size: 24px;
+    margin-bottom: 0;
+    font-family: 'IBM Plex Sans', sans-serif;
+
+}
+
+.checkBoxRow .form-check-input {
+    position: static;
+    margin-top: 0;
+    margin-left: 0;
+    height: 33px;
+    width: 33px;
+}
+
+.loginForm .line {
+    border-top: 8px solid #3E4A9E;
+    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    /* left: 0; */
+    width: 115px;
+}
+
+.loginContainer .row-gapper {
+    gap: 165px;
 }

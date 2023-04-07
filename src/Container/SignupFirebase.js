@@ -106,7 +106,7 @@ useEffect(()=>{
 
                      dispatch({ type: SIGNUP_USER_SUCCESS, payload: localStorage.getItem('user_id') });
                      NotificationManager.success('User Registration Successfully!');
-                     history.push('/login');
+                     history.push('/signIn');
                      setName("")
                      setEmail("")
                      setPassword("")
