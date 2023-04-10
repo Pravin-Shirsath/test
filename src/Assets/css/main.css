@@ -99,10 +99,11 @@
     
     .profile-block-wrap {
         background-color: rgb(250, 250, 250) !important;
-        width: 200px;
+        width: 250px;
         position: absolute;
         top: 10px;
-        left: 60px;
+        /* left: 60px; */
+        left: 10px;
     } 
     
     
@@ -218,3 +219,6 @@
         padding-left: 10px;
      }
 
+
+
+    
