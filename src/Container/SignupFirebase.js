@@ -58,7 +58,6 @@ function SignupFirebase(props) {
    const history = useHistory();
 
 useEffect(()=>{
-   
    setName("")
    setEmail("")
    setPassword("")

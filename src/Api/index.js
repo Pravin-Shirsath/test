@@ -1432,6 +1432,24 @@ export const ViewFiles = (authToken, datasetId) => {
 }
 
 
+/**
+ * getModulesLiks :: Get Modules URL dynamically through API
+ * @returns 
+ */
+export const getModulesLiks = () => {
+
+  return axios.get( `${BASE_URL}/api/automaton/projects/misc/`,
+  {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+)
+  .then(res => {
+    return res
+  })
+}
+
 // NOT WORKING  KA ORIGINAL
 // export const ViewFiles = (authToken, datasetId) => {
 //   console.log(authToken, datasetId, "authToken and datasetId on ViewFiles Api call")

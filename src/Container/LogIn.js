@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../Assets/css/main.css'
 import AutomataIcon from '../Assets/img/Automata.png'
 import { str } from '../Constants/stringConst';
-import { Form, FormGroup, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Input  } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
