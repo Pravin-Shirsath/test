@@ -293,7 +293,7 @@
 }
 
 .loginForm .has-wrapper .has-input {
-    background-color:#F2F2F2;
+    background-color: #F2F2F2;
     border: none;
     border-bottom: 1px solid #000;
     box-shadow: none;
@@ -305,7 +305,7 @@
     color: #000000;
     font-size: 20px;
     font-family: 'IBM Plex Sans', sans-serif;
-    background-color:#F2F2F2;
+    background-color: #F2F2F2;
 
 }
 
@@ -349,7 +349,7 @@
     text-align: center;
     font-family: 'IBM Plex Sans', sans-serif;
     line-height: 32px;
-    opacity: 70%;
+    opacity: 0.7;
     cursor: pointer;
     text-decoration: underline;
     padding-top: 20px;
@@ -467,6 +467,12 @@
     height: 40px;
 }
 
+
+input:-webkit-autofill {
+    background-color: #F2F2F2 !important;
+    -webkit-background-clip: text !important;
+}
+
 @media (min-width:1024px) and (max-width: 1199px) {
 
     .loginInfoWrapper {
@@ -570,9 +576,9 @@
 
 
     .moduleLink {
-    width: 65px;
-    height: 65px;
-    right: -30px;
+        width: 65px;
+        height: 65px;
+        right: -30px;
     }
 
     .moduleLink a .css-i4bv87-MuiSvgIcon-root {
@@ -708,6 +714,11 @@
 }
 
 @media (min-width:1360px) and (max-width: 1440px) {
+
+    .loginContainer .row-gapper {
+        gap: 105px;
+    }
+
     .loginInfoWrapper .metaDetails {
         font-size: 22px;
     }
@@ -715,27 +726,27 @@
     .loginInfoWrapper .loginMeta {
         font-size: 38px;
         line-height: 54px;
-        padding: 138px 0;
+        padding: 105px 0;
     }
 
     .loginContainer {
-        padding: 75px 78px 75px 85px;
+        padding: 60px 70px 36px 70px;
         height: -webkit-fill-available;
     }
 
     .loginForm {
-        padding: 65px 60px;
+        padding: 54px 58px;
 
     }
 
     .loginForm-title {
-        font-size: 38px;
-        line-height: 50px;
+        font-size: 36px;
+        line-height: 42px;
         margin-bottom: 32px;
     }
 
     .input-margin {
-        margin-bottom: 50px !important;
+        margin-bottom: 34px !important;
     }
 
     .checkBoxRow .form-check-input {
@@ -748,7 +759,7 @@
     }
 
     .loginForm .checkBoxRow {
-        padding: 16px 0 32px;
+        padding: 16px 0 28px;
     }
 
     .loginForm .LogInBtn {
