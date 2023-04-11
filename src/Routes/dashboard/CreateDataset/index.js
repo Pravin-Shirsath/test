@@ -210,6 +210,7 @@ const CreateDataset = (props) => {
 
   const UploadFile = async () => {
     const accessToken = JSON.parse(localStorage.getItem('token'))
+    const DatasetId = JSON.parse(localStorage.getItem('datasetid'))
 
     try {
  
@@ -219,14 +220,14 @@ const CreateDataset = (props) => {
         const uppy3 = new Uppy({
           id: 'uppy',
           autoProceed: false,
-          
+          exposedHeaders: ["Access-Control-Allow-Headers"],
         });
 
           uppy3.use(XHR, {
-          endpoint: `${BASE_URL}/api/automaton/file-uploads/uppy/xhr/upload/`,
+          endpoint: `${BASE_URL}/api/automaton/file-uploads/uppy/xhr/upload/${DatasetId}/`,
           method: 'POST',
           
-          fieldName: 'file',
+          fieldName: 'files',
          
           headers: {
             'X-My-Custom-Header': 'header-value',
