@@ -462,7 +462,7 @@
     cursor: pointer;
 }
 
-.moduleLink a .css-i4bv87-MuiSvgIcon-root {
+.moduleLink a .MuiSvgIcon-root, .moduleLink a .css-vubbuv {
     width: 40px;
     height: 40px;
 }
@@ -581,7 +581,7 @@ input:-webkit-autofill {
         right: -30px;
     }
 
-    .moduleLink a .css-i4bv87-MuiSvgIcon-root {
+    .moduleLink a .MuiSvgIcon-root, .moduleLink a .css-vubbuv  {
         width: 28px;
         height: 28px;
     }
@@ -690,7 +690,7 @@ input:-webkit-autofill {
         right: -30px;
     }
 
-    .moduleLink a .css-i4bv87-MuiSvgIcon-root {
+    .moduleLink a .MuiSvgIcon-root, .moduleLink a .css-vubbuv  {
         width: 32px;
         height: 32px;
     }
@@ -789,7 +789,7 @@ input:-webkit-autofill {
         right: -38px;
     }
 
-    .moduleLink a .css-i4bv87-MuiSvgIcon-root {
+    .moduleLink a .MuiSvgIcon-root , .moduleLink a .css-vubbuv {
         width: 35px;
         height: 35px;
     }
