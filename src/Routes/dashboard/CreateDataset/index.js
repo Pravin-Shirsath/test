@@ -135,130 +135,123 @@ const CreateDataset = (props) => {
 
 
 
-  const UploadFile = async () => {
-    const accessToken = JSON.parse(localStorage.getItem('token'))
-    const projectId = JSON.parse(localStorage.getItem('projId'))
-
-    if (open === undefined) {
-
-      const uppy3 = new Uppy({
-        // id : res,e
-        // id: projectId,
-        autoProceed: false,
-        debug: true,
-        
-        allowMultipleUploads: true,
-        methods: ["OPTIONS", "GET", "POST", "PATCH", "PUT"],
-        exposedHeaders: ["Access-Control-Allow-Headers"],
-        allowedHeaders: [
-          "uppy-auth-token",
-          "Content-Type",
-          "Authorization",
-          "Uppy-Versions",
-          "Accept",
-          "dataset_id",
-          "id",
-        ],
-      }).use(AwsS3Multipart, {
-        getChunkSize: () => 5 * 1024 * 1024, // 5MB
-        getUploadId: (file) => `${file.id}-${Date.now()}`,
-        partSize: 5 * 1024 * 1024, // 5MB
-        retryDelays: [0, 1000, 3000, 5000], // Milliseconds between retries
-        companionHeaders: {
-          "uppy-auth-token":
-            accessToken +
-            "@@" + 252,
-
-          // this.state.proj_id,
-        },
-       
-        companionUrl:
-
-          "https://api-automaton.progfeel.co.in/api/automaton/file-uploads/upload-project-video/",
-
-      })
-      uppy3 .on('file-added', (file) => {
-        console.log('Added file', file);
-
-        // uppy3.setFileMeta("images",file );
-        // uppy3.setFileState(file.id, { fieldName: 'images' });
-
-      })
-      uppy3.on('complete', (result) => {
-        console.log('Upload result:', result)
-      })
-        
-      uppy3.on("upload-success", (file, response) => {
-          console.log("upload-success");
-         
-        })
-        uppy3.on('upload-error', (file, error, response) => {
-          console.log("error===", file, error, response)
-          if (error.isNetworkError) {
-            // Let your users know that file upload could have failed
-            // due to firewall or ISP issues
-            console.log("error===", error)
-          }
-        })
-
-      setInstance(uppy3);
-      setOpen(true)
-    } else {
-      setOpen(true)
-    }
-  }
-
   // const UploadFile = async () => {
   //   const accessToken = JSON.parse(localStorage.getItem('token'))
+  //   const projectId = JSON.parse(localStorage.getItem('projId'))
 
-  //   try {
+  //   if (open === undefined) {
 
-  //     if (open === undefined) {
+  //     const uppy3 = new Uppy({
+  //       // id : res,e
+  //       // id: projectId,
+  //       autoProceed: false,
+  //       debug: true,
+        
+  //       allowMultipleUploads: true,
+  //       methods: ["OPTIONS", "GET", "POST", "PATCH", "PUT"],
+  //       exposedHeaders: ["Access-Control-Allow-Headers"],
+  //       allowedHeaders: [
+  //         "uppy-auth-token",
+  //         "Content-Type",
+  //         "Authorization",
+  //         "Uppy-Versions",
+  //         "Accept",
+  //         "dataset_id",
+  //         "id",
+  //       ],
+  //     }).use(AwsS3Multipart, {
+  //       getChunkSize: () => 5 * 1024 * 1024, // 5MB
+  //       getUploadId: (file) => `${file.id}-${Date.now()}`,
+  //       partSize: 5 * 1024 * 1024, // 5MB
+  //       retryDelays: [0, 1000, 3000, 5000], // Milliseconds between retries
+  //       companionHeaders: {
+  //         "uppy-auth-token":
+  //           accessToken +
+  //           "@@" + 252,
 
+  //         // this.state.proj_id,
+  //       },
+       
+  //       companionUrl:
 
-  //       // const uppy3 = new Uppy({
-  //       //   id: 'uppy',
-  //       //   autoProceed: false,
-  //       // });
+  //         "https://api-automaton.progfeel.co.in/api/automaton/file-uploads/upload-project-video/",
 
-  //       //   uppy3.use(XHR, {
-  //       //   endpoint: '${BASE_URL}/api/automaton/file-uploads/upload/${143}/',
-  //       //   method: 'POST',
-  //       //   formData: true,
-  //       //   fieldName: 'file',
-  //       //   headers: {
-  //       //     'X-My-Custom-Header': 'header-value',
-  //       //   },
-  //       // });
+  //     })
+  //     uppy3 .on('file-added', (file) => {
+  //       console.log('Added file', file);
 
-  //       // // Listen for events
-  //       // uppy3.on('file-added', (file) => {
-  //       //   console.log('Added file', file);
-  //       // });
+  //       // uppy3.setFileMeta("images",file );
+  //       // uppy3.setFileState(file.id, { fieldName: 'images' });
 
-  //       // uppy3.on('upload', (data) => {
-  //       //   console.log('Started uploading');
+  //     })
+  //     uppy3.on('complete', (result) => {
+  //       console.log('Upload result:', result)
+  //     })
+        
+  //     uppy3.on("upload-success", (file, response) => {
+  //         console.log("upload-success");
+         
+  //       })
+  //       uppy3.on('upload-error', (file, error, response) => {
+  //         console.log("error===", file, error, response)
+  //         if (error.isNetworkError) {
+  //           // Let your users know that file upload could have failed
+  //           // due to firewall or ISP issues
+  //           console.log("error===", error)
+  //         }
+  //       })
+
+  //     setInstance(uppy3);
+  //     setOpen(true)
+  //   } else {
+  //     setOpen(true)
+  //   }
+  // }
+
+  const UploadFile = async () => {
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+
+    try {
  
-  //       // });
-
-  //       // uppy3.on('upload-success', (file, response) => {
-  //       //   console.log('Upload successful');
-  //       // });
-
-  //       // uppy3.on('upload-error', (file, error, response) => {
-  //       //   console.log('Upload failed', error);
-  //       // });
+      if (open === undefined) {
 
 
+        const uppy3 = new Uppy({
+          id: 'uppy',
+          autoProceed: false,
+          
+        });
 
+          uppy3.use(XHR, {
+          endpoint: `${BASE_URL}/api/automaton/file-uploads/uppy/xhr/upload/${143}/`,
+          method: 'POST',
+          formData: true,
+          fieldName: 'file',
+         
+          headers: {
+            'X-My-Custom-Header': 'header-value',
+            Authorization: accessToken,
+          //  "Content-Type": "multipart/form-data"
+          },
+        });
 
+        // Listen for events
+        uppy3.on('file-added', (file) => {
+          console.log('Added file', file);
+        });
 
+        uppy3.on('upload', (data) => {
+          console.log('Started uploading');
+ 
+        });
 
+        uppy3.on('upload-success', (file, response) => {
+          console.log('Upload successful');
+        });
 
-
-
-
-
+        uppy3.on('upload-error', (file, error, response) => {
+          console.log('Upload failed', error);
+        });
 
 
 
@@ -397,19 +390,19 @@ const CreateDataset = (props) => {
   //         console.log('Payload:', request.data);
   //       });
 
-  //       setInstance(uppy3);
-  //       setOpen(true)
-  //     } else {
-  //       setOpen(true)
-  //     }
-  //   } catch (error) {
-  //     console.log("catch ", error)
-  //   }
+        setInstance(uppy3);
+        setOpen(true)
+      } else {
+        setOpen(true)
+      }
+    } catch (error) {
+      console.log("catch ", error)
+    }
 
 
 
 
-  // }
+  }
 
 
 

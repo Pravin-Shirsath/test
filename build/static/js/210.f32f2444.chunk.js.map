@@ -1,0 +1,1 @@
+{"version":3,"sources":["Routes/dashboard/Admin/project/index.js"],"names":["Project"],"mappings":"yGAAA,uBAUeA,UARC,WACd,OACE,8BACO,6BAAI,gBAGf,C","file":"static/js/210.f32f2444.chunk.js","sourcesContent":["import React from 'react'\n\nconst Project = () => {\n  return (\n    <div>\n           <h1> Project  </h1>\n    </div>\n  )\n}\n\nexport default Project\n"],"sourceRoot":""}
