@@ -26,7 +26,7 @@ import { getFormatDate2 } from '../../../../Constants/DateFormator';
  import DeleteIcon from '@mui/icons-material/Delete';
  import ContentCopyIcon from '@mui/icons-material/ContentCopy';
  import { Link, useHistory } from 'react-router-dom';
- 
+ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
  // delete confirmation dialog
  import DeleteConfirmationDialog from 'Components/DeleteConfirmationDialog/DeleteConfirmationDialog'
  // add new user form
@@ -316,6 +316,7 @@ import { copyToClipboard } from 'Constants/CopyToClipboard'
                  <th>Is Utilized</th>
                  <th>Utilized By</th>
                  <th>Discount Amt</th>
+                 <th>Active</th>
                  <th>Action</th>
                </tr>
              </thead>
@@ -351,9 +352,11 @@ import { copyToClipboard } from 'Constants/CopyToClipboard'
                        {item?.utilized_by == null ? "-":item?.utilized_by}
                      </td>
                      <td>
-                       {item?.discount_value }
+                       {item?.discount_value }  
                      </td>
-
+                     <td>
+                       {item?.is_active ?<FiberManualRecordIcon  color="success" />:<FiberManualRecordIcon color="error"/>}  
+                     </td>
                      <td className="list-action" style={{display:"flex", gap:"3px"}}>
                      <ContentCopyIcon onClick={()=>copyToClipboard(item?.coupon_text)}/>
                      <DeleteIcon  onClick={()=>DeletModalOpen(item)}/>

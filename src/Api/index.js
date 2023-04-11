@@ -1417,14 +1417,14 @@ export const ViewFiles = (authToken, datasetId) => {
   return axios.post( `${BASE_URL}/api/automaton/file-uploads/view-files/`,
     {
     "dataset_id": datasetId
-  },
-  {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `token ${authToken}`
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `token ${authToken}`
+      }
     }
-  }
-)
+  )
   .then(res => {
     console.log("res view datasets file in API:", res)
     return res
@@ -1449,6 +1449,8 @@ export const getModulesLiks = () => {
     return res
   })
 }
+
+
 
 // NOT WORKING  KA ORIGINAL
 // export const ViewFiles = (authToken, datasetId) => {

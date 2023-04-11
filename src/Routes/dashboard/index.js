@@ -27,7 +27,8 @@ import {
    AsyncRechargeModalComponent,
    AsyncCreateDatasetComponent,
    AsyncCreateTaskComponent,
-   AsyncViewDataset
+   AsyncViewDataset,
+   AsyncCoustomerDetailsComponent
 
 } from 'Components/AsyncComponent/AsyncComponent';
 
@@ -78,6 +79,7 @@ return(
          <Route path={`${match.url}/Admin/Account`} component={AsyncAdminAccountComponent} />
          <Route path={`${match.url}/Admin/Report`} component={AsyncAdminreportComponent} />
          <Route path={`${match.url}/Admin/Project`} component={AsyncAdminProjectComponent} />
+         <Route path={`${match.url}/Admin/CustomerDetails`} component={AsyncCoustomerDetailsComponent} />
          
          
 

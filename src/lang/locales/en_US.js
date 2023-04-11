@@ -1,5 +1,6 @@
 module.exports = {
    "sidebar.app": "App",
+   "sidebar.recharge":"Recharge Model",
    "sidebar.coupon": "Coupons",
    "sidebar.account": "Account",
    "sidebar.viewpro": "View Project",

@@ -34,6 +34,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import FolderIcon from '@mui/icons-material/Folder';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import ImageIcon from '@mui/icons-material/Image';
 import EditDataset from '../ReuseComponent/EditDataset';
 
 
@@ -108,8 +109,8 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 
 const getDatasetFiles = () => {
     const authToken = JSON.parse(localStorage.getItem("token"));
-    const datasetId = localStorage?.getItem("dId") || 146
-    // const datasetId = 146;
+    // const datasetId = localStorage?.getItem("datasetId") || 146;
+    const datasetId = 146
 
     if(authToken !== null){
         ViewFiles(authToken, datasetId)
@@ -117,23 +118,33 @@ const getDatasetFiles = () => {
             console.log(res, "resss in viewDataset file")
             if(res?.status == 200){
                 console.log(res?.data?.results, "dataaa of filesss in view datasetfile")
-                
                 const results = res?.data?.results;
                 const updatedResults = results.map(result=> {
                     return {...result, selectedFile: false}
                 })
-                console.log(updatedResults, "updaattedd resultsss")
 
                 setDatasetFiles(updatedResults)
                 setFilteredDatasetFiles(updatedResults)
                 setTotalPageCount(parseInt(res?.data?.count));
             }else {
-                console.log('Response from View project Datasets lists api:', res)
+                console.log('Response from View project Datasets lists api in view project:', res)
             }
-        }).catch((error)=>{
-            console.log("error=",error)
         })
-    } 
+        .catch((error)=>{
+            console.log("error in viewdataset:",error)
+            const status = error?.response?.status
+            if(status == 401){
+              NotificationManager.error("Something went wrong !");
+              localStorage.clear();
+              history.push("/login")
+            } else if(status == 500){
+              NotificationManager.error("Temporary connectivity issues.");
+            }
+        })
+    } else {
+      localStorage.clear();
+      history.push("/login")
+    }
 }
 
   const handlePageChange = (pageNumber) => {
@@ -164,7 +175,38 @@ const getDatasetFiles = () => {
 
   const handleFileSelect = (file) => {
     console.log(file, "selecteddd filee");
+
+    const ifAlreadyExists = selectedFiles.find(obj=> {
+      return obj.file_name == file.file_name
+    });
+
+    if(!ifAlreadyExists){
+      const updatedFile = {...file, selectedFile: true}
+      const copySelectedFiles = [...selectedFiles];
+      copySelectedFiles.push(updatedFile);
+      setSelectedFiles(copySelectedFiles);
+
+      const copyFilteredDatasetFiles = [...filteredDatasetFiles]
+      const indexOfSelectedFile = copyFilteredDatasetFiles.indexOf(file);
+      copyFilteredDatasetFiles[indexOfSelectedFile] = updatedFile
+      setFilteredDatasetFiles(copyFilteredDatasetFiles)
+    } else {
+      const updatedFile = {...file, selectedFile: false}
+      const copySelectedFiles = [...selectedFiles];
+      const indexOfSelectedFileInSelected = selectedFiles.findIndex(item=> {
+        return item.id == file.id
+      });
+      copySelectedFiles.splice(indexOfSelectedFileInSelected, 1)
+      setSelectedFiles(copySelectedFiles)
+
+      const copyFilteredDatasetFiles = [...filteredDatasetFiles];
+      const indexOfSelectedFile = copyFilteredDatasetFiles.indexOf(file);
+      copyFilteredDatasetFiles[indexOfSelectedFile] = updatedFile;
+      setFilteredDatasetFiles(copyFilteredDatasetFiles)
+    }
   }
+   
+  
 
   console.log(filteredDatasetFiles, "filteredd datasets")
   console.log(datasetFiles, "daaaaset Filesss")
@@ -194,7 +236,9 @@ const getDatasetFiles = () => {
                 >Search</Button>
             </div>
 
-            <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} onClick={()=> history.push("/app/dashboard/createDataset")}>New Task</Button>
+            <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} 
+            // onClick={()=> history.push("/app/dashboard/createDataset")}
+            >New Task</Button>
             </div>
 
             <div className='viewDatasetFilesContainer'>
@@ -203,9 +247,8 @@ const getDatasetFiles = () => {
                         return(
                                 <div className='imageContainer' key={ind} onClick={()=>handleFileSelect(file)}>
                                     {
-                                      file.selectedFile ? <CheckBoxIcon className="folderIcon" /> : <FolderIcon className="folderIcon"/>
+                                      file.selectedFile ? <CheckBoxIcon className="folderIcon" /> : (file.file_type == "png" ? <ImageIcon className="folderIcon" /> : <FolderIcon className="folderIcon" />)
                                     }
-                                    
                                     <div className="fileName">{file.file_name}</div>
                                 </div>
                         )

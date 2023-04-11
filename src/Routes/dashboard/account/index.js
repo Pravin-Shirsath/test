@@ -109,7 +109,7 @@ useEffect(()=>{
         <div>
 
          {
-            true? <Progress bar color="danger" value={100} style={{ height: "50px" }} ><h2 style={{marginTop:"6px"}}>0GB</h2></Progress>
+            totalData == 0 ? <Progress bar color="danger" value={100} style={{ height: "50px" }} ><h2 style={{marginTop:"6px"}}>0GB</h2></Progress>
             :
             <Progress multi style={{ height: "50px" }}>
         <Progress bar color="danger" value={useData} ><h2 style={{marginTop:"6px"}}>{useData}GB</h2></Progress>
