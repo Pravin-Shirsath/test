@@ -177,9 +177,8 @@ export default function SaasDashbaord(props) {
     setSelectedItem(item)
     deleteConfirmationDialog.current.open()
   }
+
   const Delete_project = () => {
-
-
     const accessToken = JSON.parse(localStorage.getItem('token'))
     if (accessToken !== null) {
       DeleteProject(accessToken, selected?.id)
@@ -308,7 +307,7 @@ export default function SaasDashbaord(props) {
             message="This will delete your project permanently."
             onConfirm={() => Delete_project()}
             ref={deleteConfirmationDialog} />
-
+            
           <div className="row ">
             {filterProject &&
               filterProject.map((item, i) => {

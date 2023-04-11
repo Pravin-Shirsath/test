@@ -112,10 +112,10 @@
 
 .profile-block-wrap {
     background-color: rgb(250, 250, 250) !important;
-    width: 200px;
+    width: 225px;
     position: absolute;
     top: 10px;
-    left: 60px;
+    left: 72px;
 }
 
 
@@ -465,6 +465,21 @@
 .moduleLink a .css-i4bv87-MuiSvgIcon-root {
     width: 40px;
     height: 40px;
+}
+
+
+/* CSS for delete modal */
+.MuiPaper-root {
+    background-color: red;
+    padding: 15px 26px 10px 26px;
+}
+
+.MuiDialogTitle-root {
+    padding: 16px 24px 2px !important;
+}
+
+.MuiTypography-root {
+    margin-bottom: 0px;
 }
 
 @media (min-width:1024px) and (max-width: 1199px) {
