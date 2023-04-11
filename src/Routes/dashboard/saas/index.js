@@ -172,7 +172,6 @@ export default function SaasDashbaord(props) {
     console.log("type", type);
   }, [])
 
-
   const DeletModalOpen = (item) => {
     setSelectedItem(item)
     deleteConfirmationDialog.current.open()
