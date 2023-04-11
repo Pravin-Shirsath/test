@@ -1430,3 +1430,46 @@ export const ViewFiles = (authToken, datasetId) => {
     return res
   })
 }
+
+
+/**
+ * getModulesLiks :: Get Modules URL dynamically through API
+ * @returns 
+ */
+export const getModulesLiks = () => {
+
+  return axios.get( `${BASE_URL}/api/automaton/projects/misc/`,
+  {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+)
+  .then(res => {
+    return res
+  })
+}
+
+
+
+// NOT WORKING  KA ORIGINAL
+// export const ViewFiles = (authToken, datasetId) => {
+//   console.log(authToken, datasetId, "authToken and datasetId on ViewFiles Api call")
+//   // return axios.get(`${BASE_URL}/api/automaton/file-uploads/view-files/`,
+//   return axios.get("https://api-automaton.progfeel.co.in/api/automaton/file-uploads/view-files/",
+//   {
+//     "dataset_id":146
+//   },
+//   {
+//     headers: {
+//       Authorization:"token 8dc73b64bb85197e90abba84517bc1e04e91a83a096e9e35b8fbcf928a5065a9",
+//       "Content-Type": "application/json"
+//     }
+//   })
+//   .then(res => {
+//     console.log("res view datasets file in API", res)
+//   })
+//   .catch(err => {
+//     console.log("err in ViewFiles API call", err)
+//   })
+// }

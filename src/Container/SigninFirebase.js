@@ -283,7 +283,6 @@ function Signin(props) {
                                  <Checkbox
                                     checked={check}
                                     onChange={() => setChecked(!check)}
-
                                     color="default"
                                  />
                                   </div>
