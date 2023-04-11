@@ -219,6 +219,7 @@ const CreateDataset = (props) => {
         const uppy3 = new Uppy({
           id: 'uppy',
           autoProceed: false,
+          
         });
 
           uppy3.use(XHR, {
@@ -226,6 +227,7 @@ const CreateDataset = (props) => {
           method: 'POST',
           formData: true,
           fieldName: 'file',
+         
           headers: {
             'X-My-Custom-Header': 'header-value',
             Authorization: accessToken,
