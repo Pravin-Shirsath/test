@@ -293,7 +293,7 @@
 }
 
 .loginForm .has-wrapper .has-input {
-    background: transparent;
+    background-color:#F2F2F2;
     border: none;
     border-bottom: 1px solid #000;
     box-shadow: none;
@@ -305,6 +305,8 @@
     color: #000000;
     font-size: 20px;
     font-family: 'IBM Plex Sans', sans-serif;
+    background-color:#F2F2F2;
+
 }
 
 .loginForm .form-group {
@@ -319,6 +321,8 @@
     line-height: 32px;
     cursor: pointer;
     padding-top: 10px;
+    width: max-content;
+    margin-left: auto;
 }
 
 .input-margin {
@@ -613,7 +617,7 @@
     .loginInfoWrapper .loginMeta {
         font-size: 30px;
         line-height: 50px;
-        padding: 125px 0;
+        padding: 100px 0;
     }
 
     .loginContainer {
@@ -622,7 +626,7 @@
     }
 
     .loginForm {
-        padding: 58px 55px;
+        padding: 48px 55px;
 
     }
 
