@@ -44,6 +44,8 @@ import {
 import Auth from 'Auth/Auth';
 // callback component
 import Callback from "Components/Callback/Callback";
+import LogIn from './LogIn';
+import SelectModules from './SelectModules';
 //Auth0 Handle Authentication
 const auth = new Auth();
 const handleAuthentication = ({ location }) => {
@@ -112,7 +114,6 @@ const type = JSON.parse(localStorage.getItem('user_type'));
       } else {
           
           if(type === "customer"  || type === "company_admin"){
-
              return (  <Redirect to={'/app/dashboard/saas'} /> );
           }else  if(type === "admin"){
 
@@ -132,7 +133,7 @@ const type = JSON.parse(localStorage.getItem('user_type'));
          <Route path="/agency" component={AgencyLayout} />
          <Route path="/boxed" component={RctBoxedLayout} />
          <Route path="/dashboard" component={CRMLayout} />
-         <Route path="/login" component={AppSignIn} />
+         {/* <Route path="/login" component={AppSignIn} /> */}
          <Route path="/signup" component={AppSignUp} />
          <Route path="/forgotpwd" component={Forgotpwd} />
          <Route path="/confirm-password" component={ConfirmPassword} />
@@ -141,12 +142,13 @@ const type = JSON.parse(localStorage.getItem('user_type'));
          <Route path="/session/lock-screen" component={AsyncSessionLockScreenComponent} />
          <Route path="/selectactivity" component={SelectActivity} />
          <Route path="/selectanalytics" component={SelectAnalytics} />
-
+         <Route path="/selectmodules" component={SelectModules} />
 
          <Route
             path="/session/forgot-password"
             component={AsyncSessionForgotPasswordComponent}
          />
+         <Route path="/login" component={LogIn} />
          <Route path="/session/404" component={AsyncSessionPage404Component} />
          <Route path="/session/500" component={AsyncSessionPage500Component} />
          <Route path="/terms-condition" component={AsyncTermsConditionComponent} />

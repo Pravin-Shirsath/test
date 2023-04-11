@@ -70,6 +70,10 @@ const CreateCoupan = ({ selected, Modalopen, close, reloadlist }) => {
                     if (res?.status === 200) {
 
                         if (res?.data?.message) {
+                           
+                           
+                           
+                           
                             if (reloadlist) {
                                 reloadlist()
                                 reloadlist()
@@ -88,11 +92,14 @@ const CreateCoupan = ({ selected, Modalopen, close, reloadlist }) => {
                             }
                            
 
-                        }
-                        if (res?.data?.coupon_text) {
+                        }else if(res?.data?.coupon_text){
+                            
                             NotificationManager.error(res?.data?.coupon_text)
-                            NotificationManager.success(res?.data?.message)
                         }
+                        // if (res?.data?.coupon_text) {
+                        //    
+                        //     NotificationManager.success(res?.data?.message)
+                        // }
 
 
                     } else {

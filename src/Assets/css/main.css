@@ -1,224 +1,815 @@
-
-.c-primary{
+.c-primary {
     background-color: #3d4A9E !important;
-    }
-    .light-primary{
+}
+
+.light-primary {
     background-color: #C4C8E1 !important;
-    }
-    .dark-primary{
+}
+
+.dark-primary {
     background-color: #181D3F !important;
     color: white;
-    }
-    
-    .Project-cart-main{
+}
+
+.Project-cart-main {
     margin-bottom: 9px;
-    }
-    .dark-primary-text{
-        color:  #181D3F !important;
-    }
-    
-    
-    .madatory-field{
-        margin-left: 7px;
-    }
-    
-    .border-box-shadow-image{
-        border: 1px solid rgb(211, 202, 202);
-    
-        
-    }
-    
-    /*  Admin Dashboard Table */
-    .tab-Heading{
-        padding-bottom: 0px !important;
-        font-size: 15px;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    }
-    .search-Box-Table{
-        margin: 30px 0px;
-    }
-    
-    
-    
-    /* create Coupan  */
-    .d-coupan-box{
-        justify-content: center;
-       
-        font-weight: 800;
-    }
-    .d-coupan-heading{
-        font-size: 1.5rem;
-    }
-    
-    
-    /* create project css */
-    .box-shadow-box{
-        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-    }
-    
-    .activity_wrap {
-        gap: 10px;
-    }
-    
-    .btn-info {
-        cursor: pointer;
-    }
-    
-    .rct-session-wrapper .has-wrapper .has-input {
-        border: 1px solid #3d4A9E;
-    }
-    
-    
-    .text-theme {
-        color:#181D3F !important;
-    }
-    
-    .theme-background {
-        background-color: #3d4A9E !important;
-    }
-    
-    .error {
-        font-size: 16px !important;
-        color: red !important;
-        margin-top: -15px;
-        margin-bottom: 10px;
-        text-align: left;
-    }
-    
-    .edit-form {
-        padding: 32px 25px;
-        padding-bottom: 5px;
-    }
-    .update-btn {
-        padding: 7px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    
-    }
-    
-    .profile-block-wrap {
-        background-color: rgb(250, 250, 250) !important;
-        width: 250px;
-        position: absolute;
-        top: 10px;
-        /* left: 60px; */
-        left: 10px;
-    } 
-    
-    
-    .breadcrumb a {
-        color: #fff;
-    }
-    
-    .search-row {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-    
-    .search-input {
-        border: none;
-        border-bottom: 1px solid #000;
-        width: 260px;
-        /* height: 40px; */
-    }
-    
-    .paginationDiv .pagination {
-        justify-content: end;
-        padding: 6px 14px;
-    }
-    
-    
-    .model-form .form-control {
-        border: none;
-        border-bottom: 1px solid #3d4A9E;;
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0;
-    }
-    
-    .model-form .btn-primary , .model-form .MuiButton-contained, .model-form .btn-primary:hover{
-        background:#0b3d45 ;
-        border-color: #0b3d45;
-    }
-    
-    .model-form label {
-        color: #0b3d45;
-    }
-    
-    .userBlockHorizontalDropdown {
-        background-color: #181D3F;;
-    }
-    
-    .financialChartPrice, .financialChartPrice > div {
-        min-height: 300px !important;
-    }
-    
-    .rotate {
-    
-        /* Safari */
-        -webkit-transform: rotate(-90deg);
-        
-        /* Firefox */
-        -moz-transform: rotate(-90deg);
-        
-        /* IE */
-        -ms-transform: rotate(-90deg);
-        
-        /* Opera */
-        -o-transform: rotate(-90deg);
-        
-        float: left;
-    
-    }
-    
-    .rangeslider {
-        margin: 0 !important;
-    }
-    
-    .rangeslider-horizontal {
-        height: 6px !important;
-        width: 300px !important;
-    }
-    
-    .rangeslider-horizontal .rangeslider__handle{
-        width: 17px !important;
-        height: 17px !important;
-    }
-    
-    .rangeslider-horizontal .rangeslider__handle:after {
-        width: 10px !important;
-        height: 10px !important;
-        top: 2px !important;
-        left: 2px !important;
-    }
-    
-    .rangeslider-horizontal .rangeslider__fill{
-        background-color: #0b3d45cf !important;
-    }
-    
-    
-    /* 
+}
+
+.dark-primary-text {
+    color: #181D3F !important;
+}
+
+
+.madatory-field {
+    margin-left: 7px;
+}
+
+.border-box-shadow-image {
+    border: 1px solid rgb(211, 202, 202);
+
+
+}
+
+/*  Admin Dashboard Table */
+.tab-Heading {
+    padding-bottom: 0px !important;
+    font-size: 15px;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.search-Box-Table {
+    margin: 30px 0px;
+}
+
+
+
+/* create Coupan  */
+.d-coupan-box {
+    justify-content: center;
+
+    font-weight: 800;
+}
+
+.d-coupan-heading {
+    font-size: 1.5rem;
+}
+
+
+/* create project css */
+.box-shadow-box {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.activity_wrap {
+    gap: 10px;
+}
+
+.btn-info {
+    cursor: pointer;
+}
+
+.rct-session-wrapper .has-wrapper .has-input {
+    border: 1px solid #3d4A9E;
+}
+
+
+.text-theme {
+    color: #181D3F !important;
+}
+
+.theme-background {
+    background-color: #3d4A9E !important;
+}
+
+.error {
+    font-size: 16px !important;
+    color: red !important;
+    margin-top: -15px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.errorText {
+    font-size: 16px !important;
+    color: red !important;
+    text-align: left;
+    padding-top: 6px;
+    margin-bottom: 0;
+}
+
+.edit-form {
+    padding: 32px 25px;
+    padding-bottom: 5px;
+}
+
+.update-btn {
+    padding: 7px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+
+.profile-block-wrap {
+    background-color: rgb(250, 250, 250) !important;
+    width: 225px;
+    position: absolute;
+    top: 10px;
+    left: 72px;
+}
+
+
+.breadcrumb a {
+    color: #fff;
+}
+
+.search-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.search-input {
+    border: none;
+    border-bottom: 1px solid #000;
+    width: 260px;
+    /* height: 40px; */
+}
+
+.paginationDiv .pagination {
+    justify-content: end;
+    padding: 6px 14px;
+}
+
+
+.model-form .form-control {
+    border: none;
+    border-bottom: 1px solid #3d4A9E;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+.model-form .btn-primary,
+.model-form .MuiButton-contained,
+.model-form .btn-primary:hover {
+    background: #0b3d45;
+    border-color: #0b3d45;
+}
+
+.model-form label {
+    color: #0b3d45;
+}
+
+.userBlockHorizontalDropdown {
+    background-color: #181D3F;
+}
+
+.financialChartPrice,
+.financialChartPrice>div {
+    min-height: 300px !important;
+}
+
+.rotate {
+
+    /* Safari */
+    -webkit-transform: rotate(-90deg);
+
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+
+    /* IE */
+    -ms-transform: rotate(-90deg);
+
+    /* Opera */
+    -o-transform: rotate(-90deg);
+
+    float: left;
+
+}
+
+.rangeslider {
+    margin: 0 !important;
+}
+
+.rangeslider-horizontal {
+    height: 6px !important;
+    width: 300px !important;
+}
+
+.rangeslider-horizontal .rangeslider__handle {
+    width: 17px !important;
+    height: 17px !important;
+}
+
+.rangeslider-horizontal .rangeslider__handle:after {
+    width: 10px !important;
+    height: 10px !important;
+    top: 2px !important;
+    left: 2px !important;
+}
+
+.rangeslider-horizontal .rangeslider__fill {
+    background-color: #0b3d45cf !important;
+}
+
+
+/* 
         background-color: #0b3d45cf !important;
      */
-    
-    
-     /* input fields css */
-     .input-lg {
-        height: 49px !important;
-     }
-
-     .input-md {
-        height: 49px !important;
-     }
-
-     .PhoneInputInput {
-        border: none;
-        font-size: 1rem;
-        padding-left: 10px;
-     }
 
 
+/* input fields css */
+.input-lg {
+    height: 49px !important;
+}
 
-    
+.input-md {
+    height: 49px !important;
+}
+
+.PhoneInputInput {
+    border: none;
+    font-size: 1rem;
+    padding-left: 10px;
+}
+
+
+
+/* Css for New version Login Page */
+.loginContainer {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 90px 92px 116px 114px;
+    /* background-image: linear-gradient(to bottom, #b5e2fa, #c4e1f1, #c4e1f1, #d9d9d9, #fff); */
+    background-image: linear-gradient(to bottom, #b5e2fa, #cee7fe, #e4eeff, #f4f6ff, #ffffff);
+    height: -webkit-fill-available;
+}
+
+.loginInfoWrapper img {
+    object-fit: contain;
+}
+
+.loginInfoWrapper {
+    padding-top: 20px;
+}
+
+.loginInfoWrapper .loginMeta {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #000000;
+    font-size: 44px;
+    line-height: 65px;
+    font-weight: 500;
+    margin-bottom: 0;
+    padding: 160px 0;
+}
+
+.loginInfoWrapper .metaDetails {
+    font-size: 26px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #000000;
+    margin-bottom: 0;
+    font-weight: 400;
+    border-bottom: 2px dashed #ABABAB;
+    padding-bottom: 5px;
+    width: max-content;
+}
+
+.loginForm {
+    background-color: #F2F2F2;
+    border-radius: 10px;
+    padding: 80px 70px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    max-width: 700px;
+}
+
+.loginForm-title {
+    color: #3E4A9E;
+    font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 44px;
+    line-height: 65px;
+    margin-bottom: 49px;
+}
+
+.loginForm .has-wrapper .has-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+.loginForm .form-control {
+    color: #000000;
+    font-size: 20px;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.loginForm .form-group {
+    margin-bottom: 0;
+}
+
+.loginForm .forget-psw {
+    font-family: 'IBM Plex Sans', sans-serif;
+    text-align: right;
+    color: #3E4A9E;
+    font-size: 18px;
+    line-height: 32px;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.input-margin {
+    margin-bottom: 70px !important;
+}
+
+.loginForm .LogInBtn {
+    background-color: #393185 !important;
+    color: #fff;
+    border-radius: 35px;
+    border: none;
+    box-shadow: none;
+    padding: 13px 20px;
+    max-width: 450px;
+    width: 100%;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.loginForm .signUpTitle {
+    font-size: 20px;
+    color: #000;
+    text-align: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 32px;
+    opacity: 70%;
+    cursor: pointer;
+    text-decoration: underline;
+    padding-top: 20px;
+    margin-bottom: 0;
+
+
+}
+
+.loginForm .checkBoxRow {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0 56px;
+}
+
+.loginForm .checkBoxRow p {
+    color: #000000;
+    font-size: 24px;
+    margin-bottom: 0;
+    font-family: 'IBM Plex Sans', sans-serif;
+
+}
+
+.checkBoxRow .form-check-input {
+    position: static;
+    margin-top: 0;
+    margin-left: 0;
+    height: 33px;
+    width: 33px;
+}
+
+.loginForm .line {
+    border-top: 8px solid #3E4A9E;
+    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    /* left: 0; */
+    width: 115px;
+}
+
+.loginContainer .row-gapper {
+    gap: 165px;
+}
+
+
+
+/* CSS for Select Module Page  */
+.moduleBackground {
+    background-image: url("../img/dashboard.jpg");
+    background-size: 100% 100%;
+}
+
+.dashboard-title {
+    font-size: 44px;
+    line-height: 60px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    color: #000;
+    max-width: 750px;
+    width: 100%;
+    padding-top: 100px;
+}
+
+.mobuleSection img {
+    object-fit: contain;
+}
+
+.mobuleSection {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 58px 35px;
+    gap: 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+
+}
+
+.mobuleSection h4 {
+    margin-bottom: 0;
+    color: #04050B;
+    font-weight: 500;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 36px;
+
+}
+
+.moduleWRapper {
+    display: flex;
+    flex-direction: column;
+    gap: 55px;
+}
+
+.moduleLink {
+    background-color: #3E4A9E;
+    border-radius: 50%;
+    box-shadow: 4px 4px 10px rgb(0 0 0 / 25%);
+    width: 94px;
+    height: 94px;
+    position: absolute;
+    right: -34px;
+}
+
+.moduleLink a {
+    position: absolute;
+    right: 23px;
+    z-index: 1;
+    top: 28px;
+    color: #fff !important;
+    cursor: pointer;
+}
+
+.moduleLink a .css-i4bv87-MuiSvgIcon-root {
+    width: 40px;
+    height: 40px;
+}
+
+
+/* CSS for delete modal */
+.MuiPaper-root {
+    background-color: red;
+    padding: 15px 26px 10px 26px;
+}
+
+.MuiDialogTitle-root {
+    padding: 16px 24px 2px !important;
+}
+
+.MuiTypography-root {
+    margin-bottom: 0px;
+}
+
+@media (min-width:1024px) and (max-width: 1199px) {
+
+    .loginInfoWrapper {
+        padding-top: 36px;
+    }
+
+    .loginInfoWrapper .metaDetails {
+        font-size: 16px;
+    }
+
+    .loginInfoWrapper .loginMeta {
+        font-size: 24px;
+        line-height: 35px;
+        padding: 85px 0;
+    }
+
+    .loginContainer {
+        padding: 65px 60px 60px 60px;
+        height: -webkit-fill-available;
+    }
+
+    .loginForm {
+        padding: 40px 46px;
+
+    }
+
+
+    .loginForm .forget-psw {
+        font-size: 16px;
+        line-height: 24px;
+        padding-top: 8px;
+        margin-bottom: 0;
+    }
+
+
+    .loginForm .form-control {
+        font-size: 16px;
+    }
+
+    .loginForm-title {
+        font-size: 30px;
+        line-height: 36px;
+        margin-bottom: 24px;
+        max-width: 190px;
+    }
+
+    .input-margin {
+        margin-bottom: 28px !important;
+    }
+
+    .checkBoxRow .form-check-input {
+        height: 22px;
+        width: 22px;
+    }
+
+    .input-lg {
+        height: 42px !important;
+    }
+
+    .loginForm .checkBoxRow p {
+        font-size: 16px;
+    }
+
+    .loginForm .checkBoxRow {
+        padding: 16px 0 20px;
+        gap: 10px;
+    }
+
+    .loginForm .LogInBtn {
+        padding: 10px 12px;
+        font-size: 18px;
+        width: 92%;
+
+    }
+
+    .loginInfoWrapper img {
+        width: 200px;
+        height: 100px;
+    }
+
+    .loginForm .signUpTitle {
+        font-size: 16px;
+        padding-top: 12px;
+        padding-bottom: 1px;
+    }
+
+
+    .loginContainer .row-gapper {
+        gap: 30px;
+    }
+
+    .mobuleSection {
+        padding: 40px 30px;
+        gap: 24px;
+    }
+
+
+    .mobuleSection h4 {
+        font-size: 24px;
+    }
+
+
+    .moduleLink {
+    width: 65px;
+    height: 65px;
+    right: -30px;
+    }
+
+    .moduleLink a .css-i4bv87-MuiSvgIcon-root {
+        width: 28px;
+        height: 28px;
+    }
+
+    .moduleLink a {
+        right: 15px;
+        top: 16px;
+
+    }
+
+    .dashboard-title {
+        font-size: 28px;
+        line-height: 40px;
+        padding-top: 50px;
+    }
+
+    .mobuleSection img {
+        width: 170px;
+        height: 75px;
+    }
+}
+
+
+@media (min-width:1200px) and (max-width: 1359px) {
+
+    .loginInfoWrapper {
+        padding-top: 36px;
+    }
+
+    .loginInfoWrapper img {
+        width: 200px;
+        height: 100px;
+    }
+
+    .loginInfoWrapper .metaDetails {
+        font-size: 18px;
+    }
+
+    .loginInfoWrapper .loginMeta {
+        font-size: 30px;
+        line-height: 50px;
+        padding: 125px 0;
+    }
+
+    .loginContainer {
+        padding: 70px 72px 70px 80px;
+        height: -webkit-fill-available;
+    }
+
+    .loginForm {
+        padding: 58px 55px;
+
+    }
+
+    .loginForm-title {
+        font-size: 34px;
+        line-height: 42px;
+        margin-bottom: 30px;
+    }
+
+    .input-margin {
+        margin-bottom: 50px !important;
+    }
+
+    .checkBoxRow .form-check-input {
+        height: 28px;
+        width: 28px;
+    }
+
+    .loginForm .checkBoxRow p {
+        font-size: 20px;
+    }
+
+    .loginForm .checkBoxRow {
+        padding: 16px 0 32px;
+    }
+
+    .loginForm .LogInBtn {
+        padding: 10px 20px;
+        font-size: 22px;
+    }
+
+    .loginForm .signUpTitle {
+        font-size: 18px;
+        padding-top: 16px;
+    }
+
+
+    .loginContainer .row-gapper {
+        gap: 120px;
+    }
+
+    .mobuleSection {
+        padding: 46px 35px;
+        gap: 32px;
+    }
+
+
+    .mobuleSection h4 {
+        font-size: 30px;
+    }
+
+
+    .moduleLink {
+        width: 75px;
+        height: 75px;
+        right: -30px;
+    }
+
+    .moduleLink a .css-i4bv87-MuiSvgIcon-root {
+        width: 32px;
+        height: 32px;
+    }
+
+    .moduleLink a {
+        right: 20px;
+        top: 25px;
+
+    }
+
+    .dashboard-title {
+        font-size: 32px;
+        line-height: 46px;
+        padding-top: 55px;
+    }
+
+    .mobuleSection img {
+        width: 170px;
+        height: 75px;
+    }
+}
+
+@media (min-width:1360px) and (max-width: 1440px) {
+    .loginInfoWrapper .metaDetails {
+        font-size: 22px;
+    }
+
+    .loginInfoWrapper .loginMeta {
+        font-size: 38px;
+        line-height: 54px;
+        padding: 138px 0;
+    }
+
+    .loginContainer {
+        padding: 75px 78px 75px 85px;
+        height: -webkit-fill-available;
+    }
+
+    .loginForm {
+        padding: 65px 60px;
+
+    }
+
+    .loginForm-title {
+        font-size: 38px;
+        line-height: 50px;
+        margin-bottom: 32px;
+    }
+
+    .input-margin {
+        margin-bottom: 50px !important;
+    }
+
+    .checkBoxRow .form-check-input {
+        height: 28px;
+        width: 28px;
+    }
+
+    .loginForm .checkBoxRow p {
+        font-size: 20px;
+    }
+
+    .loginForm .checkBoxRow {
+        padding: 16px 0 32px;
+    }
+
+    .loginForm .LogInBtn {
+        padding: 10px 20px;
+        font-size: 22px;
+    }
+
+    .loginForm .signUpTitle {
+        font-size: 18px;
+        padding-top: 16px;
+    }
+
+    .mobuleSection {
+        padding: 52px 45px;
+        gap: 42px;
+    }
+
+
+    .mobuleSection h4 {
+        font-size: 34px;
+    }
+
+
+    .moduleLink {
+        width: 85px;
+        height: 85px;
+        right: -38px;
+    }
+
+    .moduleLink a .css-i4bv87-MuiSvgIcon-root {
+        width: 35px;
+        height: 35px;
+    }
+
+    .moduleLink a {
+        right: 20px;
+        top: 25px;
+
+    }
+
+    .dashboard-title {
+        font-size: 40px;
+        line-height: 56px;
+        padding-top: 70px;
+    }
+
+    .mobuleSection img {
+        width: 170px;
+        height: 75px;
+    }
+
+}

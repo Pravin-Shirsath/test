@@ -28,6 +28,7 @@ class DeleteConfirmationDialog extends Component {
             onClose={() => this.close()}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
+            maxWidth="false"
          >
             <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
             <DialogContent>
@@ -36,11 +37,11 @@ class DeleteConfirmationDialog extends Component {
                </DialogContentText>
             </DialogContent>
             <DialogActions>
-               <Button onClick={() => this.close()} className="btn-danger text-white">
-                  Cancel
-               </Button>
                <Button onClick={onConfirm} className="btn-primary text-white" autoFocus>
                   Yes
+               </Button>
+               <Button onClick={() => this.close()} className="btn-danger text-white">
+                  Cancel
                </Button>
             </DialogActions>
          </Dialog>
