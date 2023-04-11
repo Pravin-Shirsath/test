@@ -223,15 +223,21 @@ const CreateDataset = (props) => {
         });
 
           uppy3.use(XHR, {
-          endpoint: `${BASE_URL}/api/automaton/file-uploads/uppy/xhr/upload/${143}/`,
+          endpoint: `${BASE_URL}/api/automaton/file-uploads/uppy/xhr/upload/`,
           method: 'POST',
-          formData: true,
+          
           fieldName: 'file',
          
           headers: {
             'X-My-Custom-Header': 'header-value',
             Authorization: accessToken,
           //  "Content-Type": "multipart/form-data"
+          "Acess-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS, GET, POST, PATCH, PUT",
+          "Access-Control-Allow-Headers":
+          "Origin, X-Requested-With, Content-Type, Accept, Authorization, Extra-Data",
+
+          
           },
         });
 

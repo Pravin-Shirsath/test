@@ -219,6 +219,12 @@ export default function UserManagement(props) {
     setAddNewUserModal(true)
   }
 
+  const onAddUpdateUserModalClose = () => {
+    setAddNewUserModal(false)
+    setUsername("")
+     setEmail("")
+  }
+
 
   /**
    * Add New User
@@ -243,7 +249,9 @@ export default function UserManagement(props) {
     
               if (res?.status === 200 ) {
                 NotificationManager.success(res?.data?.message)
+
                 getCustomersListData()
+                onAddUpdateUserModalClose()
               } else {
                
                 NotificationManager.error("!")
@@ -281,12 +289,6 @@ export default function UserManagement(props) {
 
 
 
-
-  const onAddUpdateUserModalClose = () => {
-    setAddNewUserModal(false)
-    setUsername("")
-     setEmail("")
-  }
 
 
 
@@ -421,9 +423,9 @@ export default function UserManagement(props) {
         className="addCustomerModal "
 
       >
-        <ModalHeader toggle={() => onAddUpdateUserModalClose()}>
-          <strong>Welcome</strong>
-        </ModalHeader>
+      
+       <center> <strong>Welcome</strong></center>
+     
         <ModalBody>
           <FormGroup row >
 
