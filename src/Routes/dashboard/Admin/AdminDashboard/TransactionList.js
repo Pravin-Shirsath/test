@@ -30,9 +30,9 @@ function TabContainer({ children, dir }) {
    );
 }
 
-const NewUserheading = ['No','user', 'email', 'phone', 'GST No', 'Data Available'];
-const LowDataUser =['No', 'user', 'email', 'phone', 'GST No', 'Data Available'];
-const CoupansHeding = ['Sr No', 'Coupon Id','Created Date', 'Discount', 'is Utilized', 'Utilized by', 'Discount Amt','Action'];
+const NewUserheading = ['No','User', 'Email', 'Phone', 'GST No', 'Data Available'];
+const LowDataUser =['No', 'User', 'Email', 'Phone', 'GST No', 'Data Available'];
+const CoupansHeding = ['Sr No', 'Coupon Id','Created Date', 'Discount', 'Is Utilized', 'Utilized By', 'Discount Amt','Action'];
 
 function TransactionList(props){
   const history = useHistory();
