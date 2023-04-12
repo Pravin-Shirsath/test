@@ -35,12 +35,14 @@ import RctSectionLoader from '../../../Components/RctSectionLoader/RctSectionLoa
 import '../../../Assets/css/user.css'
 import {
   DeleteDataset,
+  getSearchProjectDatasets,
   getViewProjectDatasets
 } from '../../../Api/'
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import EditDataset from '../ReuseComponent/EditDataset';
+import { getFormatDate2 } from 'Constants/DateFormator';
 export default function ViewProject(props) {
   const history = useHistory();
  
@@ -120,6 +122,11 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     }
   }
 
+
+
+
+
+
   const EditModal = (item) => {
     setSelectedItem(item)
   
@@ -194,6 +201,35 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     history.push("/app/dashboard/viewDataset")
   }
 
+
+
+  
+
+  const getSearchedCustomerData = () => {
+    const accessToken = JSON.parse(localStorage.getItem('token'));
+    const projectId = localStorage?.getItem("projId")
+    if (accessToken !== null) {
+       getSearchProjectDatasets(accessToken,projectId, searchText)
+        .then((res) => {
+          if (res?.status === 200 && res?.data?.results.length>0) {
+            setFilteredDatasets(res?.data?.results);
+            setSearchText('')
+            // console.log('Response from customerlist :', res)
+          } else {
+            // console.log('Response from customerlist:', res)
+            setFilteredDatasets(datasets);
+            setSearchText('');
+            NotificationManager.error("No dataset found!")
+          }
+        })
+        .catch((err) => {
+          // console.log('Response from customerlist:', err)
+        })
+    }
+  }
+
+
+
   console.log(filteredDatasets, "filteredd datasets")
   return (
     <div className="user-management">
@@ -216,7 +252,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
             <div className='search-row'>
               <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
               <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} 
-              // onClick={getSearchedCustomerData}
+               onClick={getSearchedCustomerData}
               >Search</Button>
             </div>
 
@@ -242,6 +278,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
               {filteredDatasets &&
                 filteredDatasets.map((dataset, i, data) => {
                   // let active = user?.is_active
+                  let created_Date = getFormatDate2((dataset?.date_created))
                   return (
 
                     <tr key={i}>
@@ -254,7 +291,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
                           </div>
                         </div>
                       </td>
-                      <td>{dataset?.date_created ? dataset?.date_created : '-'}</td>
+                      <td>{created_Date?created_Date: '-'}</td>
                       <td className="list-action d-flex ">
                     
                       <VisibilityIcon onClick={()=>handleView(dataset)} />

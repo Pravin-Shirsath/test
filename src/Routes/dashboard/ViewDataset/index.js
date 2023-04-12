@@ -109,8 +109,8 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 
 const getDatasetFiles = () => {
     const authToken = JSON.parse(localStorage.getItem("token"));
-    // const datasetId = localStorage?.getItem("datasetId") || 146;
-    const datasetId = 146
+    const datasetId = localStorage?.getItem("datasetId")
+    // const datasetId = 146
 
     if(authToken !== null){
         ViewFiles(authToken, datasetId)
@@ -244,10 +244,11 @@ const getDatasetFiles = () => {
             <div className='viewDatasetFilesContainer'>
                 {
                     filteredDatasetFiles && filteredDatasetFiles.map((file,ind)=> {
+                      console.log(file)
                         return(
                                 <div className='imageContainer' key={ind} onClick={()=>handleFileSelect(file)}>
                                     {
-                                      file.selectedFile ? <CheckBoxIcon className="folderIcon" /> : (file.file_type == "png" ? <ImageIcon className="folderIcon" /> : <FolderIcon className="folderIcon" />)
+                                      file.selectedFile ? <CheckBoxIcon className="folderIcon" /> : (file.file_type == null ? <ImageIcon className="folderIcon" /> : <FolderIcon className="folderIcon" />)
                                     }
                                     <div className="fileName">{file.file_name}</div>
                                 </div>

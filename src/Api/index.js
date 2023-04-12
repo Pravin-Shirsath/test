@@ -448,6 +448,65 @@ export const SearchLowDataAvilableUser = (token, searchItem) => {
     });
 };
 
+
+
+/** customer view all project
+ *
+ * @param {*} token
+ * @param {*} userid
+ * @param {*} pagenumber
+ * @returns
+ */
+
+ export const CustomerProjects = (token, pageNumber ,id) => {
+
+  let params={
+    "user_id":id
+  }
+  console.log(params,token,"pageNumber=",pageNumber,">>>>>>>>>>>>>>>>>>>>")
+   return axios
+    .post(`${BASE_URL}/api/automaton/projects/admin-view/?page=${pageNumber}`,params, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((res) => {
+      console.log("Delete customer details :", res);
+      return res;
+    });
+};
+
+/**
+ *
+ * @param {*} token
+ * @param {*} userid
+ * @returns
+ */
+
+export const SearchCustomerProjects = (token, searchItem,id) => {
+  let params={
+    "user_id":id
+  }
+  return axios
+    .post(`${BASE_URL}/api/automaton/projects/admin-view/?search=${searchItem}`,params, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((res) => {
+      console.log("Delete customer details :", res);
+      return res;
+    });
+};
+
+
+
+
+
+
+
+
+
 /**    Admin SECTION END */
 
 /**    Customer SECTION Start */
@@ -471,7 +530,7 @@ export const UserAccountStatus = (token) => {
     });
 };
 
-/**
+/** customer view all project
  *
  * @param {*} token
  * @param {*} userid
@@ -499,6 +558,7 @@ export const GetAlLProjectList = (token, pageNumber) => {
  */
 
 export const GetSearchProjectList = (token, searchItem) => {
+  console.log("....",searchItem)
   return axios
     .get(`${BASE_URL}/api/automaton/projects/view/?search=${searchItem}`, {
       headers: {
@@ -1400,6 +1460,28 @@ export const getViewProjectDatasets = (authToken, projectId, pageNumber) => {
       return res
     })
 }
+
+export const getSearchProjectDatasets = (authToken, projectId, searchItem) => {
+  return axios.post( `${BASE_URL}/api/automaton/datasets/view/?search=${searchItem}`,
+  {
+    "project_id": projectId
+  },
+  {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `token ${authToken}`
+    }
+  }
+)
+  .then(res => {
+    console.log("view projects datasets list:", res)
+    return res
+  })
+}
+
+
+
+
 
 
 // API FOR VIEW FILES IN VIEW DATASET PAGE i.e; VIEWDATASET 

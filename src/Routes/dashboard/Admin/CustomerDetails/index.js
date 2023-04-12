@@ -21,7 +21,7 @@ import Table from "./Table"
 const CustomerDetails = (props) => {
 
   const { location } = props
-  console.log(location.state)
+  console.log(location,">>>>>>>")
 
   const [Accout, setAccout] = useState()
   const [useData, setUseData] = useState(0)
@@ -108,7 +108,7 @@ const CustomerDetails = (props) => {
           </div>
           {/* user Profile end */}
 
-         {/* <Table /> */}
+         <Table />
          
 
 

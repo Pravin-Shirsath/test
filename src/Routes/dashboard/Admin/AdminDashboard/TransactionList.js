@@ -53,8 +53,8 @@ function TransactionList(props){
 
 // THIS FUNCTION NAVIGGATE TO PERTICULAR USE INFO
      const  Navigate =(list)=>{
-     
-
+      console.log(list ,"list ")
+      localStorage.setItem('CustomerId',JSON.stringify(list?.id))
       
             history.push("/app/dashboard/Admin/CustomerDetails",list)
      }
@@ -447,7 +447,7 @@ const NewhandlePageChange = (pageNumber) => {
                                  <TableCell>{user?.username?user?.username:"-"}</TableCell>
                                  <TableCell>{user?.email ? user?.email : '-'}</TableCell>
                               
-                                 <TableCell>{user?.phone ? user?.phone : '-'}</TableCell>
+                                 <TableCell>{user?.mobile_number? user?.mobile_number : '-'}</TableCell>
                                  <TableCell>{user?.gst_number != null ? user?.gst_number : '-'}</TableCell>
                                  <TableCell>{user?.total_size_consumed != null ? user?.total_size_consumed :0}</TableCell>
                                  

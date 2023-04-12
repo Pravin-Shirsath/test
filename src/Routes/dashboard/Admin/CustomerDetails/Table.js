@@ -42,10 +42,12 @@ import RctCollapsibleCard from './../../../../Components/RctCollapsibleCard/RctC
 import RctSectionLoader from '../../../../Components/RctSectionLoader/RctSectionLoader'
 import '../../../.././Assets/css/user.css'
 import {
-  DeleteProject, GetAlLProjectList, GetSearchProjectList,
+  CustomerProjects,
+  DeleteProject, GetAlLProjectList, GetSearchProjectList, SearchCustomerProjects,
  
   
 } from '../../../.././Api/'
+import { getFormatDate2 } from 'Constants/DateFormator'
 
 
 
@@ -69,12 +71,13 @@ const Table = () => {
   //    history.push("app/dashboard/Admin/Dashboard")
   //  }
 
-
+    
 
   const ProjectList = () => {
     const accessToken = JSON.parse(localStorage.getItem('token'))
+    const CustomerID = JSON.parse(localStorage.getItem('CustomerId'))
     if (accessToken !== null) {
-      GetAlLProjectList(accessToken, activePage)
+      CustomerProjects(accessToken, activePage,CustomerID)
         .then((res) => {
           if (res?.status === 200) {
             setProject(res?.data?.results);
@@ -129,9 +132,10 @@ const Table = () => {
 
 
   const getSearchedProjectData = () => {
-    const accessToken = JSON.parse(localStorage.getItem('token'))
+    const accessToken = JSON.parse(localStorage.getItem('token'));
+    const CustomerID = JSON.parse(localStorage.getItem('CustomerId'))
     if (accessToken !== null) {
-      GetSearchProjectList(accessToken, searchText)
+      SearchCustomerProjects(accessToken, searchText,CustomerID)
         .then((res) => {
           if (res?.status === 200 && res?.data?.results.length > 0) {
             setFilteredProject(res?.data?.results);
@@ -208,45 +212,41 @@ const Table = () => {
              <thead>
                <tr>
                  <th></th>
-                 <th>No</th>
-                 <th>User</th>
-                 <th>Email</th>
-                 <th>Phone</th>
-                 {/* <th>Action</th> */}
+                 <th>Project Id</th>
+                 <th>Project Name </th>
+                 <th>Size</th>
+                 <th>Created Date</th>
+                 <th>Status</th>
                </tr>
              </thead>
  
              {/****** mine filtered Table body, without ternary conditional value  *****/}
              <tbody>
              {filterProject &&
-              filterProject.map((user, i,data) => {
-                   let active = user?.is_active  
+              filterProject.map((Project , i,data) => {
+                let created = getFormatDate2(Project.date_created)
                  return(
 
                    <tr key={i}>
                      <td></td>
-                     <td>{user?.id}</td>
+                     <td>{Project?.id}</td>
                      <td>
                        <div className="media">
                          <div className="media-body">
-                           <h5 className="mb-5 fw-bold">{user?.user}</h5>
+                           <h5 className="mb-5 fw-bold">
+                           {Project?.project_name}
+                           </h5>
                          </div>
                        </div>
                      </td>
-                     <td>{user?.email ? user?.email : '-'}</td>
+                     <td>{Project?.size != null ? Project?.size :"-"}</td>
                      <td>
-                       {user?.phone ? user?.phone : '-'}
+                    { created}
                      </td>
- 
-                     {/* <td className="list-action" style={{display:"flex", gap:"3px"}}>
-                   
-                       <Switch
-                         onClick={()=>handleToggleUser(user)}
-                        on={active}
-                        className={user?.is_active==true?"bg-primary":"bg-danger"}
-                     />
-                      
-                     </td> */}
+                     <td>
+                    {Project?.status != null ? Project?.status :"-"}
+                     </td>
+                    
                    </tr>
                  )})}
              </tbody>

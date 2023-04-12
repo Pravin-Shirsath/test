@@ -153,13 +153,13 @@ const [disable,setDisable]=useState(true)
                             <div style={{ position: "relative" }}>
                                 <Avatar
                                     alt="user 2"
-                                    src={`${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg`}
+                                    src={ image != null ? image :`${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg`}
                                     className="size-100 rounded-circle mr-15 "
                                 />
                                 <div className=" rounded-circle bordered d-flex align-items-center justify-content-center" style={{ position: "absolute", bottom: "-7px", right: "17px", backgroundColor: "#464D69", width: '30px', height: "30px" }}>
 
                                     <i className="ti-pencil rounded-circle bordered text-white" > </i>
-                                    <input type='file' className="rounded-circle bordered" style={{ position: "absolute", bottom: "0px", right: "0px", width: "30px", height: "30px", opacity: 0 }} />
+                                    <input type='file' className="rounded-circle bordered" onChange={(e)=>handleImageUpload(e)} style={{ position: "absolute", bottom: "0px", right: "0px", width: "30px", height: "30px", opacity: 0 }} />
 
                                 </div>
                             </div>
