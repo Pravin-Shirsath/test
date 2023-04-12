@@ -53,7 +53,7 @@ function Header(props) {
   const history = useHistory()
 
   useEffect(()=> {
-    console.log("token got in headers useEffect", localStorage.getItem(localStorage.getItem("token")))
+    console.log("token got in headers useEffect", localStorage.getItem("token"))
   },[])
 
 

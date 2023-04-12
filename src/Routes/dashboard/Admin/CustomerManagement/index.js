@@ -284,7 +284,7 @@ import Switch from 'react-toggle-switch';
                      </td>
                      <td>{user?.email ? user?.email : '-'}</td>
                      <td>
-                       {user?.phone ? user?.phone : '-'}
+                       {user?.mobile_number ? user?.mobile_number : '-'}
                      </td>
  
                      <td className="list-action" style={{display:"flex", gap:"3px"}}>

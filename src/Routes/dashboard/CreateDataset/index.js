@@ -221,6 +221,7 @@ const CreateDataset = (props) => {
           id: 'uppy',
           autoProceed: false,
           exposedHeaders: ["Access-Control-Allow-Headers"],
+          hidePauseResumeButton:false
         });
 
           uppy3.use(XHR, {
@@ -235,9 +236,7 @@ const CreateDataset = (props) => {
           //  "Content-Type": "multipart/form-data"
           "Acess-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "OPTIONS, GET, POST, PATCH, PUT",
-          "Access-Control-Allow-Headers":
-          "Origin, X-Requested-With, Content-Type, Accept, Authorization, Extra-Data",
-
+          "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept, Authorization, Extra-Data",
           
           },
         });
@@ -441,6 +440,10 @@ const CreateDataset = (props) => {
           open={open}
           target={document.body}
           onRequestClose={() => setOpen(false)}
+          hideCancelButton={true}
+          hidePauseResumeButton={true}
+          showPauseResume={true}
+          proudlyDisplayPoweredByUppy={false}
         />
 
       }
