@@ -30,6 +30,10 @@
 
 }
 
+.globalFontFamily{
+    font-family: 'IBM Plex Sans', sans-serif !important;
+}
+
 /*  Admin Dashboard Table */
 .tab-Heading {
     padding-bottom: 0px !important;

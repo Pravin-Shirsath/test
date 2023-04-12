@@ -21,6 +21,5 @@ export  const str = {
     CancelText:"Cancel",
     changeText:"Change",
     checkedboxWarning:'Make sure you have checked the checkbox',
-    askRechargeText:"Do you want to ",
-    recharge:"recharge"
+    askRechargeText:"Do you want to recharge",
 }
