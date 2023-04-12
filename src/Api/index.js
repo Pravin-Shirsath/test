@@ -1493,10 +1493,10 @@ export const getSearchProjectDatasets = (authToken, projectId, searchItem) => {
  * @returns 
  */
 
-export const ViewFiles = (authToken, datasetId) => {
+export const ViewFiles = (authToken, datasetId, pageNumber) => {
   console.log(authToken, datasetId, "authToken and datasetId on ViewFiles Api call")
 
-  return axios.post( `${BASE_URL}/api/automaton/file-uploads/view-files/`,
+  return axios.post( `${BASE_URL}/api/automaton/file-uploads/view-files/?page=${pageNumber}`,
     {
     "dataset_id": datasetId
     },
