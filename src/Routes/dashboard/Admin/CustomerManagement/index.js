@@ -276,11 +276,11 @@ import Switch from 'react-toggle-switch';
                      <td></td>
                      <td>{user?.id}</td>
                      <td>
-                       <div className="media">
-                         <div className="media-body">
-                           <h5 className="mb-5 fw-bold">{user?.user}</h5>
-                         </div>
-                       </div>
+                       
+                         
+                           {user?.username}
+                         
+                       
                      </td>
                      <td>{user?.email ? user?.email : '-'}</td>
                      <td>
