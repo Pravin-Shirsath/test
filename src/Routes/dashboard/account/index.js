@@ -20,11 +20,9 @@
 // intl messages
 import IntlMessages from '../../../Util/IntlMessages';
 
+// main css
+import "../../../Assets/css/main.css"
 
-
-
-
- 
  // rct collapsible card
 
  
@@ -102,7 +100,7 @@ useEffect(()=>{
             heading={<center > <h2>Account</h2></center> }
                  
          >
-        <div className="w-100 d-flex justify-content-between px-40"> 
+        <div className="w-100 d-flex justify-content-between px-40  globalFontFamily"> 
         <h3>Used </h3> <h3>Available </h3>
         </div>
 
@@ -112,31 +110,30 @@ useEffect(()=>{
             totalData == 0 ? <Progress bar color="danger" value={100} style={{ height: "50px" }} ><h2 style={{marginTop:"6px"}}>0GB</h2></Progress>
             :
             <Progress multi style={{ height: "50px" }}>
-        <Progress bar color="danger" value={useData} ><h2 style={{marginTop:"6px"}}>{useData}GB</h2></Progress>
-        <Progress bar color="success" value={totalData-useData}  ><h2 style={{marginTop:"6px"}}>{totalData-useData}GB </h2></Progress>
-      </Progress>
+               <Progress bar color="danger" value={useData} ><h2 style={{marginTop:"6px"}}>{useData}GB</h2></Progress>
+               <Progress bar color="success" value={totalData-useData}  ><h2 style={{marginTop:"6px"}}>{totalData-useData}GB </h2></Progress>
+            </Progress>
          }
        
         </div>
             <div className="d-flex justify-content-center mt-50">
               
-               <h2>{str.askRechargeText} <span className="mx-5 font-weight-bold ">{str.recharge} ?</span></h2>
+               <h2 className='globalFontFamily'>{str.askRechargeText} ?</h2>
                
             </div>
             <div className=" d-flex justify-content-center" style={{marginTop:"30px"}}>
 
             <FormGroup tag="fieldset" className="d-flex justify-content-between my-100 " >
-                       
                         <FormGroup check className="d-flex align-item-center mx-50">
                         <Input type="radio" name="radio1" style={{width:"30px" ,height:"30px"}} onClick={()=> history.push("/app/dashboard/rechargeModal")} />
-          <Label check className="mx-20  mt-10">
+          <Label check className="mx-20  mt-10  globalFontFamily">
              Yes
           </Label>
         </FormGroup>
             
         <FormGroup check className="d-flex align-item-center mx-50">
                         <Input type="radio" name="radio1" style={{width:"30px" ,height:"30px"}} onClick={()=> history.push("/app/dashboard/saas")} />
-          <Label check className="mx-20 mt-10">
+          <Label check className="mx-20 mt-10  globalFontFamily">
              No
           </Label>
         </FormGroup>
@@ -151,3 +148,5 @@ useEffect(()=>{
     )
  }
  
+
+//  esmrp.csb.app

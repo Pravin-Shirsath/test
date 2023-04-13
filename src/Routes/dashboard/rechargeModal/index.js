@@ -17,6 +17,7 @@ import RctCollapsibleCard from '../../../Components/RctCollapsibleCard/RctCollap
 // rct section loader
 import RctSectionLoader from '../../../Components/RctSectionLoader/RctSectionLoader'
 import '../../../Assets/css/user.css'
+import "../../../Assets/css/main.css"
 
 import {
   Progress, Button,
@@ -233,9 +234,6 @@ export default function Recharge(props) {
         title={<IntlMessages id="sidebar.recharge" />}
         match={props.match}
       />
-    
-
-
 
       <div className="row ">
         {filteredRecharges &&
@@ -273,17 +271,17 @@ export default function Recharge(props) {
         <div className="table-responsive dark-primary-text">
           <div className='rechargeBoxContainer'>
             <div className="heading dark-primary">
-              <h1>Recharge</h1>
+              <h1 className="globalFontFamily">Recharge</h1>
             </div>
 
             <div className="firstRow recharge-modal-row light-primary">
               <div className="left">
-                <p className="wrapper"><p className="text">Additional Space</p> <p className="inputMaterial"><input type="number" value={additionalspace} onChange={(e) => AddspceEvent(e.target.value)} /> GB <span className="diff">@{selectedPlan?.per_gb_rate} ₹ / GB</span></p></p>
+                <p className="wrapper"><p className="text globalFontFamily">Additional Space</p> <p className="inputMaterial globalFontFamily"><input type="number" value={additionalspace} onChange={(e) => AddspceEvent(e.target.value)} /> GB <span className="diff globalFontFamily">@{selectedPlan?.per_gb_rate} ₹ / GB</span></p></p>
               </div>
 
-              <div className="mid"><p>=</p></div>
+              <div className="mid globalFontFamily"><p>=</p></div>
 
-              <div className="right"><p>{amountTotal} ₹</p></div>
+              <div className="right globalFontFamily"><p>{amountTotal} ₹</p></div>
             </div>
 
             <div className="secondRow recharge-modal-row light-primary">
@@ -292,10 +290,10 @@ export default function Recharge(props) {
               </div>
 
               <div className="mid">
-                <p>=</p>
+                <p className="globalFontFamily">=</p>
               </div>
 
-              <div className="right"><p><span className="operator">-</span>{discount} ₹</p></div>
+              <div className="right globalFontFamily"><p><span className="operator globalFontFamily">-</span>{discount} ₹</p></div>
             </div>
 
             <div className="thirdRow recharge-modal-row light-primary">
@@ -304,12 +302,12 @@ export default function Recharge(props) {
               <div className="mid"></div>
 
               <div className="right">
-                <p> {PaybleAmount()} ₹</p>
+                <p className="globalFontFamily"> {PaybleAmount()} ₹</p>
               </div>
             </div>
 
             <div className="fourthRow recharge-modal-row light-primary">
-              <p>
+              <p className="globalFontFamily">
                 Net Payable <span>{PaybleAmount()} ₹</span>
               </p>
             </div>

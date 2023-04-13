@@ -29,12 +29,14 @@ import {
   getViewProjectDatasets,
   ViewFiles
 } from '../../../Api/'
-import DeleteIcon from '@mui/icons-material/Delete';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import EditIcon from '@mui/icons-material/Edit';
+
 import FolderIcon from '@mui/icons-material/Folder';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import ImageIcon from '@mui/icons-material/Image';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import DescriptionIcon from '@mui/icons-material/Description';
+
+
 import EditDataset from '../ReuseComponent/EditDataset';
 
 
@@ -113,7 +115,7 @@ const getDatasetFiles = () => {
     // const datasetId = 146
 
     if(authToken !== null){
-        ViewFiles(authToken, datasetId)
+        ViewFiles(authToken, datasetId, 1)
         .then(res=> {
             console.log(res, "resss in viewDataset file")
             if(res?.status == 200){
@@ -151,10 +153,10 @@ const getDatasetFiles = () => {
     console.log("pagination", pageNumber)
     if (activePage !== pageNumber) {
       const authToken = JSON.parse(localStorage.getItem('token'))
-      const projectId = localStorage?.getItem("projId")
+      const datasetId = localStorage?.getItem("datasetId")
 
       if (authToken !== null) {
-        getViewProjectDatasets(authToken, projectId, pageNumber)
+          ViewFiles(authToken, datasetId, pageNumber)
           .then((res) => {
             if (res?.status === 200) {
               setDatasetFiles(res?.data?.results);
@@ -246,11 +248,16 @@ const getDatasetFiles = () => {
                     filteredDatasetFiles && filteredDatasetFiles.map((file,ind)=> {
                       console.log(file)
                         return(
-                                <div className='imageContainer' key={ind} onClick={()=>handleFileSelect(file)}>
+                                <div className="mainBox" key={ind} onClick={()=>handleFileSelect(file)}>
+                                  <div className="imageContainer">
                                     {
-                                      file.selectedFile ? <CheckBoxIcon className="folderIcon" /> : (file.file_type == null ? <ImageIcon className="folderIcon" /> : <FolderIcon className="folderIcon" />)
+                                      file.selectedFile ? <CheckBoxIcon className="folderIcon" /> : (file.file_type == "pdf" ? <PictureAsPdfIcon className="folderIcon" /> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <ImageIcon className="folderIcon" /> : (file.file_type == "xlsx" ? <DescriptionIcon className="folderIcon" /> : <FolderIcon className="folderIcon" />)))
                                     }
-                                    <div className="fileName">{file.file_name}</div>
+                                  </div>
+                                  <div className="nameContainer">
+                                    <p>{file.file_name}</p>
+                                  </div>
+                                  
                                 </div>
                         )
                     })
@@ -260,10 +267,10 @@ const getDatasetFiles = () => {
             {filteredDatasetFiles.length == 0 && <center style={{ color: "black" }}>Data not available </center>}
           {
             datasetFiles?.length > 0 &&
-            <div className='paginationDiv'>
+            <div className='paginationDiv'> 
               <Pagination
                 activePage={activePage}
-                itemsCountPerPage={5}
+                itemsCountPerPage={6}
                 pageRangeDisplayed={5}
                 onChange={(e) => handlePageChange(e)}
                 itemClass="page-item"

@@ -32,6 +32,10 @@
 
 }
 
+.globalFontFamily{
+    font-family: 'IBM Plex Sans', sans-serif !important;
+}
+
 /*  Admin Dashboard Table */
 .tab-Heading {
     padding-bottom: 0px !important;
@@ -114,10 +118,10 @@
 
 .profile-block-wrap {
     background-color: rgb(250, 250, 250) !important;
-    width: 225px;
+    width: 228px;
     position: absolute;
     top: 10px;
-    left: 72px;
+    left: 45px;
 }
 
 
