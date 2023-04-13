@@ -37,7 +37,8 @@ import DialogContent from '@material-ui/core/DialogContent'
 // rct collapsible card
 
 
-
+// import css file
+import "../../../Assets/css/main.css"
 
 // widgets data
 import {
@@ -337,18 +338,18 @@ export default function SaasDashbaord(props) {
 
 
                     </section>
-                    <section className="Project-Card-Main" style={{height: "195px"}}>
-                      <section className="d-flex flex-direction: column align-items-center justify-content-between Project-cart-main">
+                    <section className="Project-Card-Main" style={{height: "200px"}}>
+                      <section className="px-4 d-flex flex-direction: column align-items-center justify-content-between Project-cart-main">
                         <div className="Doughnut-in-Project-cart">
                           <DoughnutChart />
                         </div>
-                        <div>
-                          <p className="project-card-dataset-text">Dataset Details <span className="project-card-dataset-box">{item?.project_dataset}</span></p>
-                          <p className="project-card-dataset-text">Status <span className="project-card-Status-box  "></span></p>
+                        <div className='d-flex flex-column' style={{gap: "5px"}}>
+                          <p className="project-card-dataset-text m-0">Dataset Details <span className="project-card-dataset-box">{item?.project_dataset}</span></p>
+                          <p className="project-card-dataset-text m-0">Status <span className="project-card-Status-box  "></span></p>
                         </div>
 
                       </section>
-                      <section className="d-flex flex-direction: column align-items-center justify-content-center" style={{marginTop:"18px"}} >
+                      <section className="d-flex flex-direction: column align-items-center justify-content-center" style={{marginTop:"22px"}} >
                         <Button variant="contained" color="primary" className="projectCardButton mx-2" onClick={() => EditModal(item)} >Edit</Button>
                         <Button variant="contained" color="primary" className="projectCardButton mx-2" onClick={()=>ViewProject(item)} >View</Button>
                         <Button variant="contained" color="danger" className="projectCardButton mx-2" onClick={() => { DeletModalOpen(item) }}>Delete</Button>

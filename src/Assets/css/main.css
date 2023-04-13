@@ -471,6 +471,12 @@
     height: 40px;
 }
 
+/* CSS for doughnut canvas */
+.Doughnut-in-Project-cart canvas {
+    width: 110px !important;
+    height: 110px !important;
+}
+
 
 input:-webkit-autofill {
     background-color: #F2F2F2 !important;
