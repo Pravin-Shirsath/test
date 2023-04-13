@@ -21,14 +21,15 @@ import PageTitleBar from 'Components/PageTitleBar/PageTitleBar'
 // intl messages
 import IntlMessages from 'Util/IntlMessages'
 import '../../../Assets/css/main.css'
-import { updateProfileInfo } from '../../../Api/index'
+import { profileInfo, updateProfileInfo } from '../../../Api/index'
 import Button from '@material-ui/core/Button'
 import { Zip_code_data } from 'Constants/Zipcodedata';
 import { ErrorHandling } from 'Constants/ErrorHandling';
+import eventBus from 'Constants/eventBus';
 
 export default function UserProfile(props) {
   const [type, setUserType] = useState(JSON.parse(localStorage.getItem('user_type')));
-
+ 
   const [firstName, setFirstName] = useState(JSON.parse(localStorage.getItem("ProfileData")).first_name);
   const [lastName, setLastName] = useState(JSON.parse(localStorage.getItem("ProfileData")).last_name);
   const [email, setEmail] = useState(JSON.parse(localStorage.getItem("ProfileData")).email);
@@ -72,6 +73,55 @@ export default function UserProfile(props) {
   // )
   //==================== MY update profile ====================//
 
+
+
+
+  const getProfileInfo = () => {
+    const accessToken = JSON.parse(localStorage.getItem('token'));
+    console.log("Token", accessToken)
+    if (accessToken !== null) {
+      profileInfo(accessToken)
+        .then(res => {
+
+          if (res?.status === 200) {
+           
+            localStorage.setItem("ProfileData", JSON.stringify(res?.data));
+            localStorage.setItem("user_type", JSON.stringify(res?.data?.user_type));
+            eventBus.dispatch("updateType", {
+              message: "type",
+        
+            });
+            setFirstName(JSON.parse(localStorage.getItem("ProfileData")).first_name)
+            setLastName(JSON.parse(localStorage.getItem("ProfileData")).last_name)
+            setPhone(JSON.parse(localStorage.getItem("ProfileData")).mobile_number)
+            console.log("Profile Info ResponseData", res?.data)
+          } else if (res?.status === 400) {
+            console.log("Profile Info Response", res)
+          }
+          else {
+            console.log("Profile Info Response", res)
+          }
+        }).catch(err => {
+         
+          
+        });
+    }
+  }
+
+
+
+
+useEffect(()=>{
+  getProfileInfo()
+},[])
+
+
+
+
+
+
+
+
   // getting image from user block component
   const GettingImage = (pic) => {
 
@@ -90,7 +140,7 @@ export default function UserProfile(props) {
       updateProfileInfo(ProfileDetails, accessToken, userId.id).then((res) => {
         if (res?.status === 200) {
           console.log('Response from update profile:', res)
-
+          getProfileInfo()
 
           NotificationManager.success('Profile Updated Successfully!');
 
@@ -666,7 +716,7 @@ export default function UserProfile(props) {
 
 
             </FormGroup>
-            {type == "admin" && <>
+            {(type == "admin" || ( type == "customer" && lcompanyname != null )) && <>
             <FormGroup className="row mt-50">
                   <Col sm={6}>
                     <h4>   <span className="text-danger madatory-field">*</span> Mandatory Field</h4>
@@ -706,7 +756,7 @@ export default function UserProfile(props) {
             </>}
 
           </div>
-          {(type == "customer" || type == "company_admin") &&
+          {((type == "customer" && lcompanyname == null )|| type == "company_admin") &&
 
             (<>
               <section className="border border-5 py-10 d-flex align-item-center justify-content-center dark-primary text-white">

@@ -203,23 +203,51 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   const handleView = (dataset) => {
     console.log(dataset?.id, "selected dataset ID")
     localStorage.setItem("datasetId", dataset?.id);
-    
-    const breadcrumbData = [
-      { name: 'Dashboard', url: '/app/dashboard/saas' },
-      { name: 'View Project', url: '/app/dashboard/viewProject' },
-      
-    ];
-    history.push("/app/dashboard/viewDataset",{breadcrumbData:breadcrumbData})
+    if(location?.state?.breadcrumbData){
+      let path = location?.state?.breadcrumbData[0]
+      if(path?.name == "Dashboard"){
+        const breadcrumbData = [
+          { name: 'Dashboard', url: '/app/dashboard/saas' },
+          { name: 'View Project', url: '/app/dashboard/viewProject' },
+          
+        ];
+        history.push("/app/dashboard/viewDataset",{breadcrumbData:breadcrumbData})
+      }else if(path?.name == "Project"){
+        const breadcrumbData = [
+          { name: 'Project', url: '/app/dashboard/project' },
+          { name: 'View Project', url: '/app/dashboard/viewProject' },
+          
+        ];
+        history.push("/app/dashboard/viewDataset",{breadcrumbData:breadcrumbData})
+      }
+    }
+  
   }
 
   // Dataset create
   const HandleCreate=()=>{
-    const breadcrumbData = [
-      { name: 'Dashboard', url: '/app/dashboard/saas' },
-      { name: 'View Project', url: '/app/dashboard/viewProject' },
-      
-    ];
-    history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
+
+
+
+    if(location?.state?.breadcrumbData){
+      let path = location?.state?.breadcrumbData[0]
+      if(path?.name == "Dashboard"){
+        const breadcrumbData = [
+          { name: 'Dashboard', url: '/app/dashboard/saas' },
+          { name: 'View Project', url: '/app/dashboard/viewProject' },
+          
+        ];
+        history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
+      }else if(path?.name == "Project"){
+        const breadcrumbData = [
+          { name: 'Project', url: '/app/dashboard/project' },
+          { name: 'View Project', url: '/app/dashboard/viewProject' },
+          
+        ];
+        history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
+      }
+    }
+       
   }
 
 

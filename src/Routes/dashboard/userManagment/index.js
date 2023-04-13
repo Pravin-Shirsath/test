@@ -423,11 +423,11 @@ export default function UserManagement(props) {
       <Modal
         isOpen={addNewUserModal}
         toggle={() => onAddUpdateUserModalClose()}
-        className="addCustomerModal "
+        className="addCustomerModal p-5"
 
       >
       
-       <center> <strong>Welcome</strong></center>
+       <center> <h1>Welcome</h1></center>
      
         <ModalBody>
           <FormGroup row >
@@ -470,11 +470,11 @@ export default function UserManagement(props) {
           </FormGroup>
         </ModalBody>
         <div style={{ display: "flex", justifyContent: "end" }}>
-
-          <Button variant="contained" color="primary" onClick={() => addNewUser()} className="py-2 mx-10" style={{ color: "#fff", }} >
+        
+          <Button variant="contained" color="primary" onClick={() => addNewUser()} className="projectCardButton mx-2" style={{ color: "#fff", cursor: "pointer" ,fontWeight:700}} >
             Send
           </Button>
-          <Button variant="contained" onClick={() => onAddUpdateUserModalClose()} className="py-2 px-3 bg-danger text-white mx-10" style={{ cursor: "pointer" }}>
+          <Button variant="contained" onClick={() => onAddUpdateUserModalClose()} className="projectCardButton mx-2 bg-danger text-white" style={{ cursor: "pointer",fontWeight:700 }}>
             Cancel
           </Button>
         </div>

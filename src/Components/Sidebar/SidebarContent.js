@@ -9,6 +9,7 @@ import IntlMessages from 'Util/IntlMessages';
 import NavMenuItem from './NavMenuItem';
 // redux actions
 import { onToggleMenu } from 'Store/Actions';
+import eventBus from 'Constants/eventBus';
 
 
 
@@ -28,6 +29,23 @@ function SidebarContent(){
       const type = JSON.parse(localStorage.getItem('user_type'));
       setType(type);
       console.log("type", type);
+
+
+      eventBus.on("updateType", (res) => {
+         // console.log('couponApply res=',res)
+         if (res.message) {
+          
+            const type = JSON.parse(localStorage.getItem('user_type'));
+            setType(type);
+   
+         
+   
+         }
+       })
+   
+       return () => eventBus.remove("updateType");
+
+
     }, [])
   
 
