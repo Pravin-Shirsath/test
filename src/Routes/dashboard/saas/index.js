@@ -60,6 +60,7 @@ import { BASE_URL } from 'Api/APIConst';
 import EditProject from '../ReuseComponent/EditProject';
 import ViewProject from '../ViewProject';
 import { isNotEmpty } from '@amcharts/amcharts4/.internal/core/utils/Utils';
+import { ErrorHandling } from 'Constants/ErrorHandling';
 
 
 
@@ -101,6 +102,11 @@ export default function SaasDashbaord(props) {
           }
         })
         .catch((err) => {
+
+          ErrorHandling(err)
+
+
+
           // console.log("status of invalid token", err?.response?.data, err?.response?.status)
           if (err?.response?.status == 401) {
             // conditional rendring
@@ -210,7 +216,13 @@ export default function SaasDashbaord(props) {
  const ViewProject=(item)=>{
    console.log(item,'viewProject iteeemmm in  saaasss aka dashboard' )
    localStorage.setItem("projId", item?.id)
-  history.push("/app/dashboard/viewProject",{BackPath:"/app/dashboard/saas",pathname:"Dashboard"})
+
+   const breadcrumbData = [
+    { name: 'Dashboard', url: '/app/dashboard/saas' },
+    
+  ];
+
+  history.push("/app/dashboard/viewProject",{breadcrumbData:breadcrumbData})
  }
 
 

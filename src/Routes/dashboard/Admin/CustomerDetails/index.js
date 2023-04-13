@@ -1,4 +1,4 @@
-import { UserAccountStatus } from 'Api';
+import { AccountStatus, UserAccountStatus } from 'Api';
 import React, { useEffect, useState } from 'react'
 
 import {
@@ -30,8 +30,9 @@ const CustomerDetails = (props) => {
 
   const GetAccountStatus = () => {
     const accessToken = JSON.parse(localStorage.getItem('token'))
+    const id = location?.state?.id
     if (accessToken !== null) {
-      UserAccountStatus(accessToken).then((res) => {
+      AccountStatus(accessToken,id).then((res) => {
         if (res?.status === 200) {
           if (res?.data) {
             setAccout(res?.data)

@@ -55,6 +55,7 @@ import { DeleteProject, GetAlLProjectList, GetSearchProjectList } from 'Api';
 import { getFormatDate2 } from 'Constants/DateFormator';
 import { BASE_URL } from 'Api/APIConst';
 import EditProject from '../ReuseComponent/EditProject';
+import { ErrorHandling } from 'Constants/ErrorHandling';
 
 
 export default function SaasDashbaord(props) {
@@ -94,14 +95,7 @@ export default function SaasDashbaord(props) {
         })
         .catch((err) => {
           // console.log("status of invalid token", err?.response?.data, err?.response?.status)
-          if (err?.response?.status == 401) {
-            // conditional rendring
-            // localStorage.clear();
-            // history.push("/login");
-            // window.location.reload();
-          } else {
-            // console.log('Response from customerlist:', err)
-          }
+          ErrorHandling(err)
         })
     }
   }

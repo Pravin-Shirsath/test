@@ -73,7 +73,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   const [datasets, setDatasets] = useState([]);
   const [filteredDatasets,setFilteredDatasets] = useState([])
   const [activePage, setActivePage] = useState(1)
-  const [totalPageCount, setTotalPageCount] = useState('');
+  const [totalPageCount, setTotalPageCount] = useState(0);
 
   useEffect(() => {
     const isLoggedInBool = localStorage.getItem("isLoggedIn")
@@ -198,9 +198,23 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   const handleView = (dataset) => {
     console.log(dataset?.id, "selected dataset ID")
     localStorage.setItem("datasetId", dataset?.id);
-    history.push("/app/dashboard/viewDataset")
+   
+    const breadcrumbData = [
+      { name: 'Dashboard', url: '/app/dashboard/saas' },
+      { name: 'View Project', url: '/app/dashboard/viewProject' },
+      
+    ];
+    history.push("/app/dashboard/viewDataset",{breadcrumbData:breadcrumbData})
   }
 
+  const HandleCreate=()=>{
+    const breadcrumbData = [
+      { name: 'Dashboard', url: '/app/dashboard/saas' },
+      { name: 'View Project', url: '/app/dashboard/viewProject' },
+      
+    ];
+    history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
+  }
 
 
   
@@ -228,8 +242,8 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     }
   }
 
-
-
+    console.log("history==",history)
+    console.log("props",props)
   console.log(filteredDatasets, "filteredd datasets")
   return (
     <div className="user-management">
@@ -256,7 +270,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
               >Search</Button>
             </div>
 
-            <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} onClick={()=> history.push("/app/dashboard/createDataset")}>Create Dataset</Button>
+            <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} onClick={()=>HandleCreate()}>Create Dataset</Button>
 
 
 

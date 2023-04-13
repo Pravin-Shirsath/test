@@ -17,15 +17,21 @@ import { NotificationManager } from 'react-notifications'
 import { EditProjectDetails, UpadatDataset } from 'Api';
 
 const EditDataset = ({ selected, Modalopen, close,reloadlist }) => {
-    const [datasetName, setDatasetName] = useState("")
+    const [open, setOpen] = useState(false)
+    console.log(selected)
+    const [datasetName, setDatasetName] = useState( "")
     const [comment, setComment] = useState("")
     
-    const [open, setOpen] = useState(false)
     
 
 
     useEffect(() => {
-       
+       if(selected){
+        setDatasetName(selected?.dataset_name || "")
+        setComment(selected?.comment)
+       }
+
+        console.log(datasetName,comment,">>>>>.>>>")
         //  setImage(item?.project_image)
         setOpen(Modalopen)
 
