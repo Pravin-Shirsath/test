@@ -116,10 +116,10 @@
 
 .profile-block-wrap {
     background-color: rgb(250, 250, 250) !important;
-    width: 228px;
+    width: 230px;
     position: absolute;
     top: 10px;
-    left: 45px;
+    left: 20px;
 }
 
 
@@ -477,6 +477,12 @@ input:-webkit-autofill {
     -webkit-background-clip: text !important;
 }
 
+@media (min-width:500px) and (max-width: 1023px){
+    .profile-block-wrap {
+        left: 5px;
+    }
+}
+
 @media (min-width:1024px) and (max-width: 1199px) {
 
     .loginInfoWrapper {
@@ -606,6 +612,10 @@ input:-webkit-autofill {
         width: 170px;
         height: 75px;
     }
+
+    .profile-block-wrap {
+        left: 5px;
+    }
 }
 
 
@@ -715,6 +725,10 @@ input:-webkit-autofill {
         width: 170px;
         height: 75px;
     }
+
+    .profile-block-wrap {
+        left: 10px;
+    }
 }
 
 @media (min-width:1360px) and (max-width: 1440px) {
@@ -813,6 +827,10 @@ input:-webkit-autofill {
     .mobuleSection img {
         width: 170px;
         height: 75px;
+    }
+
+    .profile-block-wrap {
+        left: 15px;
     }
 
 }
