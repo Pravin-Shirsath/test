@@ -61,11 +61,12 @@ import EditProject from '../ReuseComponent/EditProject';
 import ViewProject from '../ViewProject';
 import { isNotEmpty } from '@amcharts/amcharts4/.internal/core/utils/Utils';
 import { ErrorHandling } from 'Constants/ErrorHandling';
+import CustomBreadcrumbs from '../ReuseComponent/CustomBreadcrumbs';
 
 
 
 export default function SaasDashbaord(props) {
-  const { match } = props;
+  const { match,location } = props;
   const history = useHistory();
   const deleteConfirmationDialog = useRef()
   const [project, setProject] = useState([])
@@ -288,8 +289,8 @@ export default function SaasDashbaord(props) {
       </Helmet>
       <div className="charts-widgets-wrapper">
 
-        <PageTitleBar title={<IntlMessages id="sidebar.dashboard" />} match={props.match} />
-
+        {/* <PageTitleBar title={<IntlMessages id="sidebar.dashboard" />} match={props.match} /> */}
+        <CustomBreadcrumbs    currentPage={"Dashboard"} data={location?.state?.breadcrumbData}  />
         <RctCollapsibleCard
         // heading={<center> <h2>user Dashboard</h2></center> }
 

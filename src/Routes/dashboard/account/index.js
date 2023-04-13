@@ -41,11 +41,13 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
 import { str } from 'Constants/stringConst';
 import { UserAccountStatus } from 'Api';
 import { useHistory } from 'react-router';
+import CustomBreadcrumbs from '../ReuseComponent/CustomBreadcrumbs';
 
  
  export default function Account(props) {
    const history = useHistory();
     const { match } = props;
+    const {location}=props
 const[ Accout,setAccout]=useState()
 const[ useData,setUseData]=useState(0)
 const[ totalData,setTotalData]=useState(0)
@@ -95,7 +97,9 @@ useEffect(()=>{
          
         
           <div className="charts-widgets-wrapper">
-         <PageTitleBar title={<IntlMessages id="sidebar.account" />} match={props.match} />
+         {/* <PageTitleBar title={<IntlMessages id="sidebar.account" />} match={props.match} /> */}
+         <CustomBreadcrumbs    currentPage={"Account"} data={location?.state?.breadcrumbData}  />
+
          <RctCollapsibleCard
             heading={<center > <h2>Account</h2></center> }
                  

@@ -57,6 +57,7 @@ import { getFormatDate2 } from '../../../../Constants/DateFormator';
  } from '../../../.././Api/'
 import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
 import { copyToClipboard } from 'Constants/CopyToClipboard'
+import CustomBreadcrumbs from 'Routes/dashboard/ReuseComponent/CustomBreadcrumbs'
  
  export default function CustomerManagement(props) {
    const [coupans, setCoupans] = useState([])
@@ -70,6 +71,8 @@ import { copyToClipboard } from 'Constants/CopyToClipboard'
    const deleteConfirmationDialog = useRef()
    const [selected, setSelectedItem] = useState({})
  
+const {location}=props
+
    useEffect(() => {
    
        getCoupanAllData();
@@ -273,10 +276,12 @@ import { copyToClipboard } from 'Constants/CopyToClipboard'
          <title>Automaton | </title>
          <meta name="description" content="Automaton Widgets" />
        </Helmet>
-       <PageTitleBar
+       {/* <PageTitleBar
          title={<IntlMessages id="sidebar.coupon" />}
          match={props.match}
-       />
+       /> */}
+       <CustomBreadcrumbs    currentPage={"Account"} data={location?.state?.breadcrumbData}  />
+
 
           <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
              message="This will delete your Coupan permanently."

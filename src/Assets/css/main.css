@@ -36,6 +36,18 @@
     font-family: 'IBM Plex Sans', sans-serif !important;
 }
 
+
+.custombredcrum-heding{
+    font-size: 23px;
+    
+    font-weight: 600;
+}
+.custombredcrum-icon{
+    font-size: 15px;
+    font-weight: 800 !important;
+   
+}
+
 /*  Admin Dashboard Table */
 .tab-Heading {
     padding-bottom: 0px !important;

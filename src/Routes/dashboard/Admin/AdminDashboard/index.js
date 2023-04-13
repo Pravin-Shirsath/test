@@ -21,7 +21,9 @@ import {
   transferreport,
   expenseCategory
 } from './data';
+import CustomBreadcrumbs from 'Routes/dashboard/ReuseComponent/CustomBreadcrumbs';
 const AdminDashboard = (props) => {
+  const {location}= props
   return (
    //  <div>
    //    <h1>Admin  dashboard</h1>
@@ -47,7 +49,8 @@ const AdminDashboard = (props) => {
    </Helmet>
    <div className="charts-widgets-wrapper">
 
-     <PageTitleBar title={<IntlMessages id="sidebar.adminDashboard" />} match={props.match} />
+     {/* <PageTitleBar title={<IntlMessages id="sidebar.adminDashboard" />} match={props.match} /> */}
+     <CustomBreadcrumbs    currentPage={"Admin Dashboard"} data={location?.state?.breadcrumbData}  />
 
      <RctCollapsibleCard
      // heading={<center> <h2>user Dashboard</h2></center> }

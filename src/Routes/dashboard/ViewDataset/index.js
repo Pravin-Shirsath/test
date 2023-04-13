@@ -38,11 +38,12 @@ import DescriptionIcon from '@mui/icons-material/Description';
 
 
 import EditDataset from '../ReuseComponent/EditDataset';
+import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
 
 
 export default function ViewDataset(props) {
   const history = useHistory();
- 
+  const {location}=props
   //  const [users, setUsers] = useState() // use when data is coming from api
 //   const [users, setUsers] = useState([])
   //  const [filteredUsers, setFilteredUsers] = useState() // use when the data is coming fom api
@@ -219,10 +220,12 @@ const getDatasetFiles = () => {
         <title>Automaton | Customers List</title>
         <meta name="description" content="Automaton Widgets" />
       </Helmet>
-      <PageTitleBar
+      {/* <PageTitleBar
         title={<IntlMessages id="sidebar.viewDataset" />}
         match={props.match}
-      />
+      /> */}
+     <CustomBreadcrumbs    currentPage={"View Dataset"} data={location?.state?.breadcrumbData}  />
+
                 <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
              message="This will delete your Dataset permanently."
             //  onConfirm={() => Delete_Datset()}

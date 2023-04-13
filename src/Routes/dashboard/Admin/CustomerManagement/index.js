@@ -52,8 +52,10 @@ import Switch from 'react-toggle-switch';
    
  } from '../../../.././Api/'
 import { ErrorHandling } from 'Constants/ErrorHandling'
+import CustomBreadcrumbs from 'Routes/dashboard/ReuseComponent/CustomBreadcrumbs'
  
  export default function CustomerManagement(props) {
+   const {location}=props
    const history = useHistory();
    const [users, setUsers] = useState([])
    const [filteredUsers, setFilteredUsers] = useState([])
@@ -233,10 +235,12 @@ import { ErrorHandling } from 'Constants/ErrorHandling'
          <title>Automaton | Customers List</title>
          <meta name="description" content="Automaton Widgets" />
        </Helmet>
-       <PageTitleBar
+       {/* <PageTitleBar
          title={<IntlMessages id="custmermangement" />}
          match={props.match}
-       />
+       /> */}
+       <CustomBreadcrumbs    currentPage={"Customer Management"} data={location?.state?.breadcrumbData}  />
+
        <RctCollapsibleCard fullBlock>
          <div className="table-responsive">
            <div className="d-flex py-20 px-10 border-bottom" style={{justifyContent:'space-between'}}>

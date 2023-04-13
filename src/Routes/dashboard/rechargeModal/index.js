@@ -32,10 +32,11 @@ import {
 import { CuponValidCheck, GetRechargedPlan } from "Api";
 import { NotificationManager } from 'react-notifications'
 import { ErrorHandling } from "Constants/ErrorHandling";
+import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
 
 export default function Recharge(props) {
   const history = useHistory();
-
+  const {location}=props
   const [loading, setLoading] = useState(false)
   const [recharge, setRecharge] = useState([])
   const [filteredRecharges, setFilteredRecharges] = useState([])
@@ -230,10 +231,11 @@ export default function Recharge(props) {
         <title>Automaton | Customers List</title>
         <meta name="description" content="Automaton Widgets" />
       </Helmet>
-      <PageTitleBar
+      {/* <PageTitleBar
         title={<IntlMessages id="sidebar.recharge" />}
         match={props.match}
-      />
+      /> */}
+      <CustomBreadcrumbs    currentPage={"Recharge Modal"} data={location?.state?.breadcrumbData}  />
 
       <div className="row ">
         {filteredRecharges &&

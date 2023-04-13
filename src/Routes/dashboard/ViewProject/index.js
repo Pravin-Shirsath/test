@@ -43,8 +43,11 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import EditDataset from '../ReuseComponent/EditDataset';
 import { getFormatDate2 } from 'Constants/DateFormator';
+import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
+
 export default function ViewProject(props) {
   const history = useHistory();
+ const {location}=props
  
   //  const [users, setUsers] = useState() // use when data is coming from api
   const [users, setUsers] = useState([])
@@ -195,6 +198,8 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     }
   }
 
+
+  // Dataset View
   const handleView = (dataset) => {
     console.log(dataset?.id, "selected dataset ID")
     localStorage.setItem("datasetId", dataset?.id);
@@ -207,6 +212,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     history.push("/app/dashboard/viewDataset",{breadcrumbData:breadcrumbData})
   }
 
+  // Dataset create
   const HandleCreate=()=>{
     const breadcrumbData = [
       { name: 'Dashboard', url: '/app/dashboard/saas' },
@@ -242,8 +248,8 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     }
   }
 
-    console.log("history==",history)
-    console.log("props",props)
+    console.log("history==view project ",history)
+    console.log("props ",props)
   console.log(filteredDatasets, "filteredd datasets")
   return (
     <div className="user-management">
@@ -251,10 +257,14 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
         <title>Automaton | Customers List</title>
         <meta name="description" content="Automaton Widgets" />
       </Helmet>
-      <PageTitleBar
+      {/* <PageTitleBar
         title={<IntlMessages id="sidebar.viewProject" />}
         match={props.match}
-      />
+      /> */}
+ 
+      <CustomBreadcrumbs    currentPage={"View Project"} data={location?.state?.breadcrumbData} />
+
+
                 <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
              message="This will delete your Dataset permanently."
              onConfirm={() => Delete_Datset()}

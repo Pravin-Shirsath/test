@@ -26,10 +26,10 @@ import { CreateNewProject } from 'Api'
 import AddIcon from '@mui/icons-material/Add';
 import { ErrorHandling } from 'Constants/ErrorHandling'
 import CurrentTime from 'Constants/CurrentTime'
-
+import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
 const CreateProject = (props) => {
     const history = useHistory();
-
+    const {location}=props
     const [projectName, setProjectName] = useState("")
     const [dataset, setDataset] = useState("")
     const [projectDes, setProjectDes] = useState("")
@@ -131,12 +131,8 @@ const [disable,setDisable]=useState(true)
                 <meta name="description" content="Create Project" />
             </Helmet>
             <div className="charts-widgets-wrapper">
-                <div className=" d-flex align-items-cente">
-
-                    <NavTitle props={props} />
-                    <PageTitleBar title={<IntlMessages id="sidebar.createproject" />} match={props.match} />
-
-                </div>
+           
+            <CustomBreadcrumbs    currentPage={"Create Project"} data={location?.state?.breadcrumbData}  />
 
             </div>
 

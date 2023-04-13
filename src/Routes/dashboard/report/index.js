@@ -39,17 +39,19 @@
      topSellingProducts,
      trafficStatus
  } from './data';
+import CustomBreadcrumbs from '../ReuseComponent/CustomBreadcrumbs';
  
  export default function Reports(props) {
     const { match } = props;
+    const {location}=props
     return (
        <div className="ecom-dashboard-wrapper">
           <Helmet>
              <title>Reports Dashboard</title>
              <meta name="description" content="Automaton Ecommerce Dashboard" />
           </Helmet>
-          <PageTitleBar title={<IntlMessages id="sidebar.report" />} match={props.match} />
-          
+          {/* <PageTitleBar title={<IntlMessages id="sidebar.report" />} match={props.match} /> */}
+          <CustomBreadcrumbs    currentPage={"Report"} data={location?.state?.breadcrumbData}  />
          
        </div>
     )

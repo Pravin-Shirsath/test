@@ -54,10 +54,12 @@ import {
   AddUserIn_Company,
 
 } from '../../../Api/'
+import CustomBreadcrumbs from '../ReuseComponent/CustomBreadcrumbs'
 
 
 export default function UserManagement(props) {
   const history = useHistory();
+  const {location}=props
   const deleteConfirmationDialog = useRef()
   //  const [users, setUsers] = useState() // use when data is coming from api
   const [users, setUsers] = useState([])
@@ -323,10 +325,11 @@ export default function UserManagement(props) {
         <title>Automaton | Customers List</title>
         <meta name="description" content="Automaton Widgets" />
       </Helmet>
-      <PageTitleBar
+      {/* <PageTitleBar
         title={<IntlMessages id="sidebar.usermangement" />}
         match={props.match}
-      />
+      /> */}
+      <CustomBreadcrumbs    currentPage={"User Mangement"} data={location?.state?.breadcrumbData}  />
       <RctCollapsibleCard fullBlock>
      
         <div className="table-responsive">

@@ -18,6 +18,7 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
 import { str } from 'Constants/stringConst';
 import { BASE_URL } from 'Api/APIConst';
 import Table from "./Table"
+import CustomBreadcrumbs from 'Routes/dashboard/ReuseComponent/CustomBreadcrumbs';
 const CustomerDetails = (props) => {
 
   const { location } = props
@@ -71,7 +72,9 @@ const CustomerDetails = (props) => {
 
 
       <div className="charts-widgets-wrapper">
-        <PageTitleBar title={<IntlMessages id="sidebar.account" />} match={props.match} />
+        {/* <PageTitleBar title={<IntlMessages id="sidebar.account" />} match={props.match} /> */}
+     <CustomBreadcrumbs    currentPage={"Customer Details"} data={location?.state?.breadcrumbData}  />
+
 
         <RctCollapsibleCard
          

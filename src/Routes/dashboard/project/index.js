@@ -27,14 +27,7 @@ import DeleteConfirmationDialog from '../../../Components/DeleteConfirmationDial
 
 
 
-
-
-
-
 // rct collapsible card
-
-
-
 
 // widgets data
 import {
@@ -56,10 +49,11 @@ import { getFormatDate2 } from 'Constants/DateFormator';
 import { BASE_URL } from 'Api/APIConst';
 import EditProject from '../ReuseComponent/EditProject';
 import { ErrorHandling } from 'Constants/ErrorHandling';
+import CustomBreadcrumbs from '../ReuseComponent/CustomBreadcrumbs';
 
 
 export default function SaasDashbaord(props) {
-  const { match } = props;
+  const { match ,location} = props;
   const history = useHistory();
   const deleteConfirmationDialog = useRef()
   const [project, setProject] = useState([])
@@ -202,11 +196,22 @@ export default function SaasDashbaord(props) {
  const ViewProject=(item)=>{
   console.log(item, "viewProject iteeemmm in project")
   localStorage.setItem("projId", item?.id)
-  history.push("/app/dashboard/viewProject",{BackPath:match?.path,pathname:"Project"})
+  const breadcrumbData = [
+    { name: 'Project', url: '/app/dashboard/project' },
+    
+  ];
+
+  history.push("/app/dashboard/viewProject",{breadcrumbData:breadcrumbData})
  }
  const NavigateTo=()=>{
    
-  history.push("/app/dashboard/createProject",{BackPath:match?.path,pathname:"Project"})
+  const breadcrumbData = [
+    { name: 'Project', url: '/app/dashboard/project' },
+    
+  ];
+
+
+  history.push("/app/dashboard/createProject",{breadcrumbData:breadcrumbData})
  }
  
   return (
@@ -217,7 +222,8 @@ export default function SaasDashbaord(props) {
       </Helmet>
       <div className="charts-widgets-wrapper">
 
-        <PageTitleBar title={<IntlMessages id="sidebar.project" />} match={props.match} />
+        {/* <PageTitleBar title={<IntlMessages id="sidebar.project" />} match={props.match} /> */}
+      <CustomBreadcrumbs    currentPage={"Project"} data={location?.state?.breadcrumbData}  />
        
        
         <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
