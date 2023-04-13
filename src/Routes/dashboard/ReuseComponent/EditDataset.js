@@ -131,6 +131,8 @@ const EditDataset = ({ selected, Modalopen, close,reloadlist }) => {
                             <div className="d-flex align-items-center justify-content-end" style={{ marginTop: '30px', marginBottom: "30px" }}>
                                 <Button variant="contained" color="primary"  className="mx-2 d-flex justify-content-center align-items-center px-3" onClick={SaveEditDetails}>Save</Button>
                                 <Button variant="contained" color="danger"   className="mx-2 d-flex justify-content-center align-items-center"  onClick={() => (close(false), setOpen(false))}>Cancel</Button>
+                               
+                                
                             </div>
                         </div>
 

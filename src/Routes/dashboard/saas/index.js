@@ -37,7 +37,8 @@ import DialogContent from '@material-ui/core/DialogContent'
 // rct collapsible card
 
 
-
+// import css file
+import "../../../Assets/css/main.css"
 
 // widgets data
 import {
@@ -333,35 +334,35 @@ export default function SaasDashbaord(props) {
                   key={i}
                 >
                   <div className="shadow project-card-shadow">
-                    <section className="dark-primary text-white px-3 shadow rounded d-flex  align-items-center " style={{borderColor:'white'}}>
+                    <section className="dark-primary text-white px-3 shadow rounded d-flex  align-items-center " style={{borderColor:'white', height:"90px"}}>
 
                       <img
                         src={item?.project_image == null ? `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : `${ item.project_image}`}
                         alt="user profile"
-                        className=" rounded-circle border-box-shadow-image"
+                        className=" rounded-circle"
                        
-                        width={50}
-                        height={50}
+                        width={63}
+                        height={63}
                       />
-                      <div className="ml-4  align-items-center ">
-                        <p className="project-heading">{item.project_name}</p>
-                        <p className="project-date"> Created by {item.username} on {created}</p>
+                      <div className="ml-4 d-flex flex-column justify-content-center align-items-center">
+                        <p className="project-heading text-left w-100 m-0">{item.project_name}</p>
+                        <p className="project-date text-left w-100 m-0"> Created by {item.username} on {created}</p>
                       </div>
 
 
                     </section>
-                    <section className="Project-Card-Main ">
-                      <section className="d-flex flex-direction: column align-items-center justify-content-between Project-cart-main">
+                    <section className="Project-Card-Main" style={{height: "200px"}}>
+                      <section className="px-4 d-flex flex-direction: column align-items-center justify-content-between Project-cart-main">
                         <div className="Doughnut-in-Project-cart">
                           <DoughnutChart />
                         </div>
-                        <div>
-                          <p className="project-card-dataset-text">Dataset Details <span className="project-card-dataset-box">{item?.project_dataset}</span></p>
-                          <p className="project-card-dataset-text">Status <span className="project-card-Status-box  "></span></p>
+                        <div className='d-flex flex-column' style={{gap: "5px"}}>
+                          <p className="project-card-dataset-text m-0">Dataset Details <span className="project-card-dataset-box">{item?.project_dataset}</span></p>
+                          <p className="project-card-dataset-text m-0">Status <span className="project-card-Status-box  "></span></p>
                         </div>
 
                       </section>
-                      <section className="d-flex flex-direction: column align-items-center justify-content-center   " >
+                      <section className="d-flex flex-direction: column align-items-center justify-content-center" style={{marginTop:"22px"}} >
                         <Button variant="contained" color="primary" className="projectCardButton mx-2" onClick={() => EditModal(item)} >Edit</Button>
                         <Button variant="contained" color="primary" className="projectCardButton mx-2" onClick={()=>ViewProject(item)} >View</Button>
                         <Button variant="contained" color="danger" className="projectCardButton mx-2" onClick={() => { DeletModalOpen(item) }}>Delete</Button>

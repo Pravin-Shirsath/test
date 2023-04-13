@@ -743,9 +743,9 @@ function UserBlockHorizontal(props) {
 
 
 
-      <div className="sidebar-user-block profile-block d-flex text-align-center justify-content-center" >
-        <div style={{ color: "#fff " }} className="mt-2">
-          <NotificationsIcon />
+      <div className="sidebar-user-block profile-block d-flex text-align-center justify-content-center align-items-center" >
+        <div style={{ color: "#fff " }} className="mt-2 mr-2">
+          <NotificationsIcon style={{fontSize:"30px"}} />
         </div>
         <Dropdown
           isOpen={userDropdownMenu}
@@ -766,8 +766,8 @@ function UserBlockHorizontal(props) {
                 src={profileData?.profile_image == null ? `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : `${BASE_URL + profileData.profile_image}`}
                 alt="user profile"
                 className=" rounded-circle"
-                width={40}
-                height={40}
+                width={55}
+                height={55}
               />
             </div>
             {/* <div className="user-profile">
@@ -782,7 +782,7 @@ function UserBlockHorizontal(props) {
                   </div> */}
 
             <div className="user-info flex-column d-flex">
-              <span className="user-name ml-4 text-white">{profileData?.username} </span>
+              <span className="user-name ml-4 text-white" style={{fontSize:"16px"}}>{profileData?.username} </span>
               {/* <span className="user-name ml-4 text-white">{profileData?.email}</span> */}
 
             </div>
