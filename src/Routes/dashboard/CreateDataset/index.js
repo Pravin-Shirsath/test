@@ -38,7 +38,7 @@ import { BASE_URL } from 'Api/APIConst';
 import { NotificationManager } from 'react-notifications'
 import { createDataset } from 'Api'
 import AddIcon from '@mui/icons-material/Add';
-
+import CurrentTime from 'Constants/CurrentTime'
 
 
 import Uppy from "@uppy/core";
@@ -419,8 +419,8 @@ const CreateDataset = (props) => {
 
 
 
-
-  console.log(open, "open")
+  console.log(props, "propsd")
+  console.log(history, "open")
 
 
   return (
@@ -432,6 +432,7 @@ const CreateDataset = (props) => {
       <PageTitleBar
         title={<IntlMessages id="sidebar.createDataset" />}
         match={props.match}
+        
       />
       {
         instance != undefined &&
@@ -450,7 +451,12 @@ const CreateDataset = (props) => {
       <RctCollapsibleCard fullBlock>
         <div style={{ padding: "80px", alignItems: "center", justifyContent: 'center', display: "flex", }}>
           <div className="user-profile-widget box-shadow-box" style={{ width: "60%", backgroundColor: "white" }}>
-            <div className="p-20">
+            <div className="p-20 ">
+            <div className="d-flex align-items-end justify-content-end pr-10 ">
+
+            <CurrentTime/> 
+            </div>
+            
               <div style={{ marginTop: "30px" }}>
                 <FormGroup row >
                   <Col sm={12} className="d-flex  align-items-center justify-content-center">

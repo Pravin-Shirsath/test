@@ -31,6 +31,7 @@ import {
 } from 'reactstrap';
 import { CuponValidCheck, GetRechargedPlan } from "Api";
 import { NotificationManager } from 'react-notifications'
+import { ErrorHandling } from "Constants/ErrorHandling";
 
 export default function Recharge(props) {
   const history = useHistory();
@@ -83,6 +84,10 @@ export default function Recharge(props) {
           }
         })
         .catch((err) => {
+
+          ErrorHandling(err)
+
+
           // console.log("status of invalid token", err?.response?.data, err?.response?.status)
           if (err?.response?.status == 401) {
 
@@ -193,32 +198,10 @@ export default function Recharge(props) {
             }
           })
           .catch((err) => {
-            console.log('Response from customerlist:', err)
-            // console.log("status of invalid token", err?.response?.data, err?.response?.status)
 
-            if (err?.response?.status === 403 || err?.response?.status === 400) {
-              if (err?.response?.data) {
-                let data = err?.response?.data
-                for (var key in data) {
-                  if (data.hasOwnProperty(key)) {
-                    NotificationManager.error(data[key]);
-
-                  }
-                }
-
-              }
-            }
+            ErrorHandling(err)
 
 
-
-            if (err?.response?.status == 401) {
-              // conditional rendring
-              // localStorage.clear();
-              // history.push("/login");
-              // window.location.reload();
-            } else {
-              // console.log('Response from customerlist:', err)
-            }
           })
       }
     } else {

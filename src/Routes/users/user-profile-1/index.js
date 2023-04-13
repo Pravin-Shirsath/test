@@ -24,6 +24,7 @@ import '../../../Assets/css/main.css'
 import { updateProfileInfo } from '../../../Api/index'
 import Button from '@material-ui/core/Button'
 import { Zip_code_data } from 'Constants/Zipcodedata';
+import { ErrorHandling } from 'Constants/ErrorHandling';
 
 export default function UserProfile(props) {
   const [type, setUserType] = useState(JSON.parse(localStorage.getItem('user_type')));
@@ -133,30 +134,16 @@ export default function UserProfile(props) {
         }
       })
         .catch((err) => {
-
-          console.log('Update profile error :', err?.response)
-          console.log(err?.response?.data, "error data from user profile");
-          if (err?.response?.status === 400) {
-            if (err?.response?.data) {
-              let data = err?.response?.data
-              for (var key in data) {
-                if (data.hasOwnProperty(key)) {
-                  NotificationManager.error(data[key]);
-                  // console.log(key + " -> " + data[key]);
-                }
-              }
-              // err?.response?.data.forEach(item=>{
-
-              //   NotificationManager.error(item);
-              // })
-            }
-          }
+          ErrorHandling(err)
+          // console.log(err,"err")
         })
     } else {
       NotificationManager.error("accessToken not found");
     }
 
   }
+
+
 
   const AdminupdateProfile = () => {
     const Profile_Details = {}
@@ -693,7 +680,7 @@ export default function UserProfile(props) {
                           className="btn-block text-white px-50 fw-bold bg-primary.bg-gradient"
                           variant="contained"
                           size="medium"
-                          onClick={updateProfile}
+                          onClick={AdminupdateProfile}
                           style={{ maxWidth: "150px" }}
                         >
                           Save

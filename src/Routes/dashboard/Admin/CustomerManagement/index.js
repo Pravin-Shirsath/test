@@ -51,6 +51,7 @@ import Switch from 'react-toggle-switch';
    CustomerEnable,
    
  } from '../../../.././Api/'
+import { ErrorHandling } from 'Constants/ErrorHandling'
  
  export default function CustomerManagement(props) {
    const history = useHistory();
@@ -96,10 +97,7 @@ import Switch from 'react-toggle-switch';
          .catch((err) => {
            // console.log("status of invalid token", err?.response?.data, err?.response?.status)
            if(err?.response?.status == 401){
-           // conditional rendring
-             // localStorage.clear();
-             // history.push("/login");
-             // window.location.reload();
+            ErrorHandling(err)
            } else {
              // console.log('Response from customerlist:', err)
            }

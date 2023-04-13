@@ -502,6 +502,28 @@ export const SearchCustomerProjects = (token, searchItem,id) => {
 
 
 
+/**
+ *  Get user Account Status FOR Admin
+ * @param {*} token
+ * @returns
+ */
+
+ export const AccountStatus = (token,id) => {
+   let params = {
+     id:id
+   }
+  return axios
+    .post(`${BASE_URL}/api/version_0/users/account-status/`,params, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((res) => {
+      // console.log("Log out :",res);
+      return res;
+    });
+};
+
 
 
 

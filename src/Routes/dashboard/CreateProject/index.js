@@ -24,7 +24,8 @@ import { BASE_URL } from 'Api/APIConst';
 import { NotificationManager } from 'react-notifications'
 import { CreateNewProject } from 'Api'
 import AddIcon from '@mui/icons-material/Add';
-
+import { ErrorHandling } from 'Constants/ErrorHandling'
+import CurrentTime from 'Constants/CurrentTime'
 
 const CreateProject = (props) => {
     const history = useHistory();
@@ -77,24 +78,8 @@ const [disable,setDisable]=useState(true)
                         }
                     })
                     .catch((err) => {
-                       
-                        console.log("err=create project",err)
-                        NotificationManager.error("Project create failed!")
-                        if (err?.response?.status === 406) {
-                            if(err?.response?.data){
-                               let data = err?.response?.data?.message
-                              for (var key in data) {
-                                if (data.hasOwnProperty(key)) {
-                                  NotificationManager.error(`${key}:${data[key][0]}`);
-                                    // console.log(key + " -> " + data[key]);
-                                }
-                            }
-                              // err?.response?.data.forEach(item=>{
-                    
-                              //   NotificationManager.error(item);
-                              // })
-                            }
-                          }
+                        ErrorHandling(err)
+
                     })
             }
         } else {
@@ -126,6 +111,17 @@ const [disable,setDisable]=useState(true)
     };
 
 
+    const HandleCreate=()=>{
+        const breadcrumbData = [
+          { name: 'Project', url: '/app/dashboard/project' },
+          { name: 'Create Project', url: '/app/dashboard/createProject' }
+         
+         
+          
+        ];
+        history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
+      }
+    
 
 
     return (
@@ -147,7 +143,9 @@ const [disable,setDisable]=useState(true)
 
             <div style={{ alignItems: "center", justifyContent: 'center', display: "flex", }}>
                 <div className="user-profile-widget box-shadow-box" style={{ width: "50%", backgroundColor: "white" }}>
-                    <div className="c-primary py-70"></div>
+                    <div className="c-primary py-50 d-flex align-items-end justify-content-end pr-15 text-white">
+                    <CurrentTime/> 
+                    </div>
                     <div className="p-20">
                         <div className="d-flex user-avatar">
                             <div style={{ position: "relative" }}>
@@ -218,7 +216,7 @@ const [disable,setDisable]=useState(true)
                                 
                                 <Button variant="contained" color="primary" className=" mx-2" onClick={NewProject}>Save</Button>
                                 <Button variant="contained" color="danger"  className="mx-2 d-flex justify-content-center align-items-center" onClick={()=> history.push("/app/dashboard/project")}>Cancel</Button>
-                                <Button variant="contained" color="primary" className=" mx-2 d-flex justify-content-center align-item-center" disabled={disable} onClick={()=> history.push("/app/dashboard/createDataset")}>Create Dataset</Button>
+                                <Button variant="contained" color="primary" className=" mx-2 d-flex justify-content-center align-item-center" disabled={disable} onClick={()=> HandleCreate()}>Create Dataset</Button>
 
                             </div>
 

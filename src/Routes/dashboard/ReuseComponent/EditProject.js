@@ -18,14 +18,17 @@ import { EditProjectDetails } from 'Api';
 
 const EditProject = ({ selected, Modalopen, close,reloadlist }) => {
     const [projectName, setProjectName] = useState("")
-    const [projectDes, setProjectDes] = useState("")
+    const [projectDes, setProjectDes] = useState( "")
     const [image, setImage] = useState(null)
     const [open, setOpen] = useState(false)
     const [objImage, setObjImage] = useState(null)
 
 
     useEffect(() => {
-       
+        if(selected){
+            setProjectName(selected?.project_name ||"" )
+            setProjectDes(selected?.project_description || "")
+        }
         //  setImage(item?.project_image)
         setOpen(Modalopen)
 

@@ -61,6 +61,7 @@ import { DragDrop, StatusBar, Dashboard } from '@uppy/react';
 import Tus from '@uppy/tus'
 import eventBus from '../../Constants/eventBus';
 import { getUppyArray, setUppyArray } from 'Constants/UppyState';
+import { ErrorHandling } from 'Constants/ErrorHandling';
 const { DashboardModal } = require("@uppy/react");
 // Don’t forget to keep the Uppy instance outside of your component.
 
@@ -116,7 +117,7 @@ function UserBlockHorizontal(props) {
           console.log("errr====", err)
           dispatch({ type: LOGIN_USER_FAILURE });
           NotificationManager.error('Unable to logout');
-          console.log(err);
+          console.log(err,history);
         });
 
     }
@@ -169,6 +170,7 @@ function UserBlockHorizontal(props) {
     if (accessToken !== null) {
       profileInfo(accessToken)
         .then(res => {
+
           if (res?.status === 200) {
             setProfileData(res?.data);
             localStorage.setItem("ProfileData", JSON.stringify(res?.data));
@@ -181,9 +183,8 @@ function UserBlockHorizontal(props) {
             console.log("Profile Info Response", res)
           }
         }).catch(err => {
-          // localStorage.clear();
-          // history.push("/login");
-          console.log("error from profile info in userblock horizontal..", err);
+          ErrorHandling(err,history)
+          
         });
     }
   }
