@@ -38,10 +38,12 @@ const EditProject = ({ selected, Modalopen, close,reloadlist }) => {
 
 
     const handleImageUpload = e => {
+        console.log(e.target.files , "handle image upload click krne pe files hai ya nahi")
+
         const [file] = e.target.files;
         if (e.target.files.length) {
             var Obj = {
-                preview: URL.createObjectURL(e.target.files[0]),
+                preview: URL.createObjectURL(e?.target?.files[0]),
                 raw: e.target.files[0]
             };
             console.log("newimg", Obj.raw);
@@ -84,12 +86,14 @@ const EditProject = ({ selected, Modalopen, close,reloadlist }) => {
                                     close()
                                     }
                                     NotificationManager.success(" Project update suceesfull !") 
+                                    setImage(null)
                              }
                                 console.log('Response from search  :', res)
                             } else {
                                 // console.log('Response from customerlist:', res)
     
                                 NotificationManager.error("Project details update failed!")
+                                setImage(null)
                             }
                         })
                         .catch((err) => {
@@ -104,6 +108,8 @@ const EditProject = ({ selected, Modalopen, close,reloadlist }) => {
     }
 
 
+    console.log(selected, "Selectedddd in edit projectttt")
+    console.log(objImage, "object imaggeee")
     return (
         <Dialog
             onClose={() => (close(false), setOpen(false))}
@@ -118,7 +124,9 @@ const EditProject = ({ selected, Modalopen, close,reloadlist }) => {
                             <div style={{ position: "relative" }}>
                                 <Avatar
                                     alt="user 2"
-                                    src={selected?.project_image == null ? image == null ? `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : image : `${selected.project_image}`}
+                                    src={selected?.project_image == null ? 
+                                            (image == null ? `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : image )
+                                            : (image !== null ? image : `${selected.project_image}`)}
                                     className="size-100 rounded-circle mr-15 "
                                 />
                                 <div className=" rounded-circle bordered d-flex align-items-center justify-content-center" style={{ position: "absolute", bottom: "-7px", right: "17px", backgroundColor: "#464D69", width: '30px', height: "30px" }}>
@@ -169,7 +177,7 @@ const EditProject = ({ selected, Modalopen, close,reloadlist }) => {
                             </FormGroup>
                             <div className="d-flex align-items-center justify-content-end" style={{ marginTop: '30px', marginBottom: "30px" }}>
                                 <Button variant="contained" color="primary" className="projectCardButton mx-2" onClick={SaveEditDetails} >Change</Button>
-                                <Button variant="contained" color="danger" className="projectCardButton mx-2" onClick={() => (close(false), setOpen(false))}>Cancel</Button>
+                                <Button variant="contained" color="danger" className="projectCardButton mx-2" onClick={() => (close(false), setOpen(false, setImage(null)))}>Cancel</Button>
                             </div>
                         </div>
 

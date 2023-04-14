@@ -12,13 +12,13 @@ useEffect(()=>{
 },[])
 
   const history = useHistory();
-      console.log(data,"..")
+      console.log(data,"daaata..")
   
   const HandleNavigate = async (item,index)=>{
-    const Data = [...navData]
+    // const Data = [...navData]
     let myarray=[]
-    console.log(index,"Data=",Data)
-   
+    // console.log(index,"Data=",Data)
+
 
      for (let i = 0; i < index; i++) {
        

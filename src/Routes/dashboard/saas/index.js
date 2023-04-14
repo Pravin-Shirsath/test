@@ -65,7 +65,6 @@ import { ErrorHandling } from 'Constants/ErrorHandling';
 import CustomBreadcrumbs from '../ReuseComponent/CustomBreadcrumbs';
 
 
-
 export default function SaasDashbaord(props) {
   const { match,location } = props;
   const history = useHistory();
@@ -221,7 +220,6 @@ export default function SaasDashbaord(props) {
 
    const breadcrumbData = [
     { name: 'Dashboard', url: '/app/dashboard/saas' },
-    
   ];
 
   history.push("/app/dashboard/viewProject",{breadcrumbData:breadcrumbData})
@@ -280,8 +278,9 @@ export default function SaasDashbaord(props) {
 
 
 
-
-  
+ 
+  console.log(location, "location value in saas dashboard")
+  console.log(props, "proppsss in dashboard")
   return (
     <div className="ecom-dashboard-wrapper">
       <Helmet>

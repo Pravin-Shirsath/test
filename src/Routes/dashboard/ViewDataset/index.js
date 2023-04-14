@@ -35,6 +35,7 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import ImageIcon from '@mui/icons-material/Image';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import DescriptionIcon from '@mui/icons-material/Description';
+import CheckIcon from '@mui/icons-material/Check';
 
 
 import EditDataset from '../ReuseComponent/EditDataset';
@@ -214,6 +215,8 @@ const getDatasetFiles = () => {
   console.log(filteredDatasetFiles, "filteredd datasets")
   console.log(datasetFiles, "daaaaset Filesss")
   console.log(selectedFiles, "Selected filessss")
+  console.log(location, "location in view dataset ")
+  console.log(props, "proppsss in view dataset")
   return (
     <div className="user-management">
       <Helmet>
@@ -251,15 +254,25 @@ const getDatasetFiles = () => {
                     filteredDatasetFiles && filteredDatasetFiles.map((file,ind)=> {
                       console.log(file)
                         return(
-                                <div className="mainBox" key={ind} onClick={()=>handleFileSelect(file)}>
+                                // <div className="mainBox" key={ind} onClick={()=>handleFileSelect(file)}>
+                                <div className="mainBox" key={ind}>
                                   <div className="imageContainer">
-                                    {
+                                    {/* {
                                       file.selectedFile ? <CheckBoxIcon className="folderIcon" /> : (file.file_type == "pdf" ? <PictureAsPdfIcon className="folderIcon" /> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <ImageIcon className="folderIcon" /> : (file.file_type == "xlsx" ? <DescriptionIcon className="folderIcon" /> : <FolderIcon className="folderIcon" />)))
+                                    } */}
+
+                                    {
+                                      file.file_type == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> : (file.file_type == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> : <a href={file?.file} target="_blank"><FolderIcon className="folderIcon" /></a>))
                                     }
+
                                   </div>
                                   <div className="nameContainer">
                                     <p>{file.file_name}</p>
                                   </div>
+
+                                  <div className="checkDiv" onClick={()=>handleFileSelect(file)}>{
+                                    file.selectedFile ? <CheckIcon fontSize="medium" style={{fontWeight: "600"}} /> : ""
+                                  }</div>
                                   
                                 </div>
                         )
