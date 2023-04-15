@@ -438,7 +438,8 @@ console.log(document.querySelector('.uppy-StatusBar-actionBtn--done'),">>>.uppy-
 let m = false
 
 const h=(e)=>{
-  e.preventDefault()
+  // e.preventDefault()
+  alert("hello world")
   console.log(e,">>>>>>>>>>>")
 }
   return (
@@ -448,7 +449,7 @@ const h=(e)=>{
 
 
 <div>
-      <button onClick={addUppyInstance}>Add Uppy Instance</button>
+      {/* <button onClick={addUppyInstance}>Add Uppy Instance</button> */}
       {
         Object.keys(uppyInstances).map((uppyId) => (
         <div key={uppyId}>
@@ -465,8 +466,16 @@ const h=(e)=>{
             hidePauseResumeButton={false}
             hideUploadButton={false}
             hideRetryButton={false}
+            theme="dark"
             // disableInformer={true}
-           doneButtonHandler={(e)=>h}
+          //  doneButtonHandler={(e)=>h(e)}
+            doneButtonHandler={()=> {
+              alert("Hi");
+              return 
+              }}
+            onRequestCloseModal={()=>alert("close")}
+
+           
 
             showPauseResume={true}
             proudlyDisplayPoweredByUppy={false}

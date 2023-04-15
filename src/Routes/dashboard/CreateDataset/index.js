@@ -426,6 +426,7 @@ const CreateDataset = (props) => {
 
   const doneButtonHandler=(e)=>{
     console.log("hello")
+    
   let  breadcrumbData =location?.state?.breadcrumbData || []
      
   breadcrumbData.push( { name: 'Create Dataset', url: '/app/dashboard/createDataset' })
@@ -459,14 +460,14 @@ const CreateDataset = (props) => {
           open={open}
           target={document.body}
           onRequestClose={() => setOpen(false)}
-          hideCancelButton={true}
-          hidePauseResumeButton={true}
+          hideCancelButton={false}
+          hidePauseResumeButton={false}
           showPauseResume={true}
           proudlyDisplayPoweredByUppy={false}
           doneButtonHandler={doneButtonHandler}
           
         >
- <button onClick={doneButtonHandler}>Done</button>
+
       </DashboardModal>
       }
       <RctCollapsibleCard fullBlock>
