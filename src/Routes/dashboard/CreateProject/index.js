@@ -67,7 +67,7 @@ const [disable,setDisable]=useState(true)
                                setDisable(false)
                                 localStorage.setItem("projId", data?.project_created?.id)
                                 localStorage.setItem("project_name", data?.project_created?.project_name)
-                                NotificationManager.success("Project created !")
+                                NotificationManager.success("Project created successfully !")
                             }else{
                                 NotificationManager.error("Project create process failed!")
                             }

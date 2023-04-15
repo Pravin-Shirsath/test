@@ -276,9 +276,11 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     }
   }
 
-    console.log("history==view project ",history)
-    console.log("props ",props)
+  console.log("history==view project ",history)
+  console.log("props ",props)
   console.log(filteredDatasets, "filteredd datasets")
+  console.log(location, "location in view project")
+  console.log(props, "proppsss in view project")
   return (
     <div className="user-management">
       <Helmet>
