@@ -52,36 +52,39 @@ import { BASE_URL } from 'Api/APIConst';
 
 // Don't forget the CSS: core and the UI components + plugins you are using.
 // import { Dashboard } from "@uppy/react";
-import Uppy from "@uppy/core";
+// import Uppy from "@uppy/core";
 // const Uppy = require("@uppy/core");
-import '@uppy/core/dist/style.min.css';
-import '@uppy/dashboard/dist/style.min.css';
-import '@uppy/webcam/dist/style.min.css';
+// import '@uppy/core/dist/style.min.css';
+// import '@uppy/dashboard/dist/style.min.css';
+// import '@uppy/webcam/dist/style.min.css';
 import { DragDrop, StatusBar, Dashboard } from '@uppy/react';
-import Tus from '@uppy/tus'
+// import Tus from '@uppy/tus'
+
 import eventBus from '../../Constants/eventBus';
-import { getUppyArray, setUppyArray } from 'Constants/UppyState';
+// import { getUppyArray, setUppyArray } from 'Constants/UppyState';
 import { ErrorHandling } from 'Constants/ErrorHandling';
-const { DashboardModal } = require("@uppy/react");
-// Don’t forget to keep the Uppy instance outside of your component.
+// const { DashboardModal } = require("@uppy/react");
+// // Don’t forget to keep the Uppy instance outside of your component.
 
 
-
-const uppy = new Uppy()
-  // .use(RemoteSources, { companionUrl: 'https://companion.uppy.io' })
-  // .use(Webcam, { target: Dashboard })
-  // .use(ImageEditor, { target: Dashboard })
-  .use(Tus, { endpoint: 'https://tusd.tusdemo.net/files/' })
-  .on('complete', (result) => {
-    console.log('Upload result:', result)
-  });
+import Uppy from '@uppy/core';
+import { DashboardModal } from '@uppy/react';
+// import '@uppy/core/dist/style.css';
+// import '@uppy/dashboard/dist/style.css';
 
 
-
+import "@uppy/core/dist/style.css";
+import "@uppy/dashboard/dist/style.css";
+import "@uppy/status-bar/dist/style.css";
+import "@uppy/progress-bar/dist/style.css";
+import "@uppy/informer/dist/style.css";
+import XHR from '@uppy/xhr-upload';
+import FileCard from 'Routes/dashboard/ReuseComponent/exportToExcel';
 
 function UserBlockHorizontal(props) {
   const [userDropdownMenu, setUserDropdownMenu] = useState(false);
   const [profileData, setProfileData] = useState({});
+  const [uppyInstances, setUppyInstances] = useState({});
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -140,25 +143,30 @@ function UserBlockHorizontal(props) {
   }
 
 
-  const handleCancel = () => {
-    setState(...state, { statusDialogOpen: false })
-
-  }
+  
   useEffect(() => {
     getProfileInfo();
+// const a = document.getElementById("your-element").addEventListener("click", (event) =>{
+//     if (event.target.classList.contains("my-class")) {
+//       console.log("your-element has \"my-class\" class")
+//     }
+//   })
 
+
+console.log(document.getElementsByClassName(".uppy-u-reset"),">>>uppy-u-reset")
+console.log(document.querySelector('.uppy-c-btn'),">>>uppy-c-btn")
+console.log(document.querySelector('.uppy-StatusBar'),">>>.uppy-StatusBar")
+
+console.log(document.querySelector('.uppy-StatusBar-actionBtn--done'),">>>.uppy-StatusBar-actionBtn--done")
     eventBus.on("Upload_file", (res) => {
       // console.log('couponApply res=',res)
       if (res.message) {
         localStorage.setItem("project_name", res.message)
-        setState({ project_name: res.message ? res.message : localStorage.getItem("project_name") });
-
-        handleModalClick();
-
+        
       }
     })
 
-    return () => eventBus.remove("Upload_file");
+    return () =>{( eventBus.remove("Upload_file"))};
   }, [])
 
 
@@ -216,44 +224,6 @@ function UserBlockHorizontal(props) {
   // const [opnres, setOpnres] = useState(opn1.concat(opn2))
 
 
-
-  let str1 = "uppy";
-  let str2 = localStorage.getItem("projectId");
-  let res = str1.concat(str2);
-  let opn1 = "open";
-  let opn2 = localStorage.getItem("projectId");
-  let opnres = opn1.concat(opn2);
-
-
-
-
-  const [uppyInstance, setUppInstance] = useState(getUppyArray())
-
-
-  const [u, setU] = useState("my state")
-
-
-  const [state, setState] = useState(
-    {
-      isMobileSearchFormVisible: false,
-      userDetailsLocal: "",
-      open: undefined,
-      token: "",
-      floatingIconVisible: false,
-      cancelUpload: false,
-      proj_id: "",
-      project_name: "",
-      uppy_name_id: "",
-      dashboardArray: JSON.parse(localStorage.getItem("UppyArray")) || [],
-      projArray: [],
-      uppyArray: [],
-      statusDialogOpen: false,
-
-    }
-
-  )
-
-  console.log("my state  == ", state)
 
 
 
@@ -362,382 +332,276 @@ function UserBlockHorizontal(props) {
 
 
 
-  // const [userProfile, setUserProfile] = useState(JSON.parse(localStorage.getItem("userDetails")))
-
-  //  var userDetailsLocal = localStorage.getItem("userDetails");
-  // var userToken = localStorage.getItem("userToken");
-  // var newUserDetails = JSON.parse(userDetailsLocal);
 
 
+ // Dynamically generate an ID for a new Uppy instance
+ const generateUppyId = () => {
+  return `uppy-${Math.floor(Math.random() * 1000)}`;
+};
 
-  // console.log("hhhhh=====",uppy)
+// Create a new Uppy instance and add it to the state
+const addUppyInstance = () => {
+  const accessToken = JSON.parse(localStorage.getItem('token'))
+  const DatasetId = JSON.parse(localStorage.getItem('datasetid'))
+NotificationManager.success("hello")
 
-  /**
-     * Handle Video Upload
-     */
+  const uppyId = generateUppyId();
+  const uppyInstance = new Uppy({
+    id: 'uppy',
+    autoProceed: false,
+    pauseResume: true,
+    exposedHeaders: ["Access-Control-Allow-Headers"],
+    hidePauseResumeButton:false
+  });
 
-
-  // const  res1 = new Uppy({
-  //   // id : res,e
-  //   id: "SNT",
-  //   autoProceed: false,
-  //   debug: true,
-  //   allowMultipleUploads: true,
-  //   methods: ["OPTIONS", "GET", "POST", "PATCH", "PUT"],
-  //   exposedHeaders: ["Access-Control-Allow-Headers"],
-  //   allowedHeaders: [
-  //     "uppy-auth-token",
-  //     "Content-Type",
-  //     "Authorization",
-  //     "Uppy-Versions",
-  //     "Accept",
-  //     "project_id",
-  //     "folder_id",
-  //   ],
-  // }).use(Tus, { endpoint: 'https://tusd.tusdemo.net/files/' })
-  //   .on("complete", (result) => {
-    
-    
-  //   }).on("complete", (result) => {
+  uppyInstance.use(XHR, {
+    endpoint: `${BASE_URL}/api/automaton/file-uploads/uppy/xhr/upload/${DatasetId}/`,
+    method: 'POST',
+    resume: true,
+    fieldName: 'files',
    
-  //     });
-
-
+    headers: {
+      'X-My-Custom-Header': 'header-value',
+      Authorization: accessToken,
+    //  "Content-Type": "multipart/form-data"
+    "Acess-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "OPTIONS, GET, POST, PATCH, PUT",
+    "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept, Authorization, Extra-Data",
     
+    },
+  });
 
+  // Listen for events
+  uppyInstance.on('file-added', (file) => {
+    console.log('Added file', file);
+  });
 
+  uppyInstance.on('upload', (data) => {
+    console.log('Started uploading');
 
+  });
 
-  const handleModalClick = async () => {
-
-
-    let opn1 = "open";
-    let opn2 = await localStorage.getItem("projectId");
-    // console.log("projectid-1 = >", opn2)
-    let opnres = opn1.concat(opn2);
-    let str1 = "uppy";
-    let str2 = await localStorage.getItem("projectId");
-    let res = str1.concat(str2);
-    // console.log("project name in header", this.state.project_name)
-
-    if (await state[opnres] === undefined) {
-      let str1 = "uppy";
-      let str2 = localStorage.getItem("projectId");
-      // console.log("peojectID = >", str2)
-      let res = str1.concat(str2);
-
-      res = new Uppy({
-        // id : res,e
-        id: "SNT",
-        autoProceed: false,
-        debug: true,
-        allowMultipleUploads: true,
-        methods: ["OPTIONS", "GET", "POST", "PATCH", "PUT"],
-        exposedHeaders: ["Access-Control-Allow-Headers"],
-        allowedHeaders: [
-          "uppy-auth-token",
-          "Content-Type",
-          "Authorization",
-          "Uppy-Versions",
-          "Accept",
-          "project_id",
-          "folder_id",
-        ],
-      }).use(Tus, { endpoint: 'https://tusd.tusdemo.net/files/' })
-
-        // console.log("this[res]=>",this[res])
-        .on("complete", (result) => {
-          console.log("Result ", result)
-          console.log("this.state.proj_name", this.state.project_name)
-          setState({
-            ...state,
-            floatingIconVisible: false,
-            statusDialogOpen: false,
-            [opnres]: undefined,
-          })
-        }).on("complete", (result) => {
-          // console.log("Result ",result)
-          // console.log("this.state.proj_name", this.state.project_name)
-          setState({
-            ...state,
-            floatingIconVisible: false,
-            statusDialogOpen: false,
-            [opnres]: undefined,
-          });
+  uppyInstance.on('upload-success', (file, response) => {
+    console.log('Upload successful');
+  });
 
-          var array = [...state.dashboardArray]; // make a separate copy of the array
+  uppyInstance.on('upload-error', (file, error, response) => {
+    // Check if the error is an instance of Error or a string
+    const errorMessage = error instanceof Error ? error.message : error;
+    // alert(`Error uploading ${file.name}: ${response.body.message}`);
+    // console.log(response)
+    // console.log(error.getResponseError)
+    // // Display the error message to the user
+    // alert(`Error uploading ${file.name}: ${errorMessage}`);
+  });
 
-          var index = array.indexOf(res);
-          if (index !== -1) {
-            array.splice(index, 1);
-            setState({ ...state, dashboardArray: array });
-          }
+  setUppyInstances((prevState) => ({
+    ...prevState,
+    [uppyId]: uppyInstance,
+  }));
+};
+console.log(uppyInstances)
+// Cancel upload of a specific file
+const cancelUpload = (uppyId, fileId) => {
+  uppyInstances[uppyId].cancel(fileId);
+};
 
-          // let idArray = [];
-          // result.successful.forEach((element) => {
-          //   idArray.push(element.s3Multipart.key);
-          // });
-          // // console.log("Id Array", idArray);
-          // var headers = {
-          //   "Content-Type": "application/json",
-          //   Authorization: "Token " + localStorage.getItem("tkn"),
-          // };
-          // var params = {
-          //   project_id: localStorage.getItem("projectId"),
-          //   video_count: result.successful.length,
-          //   video_list: idArray,
-          // };
 
-          // axios
-          //   .post(
-          //     api_base_url + "/api/v0/project/upload-video-notification-mail/",
-          //     params,
-          //     { headers: headers }
-          //   )
-          //   .then((response) => { });
-          // this.setState({ cancelUpload: true });
-          // eventBus.dispatch("Refresh", { message: "Refresh Project Details" });
-          // localStorage.removeItem("tkn");
-          // NotificationManager.success("File(s) Uploaded Successfully", "", 1000);
-        }).on("upload-progress", (file, progress) => {
-          setState({
-            ...state,
-            floatingIconVisible: true,
-          });
-          // console.log("Uppy",this[res])
-        }).on("cancel-all", () => {
-          setState({
-            ...state,
-            floatingIconVisible: false,
-            statusDialogOpen: false,
-          });
-        }).on("upload-error", (file, error, response) => {
-          setState({ ...state, floatingIconVisible: true });
-          const { name } = file;
-          // message.error(`Fail to upload ${name}`);
-        })
 
-      const LArray =JSON.parse( await localStorage.getItem("UppyArray")) || []
 
-      const AddArray = [...LArray, res]
 
-      localStorage.setItem("UppyArray", JSON.stringify(AddArray));
-      console.log(" LArray", LArray)
 
 
-      // localStorage.setItem("UppyArray", );
-      console.log("res==", res)
 
-      //       let m= {...state, dashboardArray: [...state.dashboardArray, res]}
-      //  console.log("state m=",m)
 
 
-      //     setState(m);
-      // this.setState({projArray:[...this.state.projArray,this.state.proj_name]})
-      // console.log(projArray)
-    }
 
-    setState({
-      ...state,
-      [opnres]: !state[opnres],
-      isLoading: false,
-    });
 
 
 
+// class="uppy-u-reset uppy-c-btn uppy-StatusBar-actionBtn uppy-StatusBar-actionBtn--done"
 
+// console.log(document.getElementsByClassName(".uppy-StatusBar-actionBtn--done"),">>>>")
+// console.log(document.querySelector('.uppy-StatusBar-actionBtn--done'),">>>")
 
 
+console.log(document.getElementsByClassName(".uppy-u-reset"),">>>uppy-u-reset")
+console.log(document.querySelector('.uppy-c-btn'),">>>uppy-c-btn")
+console.log(document.querySelector('.uppy-StatusBar'),">>>.uppy-StatusBar")
 
+console.log(document.querySelector('.uppy-StatusBar-actionBtn--done'),">>>.uppy-StatusBar-actionBtn--done")
 
+// console.log(document.querySelector('.uppy-StatusBar'),">>>")
 
 
 
+let m = false
 
-
-
-
-
-
-
-
-
-
-
-
-    // let  res = "UppayDash"
-    // // console.log("project name in header", this.state.project_name)
-
-
-
-
-    //  res = new Uppy({
-    //     // id : res,e
-    //     id: "upp3",
-    //     autoProceed: false,
-    //     debug: true,
-    //     allowMultipleUploads: true,
-    //     methods: ["OPTIONS", "GET", "POST", "PATCH", "PUT"],
-    //     exposedHeaders: ["Access-Control-Allow-Headers"],
-    //     allowedHeaders: [
-    //       "uppy-auth-token",
-    //       "Content-Type",
-    //       "Authorization",
-    //       "Uppy-Versions",
-    //       "Accept",
-    //       "project_id",
-    //       "folder_id",
-    //     ],
-    //   }).use(Tus, { endpoint: 'https://tusd.tusdemo.net/files/' })
-
-    //   // console.log("this[res]=>",this[res])
-    //   .on("complete", (result) => {
-    //     // console.log("Result ",result)
-    //     // console.log("this.state.proj_name", this.state.project_name)
-    //     // setState(...state, {
-    //     //   floatingIconVisible: false,
-    //     //   statusDialogOpen: false,
-    //     //   opnres: undefined,
-    //     // }) 
-    //   }).on("upload-progress", (file, progress) => {
-    //       // setState(...state, {
-    //       //   floatingIconVisible: true,
-    //       // });
-    //       // console.log("Uppy",this[res])
-    //     }).on("cancel-all", () => {
-    //       // setState(...state, {
-    //       //   floatingIconVisible: false,
-    //       //   statusDialogOpen: false,
-    //       // });
-    //     }).on("upload-error", (file, error, response) => {
-    //       // setState(...state, { floatingIconVisible: true });
-    //       // const { name } = file;
-    //       // message.error(`Fail to upload ${name}`);
-    //     });
-
-    //     // var array = [...state.dashboardArray]; // make a separate copy of the array
-
-    //     // var index = array.indexOf([res]);
-    //     // if (index !== -1) {
-    //     //   array.splice(index, 1);
-    //     //   setState(...state, { dashboardArray: array });
-    //     // }
-
-    //     // let idArray = [];
-    //     // result.successful.forEach((element) => {
-    //     //   idArray.push(element.s3Multipart.key);
-    //     // });
-    //     // // console.log("Id Array", idArray);
-    //     // var headers = {
-    //     //   "Content-Type": "application/json",
-    //     //   Authorization: "Token " + localStorage.getItem("tkn"),
-    //     // };
-    //     // var params = {
-    //     //   project_id: localStorage.getItem("projectId"),
-    //     //   video_count: result.successful.length,
-    //     //   video_list: idArray,
-    //     // };
-
-    //     // axios
-    //     //   .post(
-    //     //     api_base_url + "/api/v0/project/upload-video-notification-mail/",
-    //     //     params,
-    //     //     { headers: headers }
-    //     //   )
-    //     //   .then((response) => { });
-    //     // this.setState({ cancelUpload: true });
-    //     // eventBus.dispatch("Refresh", { message: "Refresh Project Details" });
-    //     // localStorage.removeItem("tkn");
-    //     // NotificationManager.success("File(s) Uploaded Successfully", "", 1000);
-
-
-
-
-    //   console.log("res =",res)
-
-
-
-    //   // setUppInstance("uppy instance")
-    //   setU("hello world")
-
-    //     setU(res)
-
-    //     let arr= getUppyArray()
-    //     let ab= [...arr]
-    //     ab.push(res)
-    //       setUppyArray(ab)
-
-
-    //     setUppInstance( getUppyArray())
-
-    //     console.log("uppyInstance  internal =",uppyInstance)
-    //     console.log("u internan===",u)
-
-    //   // setState(...state, {
-    //   //   dashboardArray: [...]}],
-
-    //   // });
-
-    //   // this.setState({projArray:[...this.state.projArray,this.state.proj_name]})
-    //   // console.log(projArray)
-
-
-    // // setState(...state, {
-    // //   opnres: !state[opnres],
-    // //   isLoading: false,
-    // // });
-  }
-
-
-
-
-
-
-
-  // console.log("uppyInstance= extern==",uppyInstance)
-
-  console.log("state external==", state)
-
-  //  console.log(`state ${new Date()}`,state,)
+const h=(e)=>{
+  e.preventDefault()
+  console.log(e,">>>>>>>>>>>")
+}
   return (
     <div className="top-sidebar">
 
 
 
 
-
-
+<div>
+      <button onClick={addUppyInstance}>Add Uppy Instance</button>
       {
-        console.log("f=== ", state.dashboardArray)
-      }
+        Object.keys(uppyInstances).map((uppyId) => (
+        <div key={uppyId}>
 
-     
-      {state.dashboardArray.length > 0 && state.dashboardArray.map(
-            (key,i) =>
-              i === 1 &&
-              (
-                <DashboardModal
-                  //  uppy={this[res]}
-                  // Modal={true}
-                  width="80%"
-                  height="80%"
-                  closeModalOnClickOutside={true}
-                  proudlyDisplayPoweredByUppy={false}
-                  showSelectedFiles={true}
-                  // showRemoveButtonAfterComplete={true}
-                  uppy={key}
-                  // inline={true}
-                  // uppy={localStorage.getItem("projectId")}
-                  // onRequestClose={() => {
-                  //   this.setState({ [opnres]: false });
-                  //   // console.log(opnres);
-                  // }}
-                  open={true}
-                // open={this.state[key.opts.id]}
-                // target={document.body}
-                />
-              )
-          )}
+      
+
+
+          <DashboardModal
+            uppy={uppyInstances[uppyId]}
+            closeModalOnClickOutside
+            showProgressDetails
+            open={true}
+            hideCancelButton={false}
+            hidePauseResumeButton={false}
+            hideUploadButton={false}
+            hideRetryButton={false}
+            // disableInformer={true}
+           doneButtonHandler={(e)=>h}
+
+            showPauseResume={true}
+            proudlyDisplayPoweredByUppy={false}
+            onFilePause={(file) => {
+              console.log(`File paused: ${file.name}`);
+            }}
+            onFileResume={(file) => {
+              console.log(`File resumed: ${file.name}`);
+            }}
+            onCancel={(file) => {
+              console.log(`Upload of ${file.name} cancelled`);
+              cancelUpload(uppyId, file.id);
+            }}
+          />
+        </div>
+      ))
+      }
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* 
+    {Object.keys(uppyInstances).length > 0 && (
+          <div
+            className='css-uhb5lp'
+            style={{ position: "absolute", bottom:-100, right:0, backgroundColor: '#fff' }}    //position: absolute;top: 27%;left: 66%
+          
+            // open= {this.state.createUserDialog}
+            open={true}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle
+            
+            >
+              Video Uploading Status
+            </DialogTitle>
+            <Divider
+             
+            ></Divider>
+            <DialogContent
+              
+            >
+              {Object.keys(uppyInstances).length > 0 &&
+                Object.keys(uppyInstances).map(
+                  (upp, index) =>
+                    upp && (
+                      <div>
+                        {upp && (
+                          <label
+                          
+                          >
+                            Project Name : {upp?.opts?.id}
+                            <ol>
+                              {upp && upp.store.state.files && Object.keys(upp.store.state.files).length && Object.values(upp.store.state.files).map((file) =>
+                              (<div><li>{file.name}
+                                <br />
+                                <Progress
+                                  percent={file.progress.percentage}
+                                  status="success"
+                                />
+                              </li>
+                              </div>))
+                              }
+                            </ol>
+                          </label>
+                        )}
+                        // <Dashboard
+                        //   uppy={uppyInstances[upp]}
+                        //   height="50%"
+                        //   width="100%"
+                        // />
+                        <StatusBar
+                          uppy={uppyInstances[upp]}
+                          // hideUploadButton
+                          hideAfterFinish={false}
+                          showProgressDetails
+                        />
+                      </div>
+                    )
+                )}
+            </DialogContent>
+            <Divider
+             
+            ></Divider>
+            <DialogActions
+            
+            >
+              <Button
+               
+                 
+                
+                // onClick={this.handleCancel}
+                variant="contained"
+                className="btn-primary text-white bg-primary"
+                autoFocus
+              >
+                OK
+              </Button>
+            </DialogActions>
+          </div>
+        )} */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

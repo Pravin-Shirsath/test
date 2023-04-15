@@ -10,19 +10,20 @@ const SelectModules = () => {
 
   const [URLData, setURLData] = useState();
   const [URLLink , setURLLink ] = useState();
-  const [userType, setUserType] = useState();
+  const [userType, setUserType] = useState("");
   const history = useHistory();
 
 
 
   useEffect(() => {
     getURLs();
-    const user_type = localStorage.getItem("user_type");
+    const user_type =JSON.parse( localStorage.getItem("user_type"))
     setUserType(user_type);
   }, [])
 
 
   const navigateToDashbaord = () => {
+   
     if(userType === "admin") {
       history.push("app/dashboard/Admin/Dashboard");
     }
@@ -30,6 +31,7 @@ const SelectModules = () => {
     if(userType === "customer" || userType === "company_admin") {
       history.push('/app/dashboard/saas');    
     }
+    // alert("rr",JSON.stringify({userType:userType}))
   }
 
 
@@ -74,7 +76,7 @@ const SelectModules = () => {
           <div className='mobuleSection'>
             <img src={AutomataIcon} alt='automataLogo' width="188" height="80" />
             <h4> Processing Hub </h4>
-            <div className='moduleLink' onClick={navigateToDashbaord}> <Link to=""> <ArrowForwardOutlinedIcon /> </Link></div>
+            <div className='moduleLink' onClick={navigateToDashbaord}> <a> <ArrowForwardOutlinedIcon /> </a></div>
 
           </div>
           <div className='mobuleSection'>
