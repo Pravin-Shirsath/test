@@ -604,7 +604,7 @@ useEffect(()=>{
                   </Label>
                   <RegionDropdown
                     classes="w-100 form-control form-control-lg text-md"
-                    style={{ fontSize: '16px', type: "text" }}
+                    style={{ fontSize: '1rem', type: "text", paddingLeft:"10.5px" }}
                     country={country}
                     value={state}
                     onChange={(val) => (setState(val), console.log(val))} />
@@ -635,7 +635,7 @@ useEffect(()=>{
                     classes="w-100 form-control form-control-lg text-md"
                     value={country}
                     onChange={(val) => (setCountry(val))}
-                    style={{ fontSize: '17px', type: "text" }}
+                    style={{ fontSize: '1rem', type: "text", paddingLeft:"10.5px" }}
                   />
 
                   {/* <Input
@@ -735,7 +735,7 @@ useEffect(()=>{
                           variant="contained"
                           size="medium"
                           onClick={AdminupdateProfile}
-                          style={{ maxWidth: "150px" }}
+                          style={{ maxWidth: "150px", paddingTop:"11px", paddingBottom:"11px" }}
                         >
                           Save
                         </Button>
@@ -748,7 +748,7 @@ useEffect(()=>{
                           variant="contained"
                           size="medium"
                           onClick={() => { history.push("/") }}
-                          style={{ maxWidth: "150px" }}
+                          style={{ maxWidth: "150px", paddingTop:"11px", paddingBottom:"11px" }}
                         >
                           Cancel
                         </Button>
@@ -803,7 +803,7 @@ useEffect(()=>{
                         style={{ height: 55 }}
                         type="textarea"
                         name="billingAddress"
-                        className="input-lg"
+                        className="input-lg user-form-text-area"
                         value={billingAddress}
                         onChange={(e) => setBillingAddress(e.target.value)}
                         sm={9}
@@ -853,7 +853,7 @@ useEffect(()=>{
                         // rows={15}
                         style={{ height: 55 }}
                         name="companyAddress"
-                        className="input-lg"
+                        className="input-lg user-form-text-area"
                         value={companyAddress}
                         onChange={(e) => setCompanyAddress(e.target.value)}
                         sm={9}
@@ -884,7 +884,7 @@ useEffect(()=>{
                           variant="contained"
                           size="medium"
                           onClick={updateProfile}
-                          style={{ maxWidth: "150px" }}
+                          style={{ maxWidth: "150px", paddingTop:"11px", paddingBottom:"11px" }}
                         >
                           Save
                         </Button>
@@ -897,7 +897,7 @@ useEffect(()=>{
                           variant="contained"
                           size="medium"
                           onClick={() => { history.push("/") }}
-                          style={{ maxWidth: "150px" }}
+                          style={{ maxWidth: "150px", paddingTop:"11px", paddingBottom:"11px" }}
                         >
                           Cancel
                         </Button>
