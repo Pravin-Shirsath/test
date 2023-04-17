@@ -41,6 +41,9 @@ export default function UserProfile(props) {
   let lbillingAddress = JSON.parse(localStorage.getItem("ProfileData")).billing_address
   let ltaxNumber = JSON.parse(localStorage.getItem("ProfileData")).tax_number
   let lcompanyname = JSON.parse(localStorage.getItem("ProfileData")).company_name
+  let lcompanyAddress = JSON.parse(localStorage.getItem("ProfileData")).company_address
+  
+
 
   const [country, setCountry] = useState((lcountry != null && lcountry != "" ? lcountry : ""))
   const [zipCode, setZipCode] = useState(lzipCode != null && lzipCode != "" ? lzipCode : "")
@@ -48,7 +51,7 @@ export default function UserProfile(props) {
   const [companyName, setCompanyName] = useState(lcompanyname != null && lcompanyname != "" ? lcompanyname : "")
   const [billingAddress, setBillingAddress] = useState(lbillingAddress != null && lbillingAddress != "" ? lbillingAddress : "")
   const [taxNumber, setTaxNumber] = useState(ltaxNumber != null && ltaxNumber != "" ? ltaxNumber : "")
-  const [companyAddress, setCompanyAddress] = useState("")
+  const [companyAddress, setCompanyAddress] = useState(lcompanyAddress !== null && lcompanyAddress !== "" ? lcompanyAddress :"")
 
 
   const [firstNameError, setFirstNameError] = useState('')
@@ -324,6 +327,7 @@ useEffect(()=>{
   const updateProfile = () => {
     const Profile_Details = {}
     const fd = new FormData();
+
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const phoneRegex = /^\d{10}$/;  // /^[6789]\d{9}$/ (previous rule)
     const regexName = /^[a-zA-Z]{1,30}$/; // only alpha, no space, min-1, max-30
@@ -353,7 +357,6 @@ useEffect(()=>{
 
 
       if (companyAddress != "") {
-
         fd.append('company_address', companyAddress)
       }
 
@@ -503,6 +506,7 @@ useEffect(()=>{
   }
 
 
+  console.log(companyAddress, "company")
   return (
     <div className="userProfile-wrapper">
       <Helmet>

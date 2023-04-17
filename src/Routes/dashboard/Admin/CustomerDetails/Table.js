@@ -178,10 +178,7 @@ const Table = () => {
             ProjectList()
             NotificationManager.success("Project deleted !")
             console.log('Response from search  :', res)
-
           } else {
-
-
             NotificationManager.error("Project deleting process unsucess!")
           }
         })

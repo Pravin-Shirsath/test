@@ -247,9 +247,6 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
        
   }
 
-
-  
-
   const getSearchedCustomerData = () => {
     const accessToken = JSON.parse(localStorage.getItem('token'));
     const projectId = localStorage?.getItem("projId")

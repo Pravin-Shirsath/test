@@ -234,7 +234,6 @@ export default function SaasDashbaord(props) {
         
         <RctCollapsibleCard
         // heading={<center> <h2>user Dashboard</h2></center> }
-
         >
           <div className="d-flex pb-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
             <div className='search-row'>
@@ -242,11 +241,6 @@ export default function SaasDashbaord(props) {
               <Button variant="contained" color="primary" className="text-white mx-5" onClick={getSearchedProjectData} >Search</Button>
             </div>
             <Button variant="contained" color="primary" className="text-white mx-5" onClick={NavigateTo} >Create Project</Button>
-            {/* <Button variant="contained" color="primary" className="text-white mx-5"  
-               // onClick={(e) => opnAddNewUserModal(e)} 
-
-               >Add New Customer</Button> */}
-
           </div>
           <EditProject selected={selected} Modalopen={openEditProject} close={()=>setOpenEditProject(false)} reloadlist={ProjectList}/>
 
