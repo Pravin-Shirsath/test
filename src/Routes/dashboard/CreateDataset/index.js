@@ -109,7 +109,7 @@ const CreateDataset = (props) => {
                   localStorage.setItem("projId", res?.data?.message?.Dataset_created?.project_id)
                   localStorage.setItem("datasetid", res?.data?.message?.Dataset_created?.id)
                   setDisabled(false)
-                  NotificationManager.success("Dataset created !")
+                  NotificationManager.success("Dataset created successfully!")
 
                 } else {
                   NotificationManager.error("Dataset create process failed!")

@@ -7,7 +7,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Helmet } from 'react-helmet'
 
 import { Link, useHistory } from 'react-router-dom';
-
+ 
 // page title bar
 import PageTitleBar from '../../../Components/PageTitleBar/PageTitleBar'
 // intl messages
@@ -314,9 +314,10 @@ export default function Recharge(props) {
               </p>
             </div>
 
-            <div className="fifthRow recharge-modal-row light-primary">
+            <div className="fifthRow">
               <p>
-                <Button color="primary" style={{ padding: "10px 50px" }}>Proceed To Checkout</Button>
+                {/* <Button color="primary" style={{ padding: "10px 50px" }}>Proceed To Checkout</Button> */}
+                <Button color="primary" >Proceed To Checkout</Button>
               </p>
             </div>
           </div>
