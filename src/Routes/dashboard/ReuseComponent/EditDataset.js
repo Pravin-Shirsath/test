@@ -75,8 +75,6 @@ const EditDataset = ({ selected, Modalopen, close,reloadlist }) => {
            }else{
             NotificationManager.error("All field is empty")
            }
-           
-                  
 
     }
 

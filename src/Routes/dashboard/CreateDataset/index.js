@@ -93,11 +93,8 @@ const CreateDataset = (props) => {
       if (projectId) {
         if (datasetName) {
           console.log(authToken, typeof authToken, "autthhh token")
-          createDataset(authToken, projectId, datasetName)
+          createDataset(authToken, projectId, datasetName, comment)
             .then(res => {
-
-
-
               console.log(res, "resss in handle save function")
               console.log(res?.data, "ress dataaa i n handle save function")
 
