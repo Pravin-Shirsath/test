@@ -34,11 +34,11 @@ console.log(myarray,"myarray")
       {data != undefined  && data.length > 0 &&data.map((item, index) => (
         <div key={index} className="page-title-wrap  d-flex  align-items-center mr-1">
           
-        <i className="ti-angle-left text-dark m-0 custombredcrum-icon"></i> <span onClick={()=>HandleNavigate(item,index)} className="globalFontFamily custombredcrum-heding">{item.name}</span>
+        <i className="ti-angle-left text-dark  custombredcrum-icon"></i> <span onClick={()=>HandleNavigate(item,index)} className="globalFontFamily custombredcrum-heding">{item.name}</span>
          
         </div>
       ))}
-      <div className="page-title-wrap   d-flex  align-items-center text-white m-0"><i className="ti-angle-left m-0 text-white custombredcrum-icon"></i><span className="globalFontFamily custombredcrum-heding">{currentPage}</span></div>
+      <div className="page-title-wrap   d-flex  align-items-center text-white m-0"><i className="ti-angle-left  text-white custombredcrum-icon"></i><span className="globalFontFamily custombredcrum-heding">{currentPage}</span></div>
     </div>
   );
 };

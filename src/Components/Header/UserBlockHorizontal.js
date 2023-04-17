@@ -80,6 +80,7 @@ import "@uppy/progress-bar/dist/style.css";
 import "@uppy/informer/dist/style.css";
 import XHR from '@uppy/xhr-upload';
 import FileCard from 'Routes/dashboard/ReuseComponent/exportToExcel';
+import UppyModal from './UppyModal';
 
 function UserBlockHorizontal(props) {
   const [userDropdownMenu, setUserDropdownMenu] = useState(false);
@@ -343,7 +344,7 @@ console.log(document.querySelector('.uppy-StatusBar-actionBtn--done'),">>>.uppy-
 const addUppyInstance = () => {
   const accessToken = JSON.parse(localStorage.getItem('token'))
   const DatasetId = JSON.parse(localStorage.getItem('datasetid'))
-NotificationManager.success("hello")
+  NotificationManager.success("hello")
 
   const uppyId = generateUppyId();
   const uppyInstance = new Uppy({
@@ -439,7 +440,7 @@ let m = false
 
 const h=(e)=>{
   // e.preventDefault()
-  alert("hello world")
+  // alert("hello world")
   console.log(e,">>>>>>>>>>>")
 }
   return (
@@ -449,7 +450,14 @@ const h=(e)=>{
 
 
 <div>
-      {/* <button onClick={addUppyInstance}>Add Uppy Instance</button> */}
+     
+
+
+      <UppyModal  />
+
+
+
+{/*       
       {
         Object.keys(uppyInstances).map((uppyId) => (
         <div key={uppyId}>
@@ -492,7 +500,7 @@ const h=(e)=>{
           />
         </div>
       ))
-      }
+      } */}
     </div>
 
     
@@ -730,39 +738,42 @@ const h=(e)=>{
           /> */}
 
       {/**** Modal for change password  *****/}
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Reset Password</DialogTitle>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
+
+      <div className="p-10">
+        <div className=" d-flex  align-items-center justify-content-center Comman-Heading dark-primary-text">Reset Password</div>
         <DialogContent>
-          <RctCollapsibleCard>
+          {/* <RctCollapsibleCard> */}
             <Form>
-              <FormGroup>
+              <FormGroup >
                 <Label for="oldPassword">Old Password</Label>
-                <Input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} type="password" name="password" id="oldPassword" placeholder="old password" className="py-3" />
-                <Label>{validateOld ? "" : <span style={{ color: "red", marginLeft: "15px" }}>old password not matched</span>}</Label>
+                <Input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} type="password" name="password" id="oldPassword" placeholder="Old password" className="py-3" />
+                {/* <Label>{validateOld ? "" : <span style={{ color: "red", marginLeft: "15px" }}>old password not matched</span>}</Label> */}
               </FormGroup>
 
               <FormGroup>
                 <Label for="newPassword">New Password</Label>
-                <Input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} type="password" name="password" id="newPassword" placeholder="new password" className="py-3" />
-                <Label>{validateNew ? "" : <span style={{ color: "red", marginLeft: "15px" }}>must be alphanumeric and minimum 8 characters long</span>}</Label>
+                <Input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} type="password" name="password" id="newPassword" placeholder="New password" className="py-3" />
+                {/* <Label>{validateNew ? "" : <span style={{ color: "red", marginLeft: "15px" }}>must be alphanumeric and minimum 8 characters long</span>}</Label> */}
               </FormGroup>
 
               <FormGroup>
                 <Label for="confirmPassword">Confirm Password</Label>
-                <Input value={rePassword} onChange={(e) => setRePassword(e.target.value)} type="password" name="password" id="confirmPassword" placeholder="confirm password" className="py-3" />
-                <Label>{validateConfirm ? "" : <span style={{ color: "red", marginLeft: "15px" }}>confirm password incorrect</span>}</Label>
+                <Input value={rePassword} onChange={(e) => setRePassword(e.target.value)} type="password" name="password" id="confirmPassword" placeholder="Confirm password" className="py-3" />
+                {/* <Label>{validateConfirm ? "" : <span style={{ color: "red", marginLeft: "15px" }}>confirm password incorrect</span>}</Label> */}
               </FormGroup>
             </Form>
-          </RctCollapsibleCard>
-        </DialogContent>
-        <DialogActions>
-          <Button variant="contained" color="primary" onClick={resetPassword} className="py-2" style={{ cursor: "pointer" }} >
+          {/* </RctCollapsibleCard> */}
+        <div className= 'd-flex  align-items-end justify-content-end' >
+          <Button variant="contained" color="primary" onClick={resetPassword} className="py-2 mx-2" style={{ cursor: "pointer" }} >
             Change Password
           </Button>
           <Button variant="contained" color="danger" onClick={handleClose} className="py-2 px-3" style={{ backgroundColor: "#FC443C", color: "#fff", cursor: "pointer" }}>
             Cancel
           </Button>
-        </DialogActions>
+        </div>
+        </DialogContent>
+        </div>
       </Dialog>
 
 

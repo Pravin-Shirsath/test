@@ -572,8 +572,8 @@ const NewhandlePageChange = (pageNumber) => {
                            {filteredlowDataUser.length>0 && filteredlowDataUser.map((list, index) => (
                               <TableRow key={index}>
                               <TableCell>{index+1}</TableCell>
-                                 <TableCell onClick={()=>Navigate(list)}>{list?.username}</TableCell>
-                                 <TableCell onClick={()=>Navigate(list)}>{list?.email}</TableCell>
+                                 <TableCell style={{cursor:"pointer"}} onClick={()=>Navigate(list)}><b>{list?.username}</b></TableCell>
+                                 <TableCell  onClick={()=>Navigate(list)}>{list?.email}</TableCell>
                                  {/* <TableCell><Badge color={list.typeColor}>{list.type}</Badge></TableCell> */}
                                  <TableCell>{list?.mobile_number != null ? list.mobile_number :"-"}</TableCell>
                                  <TableCell>{list?.gst_number != null ? list?.gst_number :"-" }</TableCell>

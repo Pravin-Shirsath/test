@@ -9,3 +9,9 @@
     margin: 0px !important;
     box-shadow: none !important;
 }
+.upp-Modal{
+   /* box-sizing: border-box; */
+   
+   max-width:750px;
+   
+}

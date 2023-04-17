@@ -33,6 +33,7 @@ import { CuponValidCheck, GetRechargedPlan } from "Api";
 import { NotificationManager } from 'react-notifications'
 import { ErrorHandling } from "Constants/ErrorHandling";
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
+import UppyModal from "Components/Header/UppyModal";
 
 export default function Recharge(props) {
   const history = useHistory();
@@ -267,7 +268,7 @@ export default function Recharge(props) {
 
 
       </div>
-
+    
 
       <RctCollapsibleCard fullBlock>
         <div className="table-responsive dark-primary-text">
