@@ -139,6 +139,7 @@ const type = JSON.parse(localStorage.getItem('user_type'));
          <Route path="/confirm-password" component={ConfirmPassword} />
          <Route path="/session/login" component={AsyncSessionLoginComponent} />
          <Route path="/session/register" component={AsyncSessionRegisterComponent} />
+         
          <Route path="/session/lock-screen" component={AsyncSessionLockScreenComponent} />
          <Route path="/selectactivity" component={SelectActivity} />
          <Route path="/selectanalytics" component={SelectAnalytics} />

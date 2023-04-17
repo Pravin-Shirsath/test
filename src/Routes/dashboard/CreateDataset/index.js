@@ -262,6 +262,10 @@ const CreateDataset = (props) => {
         uppy3.on('upload-error', (file, error, response) => {
           console.log('Upload failed', error);
         });
+        uppy3.on('complete', (result) => {
+          console.log('result result', result);
+          // Do something
+        })
 
 
 
@@ -420,7 +424,17 @@ const CreateDataset = (props) => {
 
 
 
+  const doneButtonHandler=(e)=>{
+    console.log("hello")
+    
+  let  breadcrumbData =location?.state?.breadcrumbData || []
+     
+  breadcrumbData.push( { name: 'Create Dataset', url: '/app/dashboard/createDataset' })
+  history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
 
+    setOpen(false)
+
+  }
 
 
   console.log(props, "propsd")
@@ -446,12 +460,15 @@ const CreateDataset = (props) => {
           open={open}
           target={document.body}
           onRequestClose={() => setOpen(false)}
-          hideCancelButton={true}
-          hidePauseResumeButton={true}
+          hideCancelButton={false}
+          hidePauseResumeButton={false}
           showPauseResume={true}
           proudlyDisplayPoweredByUppy={false}
-        />
+          doneButtonHandler={doneButtonHandler}
+          
+        >
 
+      </DashboardModal>
       }
       <RctCollapsibleCard fullBlock>
         <div style={{ padding: "80px", alignItems: "center", justifyContent: 'center', display: "flex", }}>

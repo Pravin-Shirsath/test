@@ -16,12 +16,16 @@ import {
  } from 'reactstrap';
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
-import { AdminCoupanList, AdminCoupanSearch,SearchLowDataAvilableUser ,LowDataAvilableUser, getSearchedCustomer, getCustomerList, DeleteCoupon} from 'Api';
+import { 
+  AllLowDtaUser,
+  AllCoupons,
+  AllUser ,AdminCoupanList, AdminCoupanSearch,SearchLowDataAvilableUser ,LowDataAvilableUser, getSearchedCustomer, getCustomerList, DeleteCoupon} from 'Api';
 import { getFormatDate2 } from 'Constants/DateFormator';
 import { copyToClipboard } from 'Constants/CopyToClipboard';
 import DeleteConfirmationDialog from 'Components/DeleteConfirmationDialog/DeleteConfirmationDialog';
 import { useHistory } from 'react-router';
-
+import { exportToExcel } from 'Routes/dashboard/ReuseComponent/exportToExcel';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 function TabContainer({ children, dir }) {
    return (
       <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
@@ -386,6 +390,70 @@ const NewhandlePageChange = (pageNumber) => {
 
 
 
+// AllLowDtaUser data get 
+
+   const FileDownload1=()=>{
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+    if (accessToken !== null) {
+      AllLowDtaUser(accessToken)
+        .then((res) => {
+          if (res?.status === 200) {
+            console.log(res)
+            if(res?.data){
+              exportToExcel(res?.data, "Low Data User")
+            }
+          } else {
+            // console.log('Response from customerlist:', res)
+          }
+        })
+        .catch((err) => {
+          // console.log('Response from customerlist:', err)
+        })
+    }
+       
+
+   }
+
+
+// AllCoupons data get 
+   const FileDownload2=()=>{
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+    if (accessToken !== null) {
+      AllCoupons(accessToken)
+        .then((res) => {
+          if (res?.status === 200) {
+            exportToExcel(res?.data, "AllCoupons")
+          } else {
+            // console.log('Response from customerlist:', res)
+          }
+        })
+        .catch((err) => {
+          // console.log('Response from customerlist:', err)
+        })
+    }
+       
+
+   }
+   // AllUser data get 
+
+   const FileDownload3=()=>{
+    const accessToken = JSON.parse(localStorage.getItem('token'))
+    if (accessToken !== null) {
+      AllUser(accessToken)
+        .then((res) => {
+          if (res?.status === 200) {
+            exportToExcel(res?.data, "All User")
+          } else {
+            // console.log('Response from customerlist:', res)
+          }
+        })
+        .catch((err) => {
+          // console.log('Response from customerlist:', err)
+        })
+    }
+       
+
+   }
 
 
 
@@ -409,6 +477,7 @@ const NewhandlePageChange = (pageNumber) => {
                <Tab label={<p className="dark-primary-text p-0 tab-Heading" >New customer list </p>} />
                <Tab label={<p className="dark-primary-text p-0 tab-Heading" >Low data availability customer list </p>} />
                <Tab label={<p className="dark-primary-text p-0 tab-Heading" >Coupons</p>} />
+              
                
             </Tabs>
          </AppBar>
@@ -427,6 +496,8 @@ const NewhandlePageChange = (pageNumber) => {
             <div className='search-row search-Box-Table'>
               <input type="text" placeholder='Search'  className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} onChange={(e)=>setNew_searchText(e.target.value)} />
               <Button variant="contained" color="primary" className="text-white mx-5 "  size="medium"  onClick={getSearchNewUserData}>Search</Button>
+              <Button variant="contained" color="primary" className="text-white mx-5 d-flex align-items-center justify-content-center"  size="medium"  onClick={FileDownload3}><FileDownloadIcon/>Download</Button>
+
             </div>
             </div>
                      <Table className="table table-middle table-hover mb-0">
@@ -482,6 +553,8 @@ const NewhandlePageChange = (pageNumber) => {
             <div className='search-row search-Box-Table'>
               <input type="text" placeholder='Search' onChange={(e)=>{setLdu_searchText(e.target.value)}} className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} />
               <Button variant="contained" color="primary" className="text-white mx-5 "  size="medium" onClick={getSearchedLDUData}>Search</Button>
+              <Button variant="contained" color="primary" className="text-white mx-5 d-flex align-items-center justify-content-center"  size="medium"  onClick={FileDownload1}><FileDownloadIcon/>Download</Button>
+            
             </div>
             </div>
                      <Table className="table table-middle table-hover mb-0" >
@@ -535,6 +608,8 @@ const NewhandlePageChange = (pageNumber) => {
             <div className='search-row search-Box-Table'>
               <input type="text" placeholder='Search' onChange={(e)=>setSearchText(e.target.value)} className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} />
               <Button variant="contained" color="primary" className="text-white mx-5 "  size="medium" onClick={getSearchedCustomerData}>Search</Button>
+              <Button variant="contained" color="primary" className="text-white mx-5 d-flex align-items-center justify-content-center"  size="medium"  onClick={FileDownload2}><FileDownloadIcon/>Download</Button>
+           
             </div>
             </div>
                      <Table className="table table-middle table-hover mb-0" >

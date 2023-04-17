@@ -1577,3 +1577,62 @@ export const getModulesLiks = () => {
 //     console.log("err in ViewFiles API call", err)
 //   })
 // }
+
+
+
+// FILE EXPORT 
+/**
+ *
+ * @param {*} token
+ * @returns
+ */
+ export const AllUser = (token, pageNumber) => {
+  return axios
+    .get(`${BASE_URL}/api/automaton/exports/users-export/`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((res) => {
+      // console.log("Log out :",res);
+      return res;
+    });
+};
+
+
+/**
+ *
+ * @param {*} token
+ * @returns
+ */
+ export const AllCoupons = (token, pageNumber) => {
+  return axios
+    .get(`${BASE_URL}/api/automaton/exports/coupons-export/`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((res) => {
+      // console.log("Log out :",res);
+      return res;
+    });
+};
+
+
+/**
+ *
+ * @param {*} token
+ * @returns
+ */
+ export const AllLowDtaUser = (token, pageNumber) => {
+  return axios
+    .get(`${BASE_URL}/api/automaton/exports/lowdata-users-export/`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((res) => {
+      // console.log("Log out :",res);
+      return res;
+    });
+};
