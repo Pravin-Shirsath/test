@@ -1370,7 +1370,7 @@ export const scnerioPlanningPostData = (token, jsonSendFormat) => {
  */
 
 
-export const createDataset = (authToken, projectId, datasetName) => {
+export const createDataset = (authToken, projectId, datasetName, comment) => {
   console.log("Before creating dataset :", typeof (authToken), projectId, datasetName);
 
   return axios
@@ -1379,6 +1379,7 @@ export const createDataset = (authToken, projectId, datasetName) => {
       {
         "project_id": projectId,
         "dataset_name": datasetName,
+        "comment": comment,
       },
       {
         headers: {
@@ -1445,7 +1446,6 @@ export const createDataset = (authToken, projectId, datasetName) => {
     .patch(`${BASE_URL}/api/automaton/datasets/update/${id}/`,params , {
       headers: {
         Accept: "application/json",
-      
         Authorization: `Token ${token}`,
       },
     })

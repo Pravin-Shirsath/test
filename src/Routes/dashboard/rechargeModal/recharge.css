@@ -12,10 +12,12 @@
 /**************** COMMON STYLINGS ***********/
 .recharge-modal-row {
     background-color: lightgray;
+    /* background-color: purple !important; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    height: 60px;
     margin: auto;
     padding: 8px 10px;
 }
@@ -28,7 +30,7 @@
 
 .recharge-modal-row .left p {
     /* background-color: red; */
-    font-size: 25px;
+    font-size: 20px;
     margin: auto;
     display: flex;
     justify-content: flex-start;
@@ -45,7 +47,7 @@
 }
 
 .recharge-modal-row .mid p {
-    font-size: 35px;
+    font-size: 30px;
     margin: auto;
 }
 
@@ -57,7 +59,7 @@
 
 .recharge-modal-row .right p {
     width: 100%;
-    font-size: 25px;
+    font-size: 20px;
     margin: auto;
     display: flex;
     justify-content: flex-end;
@@ -76,7 +78,7 @@
 }
 
 .rechargeBoxContainer .heading h1 {
-    font-size: 35px;
+    font-size: 30px;
     color: #fff;
     margin: auto;
 }
@@ -108,7 +110,7 @@
     width: 100px;
     margin-left: 40px;
     margin-right: 10px;
-    font-size: 18px;
+    font-size: 16px;
     padding: 2px;
     padding-left: 10px;
 }
@@ -116,7 +118,7 @@
 .firstRow .left .wrapper .inputMaterial .diff {
     font-style: italic;
     margin-left: 20px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 /* Second Row Styling */
@@ -148,7 +150,7 @@
 }
  
 .secondRow .left p button {
-    background-color: blue;
+    /* background-color: blue; */
     color: #fff;
     font-size: 17px;
     width: 160px;
@@ -174,30 +176,40 @@
 .fourthRow p {
     /* background-color: red; */
     margin: auto;
-    font-size: 25px;
+    font-size: 23px;
 }
 
 .fourthRow p span {
     margin-left: 20px;
     width: 100px;
-    font-size: 23px;
+    font-size: 18px;
     border: 2px solid black;
     padding: 4px 10px;
     border-radius: 8px;
 }
 
 /* Fifth Row */
+.fifthRow {
+    /* background-color: purple !important; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    padding: 8px 10px;
+}
+
 .fifthRow p {
    margin: auto;
 }
 
 .fifthRow p button {
-   background-color: blue;
-   padding: 5px 15px;
+   /* background-color: blue; */
    color: #fff;
    font-size: 17px;
    border-radius: 7px;
    cursor: pointer;
+   padding: 10px 20px;
  }
 
 

@@ -326,6 +326,7 @@ useEffect(()=>{
   const updateProfile = () => {
     const Profile_Details = {}
     const fd = new FormData();
+
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const phoneRegex = /^\d{10}$/;  // /^[6789]\d{9}$/ (previous rule)
     const regexName = /^[a-zA-Z]{1,30}$/; // only alpha, no space, min-1, max-30
@@ -355,7 +356,6 @@ useEffect(()=>{
 
 
       if (companyAddress != "") {
-
         fd.append('company_address', companyAddress)
       }
 
@@ -505,6 +505,7 @@ useEffect(()=>{
   }
 
 
+  console.log(companyAddress, "company")
   return (
     <div className="userProfile-wrapper">
       <Helmet>
@@ -602,7 +603,7 @@ useEffect(()=>{
                   </Label>
                   <RegionDropdown
                     classes="w-100 form-control form-control-lg text-md"
-                    style={{ fontSize: '16px', type: "text" }}
+                    style={{ fontSize: '1rem', type: "text", paddingLeft:"10.5px" }}
                     country={country}
                     value={state}
                     onChange={(val) => (setState(val), console.log(val))} />
@@ -633,7 +634,7 @@ useEffect(()=>{
                     classes="w-100 form-control form-control-lg text-md"
                     value={country}
                     onChange={(val) => (setCountry(val))}
-                    style={{ fontSize: '17px', type: "text" }}
+                    style={{ fontSize: '1rem', type: "text", paddingLeft:"10.5px" }}
                   />
 
                   {/* <Input
@@ -733,7 +734,7 @@ useEffect(()=>{
                           variant="contained"
                           size="medium"
                           onClick={AdminupdateProfile}
-                          style={{ maxWidth: "150px" }}
+                          style={{ maxWidth: "150px", paddingTop:"11px", paddingBottom:"11px" }}
                         >
                           Save
                         </Button>
@@ -746,7 +747,7 @@ useEffect(()=>{
                           variant="contained"
                           size="medium"
                           onClick={() => { history.push("/") }}
-                          style={{ maxWidth: "150px" }}
+                          style={{ maxWidth: "150px", paddingTop:"11px", paddingBottom:"11px" }}
                         >
                           Cancel
                         </Button>
@@ -801,7 +802,7 @@ useEffect(()=>{
                         style={{ height: 55 }}
                         type="textarea"
                         name="billingAddress"
-                        className="input-lg"
+                        className="input-lg user-form-text-area"
                         value={billingAddress}
                         onChange={(e) => setBillingAddress(e.target.value)}
                         sm={9}
@@ -851,7 +852,7 @@ useEffect(()=>{
                         // rows={15}
                         style={{ height: 55 }}
                         name="companyAddress"
-                        className="input-lg"
+                        className="input-lg user-form-text-area"
                         value={companyAddress}
                         onChange={(e) => setCompanyAddress(e.target.value)}
                         sm={9}
@@ -882,7 +883,7 @@ useEffect(()=>{
                           variant="contained"
                           size="medium"
                           onClick={updateProfile}
-                          style={{ maxWidth: "150px" }}
+                          style={{ maxWidth: "150px", paddingTop:"11px", paddingBottom:"11px" }}
                         >
                           Save
                         </Button>
@@ -895,7 +896,7 @@ useEffect(()=>{
                           variant="contained"
                           size="medium"
                           onClick={() => { history.push("/") }}
-                          style={{ maxWidth: "150px" }}
+                          style={{ maxWidth: "150px", paddingTop:"11px", paddingBottom:"11px" }}
                         >
                           Cancel
                         </Button>

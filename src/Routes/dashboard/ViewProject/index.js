@@ -226,9 +226,6 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 
   // Dataset create
   const HandleCreate=()=>{
-
-
-
     if(location?.state?.breadcrumbData){
       let path = location?.state?.breadcrumbData[0]
       if(path?.name == "Dashboard"){
@@ -249,9 +246,6 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     }
        
   }
-
-
-  
 
   const getSearchedCustomerData = () => {
     const accessToken = JSON.parse(localStorage.getItem('token'));

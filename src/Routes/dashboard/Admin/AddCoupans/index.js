@@ -131,7 +131,7 @@ const {location}=props
              // console.log('Response from customerlist:', res)
              setFilterCoupans(coupans);
              setSearchText('');
-             NotificationManager.error("No user found!")
+             NotificationManager.error("No coupon found!")
            }
          })
          .catch((err) => {
@@ -280,40 +280,21 @@ const {location}=props
          title={<IntlMessages id="sidebar.coupon" />}
          match={props.match}
        /> */}
-       <CustomBreadcrumbs    currentPage={"Account"} data={location?.state?.breadcrumbData}  />
+       <CustomBreadcrumbs    currentPage={"Coupons"} data={location?.state?.breadcrumbData}  />
 
 
           <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
              message="This will delete your Coupan permanently."
              onConfirm={() => Delete_Coupan()}
              ref={deleteConfirmationDialog} />
-       <RctCollapsibleCard fullBlock>
+       <RctCollapsibleCard>
          <div className="table-responsive">
            <div className="d-flex py-20 px-10 border-bottom" style={{justifyContent:'space-between'}}>
-           <div className='search-row'>
-               <input type="text" placeholder='Search' className='search-input py-2' style={{border:"none", borderBottom:"1px solid black"}} value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
-               <Button variant="contained" color="primary" className="text-white mx-5"  style={{ cursor: "pointer"}}  onClick={getSearchedCustomerData}>Search</Button>
-                 </div> 
-         
-                 <Button variant="contained" color="primary" className="text-white mx-5"  style={{ cursor: "pointer"}}   onClick={(e) => opnAddNewUserModal(e)}> <i className="zmdi zmdi-plus mx-2"></i>Coupon</Button>
- 
-                
-               {/*
-                {
-            "id": 7,
-            "coupon_text": "WELFARE500",
-            "utilized_by": null,
-            "is_utilized": false,
-            "discount_value": 500.0,
-            "discount_type": "amount",
-            "description": "Cupon for 500 rupees off",
-            "total_usage_limit": 0,
-            "per_user_limit": 1,
-            "date_created": "2023-03-27T06:00:24.787167Z"
-        },
-               
-                 */}
-           
+                <div className='search-row'>
+                  <input type="text" placeholder='Search' className='search-input py-2' style={{border:"none", borderBottom:"1px solid black"}} value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
+                  <Button variant="contained" color="primary" className="text-white mx-5"  style={{ cursor: "pointer"}}  onClick={getSearchedCustomerData}>Search</Button>
+                </div> 
+                 <Button variant="contained" color="primary" className="text-white mx-5"  style={{ cursor: "pointer"}}   onClick={(e) => opnAddNewUserModal(e)}>Create Coupon</Button>
            </div>
            <table className="table table-middle table-hover mb-0">
              <thead>

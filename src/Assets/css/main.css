@@ -247,17 +247,21 @@ button{
 
 /* input fields css */
 .input-lg {
-    height: 49px !important;
+    height: 45px !important;
 }
 
 .input-md {
-    height: 49px !important;
+    height: 45px !important;
 }
 
 .PhoneInputInput {
     border: none;
     font-size: 1rem;
     padding-left: 10px;
+}
+
+.user-form-text-area {
+    line-height: 30px;
 }
 
 

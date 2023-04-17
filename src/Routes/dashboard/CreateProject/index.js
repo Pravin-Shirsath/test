@@ -129,7 +129,7 @@ const [disable,setDisable]=useState(true)
             <Helmet>
                 <title> Create Project</title>
                 <meta name="description" content="Create Project" />
-            </Helmet>
+        </Helmet>
             <div className="charts-widgets-wrapper">
            
             <CustomBreadcrumbs    currentPage={"Create Project"} data={location?.state?.breadcrumbData}  />
@@ -138,7 +138,7 @@ const [disable,setDisable]=useState(true)
 
 
             <div style={{ alignItems: "center", justifyContent: 'center', display: "flex", }}>
-                <div className="user-profile-widget box-shadow-box" style={{ width: "50%", backgroundColor: "white" }}>
+                <div className="user-profile-widget box-shadow-box" style={{ width: "60%", backgroundColor: "white" }}>
                     <div className="c-primary py-50 d-flex align-items-end justify-content-end pr-15 text-white">
                     <CurrentTime/> 
                     </div>
