@@ -30,16 +30,14 @@ function SidebarContent(){
       setType(type);
       console.log("type", type);
 
-
       eventBus.on("updateType", (res) => {
-         // console.log('couponApply res=',res)
+        
          if (res.message) {
           
             const type = JSON.parse(localStorage.getItem('user_type'));
             setType(type);
    
          
-   
          }
        })
    
@@ -48,7 +46,6 @@ function SidebarContent(){
 
     }, [])
   
-
  
   
    return (

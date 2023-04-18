@@ -71,24 +71,19 @@ export default function ConfirmPwd() {
                 })
                 .then((res) => {
                     if (res?.status === 200) {
-                        // console.log("Response from Chage Password:", res);
-                        // history.push("/confirm-password") // currently not in use, confirm-password component is still there
+                       
                         NotificationManager.success('Password change successfully!');
                         localStorage.clear();
                         history.push("/login");
 
-                        // localStorage.setItem("user_id", "user-id");
-                        /// dispatch({ type: LOGIN_USER_SUCCESS, payload: localStorage.getItem('user_id') });
-                        // history.push('/selectactivity');
                        
                     } else if (res?.status === 400) {
                         
-                        // console.log("Response from Change Password:", res);
                         NotificationManager.error('Validation failed! try again!');
                     } else if (res?.status === 500) {
                         
                         NotificationManager.error('Internal server error!');
-                        // console.log("Response from Change Password:", res);
+                      
                     }
                     else {
                         // setShow(false);
@@ -98,7 +93,9 @@ export default function ConfirmPwd() {
                         // console.log("Response from Change Password:", res);
                     }
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                     console.log("err",err)
+                })
         }
 
         setConfirmNewPassword("");

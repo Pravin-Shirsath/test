@@ -42,7 +42,6 @@ export default function UserProfile(props) {
   let ltaxNumber = JSON.parse(localStorage.getItem("ProfileData")).tax_number
   let lcompanyname = JSON.parse(localStorage.getItem("ProfileData")).company_name
   let lcompanyAddress = JSON.parse(localStorage.getItem("ProfileData")).company_address
-  
 
 
   const [country, setCountry] = useState((lcountry != null && lcountry != "" ? lcountry : ""))
@@ -51,7 +50,7 @@ export default function UserProfile(props) {
   const [companyName, setCompanyName] = useState(lcompanyname != null && lcompanyname != "" ? lcompanyname : "")
   const [billingAddress, setBillingAddress] = useState(lbillingAddress != null && lbillingAddress != "" ? lbillingAddress : "")
   const [taxNumber, setTaxNumber] = useState(ltaxNumber != null && ltaxNumber != "" ? ltaxNumber : "")
-  const [companyAddress, setCompanyAddress] = useState(lcompanyAddress !== null && lcompanyAddress !== "" ? lcompanyAddress :"")
+  const [companyAddress, setCompanyAddress] = useState(lcompanyAddress != null && lcompanyAddress != "" ? lcompanyAddress : "")
 
 
   const [firstNameError, setFirstNameError] = useState('')
@@ -872,7 +871,7 @@ useEffect(()=>{
 
                 <FormGroup className="row mt-50">
                   <Col sm={6}>
-                    <h4>   <span className="text-danger">*</span> Mandatory Field</h4>
+                   
                   </Col>
                   <Col sm={6}>
                     <section  style={{display:"flex", justifyContent:"flex-end", alignItems:"center", gap:"0px"}} >

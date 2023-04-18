@@ -31,11 +31,19 @@
 
 
 }
-
+button{
+    font-weight: 500 !important;
+}
+.MuiButton-label{
+    font-weight: 600 !important;
+}
 .globalFontFamily{
     font-family: 'IBM Plex Sans', sans-serif !important;
 }
-
+ .Comman-Heading{
+    font-size: 23px;
+    font-weight: 600;
+ }
 
 .custombredcrum-heding{
     font-size: 23px;

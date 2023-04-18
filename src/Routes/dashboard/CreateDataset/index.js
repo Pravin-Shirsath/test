@@ -39,6 +39,7 @@ import { NotificationManager } from 'react-notifications'
 import { createDataset } from 'Api'
 import AddIcon from '@mui/icons-material/Add';
 import CurrentTime from 'Constants/CurrentTime'
+import eventBus from '../../../Constants/eventBus';
 
 
 import Uppy from "@uppy/core";
@@ -77,7 +78,14 @@ const CreateDataset = (props) => {
   const [open, setOpen] = useState()
   const [instance, setInstance] = useState()
   const [disabled, setDisabled] = useState(true)
+  
+
+
+
+
+
   const handleDatasetName = (e) => {
+
     setDatasetName(e.target.value)
   }
 
@@ -104,7 +112,8 @@ const CreateDataset = (props) => {
                   NotificationManager.error(res?.data?.message)
                 } else if (res?.data?.message?.Dataset_created) {
                   localStorage.setItem("projId", res?.data?.message?.Dataset_created?.project_id)
-                  localStorage.setItem("datasetid", res?.data?.message?.Dataset_created?.id)
+                  localStorage.setItem("datasetId", res?.data?.message?.Dataset_created?.id)
+
                   setDisabled(false)
                   NotificationManager.success("Dataset created successfully!")
 
@@ -209,6 +218,21 @@ const CreateDataset = (props) => {
   //   }
   // }
 
+
+const UploadFile2=()=>{
+
+let data =location?.state?.breadcrumbData
+
+  eventBus.dispatch("UppyUpload", {
+    message: {BreadCrumb:data}
+
+  });
+}
+
+
+
+
+
   const UploadFile = async () => {
     const accessToken = JSON.parse(localStorage.getItem('token'))
     const DatasetId = JSON.parse(localStorage.getItem('datasetid'))
@@ -268,7 +292,7 @@ const CreateDataset = (props) => {
 
 
 
-
+     
 
 
 
@@ -515,7 +539,7 @@ const CreateDataset = (props) => {
                 <div className="d-flex align-items-center justify-content-end" style={{ marginTop: '30px', marginBottom: "30px" }}>
                   <Button variant="contained" color="primary" style={{ width: "100px", padding: "7px 5px" }} className="projectCardButton mx-2" onClick={handleSave}>Save</Button>
                   <Button variant="contained" color="danger" style={{ width: "100px", padding: "7px 5px" }} className="mx-2 d-flex justify-content-center align-items-center" onClick={() => history.push("/app/dashboard/project")}>Cancel</Button>
-                  <Button variant="contained" color="primary" style={{ width: "100px", padding: "7px 5px" }} disabled={disabled} className="mx-2 d-flex justify-content-center align-items-center" onClick={() => UploadFile()}><UploadIcon />Upload</Button>
+                  <Button variant="contained" color="primary" style={{ width: "100px", padding: "7px 5px" }} disabled={disabled} className="mx-2 d-flex justify-content-center align-items-center" onClick={() => UploadFile2()}><UploadIcon />Upload</Button>
 
                 </div>
               </div>
