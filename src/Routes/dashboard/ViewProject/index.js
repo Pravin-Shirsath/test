@@ -152,7 +152,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
           if (res?.status === 200) {
             deleteConfirmationDialog.current.close()
             getViewProjectData();
-            NotificationManager.success(" Datset deleted !")
+            NotificationManager.success("Datset deleted successfully!")
             console.log('Response from dataset  :', res)
 
           } else {
