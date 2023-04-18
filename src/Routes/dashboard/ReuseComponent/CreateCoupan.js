@@ -84,7 +84,8 @@ const CreateCoupan = ({ selected, Modalopen, close, reloadlist }) => {
                                 setPerRadio(false)
                                 setCoupan("")
                                 setAmtRadio(false)
-                                NotificationManager.success(res?.data?.message)
+                                // NotificationManager.success(res?.data?.message)
+                                NotificationManager.success("Coupon created successfully!")
                                 if (close) {
                                     close()
                                 }
@@ -142,6 +143,16 @@ const CreateCoupan = ({ selected, Modalopen, close, reloadlist }) => {
             NotificationManager.error("Coupan code empty!")
 
         }
+    }
+
+    const cancelCreateCoupanApi =() =>{
+        close(false);
+        setOpen(false);
+        setAmount("")
+        setPercentage("")
+        setPerRadio(false)
+        setCoupan("")
+        setAmtRadio(false)
     }
 
 
@@ -205,7 +216,7 @@ const CreateCoupan = ({ selected, Modalopen, close, reloadlist }) => {
                     </FormGroup>
                     <div className="d-flex align-items-end justify-content-end" style={{paddingRight:"17px"}}>
                         <Button variant="contained" size="medium" color="primary" className="projectCardButton mx-2" onClick={CreateCoupanApi} >Save</Button>
-                        <Button variant="contained" size="medium" color="danger" className="projectCardButton mx-2" onClick={() => (close(false), setOpen(false))}>Cancel</Button>
+                        <Button variant="contained" size="medium" color="danger" className="projectCardButton mx-2" onClick={ cancelCreateCoupanApi}>Cancel</Button>
                     </div>
                 </section>
             </DialogContent>
