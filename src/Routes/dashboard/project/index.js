@@ -235,7 +235,7 @@ export default function SaasDashbaord(props) {
         <RctCollapsibleCard
         // heading={<center> <h2>user Dashboard</h2></center> }
         >
-          <div className="d-flex pb-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
+          <div className="d-flex  px-2 " style={{ justifyContent: 'space-between' }}>
             <div className='search-row'>
               <input type="text" placeholder='Search' onChange={(e)=>setSearchText(e.target.value)} className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} />
               <Button variant="contained" color="primary" className="text-white mx-5" onClick={getSearchedProjectData} >Search</Button>
