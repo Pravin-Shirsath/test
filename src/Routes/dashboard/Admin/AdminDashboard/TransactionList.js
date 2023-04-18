@@ -50,7 +50,7 @@ function TransactionList(props){
    const handleChangeIndex = index => {
       setValue(index);
    };
-   const { theme, listData, transferreport, expenseCategory } = props;
+   const { theme } = props;
 
 
 
@@ -485,11 +485,15 @@ const NewhandlePageChange = (pageNumber) => {
              message="This will delete your Coupan permanently."
              onConfirm={() => Delete_Coupan()}
              ref={deleteConfirmationDialog} />
+
          <Scrollbars autoHeight autoHeightMin={200} autoHeightMax={820} autoHide>
             <SwipeableViews
                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                index={value}
                onChangeIndex={handleChangeIndex}>
+              
+          
+          
                <div className="card mb-0 transaction-box">
                   <TabContainer dir={theme.direction}>
                   <div className="d-flex  px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
@@ -547,6 +551,9 @@ const NewhandlePageChange = (pageNumber) => {
             }
                   </TabContainer>
                </div>
+
+
+
                <div className="card mb-0 transaction-box">
                   <TabContainer dir={theme.direction}>
                   <div className="d-flex  px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
@@ -602,6 +609,9 @@ const NewhandlePageChange = (pageNumber) => {
             }
                   </TabContainer>
                </div>
+
+
+               
                <div className="card mb-0 transaction-box">
                   <TabContainer dir={theme.direction}>
                   <div className="d-flex  px-10 border-bottom" style={{ justifyContent: 'space-between' }}>

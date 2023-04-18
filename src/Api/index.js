@@ -968,7 +968,7 @@ export const getSearchedAdmin = (token, searchItem) => {
 };
 
 /**
- *
+ * console.log("uppyInstances==", uppyInstances)
  * @param {*} token
  * @param {*} username
  * @param {*} email
