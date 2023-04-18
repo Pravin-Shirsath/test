@@ -53,8 +53,8 @@ export default function UppyModal(props) {
                 const BreadCrumb = res?.message?.BreadCrumb
                 console.log(BreadCrumb, "BreadCrumb upp")
                 setBreadcrumbData(BreadCrumb || [])
-                // addUppyInstance()
-                addUppyInstance2()
+                addUppyInstance()
+                // addUppyInstance2()
 
 
             }
