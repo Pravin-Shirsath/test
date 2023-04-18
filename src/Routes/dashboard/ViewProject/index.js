@@ -293,7 +293,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
              message="This will delete your Dataset permanently."
              onConfirm={() => Delete_Datset()}
              ref={deleteConfirmationDialog} />
-      <RctCollapsibleCard fullBlock>
+      <RctCollapsibleCard>
      
         <div className="table-responsive">
           <div className="d-flex py-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
