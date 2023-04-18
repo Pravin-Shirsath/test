@@ -333,15 +333,15 @@ export default function SaasDashbaord(props) {
                   key={i}
                 >
                   <div className="shadow project-card-shadow">
-                    <section className="dark-primary text-white px-3 shadow rounded d-flex  align-items-center " style={{borderColor:'white', height:"90px"}}>
+                    <section className="dark-primary text-white px-3 shadow rounded d-flex  align-items-center " style={{borderColor:'white', height:"100px"}}>
 
                       <img
                         src={item?.project_image == null ? `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : `${ item.project_image}`}
                         alt="user profile"
                         className=" rounded-circle"
                        
-                        width={63}
-                        height={63}
+                        width={75}
+                        height={75}
                       />
                       <div className="ml-4 d-flex flex-column justify-content-center align-items-center">
                         <p className="project-heading text-left w-100 m-0">{item.project_name}</p>

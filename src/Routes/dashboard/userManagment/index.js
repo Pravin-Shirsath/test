@@ -330,7 +330,7 @@ export default function UserManagement(props) {
         match={props.match}
       /> */}
       <CustomBreadcrumbs    currentPage={"User Mangement"} data={location?.state?.breadcrumbData}  />
-      <RctCollapsibleCard fullBlock>
+      <RctCollapsibleCard>
      
         <div className="table-responsive">
           <div className="d-flex py-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>

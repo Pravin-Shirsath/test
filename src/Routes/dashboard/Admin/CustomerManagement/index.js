@@ -241,7 +241,7 @@ import CustomBreadcrumbs from 'Routes/dashboard/ReuseComponent/CustomBreadcrumbs
        /> */}
        <CustomBreadcrumbs    currentPage={"Customer Management"} data={location?.state?.breadcrumbData}  />
 
-       <RctCollapsibleCard fullBlock>
+       <RctCollapsibleCard>
          <div className="table-responsive">
            <div className="d-flex py-20 px-10 border-bottom" style={{justifyContent:'space-between'}}>
            <div className='search-row'>
