@@ -1,1 +1,0 @@
-{"version":3,"sources":["Routes/dashboard/Admin/account/index.js"],"names":["Account"],"mappings":"yGAAA,uBAUeA,UARC,WACd,OACE,8BAAK,WAIT,C","file":"static/js/210.13536fef.chunk.js","sourcesContent":["import React from 'react'\n\nconst Account = () => {\n  return (\n    <div>\n     Account\n    </div>\n  )\n}\n\nexport default Account\n"],"sourceRoot":""}
