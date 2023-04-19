@@ -785,4 +785,5 @@ module.exports = {
    "sidebar.createTask": "Create Task",
    "sidebar.viewDataset" : "View Dataset",
    "sidebar.adminDashboard": "Admin Dashboard",
+   "sidebar.taskStatus" : "Task Status"
 }

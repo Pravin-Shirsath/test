@@ -28,7 +28,8 @@ import {
    AsyncCreateDatasetComponent,
    AsyncCreateTaskComponent,
    AsyncViewDataset,
-   AsyncCoustomerDetailsComponent
+   AsyncCoustomerDetailsComponent,
+   AsyncTaskStatus
 
 } from 'Components/AsyncComponent/AsyncComponent';
 
@@ -72,6 +73,8 @@ return(
          <Route path={`${match.url}/createDataset`} component={AsyncCreateDatasetComponent} />
          <Route path={`${match.url}/createTask`}  component={AsyncCreateTaskComponent} />
          <Route path={`${match.url}/viewDataset`} component={AsyncViewDataset} />
+         <Route path={`${match.url}/taskStatus`} component={AsyncTaskStatus} />
+      
          
          <Route path={`${match.url}/Admin/Dashboard`} component={AsyncAdminDashboardComponent} />
          <Route path={`${match.url}/Admin/Coupons`} component={AsyncAddCoupansComponent} />

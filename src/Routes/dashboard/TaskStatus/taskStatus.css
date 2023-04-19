@@ -1,0 +1,89 @@
+.taskStatusContainer {
+    /* background-color: blue; */
+    display: flex;
+    flex-wrap: wrap;
+    
+    margin-top: 5px;
+    transition: all 0.3s;
+    padding: 30px 10px;
+    padding-top: 0px;
+    transition: all 0.4s;
+}
+
+.taskStatusContainer .top {
+    /* background-color: pink; */
+    width: 100%;
+}
+
+.taskStatusContainer .top .headingContainer {
+    /* background-color: lightcoral; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.taskStatusContainer .top .headingContainer h1 {
+    /* background-color: magenta; */
+    width: max-content;
+    margin: 0;
+    font-size: 25px;
+}
+
+.taskStatusContainer .top .detailContainer {
+    /* background-color: lightgreen; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.taskStatusContainer .top .detailContainer .left {
+    /* background-color: aqua; */
+}
+
+.taskStatusContainer .top .detailContainer .right {
+    /* background-color: aqua; */
+}
+
+
+.taskStatusContainer .top .detailContainer .left p,
+.taskStatusContainer .top .detailContainer .right p {
+    /* background-color: hotpink; */
+    padding: 0px 0px;
+    margin: 3px;
+    font-size: 16px;
+}
+
+.taskStatusContainer .top .detailContainer .left p strong,
+.taskStatusContainer .top .detailContainer .right p strong {
+    /* background-color: limegreen; */
+    /* width: 150px; */
+    width: max-content;
+    display: inline-block;
+    padding: 3px 10px;
+}
+
+
+.taskStatusContainer .bottom {
+    /* background-color: magenta; */
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between;
+    align-items: center; */
+}
+
+.taskStatusContainer .bottom  .box {
+    /* background-color: bisque; */
+    width: 12%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin: 10px;
+}
+
+
+.taskStatusContainer .bottom  .box  .folderIcon {
+    width: 100%;
+    height: 100%;
+    transition: all 0.4s;
+}
