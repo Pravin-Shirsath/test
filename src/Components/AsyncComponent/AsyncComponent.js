@@ -645,6 +645,18 @@ const AsyncTaskStatus = Loadable({
   loading: () => <RctPageLoader />,
 })
 
+// List Of Tasks
+const AsyncListOfTask = Loadable({
+  loader: () => import("Routes/dashboard/ListOfTask"),
+  loading: () => <RctPageLoader />,
+})
+
+// Download File
+const AsyncDownloadFile = Loadable({
+  loader: () => import("Routes/dashboard/DownloadFile"),
+  loading: () => <RctPageLoader />,
+})
+
 export {
   AsyncUserWidgetComponent,
   AsyncUserChartsComponent,
@@ -754,5 +766,7 @@ export {
   AsyncCreateTaskComponent,
   AsyncViewDataset,
   AsyncCoustomerDetailsComponent,
-  AsyncTaskStatus
+  AsyncTaskStatus,
+  AsyncListOfTask,
+  AsyncDownloadFile
 };
