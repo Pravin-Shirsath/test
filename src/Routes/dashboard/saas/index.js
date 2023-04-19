@@ -192,7 +192,7 @@ export default function SaasDashbaord(props) {
           if (res?.status === 200) {
             deleteConfirmationDialog.current.close()
             ProjectList()
-            NotificationManager.success("Project deleted !")
+            NotificationManager.success("Project deleted successfully!")
             console.log('Response from search  :', res)
 
           } else {

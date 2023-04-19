@@ -45,6 +45,10 @@ import EditDataset from '../ReuseComponent/EditDataset';
 import { getFormatDate2 } from 'Constants/DateFormator';
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
 
+import {
+    ViewFiles
+  } from '../../../Api/'
+
 export default function ViewProject(props) {
   const history = useHistory();
  const {location}=props
@@ -77,6 +81,9 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   const [filteredDatasets,setFilteredDatasets] = useState([])
   const [activePage, setActivePage] = useState(1)
   const [totalPageCount, setTotalPageCount] = useState(0);
+  const [datasetFiles, setDatasetFiles] = useState([]);
+  const [filteredDatasetFiles, setFilteredDatasetFiles] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   useEffect(() => {
     const isLoggedInBool = localStorage.getItem("isLoggedIn")
@@ -86,45 +93,49 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     //     localStorage.clear();
     // } else {
     // getCustomersListData();
-    getViewProjectData();
+    getDatasetFiles()
     // }
   }, [])
 
-  const getViewProjectData = () => {
-    const authToken = JSON?.parse(localStorage.getItem("token"));
-    const projectId = localStorage?.getItem("projId")
+  const getDatasetFiles = () => {
+    const authToken = JSON.parse(localStorage.getItem("token"));
+    const datasetId = localStorage?.getItem("datasetId")
+    // const datasetId = 146
 
     if(authToken !== null){
-      getViewProjectDatasets(authToken, projectId, activePage)
-      .then(res => {
-        if(res?.status == 200){
-          console.log(res?.data?.results, "project's all lists")
-          setDatasets(res?.data?.results)
-          setFilteredDatasets(res?.data?.results);
+        ViewFiles(authToken, datasetId, 1)
+        .then(res=> {
+            console.log(res, "resss in viewDataset file")
+            if(res?.status == 200){
+                console.log(res?.data?.results, "dataaa of filesss in view datasetfile")
+                const results = res?.data?.results;
+                const updatedResults = results.map(result=> {
+                    return {...result, selectedFile: false}
+                })
 
-          console.log(res?.data?.count, "total counts of datasets of projects")
-          setTotalPageCount(parseInt(res?.data?.count));
-        } else {
-          console.log('Response from View project Datasets lists api:', res)
-        }
-      })
-      .catch((error)=>{
-        console.log("error in viewdataset:",error)
-        const status = error?.response?.status
-        if(status == 401){
-          NotificationManager.error("Something went wrong !");
-          localStorage.clear();
-          history.push("/login")
-        } else if(status == 500){
-          NotificationManager.error("Temporary connectivity issues.");
-        }
-      })
+                setDatasetFiles(updatedResults)
+                setFilteredDatasetFiles(updatedResults)
+                setTotalPageCount(parseInt(res?.data?.count));
+            }else {
+                console.log('Response from View project Datasets lists api in view project:', res)
+            }
+        })
+        .catch((error)=>{
+            console.log("error in viewdataset:",error)
+            const status = error?.response?.status
+            if(status == 401){
+              NotificationManager.error("Something went wrong !");
+              localStorage.clear();
+              history.push("/login")
+            } else if(status == 500){
+              NotificationManager.error("Temporary connectivity issues.");
+            }
+        })
     } else {
       localStorage.clear();
       history.push("/login")
     }
-  }
-
+}
 
 
 
@@ -151,7 +162,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
         .then((res) => {
           if (res?.status === 200) {
             deleteConfirmationDialog.current.close()
-            getViewProjectData();
+
             NotificationManager.success("Datset deleted successfully!")
             console.log('Response from dataset  :', res)
 
@@ -173,29 +184,29 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 
 
   const handlePageChange = (pageNumber) => {
-    console.log("pagination", pageNumber)
-    if (activePage !== pageNumber) {
-      const authToken = JSON.parse(localStorage.getItem('token'))
-      const projectId = localStorage?.getItem("projId")
+    // console.log("pagination", pageNumber)
+    // if (activePage !== pageNumber) {
+    //   const authToken = JSON.parse(localStorage.getItem('token'))
+    //   const projectId = localStorage?.getItem("projId")
 
-      if (authToken !== null) {
-        getViewProjectDatasets(authToken, projectId, pageNumber)
-          .then((res) => {
-            if (res?.status === 200) {
-              setDatasets(res?.data?.results);
-              setFilteredDatasets(res?.data?.results);
-              setTotalPageCount(res?.data?.count);
-              console.log('Response from customerlist :', res)
-            } else {
-              // console.log('Response from customerlist:', res)
-            }
-          })
-          .catch((err) => {
-            // console.log('Response from customerlist:', err)
-          })
-      }
-      setActivePage(pageNumber)
-    }
+    //   if (authToken !== null) {
+    //     getViewProjectDatasets(authToken, projectId, pageNumber)
+    //       .then((res) => {
+    //         if (res?.status === 200) {
+    //           setDatasets(res?.data?.results);
+    //           setFilteredDatasets(res?.data?.results);
+    //           setTotalPageCount(res?.data?.count);
+    //           console.log('Response from customerlist :', res)
+    //         } else {
+    //           // console.log('Response from customerlist:', res)
+    //         }
+    //       })
+    //       .catch((err) => {
+    //         // console.log('Response from customerlist:', err)
+    //       })
+    //   }
+    //   setActivePage(pageNumber)
+    // }
   }
 
 
@@ -278,7 +289,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   return (
     <div className="user-management">
       <Helmet>
-        <title>Automaton | Customers List</title>
+        <title>Automaton | Task List</title>
         <meta name="description" content="Automaton Widgets" />
       </Helmet>
       {/* <PageTitleBar
@@ -286,7 +297,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
         match={props.match}
       /> */}
  
-      <CustomBreadcrumbs    currentPage={"View Project"} data={location?.state?.breadcrumbData} />
+      <CustomBreadcrumbs    currentPage={"Task List"} data={location?.state?.breadcrumbData} />
 
 
                 <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
@@ -296,7 +307,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
       <RctCollapsibleCard>
      
         <div className="table-responsive">
-          <div className="d-flex py-20 px-20 border-bottom" style={{ justifyContent: 'space-between' }}>
+          <div className="d-flex py-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
             <div className='search-row'>
               <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
               <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} 
@@ -304,26 +315,34 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
               >Search</Button>
             </div>
 
-            <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} onClick={()=>HandleCreate()}>Create Dataset</Button>
+            {/* <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} >Create Dataset</Button> */}
 
+          </div>
 
-
-
+          <div className='bg-danger p-2 d-flex justify-content-center align-items-center headingContainer dark-primary' style={{marginBottom:"50px"}}>
+            <ul className='d-flex justify-content-center align-items-center globalFontFamily ' style={{listStyle: "none", gap: "30px", margin:"0px"}}>
+                <li>0 Complete</li>
+                <li>1 In Progress</li>
+                <li>0 Failed</li>
+                <li>3 Pending</li>
+            </ul>
           </div>
           <table className="table table-middle table-hover mb-0">
             <thead>
               <tr>
                 <th></th>
-                <th>Sr.No</th>
-                <th>Dataset Name</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Images</th>
+                <th>Plan</th>
                 <th>Date Created</th>
-                <th>Actions</th>
+                <th>Action</th>
               </tr>
             </thead>
 
             {/****** mine filtered Table body, without ternary conditional value  *****/}
             <tbody>
-              {filteredDatasets &&
+              {/* {filteredDatasets &&
                 filteredDatasets.map((dataset, i, data) => {
                   // let active = user?.is_active
                   let created_Date = getFormatDate2((dataset?.date_created))
@@ -331,37 +350,36 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 
                     <tr key={i}>
                       <td></td>
-                      <td>{i+1}</td>
-                      <td>
-                        <div className="media">
-                          <div className="media-body align-item-center">
-                            <h5 className="mb-5 fw-bold">{dataset?.dataset_name}</h5>
-                          </div>
-                        </div>
-                      </td>
-                      <td>{created_Date?created_Date: '-'}</td>
-                      <td className="list-action d-flex ">
-                    
-                      <VisibilityIcon onClick={()=>handleView(dataset)} />
-                      <EditIcon className="mx-2" onClick={()=> EditModal(dataset)}/> 
-                     <DeleteIcon onClick={()=>{DeletModalOpen(dataset)}}/>
-                   
-                    </td>
+                      <td>Task-1</td>
+                      <td>Pending</td>
+                      <td>1</td>
+                      <td className="list-action d-flex ">Plaaannn</td>
+                      <td>27 March 2023</td>
                     </tr>
                   )
                 })
-              }
+              } */}
+
+                    <tr className='globalFontFamily'>
+                      <td></td>
+                      <td>Task-1</td>
+                      <td>Pending</td>
+                      <td>1</td>
+                      <td className="list-action d-flex ">Plaaannn</td>
+                      <td>27 March 2023</td>
+                      <td>View</td>
+                    </tr>
 
             </tbody>
 
           </table>
-          {filteredDatasets.length == 0 && <center style={{ color: "black" }}>  Data not available </center>}
+          {filteredDatasetFiles.length == 0 && <center style={{ color: "black" }}>Data not available </center>}
           {
-            datasets?.length > 0 &&
-            <div className='paginationDiv'>
+            datasetFiles?.length > 0 &&
+            <div className='paginationDiv'> 
               <Pagination
                 activePage={activePage}
-                itemsCountPerPage={5}
+                itemsCountPerPage={6}
                 pageRangeDisplayed={5}
                 onChange={(e) => handlePageChange(e)}
                 itemClass="page-item"
@@ -375,106 +393,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
         {loading && <RctSectionLoader />}
       </RctCollapsibleCard>
 
-      <EditDataset selected={selected} Modalopen={openEditDataset} close={()=>setOpenEditDataset(false)} reloadlist={getViewProjectData}/>
-
-
-      {/* Modal for Add New Customer */}
-      {/* <Modal
-        isOpen={addNewUserModal}
-        // toggle={() => onAddUpdateUserModalClose()}
-        className="addCustomerModal "
-
-      >
-        <ModalHeader 
-        // toggle={() => onAddUpdateUserModalClose()}
-        >
-          <strong>Welcome</strong>
-        </ModalHeader>
-        <ModalBody>
-          <FormGroup row >
-
-
-            <Col sm={12} className="d-flex  align-items-center justify-content-center">
-              <Label for="firstName" sm={3} className="d-flex primary-dark">
-
-                <span> Username <span className="text-danger madatory-field">*</span></span>
-              </Label>
-              <Input
-                type="text"
-                className="input-md"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                sm={10}
-              />
-            </Col>
-
-
-          </FormGroup>
-          <FormGroup row >
-
-
-            <Col sm={12} className="d-flex  align-items-center justify-content-center">
-              <Label for="firstName" sm={3} className="d-flex primary-dark">
-
-                <span> Email Id <span className="text-danger madatory-field">*</span></span>
-              </Label>
-              <Input
-                type="text"
-                className="input-md" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                sm={10}
-              />
-            </Col>
-
-
-          </FormGroup>
-        </ModalBody>
-        <div style={{ display: "flex", justifyContent: "end" }}>
-
-          <Button variant="contained" color="primary"
-          // onClick={() => addNewUser()} 
-          className="py-2 mx-10" style={{ color: "#fff", }} >
-            Send
-          </Button>
-          <Button variant="contained"
-          // onClick={() => onAddUpdateUserModalClose()} 
-          className="py-2 px-3 bg-danger text-white mx-10" style={{ cursor: "pointer" }}>
-            Cancel
-          </Button>
-        </div>
-      </Modal> */}
-
-
-
-
-      {/* <Modal
-        isOpen={deleteUserModal}
-        className="addCustomerModal"
-      >
-        <ModalBody>
-          Are you sure want to delete {selectedUser?.username} ?
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            variant="contained"
-            // color="primary"
-            style={{ backgroundColor: "#0b3d45", color: "#fff", borderRadius: "6px" }}
-            className="text-white"
-          //  onClick={handleDeleteUser}
-          >
-            Delete
-          </Button>
-
-          <Button
-            variant="contained"
-            className="text-white btn-secondary"
-            onClick={() => setdeleteUserModal(false)}
-          >
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal> */}
+      {/* <EditDataset selected={selected} Modalopen={openEditDataset} close={()=>setOpenEditDataset(false)} reloadlist={getViewProjectData}/>       */}
     </div>
   )
 }

@@ -59,7 +59,7 @@ const EditDataset = ({ selected, Modalopen, close,reloadlist }) => {
                                 if(close){
                                    close()
                                    }
-                                   NotificationManager.success(" Datset update suceesfull !") 
+                                   NotificationManager.success(" Datset updated succesfully!") 
                             }
                                console.log('Response from update dataset  :', res)
                            } else {
@@ -69,7 +69,7 @@ const EditDataset = ({ selected, Modalopen, close,reloadlist }) => {
                            }
                        })
                        .catch((err) => {
-                           console.log('Response from Upadat datasett:', err)
+                           console.log('Response from Upadat dataset:', err)
                        })
                }
            }else{

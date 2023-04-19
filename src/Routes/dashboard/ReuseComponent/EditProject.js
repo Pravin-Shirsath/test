@@ -85,7 +85,7 @@ const EditProject = ({ selected, Modalopen, close,reloadlist }) => {
                                  if(close){
                                     close()
                                     }
-                                    NotificationManager.success(" Project update suceesfull !") 
+                                    NotificationManager.success(" Project updated succesfully !") 
                                     setImage(null)
                              }
                                 console.log('Response from search  :', res)

@@ -255,17 +255,17 @@ const {location}=props
           if (res?.status === 200) {
             deleteConfirmationDialog.current.close()
             getCoupanAllData();
-            NotificationManager.success("coupan deleted !")
+            NotificationManager.success("Coupon deleted successfully!")
             console.log('Response from search  :', res)
 
           } else {
 
 
-            NotificationManager.error("Coupan deleting process unsucess!")
+            NotificationManager.error("Coupon deleting process unsucess!")
           }
         })
         .catch((err) => {
-          NotificationManager.error("Coupan deleting process unsucess!")
+          NotificationManager.error("Coupon deleting process unsucess!")
         })
     }
   }
@@ -287,6 +287,7 @@ const {location}=props
              message="This will delete your Coupan permanently."
              onConfirm={() => Delete_Coupan()}
              ref={deleteConfirmationDialog} />
+
        <RctCollapsibleCard>
          <div className="table-responsive">
            <div className="d-flex py-20 px-10 border-bottom" style={{justifyContent:'space-between'}}>

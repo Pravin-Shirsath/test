@@ -143,8 +143,6 @@ const Couponlist = (props) => {
       deleteConfirmationDialog.current.open()
     }
     const Delete_Coupan = () => {
-    
-    
       const accessToken = JSON.parse(localStorage.getItem('token'))
       if (accessToken !== null) {
         DeleteCoupon(accessToken, selected?.id)
@@ -152,17 +150,15 @@ const Couponlist = (props) => {
             if (res?.status === 200) {
               deleteConfirmationDialog.current.close()
               getCoupanAllData();
-              NotificationManager.success("coupan deleted !")
+              NotificationManager.success("Coupon deleted successfully!")
               console.log('Response from search  :', res)
     
             } else {
-    
-    
-              NotificationManager.error("Coupan deleting process unsucess!")
+              NotificationManager.error("Coupon deleting process unsucess!")
             }
           })
           .catch((err) => {
-            NotificationManager.error("Coupan deleting process unsucess!")
+            NotificationManager.error("Coupon deleting process unsucess!")
           })
       }
     }
