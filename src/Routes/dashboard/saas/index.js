@@ -337,13 +337,13 @@ export default function SaasDashbaord(props) {
 
                       <img
                         src={item?.project_image == null ? `${process.env.PUBLIC_URL}/assets/images/avatars/user-15.jpg` : `${ item.project_image}`}
-                        alt="user profile"
+                        alt=" profile"
                         className=" rounded-circle"
                        
                         width={75}
                         height={75}
                       />
-                      <div className="ml-4 d-flex flex-column justify-content-center align-items-center">
+                      <div className="ml-4 d-flex flex-column justify-content-center align-items-center heading-container">
                         <p className="project-heading text-left w-100 m-0">{item.project_name}</p>
                         <p className="project-date text-left w-100 m-0"> Created by {item.username} on {created}</p>
                       </div>

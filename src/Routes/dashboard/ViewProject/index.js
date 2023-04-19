@@ -296,7 +296,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
       <RctCollapsibleCard>
      
         <div className="table-responsive">
-          <div className="d-flex py-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
+          <div className="d-flex py-20 px-20 border-bottom" style={{ justifyContent: 'space-between' }}>
             <div className='search-row'>
               <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
               <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} 
@@ -314,7 +314,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
             <thead>
               <tr>
                 <th></th>
-                <th>Project ID</th>
+                <th>Sr.No</th>
                 <th>Dataset Name</th>
                 <th>Date Created</th>
                 <th>Actions</th>
@@ -331,10 +331,10 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 
                     <tr key={i}>
                       <td></td>
-                      <td>{dataset?.project_id}</td>
+                      <td>{i+1}</td>
                       <td>
                         <div className="media">
-                          <div className="media-body">
+                          <div className="media-body align-item-center">
                             <h5 className="mb-5 fw-bold">{dataset?.dataset_name}</h5>
                           </div>
                         </div>

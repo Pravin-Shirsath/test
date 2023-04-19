@@ -40,6 +40,9 @@ button{
 .globalFontFamily{
     font-family: 'IBM Plex Sans', sans-serif !important;
 }
+
+
+
  .Comman-Heading{
     font-size: 23px;
     font-weight: 600;
@@ -55,6 +58,8 @@ button{
     font-weight: 800 !important;
    
 }
+
+
 
 /*  Admin Dashboard Table */
 .tab-Heading {
@@ -143,6 +148,8 @@ button{
     top: 10px;
     left: 5px;
 }
+
+
 
 
 .breadcrumb a {

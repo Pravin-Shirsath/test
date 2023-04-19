@@ -147,27 +147,17 @@ function UserBlockHorizontal(props) {
   
   useEffect(() => {
     getProfileInfo();
-// const a = document.getElementById("your-element").addEventListener("click", (event) =>{
-//     if (event.target.classList.contains("my-class")) {
-//       console.log("your-element has \"my-class\" class")
-//     }
-//   })
 
-
-console.log(document.getElementsByClassName(".uppy-u-reset"),">>>uppy-u-reset")
-console.log(document.querySelector('.uppy-c-btn'),">>>uppy-c-btn")
-console.log(document.querySelector('.uppy-StatusBar'),">>>.uppy-StatusBar")
-
-console.log(document.querySelector('.uppy-StatusBar-actionBtn--done'),">>>.uppy-StatusBar-actionBtn--done")
-    eventBus.on("Upload_file", (res) => {
-      // console.log('couponApply res=',res)
-      if (res.message) {
-        localStorage.setItem("project_name", res.message)
+    eventBus.on("UpdateProfile", (res) => {
+     
+      if (res?.message) {
+        getProfileInfo();
         
+       
       }
     })
 
-    return () =>{( eventBus.remove("Upload_file"))};
+    return () =>{( eventBus.remove("UpdateProfile"))};
   }, [])
 
 
@@ -662,7 +652,7 @@ const h=(e)=>{
                       />
                   </div> */}
 
-            <div className="user-info flex-column d-flex">
+            <div className="user-info flex-column d-flex ml-2">
               <span className="user-name ml-4 text-white" style={{fontSize:"16px"}}>{profileData?.username} </span>
               {/* <span className="user-name ml-4 text-white">{profileData?.email}</span> */}
 
@@ -696,8 +686,8 @@ const h=(e)=>{
           <DropdownMenu style={{ left: '65px', top: '5px' }}>
             <ul className="list-unstyled mb-0 profile-block-wrap " >
               <li className="p-15 border-bottom user-profile-top userBlockHorizontalDropdown ">
-                <p className="text-white mb-0 fs-14 userNameText">{profileData?.username}</p>
-                <span className="text-white fs-14 userNameText">{profileData?.email}</span>
+                <p className="text-white mb-0 fs-14 userNameText pr-3">{profileData?.username}</p>
+                <span className="text-white fs-14 pr-3 userNameText">{profileData?.email}</span>
               </li>
               <li>
                 <Link to={{

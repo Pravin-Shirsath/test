@@ -333,23 +333,19 @@ export default function UserManagement(props) {
       <RctCollapsibleCard>
      
         <div className="table-responsive">
-          <div className="d-flex py-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
+          <div className="d-flex py-20 px-20 border-bottom" style={{ justifyContent: 'space-between' }}>
             <div className='search-row'>
               <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
               <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} onClick={getSearchedCustomerData}>Search</Button>
             </div>
 
-            <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} onClick={(e) => opnAddNewUserModal(e)}> <i className="zmdi zmdi-plus mx-2"></i>Users</Button>
-
-
-
-
+            <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} onClick={(e) => opnAddNewUserModal(e)}> Create Users</Button>
           </div>
           <table className="table table-middle table-hover mb-0">
             <thead>
               <tr>
                 <th></th>
-                <th>No</th>
+                <th>Sr.No</th>
                 <th>User</th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -366,7 +362,7 @@ export default function UserManagement(props) {
 
                     <tr key={i}>
                       <td></td>
-                      <td>{user?.id}</td>
+                      <td>{i+1}</td>
                       <td>
                         <div className="media">
                           <div className="media-body">

@@ -36,7 +36,7 @@ import ImageIcon from '@mui/icons-material/Image';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import DescriptionIcon from '@mui/icons-material/Description';
 import CheckIcon from '@mui/icons-material/Check';
-
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
 import EditDataset from '../ReuseComponent/EditDataset';
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
@@ -217,6 +217,29 @@ const getDatasetFiles = () => {
   console.log(selectedFiles, "Selected filessss")
   console.log(location, "location in view dataset ")
   console.log(props, "proppsss in view dataset")
+
+
+
+
+
+  const NewTaskNavigate = ()=>{
+    
+  
+     if(selectedFiles.length > 0){
+      const  breadcrumbData =location?.state?.breadcrumbData || []
+             breadcrumbData.push( { name: 'View Dataset', url: '/app/dashboard/viewDataset' });
+             history.push("/app/dashboard/createTask",{breadcrumbData:breadcrumbData,files:{"count":1,data:selectedFiles}});
+
+             console.log()
+     }else{
+      NotificationManager.error("you don't have selected file  ");
+
+     }
+
+
+
+  }
+
   return (
     <div className="user-management">
       <Helmet>
@@ -245,7 +268,7 @@ const getDatasetFiles = () => {
             </div>
 
             <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} 
-            // onClick={()=> history.push("/app/dashboard/createDataset")}
+             onClick={NewTaskNavigate}
             >New Task</Button>
             </div>
 
@@ -262,7 +285,7 @@ const getDatasetFiles = () => {
                                     } */}
 
                                     {
-                                      file.file_type == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> : (file.file_type == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> : <a href={file?.file} target="_blank"><FolderIcon className="folderIcon" /></a>))
+                                      file.file_type == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> : (file.file_type == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> : <a href={file?.file} target="_blank"><InsertDriveFileIcon className="folderIcon" /></a>))
                                     }
 
                                   </div>

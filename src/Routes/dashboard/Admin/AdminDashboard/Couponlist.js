@@ -176,7 +176,20 @@ const Couponlist = (props) => {
       AllCoupons(accessToken)
         .then((res) => {
           if (res?.status === 200) {
-            exportToExcel(res?.data, "AllCoupons")
+
+            if(res?.data){
+              let data = res?.data || []
+              const modifyarray = data.length > 0 ? data.map((item)=>{
+                const obj ={...item}
+                obj["is_utilized"] = obj["is_utilized"] == 0 ? "No" : "Yes"
+                return obj
+              }):[]
+                
+              exportToExcel(modifyarray, "AllCoupons")
+            }
+
+
+          
           } else {
             // console.log('Response from customerlist:', res)
           }

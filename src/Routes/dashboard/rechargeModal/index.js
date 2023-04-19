@@ -74,11 +74,15 @@ export default function Recharge(props) {
               if (res?.data?.results != undefined) {
                 if (res?.data?.results.length == 1) {
                   setSelectedPlan(res?.data?.results[0])
+                }else{
+                  
                 }
               }
             }
 
-            setRecharge(res?.data?.results);
+            setRecharge(res?.data?.results)
+            setFilteredRecharges(res?.data?.results)
+            ;
             console.log('Response fromRecharged list :', res)
 
           } else {

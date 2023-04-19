@@ -235,7 +235,7 @@ export default function SaasDashbaord(props) {
         <RctCollapsibleCard
         // heading={<center> <h2>user Dashboard</h2></center> }
         >
-          <div className="d-flex  px-2 " style={{ justifyContent: 'space-between' }}>
+          <div className="d-flex  px-2 " style={{ justifyContent: 'space-between',flexWrap:"wrap" }}>
             <div className='search-row'>
               <input type="text" placeholder='Search' onChange={(e)=>setSearchText(e.target.value)} className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} />
               <Button variant="contained" color="primary" className="text-white mx-5" onClick={getSearchedProjectData} >Search</Button>
@@ -272,7 +272,7 @@ export default function SaasDashbaord(props) {
                         height={75}
                       />
 
-                      <div className="ml-4 d-flex flex-column justify-content-center align-items-center">
+                      <div className="ml-4 d-flex flex-column justify-content-center align-items-center heading-container">
                         <p className="project-heading text-left w-100 m-0">{item.project_name}</p>
                         <p className="project-date text-left w-100 m-0"> Created by {item.username} on {created}</p>
                       </div>

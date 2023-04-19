@@ -40,12 +40,12 @@ const CustomerDetails = (props) => {
             const Tdata = res?.data["total_allowed_size"]
             const Udata = res?.data["total_size_consumed"]
             if (Udata) {
-              setUseData(parseInt(Udata))
+              setUseData(Number(Udata))
             }
 
             if (Tdata) {
 
-              setTotalData(parseInt(Tdata))
+              setTotalData(Number(Tdata))
             }
           }
         } else {
@@ -104,8 +104,8 @@ const CustomerDetails = (props) => {
               totalData == 0 ? <Progress bar color="danger" value={100} style={{ height: "50px" }} ><h2 style={{ marginTop: "6px" }}>0GB</h2></Progress>
                 :
                 <Progress multi style={{ height: "50px" }}>
-                  <Progress bar color="danger" value={useData} ><h2 style={{ marginTop: "6px" }}>{useData}GB</h2></Progress>
-                  <Progress bar color="success" value={totalData - useData}  ><h2 style={{ marginTop: "6px" }}>{totalData - useData}GB </h2></Progress>
+                <Progress bar color="danger" value={useData *(100/totalData) } className="progress-bar progress-bar-striped progress-bar-animated" ><p className="account-gb-text "  >{useData}GB</p></Progress>
+               <Progress bar color="success" value={(totalData-useData)*(100/totalData)}   className="progress-bar progress-bar-striped progress-bar-animated" > <p className="account-gb-text" >{totalData-useData}GB </p></Progress>
                 </Progress>
             }
 

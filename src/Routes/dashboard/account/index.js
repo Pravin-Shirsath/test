@@ -4,7 +4,7 @@
 
  import React,{useEffect,useState} from 'react'
  import { Helmet } from "react-helmet";
-
+ import "./Account.css"
  import { Progress ,Button,
 	Form,
 	FormGroup,
@@ -29,13 +29,7 @@ import "../../../Assets/css/main.css"
  
  
  // widgets data
- import {
-     visitorsData,
-     salesData,
-     ordersData,
-     topSellingProducts,
-     trafficStatus
- } from './data';
+
 import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import { str } from 'Constants/stringConst';
@@ -63,12 +57,12 @@ const GetAccountStatus=()=>{
             const Tdata=res?.data["total_allowed_size"]
             const Udata=res?.data["total_size_consumed"]
                 if(Udata){
-                  setUseData(parseInt(Udata))
+                  setUseData(Number(Udata))
                 }
 
                if(Tdata) {
               
-              setTotalData(parseInt(Tdata))
+              setTotalData(Number(Tdata))
            }
          }
        } else {
@@ -88,6 +82,8 @@ useEffect(()=>{
 },[])
 
 
+console.log(totalData,useData,totalData-useData,"totalData-useData")
+
     return (
        <div className="ecom-dashboard-wrapper">
           <Helmet>
@@ -100,42 +96,46 @@ useEffect(()=>{
          {/* <PageTitleBar title={<IntlMessages id="sidebar.account" />} match={props.match} /> */}
          <CustomBreadcrumbs    currentPage={"Account"} data={location?.state?.breadcrumbData}  />
 
-         <RctCollapsibleCard
-            heading={<center > <h2>Account</h2></center> }
-                 
-         >
-        <div className="w-100 d-flex justify-content-between px-40  globalFontFamily"> 
+         <RctCollapsibleCard 
+         customClasses="py-10"
+          >
+            <section className="d-flex justify-content-center align-item-center"><p className="Comman-Heading ">Account</p></section>
+         <section>
+        <d iv className="w-100 d-flex justify-content-center align-item-center"> 
+        <div className=" account-data-available  globalFontFamily  ">
         <h3>Used </h3> <h3>Available </h3>
-        </div>
-
-        <div>
-
+        </div> 
+        </d>
+       
+        <div className="d-flex justify-content-center ">
+      
          {
-            totalData == 0 ? <Progress bar color="danger" value={100} style={{ height: "50px" }} ><h2 style={{marginTop:"6px"}}>0GB</h2></Progress>
+            totalData == 0 ? <Progress bar color="danger" className="account-Progressbar progress-bar progress-bar-striped progress-bar-animated"> <p className="account-gb-text" >0GB</p></Progress>
             :
-            <Progress multi style={{ height: "50px" }}>
-               <Progress bar color="danger" value={useData} ><h2 style={{marginTop:"6px"}}>{useData}GB</h2></Progress>
-               <Progress bar color="success" value={totalData-useData}  ><h2 style={{marginTop:"6px"}}>{totalData-useData}GB </h2></Progress>
+            <Progress multi   className="account-Progressbar" >
+               <Progress bar color="danger" value={useData *(100/totalData) } className="progress-bar progress-bar-striped progress-bar-animated" ><p className="account-gb-text "  >{useData}GB</p></Progress>
+               <Progress bar color="success" value={(totalData-useData)*(100/totalData)}   className="progress-bar progress-bar-striped progress-bar-animated" > <p className="account-gb-text" >{totalData-useData}GB </p></Progress>
             </Progress>
          }
        
         </div>
-            <div className="d-flex justify-content-center mt-50">
+        </section>
+            <div className="d-flex justify-content-center ">
               
-               <h2 className='globalFontFamily'>{str.askRechargeText} ?</h2>
+               <h2 className='account-recharge-text'>{str.askRechargeText} ?</h2>
                
             </div>
-            <div className=" d-flex justify-content-center" style={{marginTop:"30px"}}>
+            <div className=" d-flex justify-content-center mt-5" >
 
-            <FormGroup tag="fieldset" className="d-flex justify-content-between my-100 " >
-                        <FormGroup check className="d-flex align-item-center mx-50">
+            <FormGroup tag="fieldset" className="d-flex justify-content-between acoount-radio-box m-0" >
+                        <FormGroup check className="d-flex align-item-center ">
                         <Input type="radio" name="radio1" style={{width:"30px" ,height:"30px"}} onClick={()=> history.push("/app/dashboard/rechargeModal")} />
           <Label check className="mx-20  mt-10  globalFontFamily">
              Yes
           </Label>
         </FormGroup>
             
-        <FormGroup check className="d-flex align-item-center mx-50">
+        <FormGroup check className="d-flex align-item-center acoount-radio-box ">
                         <Input type="radio" name="radio1" style={{width:"30px" ,height:"30px"}} onClick={()=> history.push("/app/dashboard/saas")} />
           <Label check className="mx-20 mt-10  globalFontFamily">
              No

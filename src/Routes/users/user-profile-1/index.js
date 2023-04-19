@@ -142,8 +142,12 @@ useEffect(()=>{
       updateProfileInfo(ProfileDetails, accessToken, userId.id).then((res) => {
         if (res?.status === 200) {
           console.log('Response from update profile:', res)
+          eventBus.dispatch("UpdateProfile", {
+            message: "UpdateProfile",
+      
+          });
           getProfileInfo()
-
+          
           NotificationManager.success('Profile Updated Successfully!');
 
           setShow(false)

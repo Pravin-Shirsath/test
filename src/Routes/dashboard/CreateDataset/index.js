@@ -457,7 +457,11 @@ let data =location?.state?.breadcrumbData
 
   }
 
+ const HandleCancel=()=>{
+ 
+  history.goBack(-1)
 
+ }
   console.log(props, "propsd")
   console.log(history, "open")
 
@@ -538,7 +542,7 @@ let data =location?.state?.breadcrumbData
                 </FormGroup>
                 <div className="d-flex align-items-center justify-content-end" style={{ marginTop: '30px', marginBottom: "30px" }}>
                   <Button variant="contained" color="primary" style={{ width: "100px", padding: "7px 5px" }} className="projectCardButton mx-2" onClick={handleSave}>Save</Button>
-                  <Button variant="contained" color="danger" style={{ width: "100px", padding: "7px 5px" }} className="mx-2 d-flex justify-content-center align-items-center" onClick={() => history.push("/app/dashboard/project")}>Cancel</Button>
+                  <Button variant="contained" color="danger" style={{ width: "100px", padding: "7px 5px" }} className="mx-2 d-flex justify-content-center align-items-center" onClick={HandleCancel}>Cancel</Button>
                   <Button variant="contained" color="primary" style={{ width: "100px", padding: "7px 5px" }} disabled={disabled} className="mx-2 d-flex justify-content-center align-items-center" onClick={() => UploadFile2()}><UploadIcon />Upload</Button>
 
                 </div>

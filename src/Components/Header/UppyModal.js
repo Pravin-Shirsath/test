@@ -75,7 +75,7 @@ export default function UppyModal(props) {
         const accessToken = JSON.parse(localStorage.getItem('token'))
         const DatasetId = JSON.parse(localStorage.getItem('datasetId'))
         const uppyId = generateUppyId();
-
+   console.log(accessToken,DatasetId,"DatasetIdDatasetIdDatasetId")
         if (uppyInstances.hasOwnProperty(`uppy-${DatasetId}`)) {
             setOpen(true)
         } else {
@@ -89,14 +89,14 @@ export default function UppyModal(props) {
             });
 
             uppyInstance.use(XHR, {
-                endpoint: `${BASE_URL}/api/automaton/file-uploads/uppy/xhr/upload/${DatasetId}/`,
+                endpoint: `${BASE_URL}/api/automaton/file-uploads/uppy/xhr/upload/${DatasetId}/v1/`,
                 method: 'POST',
                 resume: true,
                 fieldName: 'files',
 
                 headers: {
                     'X-My-Custom-Header': 'header-value',
-                    Authorization: accessToken,
+                    Authorization: `token ${accessToken}`,
                     //  "Content-Type": "multipart/form-data"
                     "Acess-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Methods": "OPTIONS, GET, POST, PATCH, PUT",
@@ -123,10 +123,14 @@ export default function UppyModal(props) {
                 // Check if the error is an instance of Error or a string
                 const errorMessage = error instanceof Error ? error.message : error;
                 // alert(`Error uploading ${file.name}: ${response.body.message}`);
-                // console.log(response)
+             
+             if(response?.body?.message){
+                console.log(response?.body?.message)
+                NotificationManager.error(response?.body?.message)
+             }
                 // console.log(error.getResponseError)
                 // // Display the error message to the user
-                // alert(`Error uploading ${file.name}: ${errorMessage}`);
+            //  alert(`Error uploading ${file.name}: ${errorMessage}`);
             });
 
             setUppyInstances((prevState) => ({
