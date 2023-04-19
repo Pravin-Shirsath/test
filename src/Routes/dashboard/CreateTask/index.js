@@ -212,7 +212,11 @@ const getTaskFile = () => {
 
 
  const  Submit =()=>{
-
+  const  breadcrumbData =location?.state?.breadcrumbData || []
+  breadcrumbData.push( { name: 'View Task', url: '/app/dashboard/createTask' });
+  history.push("/app/dashboard/taskStatus",{breadcrumbData:breadcrumbData});
+  
+  
  }
   return (
     <div className="user-management">
@@ -242,6 +246,9 @@ const getTaskFile = () => {
             </div>
 
             
+            </div>
+            <div className="d-flex align-items-center justify-content-center">
+              <p className="Comman-Heading">Task-1</p>
             </div>
 
             <div className='viewDatasetFilesContainer'>
@@ -292,8 +299,15 @@ const getTaskFile = () => {
             </div>
           }
         </div>
-       <div className="d-flex align-items-center justify-content-center"> <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} 
-             onClick={NewTaskNavigate}>Proceed</Button></div>
+       <div className="d-flex align-items-center justify-content-center"> 
+       <Button 
+       variant="contained"
+        color="primary" 
+        className="text-white mx-5 mb-30"
+         style={{ cursor: "pointer" }} 
+        onClick={NewTaskNavigate}>
+        Proceed
+        </Button></div>
         {loading && <RctSectionLoader />}
       </RctCollapsibleCard>
 
@@ -416,11 +430,12 @@ color="primary"
  onClick={Submit}>
  Yes
  </Button>
+ 
  <Button 
 variant="contained" 
-color="primary"
- className="text-white mx-5"
-  style={{ cursor: "pointer" }} 
+color="error"
+ className="text-white mx-5 bg-danger"
+  style={{ cursor: "pointer" ,color:"red"}} 
  onClick={()=>setModalOpen(false)}>
  No
  </Button>

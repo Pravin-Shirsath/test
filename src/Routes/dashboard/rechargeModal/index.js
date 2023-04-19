@@ -1,4 +1,5 @@
 import "./recharge.css"
+import Payment from './Payment'
 
 /**
  * User Management Page
@@ -43,7 +44,7 @@ export default function Recharge(props) {
   const [filteredRecharges, setFilteredRecharges] = useState([])
   const [totalPageCount, setTotalPageCount] = useState(0)
   const [selectedPlan, setSelectedPlan] = useState(null)
-
+  const [modalOpen,setModalOpen]=useState(false)
   const [additionalspace, setAdditionalspace] = useState(0)
   const [paybleAmount, setPaybleAmount] = useState(0)
 
@@ -241,7 +242,7 @@ export default function Recharge(props) {
         match={props.match}
       /> */}
       <CustomBreadcrumbs    currentPage={"Recharge Modal"} data={location?.state?.breadcrumbData}  />
-
+{/* 
       <div className="row ">
         {filteredRecharges &&
           filteredRecharges.map((item, i) => {
@@ -271,7 +272,7 @@ export default function Recharge(props) {
         }
 
 
-      </div>
+      </div> */}
     
 
       <RctCollapsibleCard fullBlock>
@@ -322,12 +323,14 @@ export default function Recharge(props) {
             <div className="fifthRow">
               <p>
                 {/* <Button color="primary" style={{ padding: "10px 50px" }}>Proceed To Checkout</Button> */}
-                <Button color="primary" >Proceed To Checkout</Button>
+                <Button color="primary"  onClick={()=>setModalOpen(true)}>Proceed To Checkout</Button>
               </p>
             </div>
           </div>
         </div>
         {loading && <RctSectionLoader />}
+
+        <Payment open={modalOpen}  handle={setModalOpen}/>
       </RctCollapsibleCard>
     </div>
   )

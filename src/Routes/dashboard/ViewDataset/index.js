@@ -232,11 +232,18 @@ const getDatasetFiles = () => {
 
              console.log()
      }else{
-      NotificationManager.error("you don't have selected file  ");
+      NotificationManager.error("Please  selected file !");
 
      }
 
 
+
+  }
+
+  const AllTask=()=>{
+    const  breadcrumbData =location?.state?.breadcrumbData || []
+             breadcrumbData.push( { name: 'View Dataset', url: '/app/dashboard/viewDataset' });
+             history.push("/app/dashboard/listOfTask",{breadcrumbData:breadcrumbData,files:{"count":1,data:selectedFiles}});
 
   }
 
@@ -268,8 +275,8 @@ const getDatasetFiles = () => {
             </div>
 
             <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} 
-             onClick={NewTaskNavigate}
-            >New Task</Button>
+             onClick={AllTask}
+            >All Task</Button>
             </div>
 
             <div className='viewDatasetFilesContainer'>
@@ -321,6 +328,16 @@ const getDatasetFiles = () => {
           }
         </div>
         {loading && <RctSectionLoader />}
+        <div className="d-flex align-items-center justify-content-center"> 
+       <Button 
+       variant="contained"
+        color="primary" 
+        className="text-white mx-5 mb-30"
+         style={{ cursor: "pointer" }} 
+         onClick={NewTaskNavigate}
+        >
+        New Task
+        </Button></div>
       </RctCollapsibleCard>
 
       <EditDataset selected={selected} Modalopen={openEditDataset} close={()=>setOpenEditDataset(false)} reloadlist={getDatasetFiles}/>

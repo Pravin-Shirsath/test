@@ -280,12 +280,9 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
         })
     }
   }
-
-  console.log("history==view project ",history)
-  console.log("props ",props)
-  console.log(filteredDatasets, "filteredd datasets")
-  console.log(location, "location in view project")
-  console.log(props, "proppsss in view project")
+const NavigateCompletTask=()=>{
+  history.push("/app/dashboard/downloadFile")
+}
   return (
     <div className="user-management">
       <Helmet>
@@ -315,7 +312,9 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
               >Search</Button>
             </div>
 
-            {/* <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} >Create Dataset</Button> */}
+            <Button  
+             onClick={NavigateCompletTask}
+            variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} >Completed Task</Button>
 
           </div>
 
