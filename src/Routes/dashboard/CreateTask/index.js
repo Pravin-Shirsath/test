@@ -36,6 +36,7 @@ import RctCollapsibleCard from '../../../Components/RctCollapsibleCard/RctCollap
 import RctSectionLoader from '../../../Components/RctSectionLoader/RctSectionLoader'
 import '../../../Assets/css/user.css'
 import {
+  AddFileToTask,
   DeleteDataset,
   getViewProjectDatasets,
   ViewFiles
@@ -172,21 +173,29 @@ const getTaskFile = () => {
 
 
 
-  const NewTaskNavigate = ()=>{
+  const Proceed = ()=>{
     
-    setModalOpen(true)
-    //  if(selectedFiles.length > 0){
-    //   const  breadcrumbData =location?.state?.breadcrumbData || []
-    //          breadcrumbData.push( { name: 'View Dataset', url: '/app/dashboard/viewDataset' });
-    //          history.push("/app/dashboard/createTask",{breadcrumbData:breadcrumbData});
+   
 
-    //          console.log()
-    //  }else{
-    //   NotificationManager.error("you don't have selected file  ");
-
-    //  }
-
-
+        const authToken = JSON?.parse(localStorage.getItem("token"));
+        const TaskId = localStorage?.getItem("TaskId")
+    
+        if(filteredTaskFiles.length > 0){
+          const IdArray = filteredTaskFiles.map(item=>item.id)
+          if(authToken !== null){
+            console.log(authToken, TaskId, IdArray,"authToken, DatasetId, IdArray")
+            AddFileToTask(authToken, TaskId, IdArray)
+            .then(res => {
+              if(res?.status == 200){
+                console.log("res=",res)
+                setModalOpen(true)
+              }
+            }).catch((error)=>{
+              console.log("error=",error)
+            })
+          }
+  
+        }
 
   }
 
@@ -228,7 +237,7 @@ const getTaskFile = () => {
         title={<IntlMessages id="sidebar.viewDataset" />}
         match={props.match}
       /> */}
-     <CustomBreadcrumbs    currentPage={"View Dataset"} data={location?.state?.breadcrumbData}  />
+     <CustomBreadcrumbs    currentPage={"View Task"} data={location?.state?.breadcrumbData}  />
 
                 <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
              message="This will delete your Dataset permanently."
@@ -305,7 +314,7 @@ const getTaskFile = () => {
         color="primary" 
         className="text-white mx-5 mb-30"
          style={{ cursor: "pointer" }} 
-        onClick={NewTaskNavigate}>
+        onClick={Proceed}>
         Proceed
         </Button></div>
         {loading && <RctSectionLoader />}
