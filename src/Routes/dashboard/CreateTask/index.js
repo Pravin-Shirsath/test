@@ -158,13 +158,7 @@ const getTaskFile = () => {
      })
 
     setFilteredTaskFiles(filterarray)
-    setTaskFile(filterarray)
-   
-
-
-
-
-    
+    setTaskFile(filterarray)    
   }
    
 
@@ -215,9 +209,10 @@ const getTaskFile = () => {
   const  breadcrumbData =location?.state?.breadcrumbData || []
   breadcrumbData.push( { name: 'View Task', url: '/app/dashboard/createTask' });
   history.push("/app/dashboard/taskStatus",{breadcrumbData:breadcrumbData});
-  
-  
  }
+
+ console.log(history, "historrryy in create task")
+ console.log(location, "location in create task")
   return (
     <div className="user-management">
       <Helmet>
@@ -228,7 +223,7 @@ const getTaskFile = () => {
         title={<IntlMessages id="sidebar.viewDataset" />}
         match={props.match}
       /> */}
-     <CustomBreadcrumbs    currentPage={"View Dataset"} data={location?.state?.breadcrumbData}  />
+     <CustomBreadcrumbs    currentPage={"Create Task"} data={location?.state?.breadcrumbData}  />
 
                 <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
              message="This will delete your Dataset permanently."

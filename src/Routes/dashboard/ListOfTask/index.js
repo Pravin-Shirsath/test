@@ -35,6 +35,7 @@ import RctSectionLoader from '../../../Components/RctSectionLoader/RctSectionLoa
 import '../../../Assets/css/user.css'
 import {
   DeleteDataset,
+  ViewTasks,
   getSearchProjectDatasets,
   getViewProjectDatasets
 } from '../../../Api/'
@@ -48,6 +49,7 @@ import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
 import {
     ViewFiles
   } from '../../../Api/'
+import { ErrorHandling } from 'Constants/ErrorHandling';
 
 export default function ViewProject(props) {
   const history = useHistory();
@@ -79,11 +81,19 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 
   const [datasets, setDatasets] = useState([]);
   const [filteredDatasets,setFilteredDatasets] = useState([])
-  const [activePage, setActivePage] = useState(1)
-  const [totalPageCount, setTotalPageCount] = useState(0);
+  // const [activePage, setActivePage] = useState(1)
+  // const [totalPageCount, setTotalPageCount] = useState(0);
   const [datasetFiles, setDatasetFiles] = useState([]);
   const [filteredDatasetFiles, setFilteredDatasetFiles] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
+
+
+  // states used in viewTasks i.e; this page
+  const [tasksList, setTasksList] = useState([]);
+  const [filteredTasksList, setFilteredTasksList] = useState([])
+  const [totalPageCount, setTotalPageCount] = useState(0)
+  const [activePage, setActivePage] = useState(1)
+
 
   useEffect(() => {
     const isLoggedInBool = localStorage.getItem("isLoggedIn")
@@ -93,49 +103,75 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     //     localStorage.clear();
     // } else {
     // getCustomersListData();
-    getDatasetFiles()
+    // getDatasetFiles()
+
+    getTasksList()
     // }
   }, [])
 
-  const getDatasetFiles = () => {
-    const authToken = JSON.parse(localStorage.getItem("token"));
-    const datasetId = localStorage?.getItem("datasetId")
-    // const datasetId = 146
+  const getTasksList = () => {
+    const authToken = JSON.parse(localStorage?.getItem("token"));
+    const datasetId = localStorage?.getItem("datasetId");
 
-    if(authToken !== null){
-        ViewFiles(authToken, datasetId, 1)
-        .then(res=> {
-            console.log(res, "resss in viewDataset file")
-            if(res?.status == 200){
-                console.log(res?.data?.results, "dataaa of filesss in view datasetfile")
-                const results = res?.data?.results;
-                const updatedResults = results.map(result=> {
-                    return {...result, selectedFile: false}
-                })
+    console.log(authToken, datasetId, "auth token and datasetId on getTasksList api call")
 
-                setDatasetFiles(updatedResults)
-                setFilteredDatasetFiles(updatedResults)
-                setTotalPageCount(parseInt(res?.data?.count));
-            }else {
-                console.log('Response from View project Datasets lists api in view project:', res)
-            }
-        })
-        .catch((error)=>{
-            console.log("error in viewdataset:",error)
-            const status = error?.response?.status
-            if(status == 401){
-              NotificationManager.error("Something went wrong !");
-              localStorage.clear();
-              history.push("/login")
-            } else if(status == 500){
-              NotificationManager.error("Temporary connectivity issues.");
-            }
-        })
-    } else {
-      localStorage.clear();
-      history.push("/login")
+    if(authToken!==null){
+      ViewTasks(authToken, datasetId)
+      .then(res=> {
+        console.log(res, "ressss in listOfTask file ke then block")
+        if(res?.status == 200){
+          setTasksList(res?.data?.results)
+          setFilteredTasksList(res?.data?.results)
+          setTotalPageCount(parseInt(res?.data?.count))
+        } else {
+          console.log('Response from View Tasks list api in ListOfTask', res)
+        }
+      })
+      .catch(err => {
+        ErrorHandling(err)
+      })
     }
-}
+  }
+
+//   const getDatasetFiles = () => {
+//     const authToken = JSON.parse(localStorage.getItem("token"));
+//     const datasetId = localStorage?.getItem("datasetId")
+//     // const datasetId = 146
+
+//     if(authToken !== null){
+//         ViewFiles(authToken, datasetId, 1)
+//         .then(res=> {
+//             console.log(res, "resss in viewDataset file")
+//             if(res?.status == 200){
+//                 console.log(res?.data?.results, "dataaa of filesss in view datasetfile")
+//                 const results = res?.data?.results;
+//                 const updatedResults = results.map(result=> {
+//                     return {...result, selectedFile: false}
+//                 })
+
+//                 setDatasetFiles(updatedResults)
+//                 setFilteredDatasetFiles(updatedResults)
+//                 setTotalPageCount(parseInt(res?.data?.count));
+//             }else {
+//                 console.log('Response from View project Datasets lists api in view project:', res)
+//             }
+//         })
+//         .catch((error)=>{
+//             console.log("error in viewdataset:",error)
+//             const status = error?.response?.status
+//             if(status == 401){
+//               NotificationManager.error("Something went wrong !");
+//               localStorage.clear();
+//               history.push("/login")
+//             } else if(status == 500){
+//               NotificationManager.error("Temporary connectivity issues.");
+//             }
+//         })
+//     } else {
+//       localStorage.clear();
+//       history.push("/login")
+//     }
+// }
 
 
 
@@ -283,6 +319,8 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
 const NavigateCompletTask=()=>{
   history.push("/app/dashboard/downloadFile")
 }
+
+console.log(tasksList, "tassskkssss lissssttt aboove return")
   return (
     <div className="user-management">
       <Helmet>
@@ -297,10 +335,10 @@ const NavigateCompletTask=()=>{
       <CustomBreadcrumbs    currentPage={"Task List"} data={location?.state?.breadcrumbData} />
 
 
-                <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
+                {/* <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
              message="This will delete your Dataset permanently."
              onConfirm={() => Delete_Datset()}
-             ref={deleteConfirmationDialog} />
+             ref={deleteConfirmationDialog} /> */}
       <RctCollapsibleCard>
      
         <div className="table-responsive">
@@ -359,22 +397,28 @@ const NavigateCompletTask=()=>{
                 })
               } */}
 
-                    <tr className='globalFontFamily'>
-                      <td></td>
-                      <td>Task-1</td>
-                      <td>Pending</td>
-                      <td>1</td>
-                      <td className="list-action d-flex ">Plaaannn</td>
-                      <td>27 March 2023</td>
-                      <td>View</td>
-                    </tr>
+                    {
+                      filteredTasksList && filteredTasksList.map((task, ind, data)=> {
+                        return(
+                          <tr className='globalFontFamily'>
+                            <td></td>
+                            <td>{task?.task_name}</td>
+                            <td>{task?.status}</td>
+                            <td>{task?.task_file}</td>
+                            <td className="list-action d-flex ">Plaaannn</td>
+                            <td>{task?.date_created.slice(0, 10).split("-").reverse().join("-")}</td>
+                            <td>View</td>
+                          </tr>
+                        )
+                      })
+                    }
 
             </tbody>
 
           </table>
-          {filteredDatasetFiles.length == 0 && <center style={{ color: "black" }}>Data not available </center>}
+          {filteredTasksList.length == 0 && <center style={{ color: "black" }}>Data not available </center>}
           {
-            datasetFiles?.length > 0 &&
+            tasksList?.length > 0 &&
             <div className='paginationDiv'> 
               <Pagination
                 activePage={activePage}

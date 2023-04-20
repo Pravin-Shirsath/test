@@ -10,6 +10,9 @@ import Button from '@material-ui/core/Button'
 import Pagination from "react-js-pagination";
 
 import { useHistory } from 'react-router-dom';
+
+import { ErrorHandling } from "Constants/ErrorHandling";
+
 import { NotificationManager } from 'react-notifications'
 // delete confirmation dialog
 import DeleteConfirmationDialog from 'Components/DeleteConfirmationDialog/DeleteConfirmationDialog'
@@ -135,19 +138,21 @@ const getDatasetFiles = () => {
             }
         })
         .catch((error)=>{
-            console.log("error in viewdataset:",error)
-            const status = error?.response?.status
-            if(status == 401){
-              NotificationManager.error("Something went wrong !");
-              localStorage.clear();
-              history.push("/login")
-            } else if(status == 500){
-              NotificationManager.error("Temporary connectivity issues.");
-            }
+            // console.log("error in viewdataset:",error)
+            // const status = error?.response?.status
+            // if(status == 401){
+            //   NotificationManager.error("Something went wrong !");
+            //   localStorage.clear();
+            //   history.push("/login")
+            // } else if(status == 500){
+            //   NotificationManager.error("Temporary connectivity issues.");
+            // }
+
+            ErrorHandling(error)
         })
     } else {
-      localStorage.clear();
-      history.push("/login")
+      // localStorage.clear();
+      // history.push("/login")
     }
 }
 
@@ -263,7 +268,7 @@ const getDatasetFiles = () => {
              message="This will delete your Dataset permanently."
             //  onConfirm={() => Delete_Datset()}
              ref={deleteConfirmationDialog} />
-      <RctCollapsibleCard fullBlock>
+      <RctCollapsibleCard>
      
         <div className="table-responsive">
             <div className="d-flex py-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
