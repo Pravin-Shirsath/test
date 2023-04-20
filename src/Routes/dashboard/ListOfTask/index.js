@@ -45,6 +45,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import EditDataset from '../ReuseComponent/EditDataset';
 import { getFormatDate2 } from 'Constants/DateFormator';
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
+// import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import {
     ViewFiles
@@ -294,6 +295,9 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
        
   }
 
+
+
+
   const getSearchedCustomerData = () => {
     const accessToken = JSON.parse(localStorage.getItem('token'));
     const projectId = localStorage?.getItem("projId")
@@ -321,6 +325,21 @@ const NavigateCompletTask=()=>{
 }
 
 console.log(tasksList, "tassskkssss lissssttt aboove return")
+
+
+const TaskStatus=()=>{
+  const  breadcrumbData =location?.state?.breadcrumbData || []
+  breadcrumbData.push( { name: 'View Task', url: '/app/dashboard/createTask' });
+  history.push("/app/dashboard/taskStatus",{breadcrumbData:breadcrumbData});
+}
+
+
+
+
+
+
+
+
   return (
     <div className="user-management">
       <Helmet>
@@ -407,7 +426,7 @@ console.log(tasksList, "tassskkssss lissssttt aboove return")
                             <td>{task?.task_file}</td>
                             <td className="list-action d-flex ">Plaaannn</td>
                             <td>{task?.date_created.slice(0, 10).split("-").reverse().join("-")}</td>
-                            <td>View</td>
+                            <td><VisibilityIcon onClick={TaskStatus}></VisibilityIcon></td>
                           </tr>
                         )
                       })

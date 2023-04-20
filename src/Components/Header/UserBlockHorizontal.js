@@ -79,7 +79,7 @@ import "@uppy/status-bar/dist/style.css";
 import "@uppy/progress-bar/dist/style.css";
 import "@uppy/informer/dist/style.css";
 import XHR from '@uppy/xhr-upload';
-import FileCard from 'Routes/dashboard/ReuseComponent/exportToExcel';
+
 import UppyModal from './UppyModal';
 
 function UserBlockHorizontal(props) {

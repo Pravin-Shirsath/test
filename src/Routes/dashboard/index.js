@@ -31,7 +31,8 @@ import {
    AsyncCoustomerDetailsComponent,
    AsyncTaskStatus,
    AsyncListOfTask,
-   AsyncDownloadFile
+   AsyncDownloadFile,
+   AsyncStorageused
 
 } from 'Components/AsyncComponent/AsyncComponent';
 
@@ -78,6 +79,7 @@ return(
          <Route path={`${match.url}/taskStatus`} component={AsyncTaskStatus} />
          <Route path={`${match.url}/listOfTask`} component={AsyncListOfTask} />
          <Route path={`${match.url}/downloadFile`} component={AsyncDownloadFile} />
+         <Route path={`${match.url}/storageuse`} component={AsyncStorageused} />
       
          
          <Route path={`${match.url}/Admin/Dashboard`} component={AsyncAdminDashboardComponent} />
