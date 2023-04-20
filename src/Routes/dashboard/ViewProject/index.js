@@ -286,7 +286,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
         match={props.match}
       /> */}
  
-      <CustomBreadcrumbs    currentPage={"View Project"} data={location?.state?.breadcrumbData} />
+      <CustomBreadcrumbs  currentPage={"View Project"} data={location?.state?.breadcrumbData} />
 
 
                 <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
