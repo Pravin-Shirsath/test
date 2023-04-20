@@ -1394,6 +1394,19 @@ export const ViewTasks = (token, datasetId, activePage) => {
 }
 
 
+// Search Task in ViewTaskList API handling
+export const SearchTask = (token, datasetId, searchText) => {
+  return axios.get(`${BASE_URL}/api/automaton/tasks/view-tasks/${datasetId}/?search=${searchText}`, {
+    headers:{
+      Authorization: `Token ${token}`,
+    }
+  })
+  .then(res => {
+    console.log(res, "responseee from view tasks api")
+    return res;
+  })
+}
+
 
 
 

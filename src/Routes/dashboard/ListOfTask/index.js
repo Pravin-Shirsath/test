@@ -47,7 +47,8 @@ import { getFormatDate2 } from 'Constants/DateFormator';
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
 
 import {
-    ViewFiles
+    ViewFiles,
+    SearchTask
   } from '../../../Api/'
 import { ErrorHandling } from 'Constants/ErrorHandling';
 
@@ -244,27 +245,51 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
        
   }
 
-  const getSearchedCustomerData = () => {
-    // const accessToken = JSON.parse(localStorage.getItem('token'));
-    // const projectId = localStorage?.getItem("projId")
-    // if (accessToken !== null) {
-    //    getSearchProjectDatasets(accessToken,projectId, searchText)
-    //     .then((res) => {
-    //       if (res?.status === 200 && res?.data?.results.length>0) {
-    //         setFilteredDatasets(res?.data?.results);
-    //         setSearchText('')
-    //         // console.log('Response from customerlist :', res)
-    //       } else {
-    //         // console.log('Response from customerlist:', res)
-    //         setFilteredDatasets(datasets);
-    //         setSearchText('');
-    //         NotificationManager.error("No dataset found!")
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       // console.log('Response from customerlist:', err)
-    //     })
-    // }
+  // const SearchTask = () => {
+  //   const accessToken = JSON.parse(localStorage.getItem('token'));
+  //   const projectId = localStorage?.getItem("projId")
+  //   if (accessToken !== null) {
+  //      getSearchProjectDatasets(accessToken,projectId, searchText)
+  //       .then((res) => {
+  //         if (res?.status === 200 && res?.data?.results.length>0) {
+  //           setFilteredDatasets(res?.data?.results);
+  //           setSearchText('')
+  //           // console.log('Response from customerlist :', res)
+  //         } else {
+  //           // console.log('Response from customerlist:', res)
+  //           setFilteredDatasets(datasets);
+  //           setSearchText('');
+  //           NotificationManager.error("No dataset found!")
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         // console.log('Response from customerlist:', err)
+  //       })
+  //   }
+  // }
+
+  const searchTask = () => {
+    const authToken = JSON.parse(localStorage?.getItem("token"));
+    const datasetId = localStorage?.getItem("datasetId");
+
+    if (authToken !== null) {
+      SearchTask(authToken,datasetId, searchText)
+        .then((res) => {
+          if (res?.status === 200 && res?.data?.results.length>0) {
+            setFilteredTasksList(res?.data?.results);
+            setSearchText('')
+            // console.log('Response from customerlist :', res)
+          } else {
+            // console.log('Response from customerlist:', res)
+            setFilteredDatasets(tasksList);
+            setSearchText('');
+            NotificationManager.error("No task found!")
+          }
+        })
+        .catch((err) => {
+          // console.log('Response from customerlist:', err)
+        })
+    }
   }
 
 const NavigateCompletTask=()=>{
@@ -272,6 +297,7 @@ const NavigateCompletTask=()=>{
 }
 
 console.log(tasksList, "tassskkssss lissssttt aboove return")
+console.log(searchText, "Seaccccchhhh text")
   return (
     <div className="user-management">
       <Helmet>
@@ -297,7 +323,7 @@ console.log(tasksList, "tassskkssss lissssttt aboove return")
             <div className='search-row'>
               <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
               <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} 
-               onClick={getSearchedCustomerData}
+               onClick={searchTask}
               >Search</Button>
             </div>
 
