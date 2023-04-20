@@ -1381,8 +1381,8 @@ export const scnerioPlanningPostData = (token, jsonSendFormat) => {
 };
 
 // View Tasks API export const BASE_URL = "https://api-automaton.progfeel.co.in"
-export const ViewTasks = (token, datasetId) => {
-  return axios.get(`${BASE_URL}/api/automaton/tasks/view-tasks/${datasetId}/`, {
+export const ViewTasks = (token, datasetId, activePage) => {
+  return axios.get(`${BASE_URL}/api/automaton/tasks/view-tasks/${datasetId}/?page=${activePage}`, {
     headers:{
       Authorization: `Token ${token}`,
     }
@@ -1393,6 +1393,19 @@ export const ViewTasks = (token, datasetId) => {
   })
 }
 
+
+// Search Task in ViewTaskList API handling
+export const SearchTask = (token, datasetId, searchText) => {
+  return axios.get(`${BASE_URL}/api/automaton/tasks/view-tasks/${datasetId}/?search=${searchText}`, {
+    headers:{
+      Authorization: `Token ${token}`,
+    }
+  })
+  .then(res => {
+    console.log(res, "responseee from view tasks api")
+    return res;
+  })
+}
 
 
 
