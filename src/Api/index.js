@@ -770,8 +770,63 @@ export const CreateNewProject = (
 
 
 
+/**
+ *
+ * @param {*} token
+ * @param {*} DatasetId
+ * 
+ * @returns
+ */
+export const CreateTask = (
+  token,
+  DatasetId
+) => {
+  return axios.post(`${BASE_URL}/api/automaton/tasks/create-task/ `,
+  {
+    "dataset_id":DatasetId
+  },
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.log("/tasks/create-task/ :", res);
+      return res;
+    });
+};
 
 
+
+/**
+ *
+ * @param {*} token
+ * @param {*} DatasetId
+ * 
+ * @returns
+ */
+export const AddFileToTask = (
+  token,
+  TaskId,
+  idArray
+) => {
+  return axios.post(`${BASE_URL}/api/automaton/tasks/add-files/ `,
+  {
+    "task_id":TaskId,
+    "dataset_input_files":idArray
+  },
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.log("/tasks/create-task/ :", res);
+      return res;
+    });
+};
 
 
 

@@ -28,6 +28,7 @@ import RctCollapsibleCard from '../../../Components/RctCollapsibleCard/RctCollap
 import RctSectionLoader from '../../../Components/RctSectionLoader/RctSectionLoader'
 import '../../../Assets/css/user.css'
 import {
+  CreateTask,
   DeleteDataset,
   getViewProjectDatasets,
   ViewFiles
@@ -43,6 +44,7 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
 import EditDataset from '../ReuseComponent/EditDataset';
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
+// import { ErrorHandling } from "Constants/ErrorHandling";
 
 
 export default function ViewDataset(props) {
@@ -231,11 +233,46 @@ const getDatasetFiles = () => {
     
   
      if(selectedFiles.length > 0){
-      const  breadcrumbData =location?.state?.breadcrumbData || []
-             breadcrumbData.push( { name: 'View Dataset', url: '/app/dashboard/viewDataset' });
-             history.push("/app/dashboard/createTask",{breadcrumbData:breadcrumbData,files:{"count":1,data:selectedFiles}});
+              const  breadcrumbData =location?.state?.breadcrumbData || []
+                     breadcrumbData.push( { name: 'View Dataset', url: '/app/dashboard/viewDataset' });
+            
+              const authToken = JSON.parse(localStorage.getItem("token"));
+              const datasetId = localStorage.getItem("datasetId")
+          
+          
+              if(authToken !== null){
+                CreateTask(authToken, datasetId)
+                  .then(res=> {
+                      console.log(res, "CREATED TASK")
+                      if(res?.status == 200){
+                        if(res.data?.task_id){
+                          localStorage.setItem("TaskId",JSON.stringify(res?.data?.task_id))
+                          history.push("/app/dashboard/createTask",{breadcrumbData:breadcrumbData,files:{"count":1,data:selectedFiles}});
+                        }
+                      }
+                  })
+                  .catch((error)=>{
+                     ErrorHandling(error)
+                  })
+              }
+          
+          
 
-             console.log()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      }else{
       NotificationManager.error("Please  selected file !");
 
