@@ -103,7 +103,6 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     //     localStorage.clear();
     // } else {
     // getCustomersListData();
-    // getDatasetFiles()
 
     getTasksList()
     // }
@@ -116,7 +115,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     console.log(authToken, datasetId, "auth token and datasetId on getTasksList api call")
 
     if(authToken!==null){
-      ViewTasks(authToken, datasetId)
+      ViewTasks(authToken, datasetId, 1)
       .then(res=> {
         console.log(res, "ressss in listOfTask file ke then block")
         if(res?.status == 200){
@@ -133,191 +132,143 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     }
   }
 
-//   const getDatasetFiles = () => {
-//     const authToken = JSON.parse(localStorage.getItem("token"));
-//     const datasetId = localStorage?.getItem("datasetId")
-//     // const datasetId = 146
-
-//     if(authToken !== null){
-//         ViewFiles(authToken, datasetId, 1)
-//         .then(res=> {
-//             console.log(res, "resss in viewDataset file")
-//             if(res?.status == 200){
-//                 console.log(res?.data?.results, "dataaa of filesss in view datasetfile")
-//                 const results = res?.data?.results;
-//                 const updatedResults = results.map(result=> {
-//                     return {...result, selectedFile: false}
-//                 })
-
-//                 setDatasetFiles(updatedResults)
-//                 setFilteredDatasetFiles(updatedResults)
-//                 setTotalPageCount(parseInt(res?.data?.count));
-//             }else {
-//                 console.log('Response from View project Datasets lists api in view project:', res)
-//             }
-//         })
-//         .catch((error)=>{
-//             console.log("error in viewdataset:",error)
-//             const status = error?.response?.status
-//             if(status == 401){
-//               NotificationManager.error("Something went wrong !");
-//               localStorage.clear();
-//               history.push("/login")
-//             } else if(status == 500){
-//               NotificationManager.error("Temporary connectivity issues.");
-//             }
-//         })
-//     } else {
-//       localStorage.clear();
-//       history.push("/login")
-//     }
-// }
-
-
-
-
-
   const EditModal = (item) => {
-    setSelectedItem(item)
+    // setSelectedItem(item)
   
-    setOpenEditDataset(true)
+    // setOpenEditDataset(true)
   }
 
   const DeletModalOpen = (item) => {
-    setSelectedItem(item)
-    deleteConfirmationDialog.current.open()
+    // setSelectedItem(item)
+    // deleteConfirmationDialog.current.open()
   }
 
   const Delete_Datset = () => {
-
-
-    const accessToken = JSON.parse(localStorage.getItem('token'))
-    if (accessToken !== null) {
+    // const accessToken = JSON.parse(localStorage.getItem('token'))
+    // if (accessToken !== null) {
      
-      DeleteDataset(accessToken, selected?.id,selected?.project_id)
-        .then((res) => {
-          if (res?.status === 200) {
-            deleteConfirmationDialog.current.close()
+    //   DeleteDataset(accessToken, selected?.id,selected?.project_id)
+    //     .then((res) => {
+    //       if (res?.status === 200) {
+    //         deleteConfirmationDialog.current.close()
 
-            NotificationManager.success("Datset deleted successfully!")
-            console.log('Response from dataset  :', res)
+    //         NotificationManager.success("Datset deleted successfully!")
+    //         console.log('Response from dataset  :', res)
 
-          } else {
+    //       } else {
 
 
-            NotificationManager.error("Delete_Datset deleting process unsucess!")
-          }
-        })
-        .catch((err) => {
-          console.log('Response from err dataset  :', err)
-          NotificationManager.error("Delete_Datset deleting process unsucess!")
-        })
-    }
+    //         NotificationManager.error("Delete_Datset deleting process unsucess!")
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log('Response from err dataset  :', err)
+    //       NotificationManager.error("Delete_Datset deleting process unsucess!")
+    //     })
+    // }
   }
 
-
-
-
-
   const handlePageChange = (pageNumber) => {
-    // console.log("pagination", pageNumber)
-    // if (activePage !== pageNumber) {
-    //   const authToken = JSON.parse(localStorage.getItem('token'))
-    //   const projectId = localStorage?.getItem("projId")
+    console.log("pagination", pageNumber)
 
-    //   if (authToken !== null) {
-    //     getViewProjectDatasets(authToken, projectId, pageNumber)
-    //       .then((res) => {
-    //         if (res?.status === 200) {
-    //           setDatasets(res?.data?.results);
-    //           setFilteredDatasets(res?.data?.results);
-    //           setTotalPageCount(res?.data?.count);
-    //           console.log('Response from customerlist :', res)
-    //         } else {
-    //           // console.log('Response from customerlist:', res)
-    //         }
-    //       })
-    //       .catch((err) => {
-    //         // console.log('Response from customerlist:', err)
-    //       })
-    //   }
-    //   setActivePage(pageNumber)
-    // }
+    if (activePage !== pageNumber) {
+      const authToken = JSON.parse(localStorage?.getItem("token"));
+      const datasetId = localStorage?.getItem("datasetId");
+
+      if (authToken !== null) {
+        ViewTasks(authToken, datasetId, pageNumber)
+          .then(res=> {
+            console.log(res, "ressss in listOfTask file ke then block")
+            if(res?.status == 200){
+              setTasksList(res?.data?.results)
+              setFilteredTasksList(res?.data?.results)
+              setTotalPageCount(parseInt(res?.data?.count))
+            } else {
+              console.log('Response from View Tasks list api in ListOfTask', res)
+            }
+          })
+          .catch(err => {
+            ErrorHandling(err)
+          })
+      }
+      setActivePage(pageNumber)
+    }
   }
 
 
   // Dataset View
   const handleView = (dataset) => {
-    console.log(dataset?.id, "selected dataset ID")
-    localStorage.setItem("datasetId", dataset?.id);
-    if(location?.state?.breadcrumbData){
-      let path = location?.state?.breadcrumbData[0]
-      if(path?.name == "Dashboard"){
-        const breadcrumbData = [
-          { name: 'Dashboard', url: '/app/dashboard/saas' },
-          { name: 'View Project', url: '/app/dashboard/viewProject' },
+    // console.log(dataset?.id, "selected dataset ID")
+    // localStorage.setItem("datasetId", dataset?.id);
+    // if(location?.state?.breadcrumbData){
+    //   let path = location?.state?.breadcrumbData[0]
+    //   if(path?.name == "Dashboard"){
+    //     const breadcrumbData = [
+    //       { name: 'Dashboard', url: '/app/dashboard/saas' },
+    //       { name: 'View Project', url: '/app/dashboard/viewProject' },
           
-        ];
-        history.push("/app/dashboard/viewDataset",{breadcrumbData:breadcrumbData})
-      }else if(path?.name == "Project"){
-        const breadcrumbData = [
-          { name: 'Project', url: '/app/dashboard/project' },
-          { name: 'View Project', url: '/app/dashboard/viewProject' },
+    //     ];
+    //     history.push("/app/dashboard/viewDataset",{breadcrumbData:breadcrumbData})
+    //   }else if(path?.name == "Project"){
+    //     const breadcrumbData = [
+    //       { name: 'Project', url: '/app/dashboard/project' },
+    //       { name: 'View Project', url: '/app/dashboard/viewProject' },
           
-        ];
-        history.push("/app/dashboard/viewDataset",{breadcrumbData:breadcrumbData})
-      }
-    }
+    //     ];
+    //     history.push("/app/dashboard/viewDataset",{breadcrumbData:breadcrumbData})
+    //   }
+    // }
   
   }
 
   // Dataset create
   const HandleCreate=()=>{
-    if(location?.state?.breadcrumbData){
-      let path = location?.state?.breadcrumbData[0]
-      if(path?.name == "Dashboard"){
-        const breadcrumbData = [
-          { name: 'Dashboard', url: '/app/dashboard/saas' },
-          { name: 'View Project', url: '/app/dashboard/viewProject' },
+    // if(location?.state?.breadcrumbData){
+    //   let path = location?.state?.breadcrumbData[0]
+    //   if(path?.name == "Dashboard"){
+    //     const breadcrumbData = [
+    //       { name: 'Dashboard', url: '/app/dashboard/saas' },
+    //       { name: 'View Project', url: '/app/dashboard/viewProject' },
           
-        ];
-        history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
-      }else if(path?.name == "Project"){
-        const breadcrumbData = [
-          { name: 'Project', url: '/app/dashboard/project' },
-          { name: 'View Project', url: '/app/dashboard/viewProject' },
+    //     ];
+    //     history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
+    //   }else if(path?.name == "Project"){
+    //     const breadcrumbData = [
+    //       { name: 'Project', url: '/app/dashboard/project' },
+    //       { name: 'View Project', url: '/app/dashboard/viewProject' },
           
-        ];
-        history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
-      }
-    }
+    //     ];
+    //     history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
+    //   }
+    // }
        
   }
 
   const getSearchedCustomerData = () => {
-    const accessToken = JSON.parse(localStorage.getItem('token'));
-    const projectId = localStorage?.getItem("projId")
-    if (accessToken !== null) {
-       getSearchProjectDatasets(accessToken,projectId, searchText)
-        .then((res) => {
-          if (res?.status === 200 && res?.data?.results.length>0) {
-            setFilteredDatasets(res?.data?.results);
-            setSearchText('')
-            // console.log('Response from customerlist :', res)
-          } else {
-            // console.log('Response from customerlist:', res)
-            setFilteredDatasets(datasets);
-            setSearchText('');
-            NotificationManager.error("No dataset found!")
-          }
-        })
-        .catch((err) => {
-          // console.log('Response from customerlist:', err)
-        })
-    }
+    // const accessToken = JSON.parse(localStorage.getItem('token'));
+    // const projectId = localStorage?.getItem("projId")
+    // if (accessToken !== null) {
+    //    getSearchProjectDatasets(accessToken,projectId, searchText)
+    //     .then((res) => {
+    //       if (res?.status === 200 && res?.data?.results.length>0) {
+    //         setFilteredDatasets(res?.data?.results);
+    //         setSearchText('')
+    //         // console.log('Response from customerlist :', res)
+    //       } else {
+    //         // console.log('Response from customerlist:', res)
+    //         setFilteredDatasets(datasets);
+    //         setSearchText('');
+    //         NotificationManager.error("No dataset found!")
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       // console.log('Response from customerlist:', err)
+    //     })
+    // }
   }
+
 const NavigateCompletTask=()=>{
-  history.push("/app/dashboard/downloadFile")
+  // history.push("/app/dashboard/downloadFile")
 }
 
 console.log(tasksList, "tassskkssss lissssttt aboove return")
@@ -350,9 +301,9 @@ console.log(tasksList, "tassskkssss lissssttt aboove return")
               >Search</Button>
             </div>
 
-            <Button  
+            {/* <Button  
              onClick={NavigateCompletTask}
-            variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} >Completed Task</Button>
+            variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} >Completed Task</Button> */}
 
           </div>
 
