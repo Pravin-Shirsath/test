@@ -72,6 +72,11 @@ button{
     margin: 30px 0px;
 }
 
+/* CSS for user block horizontal font */
+.rct-sidebar .rct-sidebar-wrap .top-sidebar .sidebar-user-block .rct-dropdown .dropdown-menu ul li:not(.user-profile-top) a span:not(.badge) {
+    font-size: 16px !important;
+}
+
 
 
 /* create Coupan  */
