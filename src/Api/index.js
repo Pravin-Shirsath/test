@@ -829,12 +829,32 @@ export const AddFileToTask = (
 };
 
 
+/**
+ *
+ * @param {*} token
+ * @param {*} userid
+ * @returns
+ */
+
+export const getChartData = (token) => {
+  return axios
+    .get(`${BASE_URL}/api/automaton/charts/dashboard-chart/`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((res) => {
+     
+      return res;
+    });
+};
 
 
 
 
 
-/**    Customer SECTION END */
+
+/**    Customer SECTION END  */
 
 
 

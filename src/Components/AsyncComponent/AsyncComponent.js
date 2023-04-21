@@ -656,6 +656,10 @@ const AsyncDownloadFile = Loadable({
   loader: () => import("Routes/dashboard/DownloadFile"),
   loading: () => <RctPageLoader />,
 })
+const AsyncStorageused = Loadable({
+  loader: () => import("Routes/dashboard/Storageused"),
+  loading: () => <RctPageLoader />,
+})
 
 export {
   AsyncUserWidgetComponent,
@@ -768,5 +772,6 @@ export {
   AsyncCoustomerDetailsComponent,
   AsyncTaskStatus,
   AsyncListOfTask,
-  AsyncDownloadFile
+  AsyncDownloadFile,
+  AsyncStorageused
 };

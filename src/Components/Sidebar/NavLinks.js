@@ -27,13 +27,21 @@ let sidebarMenu = {
 
       },
       {
+         "menu_title": "sidebar.staorageuse",
+         "path": "/app/dashboard/storageuse",
+         "new_item": false,
+         //  "menu_icon": "zmdi zmdi-accounts",
+
+      },
+      {
          "menu_title": "sidebar.report",
          "path": "/app/dashboard/report",
          "new_item": false,
          //  "menu_icon": "zmdi zmdi-accounts",
 
       },
-
+      
+      
       // {
       //    "menu_title": "sidebar.dashboard",
       //    "menu_icon": "zmdi zmdi-view-dashboard",
@@ -318,12 +326,20 @@ let sidebarMenu = {
 
    },
    {
+      "menu_title": "sidebar.staorageuse",
+      "path": "/app/dashboard/storageuse",
+      "new_item": false,
+      //  "menu_icon": "zmdi zmdi-accounts",
+
+   },
+   {
       "menu_title": "sidebar.report",
       "path": "/app/dashboard/report",
       "new_item": false,
       //  "menu_icon": "zmdi zmdi-accounts",
 
    },
+   
 
 
       // {

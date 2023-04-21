@@ -61,7 +61,7 @@ export default function ViewDataset(props) {
   //  const [filteredUsers, setFilteredUsers] = useState() // use when the data is coming fom api
 //   const [filteredUsers, setFilteredUsers] = useState([])
   const [searchText, setSearchText] = useState('');
-  
+  const [Taskid,setTaskId]=useState(JSON.parse( localStorage.getItem("TaskId")))
 
   const [username, setUsername] = useState("")
 //   const [email, setEmail] = useState("")
@@ -89,12 +89,14 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   const [modalOpen,setModalOpen]=useState(false);
   useEffect(() => {
     const isLoggedInBool = localStorage.getItem("isLoggedIn")
+    const TID= JSON.parse( localStorage.getItem("TaskId"))
     // conditional rendring
     // if(isLoggedInBool !== "true"){
     //   history.push("/login")
     //     localStorage.clear();
     // } else {
     // getCustomersListData();
+    setTaskId(TID)
     getTaskFile()
     // }
   }, [])
@@ -165,7 +167,7 @@ const getTaskFile = () => {
    
 
         const authToken = JSON?.parse(localStorage.getItem("token"));
-        const TaskId = localStorage?.getItem("TaskId")
+        const TaskId = localStorage.getItem("TaskId")
     
         if(filteredTaskFiles.length > 0){
           const IdArray = filteredTaskFiles.map(item=>item.id)
@@ -208,9 +210,7 @@ const getTaskFile = () => {
 
 
  const  Submit =()=>{
-  const  breadcrumbData =location?.state?.breadcrumbData || []
-  breadcrumbData.push( { name: 'View Task', url: '/app/dashboard/createTask' });
-  history.push("/app/dashboard/taskStatus",{breadcrumbData:breadcrumbData});
+ setModalOpen(false)
  }
 
  console.log(history, "historrryy in create task")
@@ -245,7 +245,7 @@ const getTaskFile = () => {
             
             </div>
             <div className="d-flex align-items-center justify-content-center">
-              <p className="Comman-Heading">Task-1</p>
+              <p className="Comman-Heading">Task-{Taskid}</p>
             </div>
 
             <div className='viewDatasetFilesContainer'>
