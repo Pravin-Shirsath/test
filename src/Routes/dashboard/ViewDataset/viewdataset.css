@@ -8,6 +8,7 @@
     transition: all 0.3s;
     padding: 0px 10px;
     transition: all 0.4s;
+    margin-bottom: 30px;
 }
 
 .viewDatasetFilesContainer .mainBox {
