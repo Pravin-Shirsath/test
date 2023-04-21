@@ -1,5 +1,3 @@
-
-
 /**
  * User Management Page
  */
@@ -130,7 +128,6 @@ const getTaskFile = () => {
                 setTaskFile(files?.data || [])
                 setFilteredTaskFiles(files?.data || [])
                 setTotalPageCount(parseInt(files?.count || 1));
-        
 }
 
   const handlePageChange = (pageNumber) => {
@@ -162,10 +159,6 @@ const getTaskFile = () => {
     setTaskFile(filterarray)    
   }
    
-
-
-
-
 
   const Proceed = ()=>{
     
