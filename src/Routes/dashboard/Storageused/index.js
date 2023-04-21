@@ -2,7 +2,7 @@
  * Ecommerce Dashboard
  */
 
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Helmet } from "react-helmet";
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
@@ -40,10 +40,34 @@ import {
 
 import CustomBreadcrumbs from '../ReuseComponent/CustomBreadcrumbs';
 import SpacePieChart from 'Components/Charts/SpacePieChart';
+import { getChartData } from 'Api';
 
 export default function Storageused(props) {
    const { match } = props;
    const {location}=props
+
+   useEffect(()=>{
+      GET_CHART_DATA()
+   },[])
+
+  const GET_CHART_DATA = () => {
+  
+   const accessToken = JSON.parse(localStorage.getItem('token'))
+   if (accessToken !== null) {
+      getChartData(accessToken)
+       .then((res) => {
+         if (res?.status === 200) {
+           
+           console.log('Chart:', res)
+         }
+       })
+       .catch((err) => {
+         // console.log('Response from customerlist:', err)
+       })
+   }
+  }
+
+
    return (
       <div className="ecom-dashboard-wrapper">
          <Helmet>
