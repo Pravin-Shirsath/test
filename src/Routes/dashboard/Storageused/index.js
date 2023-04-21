@@ -2,7 +2,7 @@
  * Ecommerce Dashboard
  */
 
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Helmet } from "react-helmet";
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
@@ -14,22 +14,22 @@ import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 
 import {
-    VisitorAreaChartWidget,
-    SalesAreaChartWidget,
-    OrdersAreaChartWidget,
-    RecentOrdersWidget,
-    SupportRequest,
-    Notifications,
-    TopSellingWidget,
-    OverallTrafficStatusWidget,
-    ProductReportsWidget,
-    OnlineVisitorsWidget,
-    TodayOrdersStatsWidget,
-    BookingInfo,
-    NewOrderCountdown,
-    FollowersWidget,
-    Notes,
-    Space
+   VisitorAreaChartWidget,
+   SalesAreaChartWidget,
+   OrdersAreaChartWidget,
+   RecentOrdersWidget,
+   SupportRequest,
+   Notifications,
+   TopSellingWidget,
+   OverallTrafficStatusWidget,
+   ProductReportsWidget,
+   OnlineVisitorsWidget,
+   TodayOrdersStatsWidget,
+   BookingInfo,
+   NewOrderCountdown,
+   FollowersWidget,
+   Notes,
+   Space
 } from "Components/Widgets";
 
 // widgets data
@@ -44,28 +44,50 @@ import { getChartData } from 'Api';
 
 export default function Storageused(props) {
    const { match } = props;
-   const {location}=props
+   const { location } = props
 
-   useEffect(()=>{
+   useEffect(() => {
       GET_CHART_DATA()
-   },[])
+   }, [])
 
-  const GET_CHART_DATA = () => {
-  
-   const accessToken = JSON.parse(localStorage.getItem('token'))
-   if (accessToken !== null) {
-      getChartData(accessToken)
-       .then((res) => {
-         if (res?.status === 200) {
-           
-           console.log('Chart:', res)
-         }
-       })
-       .catch((err) => {
-         // console.log('Response from customerlist:', err)
-       })
+   const GET_CHART_DATA = () => {
+
+      const accessToken = JSON.parse(localStorage.getItem('token'))
+      if (accessToken !== null) {
+         getChartData(accessToken)
+            .then((res) => {
+               if (res?.status === 200) {
+                  const Label = [];
+                  const  size = [];
+                  let m = {
+                     project_id: 114,
+                     project_name:"dscds",
+                     project_size: null,
+                     project_size_in_GB :  0
+                  }
+                 
+               if(res?.projects){
+                  let available_balance= "available_balance"
+
+
+                  // res?.projects.forEach(item=>{
+                       
+                  //    Label.push(item.project_name)
+                  //    size.push(item.project_size_in_GB)
+                     
+                  // })
+
+               }
+
+
+                  console.log('Chart:', res)
+               }
+            })
+            .catch((err) => {
+               // console.log('Response from customerlist:', err)
+            })
+      }
    }
-  }
 
 
    return (
@@ -75,8 +97,8 @@ export default function Storageused(props) {
             <meta name="description" content="Automaton Ecommerce Dashboard" />
          </Helmet>
          {/* <PageTitleBar title={<IntlMessages id="sidebar.report" />} match={props.match} /> */}
-         <CustomBreadcrumbs  currentPage={"Storage Uses"} data={location?.state?.breadcrumbData}  />
-       <Space  data={spaceUsed} />
+         <CustomBreadcrumbs currentPage={"Storage Uses"} data={location?.state?.breadcrumbData} />
+         <Space data={spaceUsed} />
       </div>
    )
 }
