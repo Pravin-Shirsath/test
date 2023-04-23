@@ -1310,36 +1310,10 @@ export const getSearchedModal = (token, searchItem) => {
     });
 };
 
-//========= API FOR SALES SCENARIO PLANNING =======//
-/**
- *
- * @param {*} file
- * @param {*} submittedData
- * @returns
- */
-export const scenarioPlanning = (token, file, submittedData) => {
-  return axios
-    .post(`${BASE_MI}/v0/sales/scenario_planning/`, {
-      uploaded_file: file,
-      column_names: submittedData,
-    })
-    .then((res) => {
-      console.log("Scenario planning api response", res);
-      return res;
-    });
-};
 
-//========= API FOR impactable_sales_outcome =======//
-export const getImpactableSalesOutcome = () => {
-  return axios
-    .get(`${BASE_MI}/v1/sales/impactable_sales_outcome/`, {
-      // header area, if have to pass data in header
-    })
-    .then((res) => {
-      console.log("Impactable sales outcome", res);
-      return res;
-    });
-};
+
+
+
 
 //=========== API for Link ML API TO Sales Modal =========//
 export const postMlDataWithModelRef = (token, modelRef, jsonSendFormat) => {
@@ -1381,24 +1355,16 @@ export const plotGraph = (token, modelRef) => {
     });
 };
 
-export const scnerioPlanningPostData = (token, jsonSendFormat) => {
-  return axios
-    .post(
-      `${BASE_URL}/version_0/sales/modal/scenario-planning/graph/plot/`,
-      {
-        ml_data: jsonSendFormat,
-      },
-      {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      }
-    )
-    .then((res) => {
-      console.log("response from scnerioplanning API :", res);
-      return res;
-    });
-};
+
+
+
+
+
+
+
+
+
+
 
 // View Tasks API export const BASE_URL = "https://api-automaton.progfeel.co.in"
 export const ViewTasks = (token, datasetId, activePage) => {

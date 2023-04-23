@@ -50,31 +50,17 @@ import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
 export default function ViewDataset(props) {
   const history = useHistory();
   const {location}=props
-  //  const [users, setUsers] = useState() // use when data is coming from api
-//   const [users, setUsers] = useState([])
-  //  const [filteredUsers, setFilteredUsers] = useState() // use when the data is coming fom api
-//   const [filteredUsers, setFilteredUsers] = useState([])
+ 
   const [searchText, setSearchText] = useState('');
   
-
-  const [username, setUsername] = useState("")
-//   const [email, setEmail] = useState("")
- 
-//   const [selectedUser, setSelectedUser] = useState(null)
   const [loading, setLoading] = useState(false)
-//   const [addNewUserModal, setAddNewUserModal] = useState(false)
-//   const [updateNewUserModal, setupdateNewUserModal] = useState(false)
-//   const [deleteUserModal, setdeleteUserModal] = useState(false)
+
 
   const deleteConfirmationDialog = useRef()
   const [selected, setSelectedItem] = useState({})
 
-//   const [editUser, setEditUser] = useState(null)
-//   const [selectedUsers, setSelectedUsers] = useState(0)
-//   const [viewDetails, setViewDetails] = useState()
 const [openEditDataset,setOpenEditDataset] = useState(false)
 
-  const [datasets, setDatasets] = useState([]);
   const [activePage, setActivePage] = useState(1)
   const [totalPageCount, setTotalPageCount] = useState('');
   const [datasetFiles, setDatasetFiles] = useState([]);
@@ -82,39 +68,13 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   useEffect(() => {
-    const isLoggedInBool = localStorage.getItem("isLoggedIn")
-    // conditional rendring
-    // if(isLoggedInBool !== "true"){
-    //   history.push("/login")
-    //     localStorage.clear();
-    // } else {
-    // getCustomersListData();
+   
+    
     getDatasetFiles()
     // }
   }, [])
 
-//   const getViewProjectData = () => {
-//     const authToken = JSON?.parse(localStorage.getItem("token"));
-//     const projectId = localStorage?.getItem("projId")
 
-//     if(authToken !== null){
-//       getViewProjectDatasets(authToken, projectId, activePage)
-//       .then(res => {
-//         if(res?.status == 200){
-//           console.log(res?.data?.results, "project's all lists")
-//           setDatasets(res?.data?.results)
-//           setFilteredDatasets(res?.data?.results);
-
-//           console.log(res?.data?.count, "total counts of datasets of projects")
-//           setTotalPageCount(parseInt(res?.data?.count));
-//         } else {
-//           console.log('Response from View project Datasets lists api:', res)
-//         }
-//       }).catch((error)=>{
-//         console.log("error=",error)
-//       })
-//     }
-//   }
 
 const getDatasetFiles = () => {
     const authToken = JSON.parse(localStorage.getItem("token"));
@@ -140,27 +100,18 @@ const getDatasetFiles = () => {
             }
         })
         .catch((error)=>{
-            // console.log("error in viewdataset:",error)
-            // const status = error?.response?.status
-            // if(status == 401){
-            //   NotificationManager.error("Something went wrong !");
-            //   localStorage.clear();
-            //   history.push("/login")
-            // } else if(status == 500){
-            //   NotificationManager.error("Temporary connectivity issues.");
-            // }
-
+        
             ErrorHandling(error)
         })
-    } else {
-      // localStorage.clear();
-      // history.push("/login")
     }
 }
 
   const handlePageChange = (pageNumber) => {
-    console.log("pagination", pageNumber)
+   
+    
     if (activePage !== pageNumber) {
+     
+
       const authToken = JSON.parse(localStorage.getItem('token'))
       const datasetId = localStorage?.getItem("datasetId")
 
@@ -172,12 +123,10 @@ const getDatasetFiles = () => {
               setFilteredDatasetFiles(res?.data?.results);
               setTotalPageCount(res?.data?.count);
               console.log('Response from customerlist :', res)
-            } else {
-              // console.log('Response from customerlist:', res)
             }
           })
           .catch((err) => {
-            // console.log('Response from customerlist:', err)
+           
           })
       }
       setActivePage(pageNumber)
@@ -216,22 +165,9 @@ const getDatasetFiles = () => {
       setFilteredDatasetFiles(copyFilteredDatasetFiles)
     }
   }
-   
   
-
-  console.log(filteredDatasetFiles, "filteredd datasets")
-  console.log(datasetFiles, "daaaaset Filesss")
-  console.log(selectedFiles, "Selected filessss")
-  console.log(location, "location in view dataset ")
-  console.log(props, "proppsss in view dataset")
-
-
-
-
-
   const NewTaskNavigate = ()=>{
-    
-  
+      
      if(selectedFiles.length > 0){
               const  breadcrumbData =location?.state?.breadcrumbData || []
                      breadcrumbData.push( { name: 'View Dataset', url: '/app/dashboard/viewDataset' });
@@ -246,6 +182,7 @@ const getDatasetFiles = () => {
                       console.log(res, "CREATED TASK")
                       if(res?.status == 200){
                         if(res.data?.task_id){
+                          NotificationManager.success("Task Created Successfully")
                           localStorage.setItem("TaskId",JSON.stringify(res?.data?.task_id))
                           history.push("/app/dashboard/createTask",{breadcrumbData:breadcrumbData,files:{"count":1,data:selectedFiles}});
                         }
@@ -255,24 +192,7 @@ const getDatasetFiles = () => {
                      ErrorHandling(error)
                   })
               }
-          
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+         
      }else{
       NotificationManager.error("Please  selected file !");
 
@@ -323,7 +243,7 @@ const getDatasetFiles = () => {
 
             <div className='viewDatasetFilesContainer'>
                 {
-                    filteredDatasetFiles && filteredDatasetFiles.map((file,ind)=> {
+                    filteredDatasetFiles &&filteredDatasetFiles?.length > 0&& filteredDatasetFiles.map((file,ind)=> {
                       console.log(file)
                         return(
                                 // <div className="mainBox" key={ind} onClick={()=>handleFileSelect(file)}>
@@ -352,7 +272,7 @@ const getDatasetFiles = () => {
                 }
             </div>
 
-            {filteredDatasetFiles.length == 0 && <center style={{ color: "black" }}>Data not available </center>}
+            {filteredDatasetFiles?.length == 0 && <center style={{ color: "black" }}>Data not available </center>}
           {
             datasetFiles?.length > 0 &&
             <div className='paginationDiv'> 

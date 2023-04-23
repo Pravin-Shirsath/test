@@ -750,7 +750,7 @@ module.exports = {
    "components.nameOnCard": "Name On Card",
    "components.confirmPayment": "Confirm Payment",
    "sidebar.saas": "SAAS",
-   "sidebar.scenarioplanning": "Scenario Planning",
+  
    "sidebar.multiLevel": "MultiLevel",
    "sidebar.level1": "Level 1",
    "sidebar.level2": "Level 2",

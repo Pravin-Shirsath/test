@@ -6,7 +6,7 @@ export const spaceUsed = {
         datasets: [{
             data: [275, 100],
             backgroundColor: [
-                ChartConfig.color.primary,
+                "green",
                 ChartConfig.color.info
             ],
             hoverBackgroundColor: [

@@ -14,9 +14,9 @@ import IntlMessages from 'Util/IntlMessages';
 function Space(props) {
    const { data } = props;
    return (
-      <Card className="rct-block">
-         <CardBody className="d-flex py-15">
-            <div className="mr-15 w-40 d-flex align-items-center">
+      <Card className="rct-block d-flex ">
+         <CardBody className="d-flex py-15 align-items-center  justify-content-center">
+            <div className="mr-15 w-40 d-flex ">
                <SpacePieChart
                   labels={data.chartData.labels}
                   datasets={data.chartData.datasets}
@@ -25,9 +25,9 @@ function Space(props) {
                />
             </div>
             <div>
-               <p className="mb-0"><IntlMessages id="components.spaceUsed" /></p>
-               <p className="font-3x mb-0">30<sub className="text-dark font-lg">/50GB</sub></p>
-               <Button color="primary" className="btn-xs"><IntlMessages id="widgets.buyMore" /></Button>
+               <p className="mb-0"></p>
+               {/* <p className="font-3x mb-0">30<sub className="text-dark font-lg">/50GB</sub></p> */}
+               {/* <Button color="primary" className="btn-xs"><IntlMessages id="widgets.buyMore" /></Button> */}
             </div>
          </CardBody>
       </Card>

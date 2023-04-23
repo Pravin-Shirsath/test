@@ -2,7 +2,7 @@
  * Ecommerce Dashboard
  */
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
@@ -37,14 +37,22 @@ import {
 import {
    spaceUsed
 } from './data';
-
+import ChartConfig from 'Constants/chart-config';
 import CustomBreadcrumbs from '../ReuseComponent/CustomBreadcrumbs';
 import SpacePieChart from 'Components/Charts/SpacePieChart';
 import { getChartData } from 'Api';
+import { colors } from '@mui/material';
+// import { useState } from 'react';
 
 export default function Storageused(props) {
    const { match } = props;
    const { location } = props
+   const [labels, setLabels] = useState([])
+   const [fileSizes, setFileSizes] = useState([])
+   const [colorCode, setColorCode] = useState([])
+   const [spaceuse, setSpaceused] = useState(null)
+   
+
 
    useEffect(() => {
       GET_CHART_DATA()
@@ -58,26 +66,49 @@ export default function Storageused(props) {
             .then((res) => {
                if (res?.status === 200) {
                   const Label = [];
-                  const  size = [];
-                  let m = {
-                     project_id: 114,
-                     project_name:"dscds",
-                     project_size: null,
-                     project_size_in_GB :  0
-                  }
+                  const size = [];
+                  const colors = []
                  
-               if(res?.projects){
-                  let available_balance= "available_balance"
-
-
-                  // res?.projects.forEach(item=>{
-                       
-                  //    Label.push(item.project_name)
-                  //    size.push(item.project_size_in_GB)
+                  
+                  if (res?.data?.projects) {
                      
-                  // })
+                     let available_balance = "available_balance"
+                     Label.push(available_balance)
+                     size.push( Number(res?.data?.available_balance) )
+                     colors.push("green")
 
-               }
+                     
+                    
+                     res?.data?.projects.forEach(item => {
+                       
+                       let color = 'rgb(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
+
+                        colors.push(color)
+                        Label.push(item.project_name)
+                        size.push(Number(item.project_size_in_GB))
+ 
+                     });
+
+
+
+                     setColorCode(colors)
+                     setLabels(Label);
+                     setFileSizes(size)
+                    
+                     console.log(colors,Label,size)
+                     setSpaceused({chartData: {
+                        labels: Label,
+                        datasets: [{
+                            data: size,
+                            backgroundColor: colors,
+                            hoverBackgroundColor: [
+                                ChartConfig.color.primary,
+                                ChartConfig.color.info
+                            ]
+                        }]
+                    },})
+                  
+                  }
 
 
                   console.log('Chart:', res)
@@ -98,7 +129,7 @@ export default function Storageused(props) {
          </Helmet>
          {/* <PageTitleBar title={<IntlMessages id="sidebar.report" />} match={props.match} /> */}
          <CustomBreadcrumbs currentPage={"Storage Uses"} data={location?.state?.breadcrumbData} />
-         <Space data={spaceUsed} />
+        {spaceuse !=null && <Space data={spaceuse} />} 
       </div>
    )
 }

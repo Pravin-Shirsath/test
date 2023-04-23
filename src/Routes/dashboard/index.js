@@ -10,7 +10,7 @@ import {
    AsyncSaasDashboardComponent,
    AsyncAgencyDashboardComponent,
    AsyncNewsDashboardComponent,
-   AsyncScenarioPlanningDashboardComponent,
+  
 
    AsyncAccountDashboardComponent,
    AsyncReportDashboardComponent,
@@ -61,7 +61,7 @@ return(
             type === "admin"   && <Redirect exact from={`${match.url}/`} to={`${match.url}/Admin/Dashboard`} />
          }
          <Route path={`${match.url}/saas`} component={AsyncSaasDashboardComponent} />
-         <Route path={`${match.url}/scenarioplanning`} component={AsyncScenarioPlanningDashboardComponent} />
+        
          <Route path={`${match.url}/ecommerce`} component={AsyncEcommerceDashboardComponent} />
          <Route path={`${match.url}/agency`} component={AsyncAgencyDashboardComponent} />
          <Route path={`${match.url}/news`} component={AsyncNewsDashboardComponent} />

@@ -8,59 +8,29 @@ import Pagination from "react-js-pagination";
 import { Helmet } from "react-helmet";
 //  import Button from '@material-ui/core/Button';
 import {
-  Progress, Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Col,
-  FormFeedback
+  Button,
+
 } from 'reactstrap';
 
 
 
-
-// intl messages
-import IntlMessages from '../../../Util/IntlMessages';
 import DeleteConfirmationDialog from '../../../Components/DeleteConfirmationDialog/DeleteConfirmationDialog';
 
-import { Avatar } from '@material-ui/core';
-
-// intl messages
-// import IntlMessages from 'Util/IntlMessages';
-import Dialog from '@material-ui/core/Dialog'
-import DialogContent from '@material-ui/core/DialogContent'
 
 
 
-// rct collapsible card
+
 
 
 // import css file
 import "../../../Assets/css/main.css"
-
-// widgets data
-import {
-  visitorsData,
-  salesData,
-  ordersData,
-  topSellingProducts,
-  trafficStatus
-} from './data';
-import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import { str } from 'Constants/stringConst';
-import { OverallTrafficStatusWidget, SupportRequest } from 'Components/Widgets';
-import ProjectCard from '../ReuseComponent/ProjectCard';
 import DoughnutChart from 'Components/Charts/DoughnutChart';
 import { useHistory } from 'react-router';
 import { DeleteProject, GetAlLProjectList, GetSearchProjectList } from 'Api';
 import { getFormatDate2 } from 'Constants/DateFormator';
-import { BASE_URL } from 'Api/APIConst';
 import EditProject from '../ReuseComponent/EditProject';
-import ViewProject from '../ViewProject';
-import { isNotEmpty } from '@amcharts/amcharts4/.internal/core/utils/Utils';
 import { ErrorHandling } from 'Constants/ErrorHandling';
 import CustomBreadcrumbs from '../ReuseComponent/CustomBreadcrumbs';
 
@@ -70,8 +40,7 @@ export default function SaasDashbaord(props) {
   const history = useHistory();
   const deleteConfirmationDialog = useRef()
   const [project, setProject] = useState([])
-  //  const [filteredUsers, setFilteredProject] = useState() // use when the data is coming fom api
-  const [filterProject, setFilteredProject] = useState([])
+   const [filterProject, setFilteredProject] = useState([])
   const [searchText, setSearchText] = useState('');
   const [activePage, setActivePage] = useState(1)
   const [totalPageCount, setTotalPageCount] = useState('');
@@ -79,12 +48,6 @@ export default function SaasDashbaord(props) {
   const type = JSON.parse(localStorage.getItem('user_type'));
   const [openEditProject, setOpenEditProject] = useState(false)
 
-
-
-  //  if(type === "admin"){
-
-  //    history.push("app/dashboard/Admin/Dashboard")
-  //  }
 
 
 

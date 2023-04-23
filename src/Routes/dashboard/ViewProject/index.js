@@ -182,6 +182,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
         getViewProjectDatasets(authToken, projectId, pageNumber)
           .then((res) => {
             if (res?.status === 200) {
+
               setDatasets(res?.data?.results);
               setFilteredDatasets(res?.data?.results);
               setTotalPageCount(res?.data?.count);
@@ -355,13 +356,13 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
             </tbody>
 
           </table>
-          {filteredDatasets.length == 0 && <center style={{ color: "black" }}>  Data not available </center>}
+          {filteredDatasets?.length == 0 && <center style={{ color: "black" }}>  Data not available </center>}
           {
             datasets?.length > 0 &&
             <div className='paginationDiv'>
               <Pagination
                 activePage={activePage}
-                itemsCountPerPage={5}
+                itemsCountPerPage={6}
                 pageRangeDisplayed={5}
                 onChange={(e) => handlePageChange(e)}
                 itemClass="page-item"

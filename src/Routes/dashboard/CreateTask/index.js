@@ -37,9 +37,7 @@ import RctSectionLoader from '../../../Components/RctSectionLoader/RctSectionLoa
 import '../../../Assets/css/user.css'
 import {
   AddFileToTask,
-  DeleteDataset,
-  getViewProjectDatasets,
-  ViewFiles
+
 } from '../../../Api/'
 
 import FolderIcon from '@mui/icons-material/Folder';
@@ -57,141 +55,134 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 export default function ViewDataset(props) {
   const history = useHistory();
-  const {location}=props
-  //  const [users, setUsers] = useState() // use when data is coming from api
-//   const [users, setUsers] = useState([])
-  //  const [filteredUsers, setFilteredUsers] = useState() // use when the data is coming fom api
-//   const [filteredUsers, setFilteredUsers] = useState([])
-  const [searchText, setSearchText] = useState('');
-  const [Taskid,setTaskId]=useState(JSON.parse( localStorage.getItem("TaskId")))
+  const { location } = props
 
-  const [username, setUsername] = useState("")
-//   const [email, setEmail] = useState("")
- 
-//   const [selectedUser, setSelectedUser] = useState(null)
+  const [searchText, setSearchText] = useState('');
+  const [Taskid, setTaskId] = useState(JSON.parse(localStorage.getItem("TaskId")))
+
   const [loading, setLoading] = useState(false)
-//   const [addNewUserModal, setAddNewUserModal] = useState(false)
-//   const [updateNewUserModal, setupdateNewUserModal] = useState(false)
-//   const [deleteUserModal, setdeleteUserModal] = useState(false)
+
 
   const deleteConfirmationDialog = useRef()
   const [selected, setSelectedItem] = useState({})
-
-//   const [editUser, setEditUser] = useState(null)
-//   const [selectedUsers, setSelectedUsers] = useState(0)
-//   const [viewDetails, setViewDetails] = useState()
-const [openEditDataset,setOpenEditDataset] = useState(false)
-
-  const [datasets, setDatasets] = useState([]);
+    ;
   const [activePage, setActivePage] = useState(1)
-  const [totalPageCount, setTotalPageCount] = useState('');
+  const [totalPageCount, setTotalPageCount] = useState(0);
   const [taskFile, setTaskFile] = useState([]);
   const [filteredTaskFiles, setFilteredTaskFiles] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [modalOpen,setModalOpen]=useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [searchResult,setSearchResult]=useState([])
+  const [perpagecount, setPerpagecount] = useState(5);
+  const [pagination, setPagination] = useState({
+    start: 0,
+    end: perpagecount
+  });
+
   useEffect(() => {
-    const isLoggedInBool = localStorage.getItem("isLoggedIn")
-    const TID= JSON.parse( localStorage.getItem("TaskId"))
-    // conditional rendring
-    // if(isLoggedInBool !== "true"){
-    //   history.push("/login")
-    //     localStorage.clear();
-    // } else {
-    // getCustomersListData();
+
+    const TID = JSON.parse(localStorage.getItem("TaskId"))
+
     setTaskId(TID)
     getTaskFile()
     // }
   }, [])
 
-//   const getViewProjectData = () => {
-//     const authToken = JSON?.parse(localStorage.getItem("token"));
-//     const projectId = localStorage?.getItem("projId")
 
-//     if(authToken !== null){
-//       getViewProjectDatasets(authToken, projectId, activePage)
-//       .then(res => {
-//         if(res?.status == 200){
-//           console.log(res?.data?.results, "project's all lists")
-//           setDatasets(res?.data?.results)
-//           setFilteredDatasets(res?.data?.results);
+  const getTaskFile = () => {
+    let files = location?.state.files
+    setTaskFile(files?.data || [])
+    setFilteredTaskFiles(files?.data || [])
+    setTotalPageCount((files?.data || []).length);
+   
+  }
 
-//           console.log(res?.data?.count, "total counts of datasets of projects")
-//           setTotalPageCount(parseInt(res?.data?.count));
-//         } else {
-//           console.log('Response from View project Datasets lists api:', res)
-//         }
-//       }).catch((error)=>{
-//         console.log("error=",error)
-//       })
-//     }
-//   }
 
-const getTaskFile = () => {
-          let files = location?.state.files
-  
-                setTaskFile(files?.data || [])
-                setFilteredTaskFiles(files?.data || [])
-                setTotalPageCount(parseInt(files?.count || 1));
-        
+
+ 
+
+
+
+
+  const searchFile=( )=>{
+    if(searchText != ""){
+      const filtered = taskFile.filter(file => {
+     return file.file_name.toLowerCase().includes(searchText+"".toLowerCase());
+ 
+    });
+
+   
+    setActivePage(1)
+    setPagination({
+      start: 0,
+      end: perpagecount
+    })
+    setFilteredTaskFiles(filtered)
+    setTotalPageCount(filtered?.length)
+
+    }
 }
 
+ 
+      
+
+
+
+
   const handlePageChange = (pageNumber) => {
-    console.log("pagination", pageNumber)
-    
-    
+
     if (activePage !== pageNumber) {
-           
-          // file filter
-           
-              // setTaskFile(res?.data?.results);
-              // setFilteredTaskFiles(res?.data?.results);
-              // setTotalPageCount(res?.data?.count);
-            
-         
-      setActivePage(pageNumber)
+
+      const value = perpagecount * pageNumber
+      setTotalPageCount(taskFile.length)
+      setPagination({
+        start: value - perpagecount,
+        end: value
+      }
+      )
+
+          setActivePage(pageNumber)
     }
   }
 
   const handleFileSelect = (file) => {
-    console.log(file, "selecteddd filee");
 
-    const clone =[...taskFile] 
-     const filterarray = taskFile.filter((item)=>{
-       return item.id !== file.id
-     })
-
+    const filterarray = taskFile.filter((item) => {
+      return item.id !== file.id
+    })
+   
     setFilteredTaskFiles(filterarray)
-    setTaskFile(filterarray)    
+    setTaskFile(filterarray)
   }
-   
 
 
+  const Proceed = () => {
+    const authToken = JSON?.parse(localStorage.getItem("token"));
+    const TaskId = localStorage.getItem("TaskId")
 
+    if (filteredTaskFiles.length > 0) {
+      const IdArray = filteredTaskFiles.map(item => item.id)
+      if (authToken !== null) {
+        // console.log(authToken, TaskId, IdArray, "authToken, DatasetId, IdArray")
+        AddFileToTask(authToken, TaskId, IdArray)
+          .then(res => {
+            if (res?.status == 200) {
+              console.log("res=", res)
+              if (res?.data?.message) {
 
-
-  const Proceed = ()=>{
-    
-   
-
-        const authToken = JSON?.parse(localStorage.getItem("token"));
-        const TaskId = localStorage.getItem("TaskId")
-    
-        if(filteredTaskFiles.length > 0){
-          const IdArray = filteredTaskFiles.map(item=>item.id)
-          if(authToken !== null){
-            console.log(authToken, TaskId, IdArray,"authToken, DatasetId, IdArray")
-            AddFileToTask(authToken, TaskId, IdArray)
-            .then(res => {
-              if(res?.status == 200){
-                console.log("res=",res)
+                NotificationManager.success(res?.data?.message)
                 setModalOpen(true)
               }
-            }).catch((error)=>{
-              console.log("error=",error)
-            })
-          }
-  
-        }
+            }
+          }).catch((error) => {
+            console.log("searchFileerror=", error)
+          })
+      }
+
+    } else {
+      NotificationManager.error("Files is not available")
+
+    }
 
   }
 
@@ -215,81 +206,79 @@ const getTaskFile = () => {
   ];
 
 
+  const yesSubmit = () => {
 
- const  Submit =()=>{
- setModalOpen(false)
- }
+    const breadcrumbData = location?.state?.breadcrumbData || []
+    breadcrumbData.push({ name: 'Create Task', url: '/app/dashboard/createTask' });
+    setModalOpen(false)
+    history.push("/app/dashboard/listOfTask", { breadcrumbData: breadcrumbData, files: { "count": 1, data: selectedFiles } });
+  }
 
- console.log(history, "historrryy in create task")
- console.log(location, "location in create task")
   return (
     <div className="user-management">
       <Helmet>
         <title>Automaton | Customers List</title>
         <meta name="description" content="Automaton Widgets" />
       </Helmet>
-      {/* <PageTitleBar
-        title={<IntlMessages id="sidebar.viewDataset" />}
-        match={props.match}
-      /> */}
-     <CustomBreadcrumbs    currentPage={"Create Task"} data={location?.state?.breadcrumbData}  />
 
-                <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
-             message="This will delete your Dataset permanently."
-            //  onConfirm={() => Delete_Datset()}
-             ref={deleteConfirmationDialog} />
+      <CustomBreadcrumbs currentPage={"Create Task"} data={location?.state?.breadcrumbData} />
+      searchFile
+      <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
+        message="This will delete your Dataset permanently."
+        //  onConfirm={() => Delete_Datset()}
+        ref={deleteConfirmationDialog} />
       <RctCollapsibleCard fullBlock>
-     
+
         <div className="table-responsive">
-            <div className="d-flex py-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
+          <div className="d-flex py-20 px-10 border-bottom" style={{ justifyContent: 'space-between' }}>
             <div className='search-row'>
-                <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
-                <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} 
-                // onClick={getSearchedCustomerData}
-                >Search</Button>
+              <input type="text" placeholder='Search' className='search-input py-2' style={{ border: "none", borderBottom: "1px solid black" }} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+              <Button variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }}
+              onClick={searchFile}
+              >Search</Button>
             </div>
 
-            
-            </div>
-            <div className="d-flex align-items-center justify-content-center">
-              <p className="Comman-Heading">Task-{Taskid}</p>
-            </div>
 
-            <div className='viewDatasetFilesContainer'>
-                {
-                    filteredTaskFiles && filteredTaskFiles.map((file,ind)=> {
-                      console.log(file)
-                        return(
-                                // <div className="mainBox" key={ind} onClick={()=>handleFileSelect(file)}>
-                                <div className="mainBox" key={ind}>
-                                  <div className="imageContainer">
-                                    {/* {
+          </div>
+          <div className="d-flex align-items-center justify-content-center">
+            <p className="Comman-Heading">Task-{Taskid}</p>
+          </div>
+
+          <div className='viewDatasetFilesContainer'>
+            {
+              filteredTaskFiles && filteredTaskFiles.slice(pagination.start, pagination.end).map((file, ind) => {
+                console.log(file)
+                return (
+                  // <div className="mainBox" key={ind} onClick={()=>handleFileSelect(file)}>
+                  <div className="mainBox" key={ind}>
+                    <div className="imageContainer">
+                      {/* {
                                       file.selectedFile ? <CheckBoxIcon className="folderIcon" /> : (file.file_type == "pdf" ? <PictureAsPdfIcon className="folderIcon" /> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <ImageIcon className="folderIcon" /> : (file.file_type == "xlsx" ? <DescriptionIcon className="folderIcon" /> : <FolderIcon className="folderIcon" />)))
                                     } */}
+                      setTotalPageCount
+                      {
+                        file.file_type == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> : (file.file_type == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> : <a href={file?.file} target="_blank"><InsertDriveFileIcon className="folderIcon" /></a>))
+                      }
 
-                                    {
-                                      file.file_type == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> : (file.file_type == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> : <a href={file?.file} target="_blank"><InsertDriveFileIcon className="folderIcon" /></a>))
-                                    }
+                    </div>
+                    <div className="nameContainer">
+                      <p>{file.file_name}</p>
+                    </div>
 
-                                  </div>
-                                  <div className="nameContainer">
-                                    <p>{file.file_name}</p>
-                                  </div>
+                    <div className="checkDiv" onClick={() => handleFileSelect(file)}>{
+                      <CloseIcon />
+                    }</div>
 
-                                 <div className="checkDiv" onClick={()=>handleFileSelect(file)}>{
-                                  <CloseIcon/>
-                                  }</div>
-                                  
-                                </div>
-                        )
-                    })
-                }
-            </div>
-           
-            {filteredTaskFiles.length == 0 && <center style={{ color: "black" }}>Data not available </center>}
+                  </div>
+                )
+              })
+            }
+          </div>
+
+          {filteredTaskFiles.length == 0 && <center style={{ color: "black" }}>Data not available </center>}
           {
             taskFile?.length > 0 &&
-            <div className='paginationDiv'> 
+            <div className='paginationDiv'>
               <Pagination
                 activePage={activePage}
                 itemsCountPerPage={6}
@@ -303,148 +292,153 @@ const getTaskFile = () => {
             </div>
           }
         </div>
-       <div className="d-flex align-items-center justify-content-center"> 
-       <Button 
-       variant="contained"
-        color="primary" 
-        className="text-white mx-5 mb-30"
-         style={{ cursor: "pointer" }} 
-        onClick={Proceed}>
-        Proceed
-        </Button></div>
+        <div className="d-flex align-items-center justify-content-center">
+          <Button
+            variant="contained"
+            color="primary"
+            className="text-white mx-5 mb-30"
+            style={{ cursor: "pointer" }}
+            onClick={Proceed}>
+            Proceed
+          </Button></div>
         {loading && <RctSectionLoader />}
       </RctCollapsibleCard>
 
-       
 
-        <Modal
+
+      <Modal
         isOpen={modalOpen}
         size="lg"
         centered={true}
-       
-       >
-       <div   className="p-25"> 
-    
- <center className=" Comman-Heading">  STARTING THE TASK ACCURACY </center>
 
-  <Form className="mt-20" >
-  <FormGroup row>
-    <Label
-      for="exampleEmail"
-      sm={3}
-    >
-     SELECT OUT PUT
-    </Label>
-    <Col sm={9}>
-    <TextField
-          id="outlined-select-currency"
-          select
-          label="Select"
-          defaultValue="EUR"
-          // helperText="Please select your currency"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-    </Col>
-  </FormGroup>
-  <FormGroup row>
-    <Label
-      for="examplePassword"
-      sm={3}
-    >
-     ORTHOMOSIC
-    </Label>
-    <Col sm={9}>
-    <TextField
-          id="outlined-select-currency"
-          select
-          label="Select"
-          defaultValue="EUR"
-          // helperText="Please select your currency"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-    </Col>
-  </FormGroup>
-  <FormGroup row>
-    <Label
-      for="exampleSelect"
-      sm={3}
-    >
-      ELEVATION MODAL
-    </Label>
-    <Col sm={9}>
-    <TextField
-          id="outlined-select-currency"
-          select
-          label="Select"
-          defaultValue="EUR"
-          // helperText="Please select your currency"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-    </Col>
-  </FormGroup>
-  <FormGroup row>
-    <Label
-      for="exampleSelect"
-      sm={3}
-    >
-      3D MODAL
-    </Label>
-    <Col sm={9}>
-    <TextField
-          id="outlined-select-currency"
-          select
-          label="Select"
-          defaultValue="EUR"
-          // helperText="Please select your currency"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-    </Col>
-  </FormGroup>
+      >
+        <div className="p-60">
 
-</Form>
-<h4>Task Will Be Added To Execution Queue</h4>
-<h4>Do You Want To Process These Image And Create The Task</h4>
+          <center className=" Comman-Heading"> Starting The Task Accuracy </center>
 
-<div className="d-flex align-items-end justify-content-end"> 
-<Button 
-variant="contained" 
-color="primary"
- className="text-white mx-5"
-  style={{ cursor: "pointer" }} 
- onClick={Submit}>
- Yes
- </Button>
- 
- <Button 
-variant="contained" 
-color="error"
- className="text-white mx-5 bg-danger"
-  style={{ cursor: "pointer" ,color:"red"}} 
- onClick={()=>setModalOpen(false)}>
- No
- </Button>
- </div>
-       </div>
+          <Form className="mt-50" >
+            <FormGroup row>
+              <Label
+                for="exampleEmail"
+                sm={3}
+                className="d-flex align-items-center justify-content-center"
+              >
+                Select Out Put
+              </Label>
+              <Col sm={9}>
+                <TextField
+                  id="outlined-select-currency"
+                  select
+                  label="Select"
+                  defaultValue="EUR"
+                // helperText="Please select your currency"
+                >
+                  {currencies.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label
+                for="examplePassword"
+                sm={3}
+                className="d-flex align-items-center justify-content-center"
+              >
+                Orthomosic
+              </Label>
+              <Col sm={9}>
+                <TextField
+                  id="outlined-select-currency"
+                  select
+                  label="Select"
+                  defaultValue="EUR"
+                // helperText="Please select your currency"
+                >
+                  {currencies.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label
+                for="exampleSelect"
+                sm={3}
+                className="d-flex align-items-center justify-content-center"
+              >
+                Elevation Modal
+              </Label>
+              <Col sm={9}>
+                <TextField
+                  id="outlined-select-currency"
+                  select
+                  label="Select"
+                  defaultValue="EUR"
+                // helperText="Please select your currency"
+                >
+                  {currencies.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label
+                for="exampleSelect"
+                sm={3}
+                className="d-flex align-items-center justify-content-center"
+              >
+                3d Modal
+              </Label>
+              <Col sm={9}>
+                <TextField
+                  id="outlined-select-currency"
+                  select
+                  label="Select"
+                  defaultValue="EUR"
+
+                // helperText="Please select your currency"
+                >
+                  {currencies.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Col>
+            </FormGroup>
+
+          </Form>
+          <h4>Task Will Be Added To Execution Queue</h4>
+          <h4>Do You Want To Process These Image And Create The Task</h4>
+
+          <div className="d-flex align-items-end justify-content-end">
+            <Button
+              variant="contained"
+              color="primary"
+              className="text-white mx-5"
+              style={{ cursor: "pointer" }}
+              onClick={yesSubmit}>
+              Yes
+            </Button>
+
+            <Button
+              variant="contained"
+              color="error"
+              className="text-white mx-5 bg-danger"
+              style={{ cursor: "pointer", color: "red" }}
+              onClick={() => setModalOpen(false)}>
+              No
+            </Button>
+          </div>
+        </div>
       </Modal>
 
 

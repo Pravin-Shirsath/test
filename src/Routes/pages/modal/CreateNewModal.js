@@ -36,7 +36,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import '../../../Assets/css/modal.css';
-import { createModal, getAdminList, scenarioPlanning, getImpactableSalesOutcome, postMlDataWithModelRef } from 'Api';
+import { createModal, postMlDataWithModelRef } from 'Api';
 
 import '../../../Assets/css/main.css';
 import { rgbaToRgb } from '@amcharts/amcharts4/.internal/core/utils/Colors';
@@ -86,69 +86,6 @@ export default function CreateNewModal(props) {
       // }
    }, [])
 
-
-   //==== ORIGINAL GENERATE MODAL, with proper API validations and chaining ======//
-   // const generateModal = () => {
-   //    console.log("options:", options, timeVariable, dependentVariable, promotionalDrivers, nonPromotionalDrivers, csvFile)
-   //    const accessToken = JSON.parse(localStorage.getItem('token'));
-   //    if (accessToken !== null) {
-   //       console.log(" accessToken", accessToken)
-
-   //       createModal(accessToken, options, timeVariable, dependentVariable, promotionalDrivers, nonPromotionalDrivers, csvFile)
-   //          .then((res) => {
-   //             if (res?.status === 200) {
-   //                NotificationManager.success('Model created successfully!!');
-   //                setOptions();
-   //                setTimeVariable();
-   //                setDependentTimeVariable();
-   //                setPromotionalDrivers();
-   //                setNonPromotionalDrivers();
-   //                // setCSVFile(null);
-   //                console.log(document.getElementById("fileField"), "file field element")
-   //                document.getElementById("fileField").value = null;
-   //                setFile(null);
-   //                console.log("Response from create modal", res);
-
-   //                // below is the API handling for scenario planning API, we are passing, token, csvfile and all data inside a single array as parameters
-   //                handleClickOpenLoadingBox()
-   //                console.log(accessToken, csvFile, [timeVariable, dependentVariable, ...promotionalDrivers, ...nonPromotionalDrivers], "Data to send in scenario planning")
-   //                scenarioPlanning(accessToken, csvFile, [timeVariable, dependentVariable, ...promotionalDrivers, ...nonPromotionalDrivers])
-   //                   .then(res => {
-   //                      handleCloseLoadingBox();
-   //                      console.log(res, "Res from scenario planning called after generating model")
-   //                      if (res.status == 200) {
-   //                         getImpactableSalesOutcome()
-   //                            .then(res => {
-   //                               console.log(res, "response from getIMpactable sales outcome then block")
-   //                               if (res.status == 200) {
-   //                                  console.log("response on success from getImpactable sales outcome!")
-   //                               }
-   //                            })
-   //                            .catch(err => {
-   //                               console.log(err, "Error on running getImpactables sales outcome!")
-   //                            })
-   //                      }
-   //                   })
-   //                   .catch(err => {
-   //                      console.log(err.response, "errr from scenario planning called after generating model")
-   //                      handleCloseLoadingBox();
-   //                      NotificationManager.error("Unable to get data..!!")
-   //                      if (err.response == undefined) {
-   //                         handleClickOpenTimerBox();
-   //                         console.log("undefined in catch of scenario planning!")
-   //                      }
-   //                   })
-   //             }
-   //             else {
-   //                NotificationManager.error('Error while creating a model');
-   //             }
-   //          })
-   //          .catch(err => {
-   //             NotificationManager.error('Error while creating a model');
-   //             console.log(" ERR Response from create modal", err)
-   //          });
-   //    }
-   // }
 
    //==== JUGADU GENERATE MODAL, with not proper validations, explicitly making API response true and working aage ======//
    const generateModal = () => {

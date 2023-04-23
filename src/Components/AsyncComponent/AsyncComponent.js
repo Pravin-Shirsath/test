@@ -93,11 +93,7 @@ const AsyncSaasDashboardComponent = Loadable({
   loading: () => <RctPageLoader />,
 });
 
-// scenario lanning dashboard (aded by vish)
-const AsyncScenarioPlanningDashboardComponent = Loadable({
-  loader: () => import("Routes/dashboard/saas/scenarioplanning"),
-  loading: () => <RctPageLoader />,
-});
+
 
 // agency dashboard
 const AsyncAgencyDashboardComponent = Loadable({
@@ -742,7 +738,7 @@ export {
   AsyncCheckoutComponent,
   AsyncEcommerceDashboardComponent,
   AsyncSaasDashboardComponent,
-  AsyncScenarioPlanningDashboardComponent,
+ 
   AsyncAgencyDashboardComponent,
   AsyncNewsDashboardComponent,
   AsyncCrmComponent,

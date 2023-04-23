@@ -54,16 +54,7 @@ let sidebarMenu = {
       //          "new_item": false,
       //          "menu_title": "sidebar.crm"
       //       },
-      //       {
-      //          "path": "/app/dashboard/scenarioplanning",
-      //          "new_item": false,
-      //          "menu_title": "sidebar.scenarioplanning"
-      //       },
-      //       // {
-      //       //    "path": "/horizontal/dashboard/saas", 
-      //       //    "new_item": false,
-      //       //    "menu_title": "sidebar.saas"
-      //       // },
+     
       //    ]
       // },
       // {

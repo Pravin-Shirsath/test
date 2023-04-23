@@ -57,38 +57,12 @@ export default function ViewProject(props) {
   const history = useHistory();
  const {location}=props
  
-  //  const [users, setUsers] = useState() // use when data is coming from api
-  const [users, setUsers] = useState([])
-  //  const [filteredUsers, setFilteredUsers] = useState() // use when the data is coming fom api
-  const [filteredUsers, setFilteredUsers] = useState([])
   const [searchText, setSearchText] = useState('');
-  
-
-  const [username, setUsername] = useState("")
-  const [email, setEmail] = useState("")
  
-  const [selectedUser, setSelectedUser] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [addNewUserModal, setAddNewUserModal] = useState(false)
-  const [updateNewUserModal, setupdateNewUserModal] = useState(false)
-  const [deleteUserModal, setdeleteUserModal] = useState(false)
+ 
 
   const deleteConfirmationDialog = useRef()
-  const [selected, setSelectedItem] = useState({})
-
-  const [editUser, setEditUser] = useState(null)
-  const [selectedUsers, setSelectedUsers] = useState(0)
-  const [viewDetails, setViewDetails] = useState()
-const [openEditDataset,setOpenEditDataset] = useState(false)
-
-  const [datasets, setDatasets] = useState([]);
-  const [filteredDatasets,setFilteredDatasets] = useState([])
-  // const [activePage, setActivePage] = useState(1)
-  // const [totalPageCount, setTotalPageCount] = useState(0);
-  const [datasetFiles, setDatasetFiles] = useState([]);
-  const [filteredDatasetFiles, setFilteredDatasetFiles] = useState([]);
-  const [selectedFiles, setSelectedFiles] = useState([]);
-
 
   // states used in viewTasks i.e; this page
   const [tasksList, setTasksList] = useState([]);
@@ -114,7 +88,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
     const authToken = JSON.parse(localStorage?.getItem("token"));
     const datasetId = localStorage?.getItem("datasetId");
 
-    console.log(authToken, datasetId, "auth token and datasetId on getTasksList api call")
+   
 
     if(authToken!==null){
       ViewTasks(authToken, datasetId, 1)
@@ -132,42 +106,6 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
         ErrorHandling(err)
       })
     }
-  }
-
-  const EditModal = (item) => {
-    // setSelectedItem(item)
-  
-    // setOpenEditDataset(true)
-  }
-
-  const DeletModalOpen = (item) => {
-    // setSelectedItem(item)
-    // deleteConfirmationDialog.current.open()
-  }
-
-  const Delete_Datset = () => {
-    // const accessToken = JSON.parse(localStorage.getItem('token'))
-    // if (accessToken !== null) {
-     
-    //   DeleteDataset(accessToken, selected?.id,selected?.project_id)
-    //     .then((res) => {
-    //       if (res?.status === 200) {
-    //         deleteConfirmationDialog.current.close()
-
-    //         NotificationManager.success("Datset deleted successfully!")
-    //         console.log('Response from dataset  :', res)
-
-    //       } else {
-
-
-    //         NotificationManager.error("Delete_Datset deleting process unsucess!")
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log('Response from err dataset  :', err)
-    //       NotificationManager.error("Delete_Datset deleting process unsucess!")
-    //     })
-    // }
   }
 
   const handlePageChange = (pageNumber) => {
@@ -198,76 +136,6 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   }
 
 
-  // Dataset View
-  const handleView = (dataset) => {
-    // console.log(dataset?.id, "selected dataset ID")
-    // localStorage.setItem("datasetId", dataset?.id);
-    // if(location?.state?.breadcrumbData){
-    //   let path = location?.state?.breadcrumbData[0]
-    //   if(path?.name == "Dashboard"){
-    //     const breadcrumbData = [
-    //       { name: 'Dashboard', url: '/app/dashboard/saas' },
-    //       { name: 'View Project', url: '/app/dashboard/viewProject' },
-          
-    //     ];
-    //     history.push("/app/dashboard/viewDataset",{breadcrumbData:breadcrumbData})
-    //   }else if(path?.name == "Project"){
-    //     const breadcrumbData = [
-    //       { name: 'Project', url: '/app/dashboard/project' },
-    //       { name: 'View Project', url: '/app/dashboard/viewProject' },
-          
-    //     ];
-    //     history.push("/app/dashboard/viewDataset",{breadcrumbData:breadcrumbData})
-    //   }
-    // }
-  
-  }
-
-  // Dataset create
-  const HandleCreate=()=>{
-    // if(location?.state?.breadcrumbData){
-    //   let path = location?.state?.breadcrumbData[0]
-    //   if(path?.name == "Dashboard"){
-    //     const breadcrumbData = [
-    //       { name: 'Dashboard', url: '/app/dashboard/saas' },
-    //       { name: 'View Project', url: '/app/dashboard/viewProject' },
-          
-    //     ];
-    //     history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
-    //   }else if(path?.name == "Project"){
-    //     const breadcrumbData = [
-    //       { name: 'Project', url: '/app/dashboard/project' },
-    //       { name: 'View Project', url: '/app/dashboard/viewProject' },
-          
-    //     ];
-    //     history.push("/app/dashboard/createDataset",{breadcrumbData:breadcrumbData})
-    //   }
-    // }
-       
-  }
-
-  // const SearchTask = () => {
-  //   const accessToken = JSON.parse(localStorage.getItem('token'));
-  //   const projectId = localStorage?.getItem("projId")
-  //   if (accessToken !== null) {
-  //      getSearchProjectDatasets(accessToken,projectId, searchText)
-  //       .then((res) => {
-  //         if (res?.status === 200 && res?.data?.results.length>0) {
-  //           setFilteredDatasets(res?.data?.results);
-  //           setSearchText('')
-  //           // console.log('Response from customerlist :', res)
-  //         } else {
-  //           // console.log('Response from customerlist:', res)
-  //           setFilteredDatasets(datasets);
-  //           setSearchText('');
-  //           NotificationManager.error("No dataset found!")
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         // console.log('Response from customerlist:', err)
-  //       })
-  //   }
-  // }
 
   const searchTask = () => {
     const authToken = JSON.parse(localStorage?.getItem("token"));
@@ -282,7 +150,7 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
             // console.log('Response from customerlist :', res)
           } else {
             // console.log('Response from customerlist:', res)
-            setFilteredDatasets(tasksList);
+            setFilteredTasksList(tasksList);
             setSearchText('');
             NotificationManager.error("No task found!")
           }
@@ -294,15 +162,18 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   }
 
 const NavigateCompletTask=()=>{
-  // history.push("/app/dashboard/downloadFile")
+ 
+  const  breadcrumbData =location?.state?.breadcrumbData || []
+  breadcrumbData.push( { name: 'Task List', url: '/app/dashboard/listOfTask' });
+  history.push("/app/dashboard/downloadFile",{breadcrumbData:breadcrumbData});
 }
 
-console.log(tasksList, "tassskkssss lissssttt aboove return")
+
 
 
 const TaskStatus=()=>{
   const  breadcrumbData =location?.state?.breadcrumbData || []
-  breadcrumbData.push( { name: 'View Task', url: '/app/dashboard/createTask' });
+  breadcrumbData.push( { name: 'Task List', url: '/app/dashboard/listOfTask' });
   history.push("/app/dashboard/taskStatus",{breadcrumbData:breadcrumbData});
 }
 
@@ -319,10 +190,7 @@ const TaskStatus=()=>{
         <title>Automaton | Task List</title>
         <meta name="description" content="Automaton Widgets" />
       </Helmet>
-      {/* <PageTitleBar
-        title={<IntlMessages id="sidebar.viewProject" />}
-        match={props.match}
-      /> */}
+     
  
       <CustomBreadcrumbs    currentPage={"Task List"} data={location?.state?.breadcrumbData} />
 
@@ -342,9 +210,9 @@ const TaskStatus=()=>{
               >Search</Button>
             </div>
 
-            {/* <Button  
+            <Button  
              onClick={NavigateCompletTask}
-            variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} >Completed Task</Button> */}
+            variant="contained" color="primary" className="text-white mx-5" style={{ cursor: "pointer" }} >Completed Task</Button>
 
           </div>
 
