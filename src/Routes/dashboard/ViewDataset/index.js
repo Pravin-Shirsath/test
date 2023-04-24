@@ -83,13 +83,16 @@ const getDatasetFiles = () => {
             if(res?.status == 200){
                 console.log(res?.data?.results, "dataaa of filesss in view datasetfile")
                 const results = res?.data?.results;
+
                 const updatedResults = results.map(result=> {
-                    return {...result, selectedFile: false}
-                })
+                return {...result, selectedFile: false}
+                });
+
 
                 setDatasetFiles(updatedResults)
                 setFilteredDatasetFiles(updatedResults)
                 setTotalPageCount(parseInt(res?.data?.count));
+
             }else {
                 console.log('Response from View project Datasets lists api in view project:', res)
             }
@@ -105,19 +108,25 @@ const getDatasetFiles = () => {
    
     
     if (activePage !== pageNumber) {
-     
-
       const authToken = JSON.parse(localStorage.getItem('token'))
       const datasetId = localStorage?.getItem("datasetId")
-
       if (authToken !== null) {
           ViewFiles(authToken, datasetId, pageNumber)
           .then((res) => {
             if (res?.status === 200) {
-              setDatasetFiles(res?.data?.results);
-              setFilteredDatasetFiles(res?.data?.results);
-              setTotalPageCount(res?.data?.count);
-              console.log('Response from customerlist :', res)
+              // console.log(res?.data?.results, "dataaa of filesss in view datasetfile")
+              const results = res?.data?.results;
+
+              const updatedResults = results.map(result=> {
+              const find =   selectedFiles.find((item=>item.id == result.id))
+                 if(find){
+                 return {...result, selectedFile: true}
+                 }
+                return {...result, selectedFile: false}
+              });
+              setDatasetFiles(updatedResults)
+              setFilteredDatasetFiles(updatedResults)
+              setTotalPageCount(parseInt(res?.data?.count));
             }
           })
           .catch((err) => {

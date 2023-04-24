@@ -93,12 +93,6 @@ export default function ViewDataset(props) {
   }
 
 
-
- 
-
-
-
-
   const searchFile=( )=>{
     if(searchText != ""){
       const filtered = taskFile.filter(file => {
@@ -129,12 +123,12 @@ export default function ViewDataset(props) {
     if (activePage !== pageNumber) {
 
       const value = perpagecount * pageNumber
-      setTotalPageCount(taskFile.length)
-      setPagination({
-        start: value - perpagecount,
-        end: value
-      }
-      )
+          setTotalPageCount(taskFile.length)
+           setPagination({
+                   start: value - perpagecount,
+                     end: value
+                   }
+                  )
 
           setActivePage(pageNumber)
     }
@@ -217,7 +211,7 @@ export default function ViewDataset(props) {
       </Helmet>
 
       <CustomBreadcrumbs currentPage={"Create Task"} data={location?.state?.breadcrumbData} />
-      searchFile
+      
       <DeleteConfirmationDialog title="Are You Sure Want To Delete?"
         message="This will delete your Dataset permanently."
         //  onConfirm={() => Delete_Datset()}
@@ -250,7 +244,7 @@ export default function ViewDataset(props) {
                       {/* {
                                       file.selectedFile ? <CheckBoxIcon className="folderIcon" /> : (file.file_type == "pdf" ? <PictureAsPdfIcon className="folderIcon" /> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <ImageIcon className="folderIcon" /> : (file.file_type == "xlsx" ? <DescriptionIcon className="folderIcon" /> : <FolderIcon className="folderIcon" />)))
                                     } */}
-                      setTotalPageCount
+                      
                       {
                         file.file_type == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> : (file.file_type == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> : <a href={file?.file} target="_blank"><InsertDriveFileIcon className="folderIcon" /></a>))
                       }

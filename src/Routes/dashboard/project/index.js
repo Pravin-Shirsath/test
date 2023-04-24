@@ -58,13 +58,7 @@ export default function SaasDashbaord(props) {
   const [selected, setSelectedItem] = useState({})
 
   const type = JSON.parse(localStorage.getItem('user_type'));
-  //  if(type === "admin"){
-
-  //    history.push("app/dashboard/Admin/Dashboard")
-  //  }
-
-
-
+ 
   const ProjectList = () => {
     const accessToken = JSON.parse(localStorage.getItem('token'))
     if (accessToken !== null) {
@@ -225,7 +219,7 @@ export default function SaasDashbaord(props) {
         
         
         <RctCollapsibleCard
-        // heading={<center> <h2>user Dashboard</h2></center> }
+       
         >
           <div className="d-flex  px-2 " style={{ justifyContent: 'space-between',flexWrap:"wrap" }}>
             <div className='search-row'>
