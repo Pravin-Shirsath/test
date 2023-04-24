@@ -19,47 +19,7 @@ const ResetPasswordForm = (props) => {
   const [validateNew, setValidateNew] = useState(true);
   const [validateConfirm, setValidateConfirm] = useState(true);
 
-  // const resetPassword = () => {
-  //   const signedUpUser = JSON.parse(localStorage.getItem("signedUpUser"));
-  //   console.log(oldPassword, newPassword, rePassword);
-  //   const strongRegex = new RegExp("^(?=.*[a-zA-Z])(?=.*[0-9])(?=.{8,})"); //must be alphanumeric and minimum 8 characters
-
-  //   //=== Validation with regex (vishal) ====//
-  //   if (oldPassword === signedUpUser.password) {
-  //     setValidateOld(true)
-  //     if (newPassword.match(strongRegex)) {
-  //       setValidateNew(true);
-  //       if (newPassword === rePassword) {
-  //         setValidateConfirm(true)
-  //         const password = newPassword
-  //         const updatedUser = { ...signedUpUser, password }
-  //         localStorage.setItem("signedUpUser", JSON.stringify(updatedUser));
-
-  //         setOldPassword("");
-  //         setNewPassword("");
-  //         setRePassword("");
-  //         alert('Password change success ✅')
-  //         history.push("/app/dashboard/saas")
-  //       } else {
-  //         setValidateConfirm(false)
-  //         setRePassword("");
-  //       }
-  //     } else {
-  //       setValidateNew(false);
-  //       setNewPassword("");
-  //       setRePassword("");
-  //     }
-  //   } else {
-  //     setValidateOld(false)
-  //     setOldPassword("");
-  //     setNewPassword("");
-  //     setRePassword("");
-  //   }
-
-  //   console.log(signedUpUser, "reset password clicked...");
-  // }
-
-  
+ 
   // const authKey = localStorage.getItem("auth_key");
   const resetPassword = () => {
     if (oldPassword.trim() == '' && newPassword.trim() == '' && rePassword.trim() == "") {

@@ -29,14 +29,6 @@ import DeleteConfirmationDialog from '../../../Components/DeleteConfirmationDial
 
 // rct collapsible card
 
-// widgets data
-import {
-  visitorsData,
-  salesData,
-  ordersData,
-  topSellingProducts,
-  trafficStatus
-} from './data';
 import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import { str } from 'Constants/stringConst';

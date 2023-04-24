@@ -36,7 +36,7 @@ import {
    AsyncSessionForgotPasswordComponent,
    AsyncSessionPage404Component,
    AsyncSessionPage500Component,
-   AsyncTermsConditionComponent
+
 } from 'Components/AsyncComponent/AsyncComponent';
 
 
@@ -152,7 +152,7 @@ const type = JSON.parse(localStorage.getItem('user_type'));
          <Route path="/login" component={LogIn} />
          <Route path="/session/404" component={AsyncSessionPage404Component} />
          <Route path="/session/500" component={AsyncSessionPage500Component} />
-         <Route path="/terms-condition" component={AsyncTermsConditionComponent} />
+       
          <Route path="/callback" render={(props) => {
             handleAuthentication(props);
             return <Callback {...props} />

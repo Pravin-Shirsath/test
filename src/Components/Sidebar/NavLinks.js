@@ -169,10 +169,8 @@ let sidebarMenu = {
       //          "path": "/app/pages/blank",
       //          "menu_title": "sidebar.blank"
       //       },
-      //       {
-      //          "path": "/terms-condition",
-      //          "menu_title": "sidebar.terms&Conditions"
-      //       },
+      //       
+    
       //       {
       //          "path": "/app/pages/feedback",
       //          "menu_title": "sidebar.feedback"
@@ -661,10 +659,7 @@ let sidebarMenu = {
       //       //    "new_item": false,
       //       // },
       //       // {
-      //       //    "menu_title": "sidebar.modal4",
-      //       //    "path": "/terms-condition",
-      //       //    "new_item": false,
-      //       // },
+        
       //       // {
       //       //    "menu_title": "sidebar.modal5",
       //       //    "path": "/app/pages/feedback",
@@ -699,11 +694,7 @@ let sidebarMenu = {
       //    "menu_icon": "zmdi zmdi-chart-donut",
       // },
       // {
-      //    "menu_title": "sidebar.modal5",
-      //    "path": "/terms-condition",
-      //    "new_item": false,
-      //    "menu_icon": "zmdi zmdi-file-text",
-      // },
+   
    ],
 
 }

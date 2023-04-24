@@ -43,11 +43,9 @@ import RctCollapsibleCard from '../../../Components/RctCollapsibleCard/RctCollap
 import RctSectionLoader from '../../../Components/RctSectionLoader/RctSectionLoader'
 import '../../../Assets/css/user.css'
 import {
-  addNewCustomer,
+
   getCompanyUserList,
-  deleteCustomerDetails,
-  updateCustomerDetails,
-  getSearchedCustomer,
+ 
   getsearchCompanyUser,
   CustomerDisable,
   CustomerEnable,

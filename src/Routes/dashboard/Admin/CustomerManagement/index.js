@@ -8,38 +8,16 @@
  import Checkbox from '@material-ui/core/Checkbox'
 import Switch from 'react-toggle-switch';
 
- import {
-   
-   Modal,
-   ModalHeader,
-   ModalBody,
-   ModalFooter,
-   Input,
-   Form,
-   FormGroup,
-   Label,
- } from 'reactstrap'
- import Dialog from '@material-ui/core/Dialog'
- import DialogContent from '@material-ui/core/DialogContent'
+ 
  import { NotificationManager } from 'react-notifications'
  import Pagination from "react-js-pagination";
  
  import { Link, useHistory } from 'react-router-dom';
  
- // delete confirmation dialog
- import DeleteConfirmationDialog from 'Components/DeleteConfirmationDialog/DeleteConfirmationDialog'
- // add new user form
-//  import AddNewUserForm from './AddNewUserForm'
- // update user form
-//  import UpdateUserForm from './UpdateUserForm'
- // page title bar
- import PageTitleBar from './../../../../Components/PageTitleBar/PageTitleBar'
- // intl messages
- import IntlMessages from '../../../../Util/IntlMessages'
+
  // rct card box
  import RctCollapsibleCard from './../../../../Components/RctCollapsibleCard/RctCollapsibleCard'
- // rct section loader
- import RctSectionLoader from '../../../../Components/RctSectionLoader/RctSectionLoader'
+ 
  import '../../../.././Assets/css/user.css'
  import {
    addNewCustomer,

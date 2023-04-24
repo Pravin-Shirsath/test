@@ -6,26 +6,9 @@
  import SwipeableViews from 'react-swipeable-views';
  import { AppBar, Tabs, Tab, Typography, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
  import { Scrollbars } from 'react-custom-scrollbars';
- import Pagination from "react-js-pagination";
- import { NotificationManager } from 'react-notifications'
- import DeleteIcon from '@mui/icons-material/Delete';
-  import ContentCopyIcon from '@mui/icons-material/ContentCopy';
- import {
-    Button,
-   
-  } from 'reactstrap';
- // intl messages
- import IntlMessages from 'Util/IntlMessages';
- import { 
-   AllLowDtaUser,
-   AllCoupons,
-   AllUser ,AdminCoupanList, AdminCoupanSearch,SearchLowDataAvilableUser ,LowDataAvilableUser, getSearchedCustomer, getCustomerList, DeleteCoupon} from 'Api';
- import { getFormatDate2 } from 'Constants/DateFormator';
- import { copyToClipboard } from 'Constants/CopyToClipboard';
- import DeleteConfirmationDialog from 'Components/DeleteConfirmationDialog/DeleteConfirmationDialog';
+
  import { useHistory } from 'react-router';
- import { exportToExcel } from 'Routes/dashboard/ReuseComponent/exportToExcel';
- import FileDownloadIcon from '@mui/icons-material/FileDownload';
+
 import NewCustomerList from './NewCustomerList';
 import LowDataAwailable from './LowDataAwailable';
 import Couponlist from './Couponlist';

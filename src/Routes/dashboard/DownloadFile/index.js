@@ -22,12 +22,7 @@ import { useHistory } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications'
 // delete confirmation dialog
 import DeleteConfirmationDialog from 'Components/DeleteConfirmationDialog/DeleteConfirmationDialog'
-// update user form
-//  import UpdateUserForm from './UpdateUserForm'
-// page title bar
-import PageTitleBar from '../../../Components/PageTitleBar/PageTitleBar'
-// intl messages
-import IntlMessages from '../../../Util/IntlMessages'
+
 // rct card box
 import RctCollapsibleCard from '../../../Components/RctCollapsibleCard/RctCollapsibleCard'
 // rct section loader

@@ -16,12 +16,7 @@ import { ErrorHandling } from "Constants/ErrorHandling";
 import { NotificationManager } from 'react-notifications'
 // delete confirmation dialog
 import DeleteConfirmationDialog from 'Components/DeleteConfirmationDialog/DeleteConfirmationDialog'
-// update user form
-//  import UpdateUserForm from './UpdateUserForm'
-// page title bar
-import PageTitleBar from '../../../Components/PageTitleBar/PageTitleBar'
-// intl messages
-import IntlMessages from '../../../Util/IntlMessages'
+
 // rct card box
 import RctCollapsibleCard from '../../../Components/RctCollapsibleCard/RctCollapsibleCard'
 // rct section loader
@@ -44,7 +39,7 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
 import EditDataset from '../ReuseComponent/EditDataset';
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
-// import { ErrorHandling } from "Constants/ErrorHandling";
+
 
 
 export default function ViewDataset(props) {
@@ -215,10 +210,7 @@ const getDatasetFiles = () => {
         <title>Automaton | Customers List</title>
         <meta name="description" content="Automaton Widgets" />
       </Helmet>
-      {/* <PageTitleBar
-        title={<IntlMessages id="sidebar.viewDataset" />}
-        match={props.match}
-      /> */}
+     
      <CustomBreadcrumbs    currentPage={"View Dataset"} data={location?.state?.breadcrumbData}  />
 
                 <DeleteConfirmationDialog title="Are You Sure Want To Delete?"

@@ -29,25 +29,14 @@ import { getFormatDate2 } from '../../../../Constants/DateFormator';
  import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
  // delete confirmation dialog
  import DeleteConfirmationDialog from 'Components/DeleteConfirmationDialog/DeleteConfirmationDialog'
- // add new user form
-//  import AddNewUserForm from './AddNewUserForm'
- // update user form
-//  import UpdateUserForm from './UpdateUserForm'
- // page title bar
- import PageTitleBar from './../../../../Components/PageTitleBar/PageTitleBar'
- // intl messages
- import IntlMessages from '../../../../Util/IntlMessages'
+
  // rct card box
  import RctCollapsibleCard from './../../../../Components/RctCollapsibleCard/RctCollapsibleCard'
  // rct section loader
  import RctSectionLoader from '../../../../Components/RctSectionLoader/RctSectionLoader'
  import '../../../.././Assets/css/user.css'
  import {
-   addNewCustomer,
-   getCustomerList,
-   deleteCustomerDetails,
-   updateCustomerDetails,
-   getSearchedCustomer,
+  
    CustomerDisable,
    CustomerEnable,
    AdminCoupanList,
@@ -276,10 +265,7 @@ const {location}=props
          <title>Automaton | </title>
          <meta name="description" content="Automaton Widgets" />
        </Helmet>
-       {/* <PageTitleBar
-         title={<IntlMessages id="sidebar.coupon" />}
-         match={props.match}
-       /> */}
+   
        <CustomBreadcrumbs    currentPage={"Coupons"} data={location?.state?.breadcrumbData}  />
 
 

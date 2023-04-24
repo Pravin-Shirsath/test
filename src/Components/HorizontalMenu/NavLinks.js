@@ -139,11 +139,7 @@ let navLinks = {
                "new_item": false,
                "menu_title": "sidebar.blank"
             },
-            {
-               "path": "/terms-condition",
-               "new_item": false,
-               "menu_title": "sidebar.terms&Conditions"
-            },
+
             {
                "path": "/horizontal/pages/feedback",
                "new_item": false,

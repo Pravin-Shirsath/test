@@ -1,29 +1,24 @@
-import PageTitleBar from 'Components/PageTitleBar/PageTitleBar'
-import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard'
+
 // import React,{useState} from 'react'
 import { Helmet } from 'react-helmet'
 import { useHistory } from 'react-router'
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap'
-import IntlMessages from 'Util/IntlMessages'
-import NavTitle from '../ReuseComponent/NavTitle'
+
 import React, { useEffect, useState } from 'react'
 import {
-    Progress, Button,
-    Form,
+  Button,
+  
     FormGroup,
     Label,
     Input,
-    FormText,
     Col,
-    FormFeedback, CustomInput
+  
 } from 'reactstrap';
-import Dialog from '@material-ui/core/Dialog'
-import DialogContent from '@material-ui/core/DialogContent'
+
 import { Avatar } from '@material-ui/core';
 import { BASE_URL } from 'Api/APIConst';
 import { NotificationManager } from 'react-notifications'
 import { CreateNewProject } from 'Api'
-import AddIcon from '@mui/icons-material/Add';
+
 import { ErrorHandling } from 'Constants/ErrorHandling'
 import CurrentTime from 'Constants/CurrentTime'
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
@@ -49,8 +44,7 @@ const [disable,setDisable]=useState(true)
           
            
             if (accessToken !== null) {
-                // console.log(projectName,dataset,projectDes)
-                // console.log("accessToken,fd)",accessToken,fd,objImage)
+               
              
                 CreateNewProject(accessToken,projectName,dataset,projectDes,objImage)
                     .then((res) => {
@@ -216,17 +210,7 @@ const [disable,setDisable]=useState(true)
 
                             </div>
 
-                            {/* <FormGroup row >
-                                <Col sm={12} className="d-flex  align-items-center justify-content-center">
-                                    <Label for="firstName" sm={3} className="d-flex primary-dark">
-                                        File Browse
-                                    </Label>
-                                    <CustomInput type="file" id="exampleCustomFileBrowser" name="customFile" sm={10} />
-                                </Col>
-                            </FormGroup> */}
-                            {/* <div className="d-flex align-items-center justify-content-center" style={{ marginTop: '30px', marginBottom: "30px" }}>
-                                <Button variant="contained" color="primary" className="projectCardButton mx-2" >Upload</Button>
-                            </div> */}
+                        
 
                         </div>
                     </div>

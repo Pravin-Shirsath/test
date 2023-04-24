@@ -2,18 +2,10 @@ import { AccountStatus, UserAccountStatus } from 'Api';
 import React, { useEffect, useState } from 'react'
 
 import {
-  Progress, Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Col,
-  FormFeedback
+  Progress, 
 } from 'reactstrap';
 import { Helmet } from "react-helmet";
-import IntlMessages from '../../../../Util/IntlMessages';
-import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
+
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import { str } from 'Constants/stringConst';
 import { BASE_URL } from 'Api/APIConst';
@@ -72,7 +64,7 @@ const CustomerDetails = (props) => {
 
 
       <div className="charts-widgets-wrapper">
-        {/* <PageTitleBar title={<IntlMessages id="sidebar.account" />} match={props.match} /> */}
+       
      <CustomBreadcrumbs    currentPage={"Customer Details"} data={location?.state?.breadcrumbData}  />
 
 

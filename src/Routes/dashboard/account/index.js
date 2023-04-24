@@ -16,10 +16,6 @@
 
 
 
-
-// intl messages
-import IntlMessages from '../../../Util/IntlMessages';
-
 // main css
 import "../../../Assets/css/main.css"
 
@@ -30,7 +26,6 @@ import "../../../Assets/css/main.css"
  
  // widgets data
 
-import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import { str } from 'Constants/stringConst';
 import { UserAccountStatus } from 'Api';

@@ -983,7 +983,7 @@ export const updateCustomerDetails = (
 };
 
 /**
- *
+ 
  * @param {*} token
  * @param {*} userid
  * @returns
@@ -1000,6 +1000,13 @@ export const deleteCustomerDetails = (token, userid) => {
       return res;
     });
 };
+
+
+
+
+
+
+
 
 // Added by vish
 // Get admins list api
@@ -1082,24 +1089,6 @@ export const addNewAdmin = (
     });
 };
 
-/**
- *
- * @param {*} token
- * @param {*} userid
- * @returns
- */
-export const viewAdminDetails = (token, userid) => {
-  return axios
-    .get(`${BASE_URL}/version_0/admin/admin/details/${userid}/`, {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    })
-    .then((res) => {
-      console.log("Login :", res);
-      return res;
-    });
-};
 
 // Update admin api call
 /**
@@ -1146,6 +1135,8 @@ export const updateAdminDetails = (
     });
 };
 
+
+
 /**
  *
  * @param {*} token
@@ -1165,195 +1156,15 @@ export const deleteAdminDetails = (token, userid) => {
     });
 };
 
-//========================= MODAL API HANDLINGS ======================//
-
-// create modal API
-
-/**
- *
- * @param {*} token
- * @param {*} options
- * @param {*} timeVariable
- * @param {*} dependentVariable
- * @param {*} promotionalDrivers
- * @param {*} nonPromotionalDrivers
- * @param {*} csvFile
- * @returns
- */
-export const createModal = (
-  token,
-  options,
-  timeVariable,
-  dependentVariable,
-  promotionalDrivers,
-  nonPromotionalDrivers,
-  csvFile
-) => {
-  const fd = new FormData();
-  fd.append("time_variable", timeVariable);
-  fd.append("input_csv", csvFile);
-  fd.append("dependent_variable", dependentVariable);
-  fd.append("promotional_drivers", promotionalDrivers);
-  fd.append("non_promotional_drivers", nonPromotionalDrivers);
-  fd.append("csv_headers", options);
-
-  return axios
-    .post(`${BASE_URL}/version_0/sales/modal/create/`, fd, {
-      headers: {
-        Authorization: `Token ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    })
-    .then((res) => {
-      console.log("create modal res :", res);
-      return res;
-    });
-};
-
-// Update modal API
-/**
- *
- * @param {*} id
- * @param {*} token
- * @param {*} options
- * @param {*} timeVariable
- * @param {*} dependentVariable
- * @param {*} promotionalDrivers
- * @param {*} nonPromotionalDrivers
- * @param {*} csvFile
- * @returns
- */
-export const updateDataModal = (
-  id,
-  token,
-  options,
-  timeVariable,
-  dependentVariable,
-  promotionalDrivers,
-  nonPromotionalDrivers,
-  csvFile
-) => {
-  const fd = new FormData();
-  fd.append("time_variable", timeVariable);
-  fd.append("input_csv", csvFile);
-  fd.append("dependent_variable", dependentVariable);
-  fd.append("promotional_drivers", promotionalDrivers);
-  fd.append("non_promotional_drivers", nonPromotionalDrivers);
-  fd.append("csv_headers", options);
-
-  return axios
-    .patch(`${BASE_URL}/version_0/sales/modal/update/${id}/`, fd, {
-      headers: {
-        Authorization: `Token ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    })
-    .then((res) => {
-      console.log("create modal res :", res);
-      return res;
-    });
-};
-
-// For modal list display
-/**
- *
- * @param {*} token
- * @param {*} pageNumber
- * @returns
- */
-export const getModalList = (token, pageNumber) => {
-  return axios
-    .get(`${BASE_URL}/version_0/sales/modal/list/?page=${pageNumber}`, {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    })
-    .then((res) => {
-      console.log("modal data :", res);
-      return res;
-    });
-};
-
-// For delete modal from the list
-
-/**
- *
- * @param {*} token
- * @param {*} modalid
- * @returns
- */
-export const deleteModal = (token, modalid) => {
-  return axios
-    .get(`${BASE_URL}/version_0/sales/modal/delete/${modalid}/`, {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    })
-    .then((res) => {
-      console.log("Delete modal details :", res);
-      return res;
-    });
-};
-
-// for modal search (yet there is no API, this is just dummy)
-
-export const getSearchedModal = (token, searchItem) => {
-  return axios
-    .get(`${BASE_URL}/version_0/sales/modal/list/?search=${searchItem}`, {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    })
-    .then((res) => {
-      console.log("Model update response:", res);
-      return res;
-    });
-};
 
 
 
 
 
 
-//=========== API for Link ML API TO Sales Modal =========//
-export const postMlDataWithModelRef = (token, modelRef, jsonSendFormat) => {
-  return axios
-    .post(
-      `${BASE_URL}/version_0/sales/modal/link-ml-data/`,
-      {
-        sales_modal_ref_id: modelRef,
-        ml_data: jsonSendFormat,
-      },
-      {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      }
-    )
-    .then((res) => {
-      console.log("response from mlDataModel Api in API list :", res);
-      return res;
-    });
-};
 
-// API For Plotting Graph Data
-export const plotGraph = (token, modelRef) => {
-  return axios
-    .post(
-      `${BASE_URL}/version_0/sales/modal/graph/plot/`,
-      {
-        ref_no: modelRef,
-      },
-      {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      }
-    )
-    .then((res) => {
-      return res;
-    });
-};
+
+
 
 
 

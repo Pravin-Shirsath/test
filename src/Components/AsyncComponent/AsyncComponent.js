@@ -151,41 +151,41 @@ const AsyncTodoComponent = Loadable({
   loading: () => <RctPageLoader />,
 });
 
-// gallery
-const AsyncGalleryComponent = Loadable({
-  loader: () => import("Routes/pages/gallery"),
-  loading: () => <RctPageLoader />,
-});
+// // gallery
+// const AsyncGalleryComponent = Loadable({
+//   loader: () => import("Routes/pages/gallery"),
+//   loading: () => <RctPageLoader />,
+// });
 
-// feedback
-const AsyncFeedbackComponent = Loadable({
-  loader: () => import("Routes/pages/feedback"),
-  loading: () => <RctPageLoader />,
-});
+// // feedback
+// const AsyncFeedbackComponent = Loadable({
+//   loader: () => import("Routes/pages/feedback"),
+//   loading: () => <RctPageLoader />,
+// });
 
-// report
-const AsyncReportComponent = Loadable({
-  loader: () => import("Routes/pages/report"),
-  loading: () => <RctPageLoader />,
-});
+// // report
+// const AsyncReportComponent = Loadable({
+//   loader: () => import("Routes/pages/report"),
+//   loading: () => <RctPageLoader />,
+// });
 
-// faq
-const AsyncFaqComponent = Loadable({
-  loader: () => import("Routes/pages/faq"),
-  loading: () => <RctPageLoader />,
-});
+// // faq
+// const AsyncFaqComponent = Loadable({
+//   loader: () => import("Routes/pages/faq"),
+//   loading: () => <RctPageLoader />,
+// });
 
-// pricing
-const AsyncPricingComponent = Loadable({
-  loader: () => import("Routes/pages/pricing"),
-  loading: () => <RctPageLoader />,
-});
+// // pricing
+// const AsyncPricingComponent = Loadable({
+//   loader: () => import("Routes/pages/pricing"),
+//   loading: () => <RctPageLoader />,
+// });
 
-// blank
-const AsyncBlankComponent = Loadable({
-  loader: () => import("Routes/pages/blank"),
-  loading: () => <RctPageLoader />,
-});
+// // blank
+// const AsyncBlankComponent = Loadable({
+//   loader: () => import("Routes/pages/blank"),
+//   loading: () => <RctPageLoader />,
+// });
 
 // google maps
 const AsyncGooleMapsComponent = Loadable({
@@ -283,17 +283,6 @@ const AsyncResponsiveTableComponent = Loadable({
   loading: () => <RctPageLoader />,
 });
 
-// Users List
-const AsyncUsersListComponent = Loadable({
-  loader: () => import("Routes/users/user-list"),
-  loading: () => <RctPageLoader />,
-});
-
-// Users Profile
-const AsyncUserProfileComponent = Loadable({
-  loader: () => import("Routes/users/user-profile"),
-  loading: () => <RctPageLoader />,
-});
 
 // Users Profile 1
 const AsyncUserProfile1Component = Loadable({
@@ -301,11 +290,6 @@ const AsyncUserProfile1Component = Loadable({
   loading: () => <RctPageLoader />,
 });
 
-// Users Management
-const AsyncUserManagementComponent = Loadable({
-  loader: () => import("Routes/users/user-management"),
-  loading: () => <RctPageLoader />,
-});
 
 /*--------------- Charts ----------------*/
 
@@ -385,11 +369,7 @@ const AsyncSessionPage500Component = Loadable({
   loading: () => <RctPageLoader />,
 });
 
-// terms and condition
-const AsyncTermsConditionComponent = Loadable({
-  loader: () => import("Routes/pages/terms-condition"),
-  loading: () => <RctPageLoader />,
-});
+
 
 /*---------------- Editor -------------------*/
 
@@ -666,12 +646,12 @@ export {
   AsyncChatComponent,
   AsyncMailComponent,
   AsyncTodoComponent,
-  AsyncGalleryComponent,
-  AsyncFeedbackComponent,
-  AsyncReportComponent,
-  AsyncFaqComponent,
-  AsyncPricingComponent,
-  AsyncBlankComponent,
+  // AsyncGalleryComponent,
+  // AsyncFeedbackComponent,
+  // AsyncReportComponent,
+  // AsyncFaqComponent,
+  // AsyncPricingComponent,
+  // AsyncBlankComponent,
   AsyncGooleMapsComponent,
   AsyncLeafletMapComponent,
   AsyncShoplistComponent,
@@ -685,10 +665,10 @@ export {
   AsyncBasicTableComponent,
   AsyncDataTableComponent,
   AsyncResponsiveTableComponent,
-  AsyncUsersListComponent,
-  AsyncUserProfileComponent,
+  // AsyncUsersListComponent,
+  // AsyncUserProfileComponent,
   AsyncUserProfile1Component,
-  AsyncUserManagementComponent,
+  // AsyncUserManagementComponent,
   AsyncRechartsComponent,
   AsyncReactChartsjs2Component,
   AsyncBasicCalendarComponent,
@@ -701,7 +681,7 @@ export {
   AsyncSessionForgotPasswordComponent,
   AsyncSessionPage404Component,
   AsyncSessionPage500Component,
-  AsyncTermsConditionComponent,
+  
   AsyncQuillEditorComponent,
   AsyncWysiwygEditorComponent,
   AsyncFormElementsComponent,
