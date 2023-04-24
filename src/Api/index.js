@@ -1509,3 +1509,49 @@ export const getModulesLiks = () => {
       return res;
     });
 };
+
+/**
+ * 
+ * @returns 
+ */
+export const notificationAll = (token) => {
+
+  return axios.get( `${BASE_URL}/api/automaton/notification/view-notifications/`,
+  {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${token}`,
+    }
+  }
+)
+  .then(res => {
+    return res
+  })
+}
+
+/**
+ * 
+ * @param {*} authToken 
+ * @param {*} id 
+ * @returns 
+ */
+
+export const seenNotification = (token,id) => {
+ 
+
+  return axios.post( `${BASE_URL}/api/automaton/notification/read-notifications/`,
+  {
+    "notification_id":id
+},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `token ${token}`
+      }
+    }
+  )
+  .then(res => {
+    console.log("res view datasets file in API:", res)
+    return res
+  })
+}

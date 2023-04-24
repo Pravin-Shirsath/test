@@ -81,6 +81,7 @@ import "@uppy/informer/dist/style.css";
 import XHR from '@uppy/xhr-upload';
 
 import UppyModal from './UppyModal';
+import Notifications from './Notifications';
 
 function UserBlockHorizontal(props) {
   const [userDropdownMenu, setUserDropdownMenu] = useState(false);
@@ -616,7 +617,8 @@ const h=(e)=>{
 
       <div className="sidebar-user-block profile-block d-flex text-align-center justify-content-center align-items-center" >
         <div style={{ color: "#fff " }} className="mt-2 mr-2">
-          <NotificationsIcon style={{fontSize:"30px"}} />
+          {/* <NotificationsIcon style={{fontSize:"30px"}} /> */}
+          <Notifications/>
         </div>
         <Dropdown
           isOpen={userDropdownMenu}
