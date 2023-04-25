@@ -16,6 +16,7 @@ import { getFormatDate2 } from 'Constants/DateFormator';
 
 function Notifications(props){
    const [notifications, setNotifications] = useState(null);
+   const [counts,setCounts]=useState(0)
    useEffect(() => {
       getNotifications();
    },[])
@@ -32,8 +33,18 @@ function Notifications(props){
 
          if (res?.status === 200) {
             console.log("res=notification",res)
-          if(res?.data?.results){
-             setNotifications(res.data.results)
+          if(res?.data){
+          let array=  res?.data || [] ;
+          let count = 0
+             setNotifications(res.data)
+           for (let index = 0; index < array.length; index++) {
+            let seenNotification =   array[index]?.is_read 
+                  if(!seenNotification){
+                     count += 1
+                  }
+           setCounts(count)
+            
+           }
           }
          }
        }).catch(err => {
@@ -52,7 +63,7 @@ const viewNotificaation = (id) => {
        .then(res => {
 
          if (res?.status === 200) {
-          
+            getNotifications();
          }
        }).catch(err => {
          
@@ -69,9 +80,9 @@ const viewNotificaation = (id) => {
       <UncontrolledDropdown nav className="list-inline-item notification-dropdown ">
          <DropdownToggle nav className="p-0">
             <Tooltip title="Notifications" placement="bottom">
-               <IconButton className={`${notifications && notifications.length > 0 ? "shake":""} text-white`}  aria-label="bell">
+               <IconButton className={`${counts > 0 ? "shake":""} text-white`}  aria-label="bell">
                   <i className="zmdi zmdi-notifications-active"></i>
-                 {notifications && notifications.length > 0 && <Badge color="danger" className="badge-xs badge-top-right rct-notify">{notifications&&notifications.length}</Badge>}
+                 {counts > 0 && <Badge color="danger" className="badge-xs badge-top-right rct-notify">{counts}</Badge>}
                </IconButton>
             </Tooltip>
          </DropdownToggle>
@@ -86,14 +97,14 @@ const viewNotificaation = (id) => {
                <Scrollbars className="rct-scroll" autoHeight autoHeightMin={100} autoHeightMax={280}>
                   <ul className="list-unstyled dropdown-list">
                      {notifications && notifications.map((notification, key) => (
-                        <li key={key} className={``} onClick={()=>{viewNotificaation(notification.id)}}>
+                        <li key={key}  onClick={()=>{viewNotificaation(notification.id)}}>
                            <div className={"media "}>
                               {/* <div className="mr-10">
                                  <img src={notification.userAvatar} alt="user profile" className="media-object rounded-circle" width="50" height="50" />
                               </div> */}
                               <div className="media-body pt-5">
                                  <div className="d-flex justify-content-between">
-                                    <h5 className="mb-5 text-primary">{notification.context_type}</h5>
+                                    <h5    className={`${notification?.is_read ? "text-secondary mb-5":"text-primary mb-5"}`} >{notification.context_type}</h5>
                                     <span className="text-muted fs-12">{getFormatDate2(notification.date_updated)}</span>
                                  </div>
                                  <span className="text-muted fs-12 d-block">{notification.message}</span>

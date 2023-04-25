@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import { useHistory } from 'react-router';
-
+import "./CustomBreadcrumbs.css"
 
 const CustomBreadcrumbs = ({ currentPage, data =[] ,props}) => {
 
@@ -32,7 +32,7 @@ console.log(myarray,"myarray")
   return (
     <div className="page-title d-flex  align-items-center">
       {data != undefined  && data.length > 0 &&data.map((item, index) => (
-        <div key={index} className="page-title-wrap  d-flex  align-items-center mr-1" style={{cursor:"pointer"}}>
+        <div key={index} className="page-title-wrap  d-flex  align-items-center mr-1 bread-titile-box" style={{cursor:"pointer"}}>
           
         <i className="ti-angle-left text-dark  custombredcrum-icon"></i> <span onClick={()=>HandleNavigate(item,index)} className="globalFontFamily custombredcrum-heding">{item.name}</span>
          

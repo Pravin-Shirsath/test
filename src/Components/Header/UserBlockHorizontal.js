@@ -417,11 +417,11 @@ const cancelUpload = (uppyId, fileId) => {
 // console.log(document.querySelector('.uppy-StatusBar-actionBtn--done'),">>>")
 
 
-console.log(document.getElementsByClassName(".uppy-u-reset"),">>>uppy-u-reset")
-console.log(document.querySelector('.uppy-c-btn'),">>>uppy-c-btn")
-console.log(document.querySelector('.uppy-StatusBar'),">>>.uppy-StatusBar")
+// console.log(document.getElementsByClassName(".uppy-u-reset"),">>>uppy-u-reset")
+// console.log(document.querySelector('.uppy-c-btn'),">>>uppy-c-btn")
+// console.log(document.querySelector('.uppy-StatusBar'),">>>.uppy-StatusBar")
 
-console.log(document.querySelector('.uppy-StatusBar-actionBtn--done'),">>>.uppy-StatusBar-actionBtn--done")
+// console.log(document.querySelector('.uppy-StatusBar-actionBtn--done'),">>>.uppy-StatusBar-actionBtn--done")
 
 // console.log(document.querySelector('.uppy-StatusBar'),">>>")
 
@@ -432,7 +432,7 @@ let m = false
 const h=(e)=>{
   // e.preventDefault()
   // alert("hello world")
-  console.log(e,">>>>>>>>>>>")
+  // console.log(e,">>>>>>>>>>>")
 }
   return (
     <div className="top-sidebar">
@@ -589,21 +589,6 @@ const h=(e)=>{
             </DialogActions>
           </div>
         )} */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
