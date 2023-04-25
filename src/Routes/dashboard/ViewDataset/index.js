@@ -36,7 +36,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import DescriptionIcon from '@mui/icons-material/Description';
 import CheckIcon from '@mui/icons-material/Check';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-
+import VideoFileIcon from '@mui/icons-material/VideoFile';
 import EditDataset from '../ReuseComponent/EditDataset';
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
 
@@ -245,7 +245,7 @@ const getDatasetFiles = () => {
             <div className='viewDatasetFilesContainer'>
                 {
                     filteredDatasetFiles &&filteredDatasetFiles?.length > 0&& filteredDatasetFiles.map((file,ind)=> {
-                      console.log(file)
+                      {/* console.log(file) */}
                         return(
                                 // <div className="mainBox" key={ind} onClick={()=>handleFileSelect(file)}>
                                 <div className="mainBox" key={ind}>
@@ -255,7 +255,10 @@ const getDatasetFiles = () => {
                                     } */}
 
                                     {
-                                      file.file_type == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> : (file.file_type == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> : <a href={file?.file} target="_blank"><InsertDriveFileIcon className="folderIcon" /></a>))
+                                      file.file_type == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> 
+                                      : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> 
+                                      : (file.file_type == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> 
+                                      : <a href={file?.file} target="_blank"><InsertDriveFileIcon className="folderIcon" /></a>))
                                     }
 
                                   </div>

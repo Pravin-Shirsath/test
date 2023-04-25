@@ -124,6 +124,7 @@ export default function ViewDataset(props) {
 
       const value = perpagecount * pageNumber
           setTotalPageCount(taskFile.length)
+
            setPagination({
                    start: value - perpagecount,
                      end: value
@@ -142,6 +143,9 @@ export default function ViewDataset(props) {
    
     setFilteredTaskFiles(filterarray)
     setTaskFile(filterarray)
+    setTotalPageCount(filterarray.length)
+     NotificationManager.success("Removed file !")
+    
   }
 
 
@@ -246,7 +250,10 @@ export default function ViewDataset(props) {
                                     } */}
                       
                       {
-                        file.file_type == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> : (file.file_type == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> : <a href={file?.file} target="_blank"><InsertDriveFileIcon className="folderIcon" /></a>))
+                        file.file_type == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> 
+                        : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> 
+                        : (file.file_type == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> 
+                        : <a href={file?.file} target="_blank"><InsertDriveFileIcon className="folderIcon" /></a>))
                       }
 
                     </div>
@@ -264,7 +271,7 @@ export default function ViewDataset(props) {
             }
           </div>
 
-          {filteredTaskFiles.length == 0 && <center style={{ color: "black" }}>Data not available </center>}
+          {filteredTaskFiles.length == 0 && <center style={{ color: "black" }}> Data not available </center>}
           {
             taskFile?.length > 0 &&
             <div className='paginationDiv'>

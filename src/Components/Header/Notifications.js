@@ -96,7 +96,7 @@ const viewNotificaation = (id) => {
                </div>
                <Scrollbars className="rct-scroll" autoHeight autoHeightMin={100} autoHeightMax={280}>
                   <ul className="list-unstyled dropdown-list">
-                     {notifications && notifications.map((notification, key) => (
+                     {notifications && notifications.length >0 ? notifications.map((notification, key) => (
                         <li key={key}  onClick={()=>{viewNotificaation(notification.id)}}>
                            <div className={"media "}>
                               {/* <div className="mr-10">
@@ -119,7 +119,7 @@ const viewNotificaation = (id) => {
                               </div>
                            </div>
                         </li>
-                     ))}
+                     )):<span className="text-muted  d-flex justify-content-center align-items-center"> No notification </span>}
                   </ul>
                </Scrollbars>
             </div>
