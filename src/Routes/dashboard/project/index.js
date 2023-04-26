@@ -292,6 +292,7 @@ export default function SaasDashbaord(props) {
             
           </div>
           <div>
+          {project?.length == 0 && <center style={{ color: "black" }}>  Data not available </center>}
             {
               project?.length > 0 &&
               <div className='paginationDiv'>

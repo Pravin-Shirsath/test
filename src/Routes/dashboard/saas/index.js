@@ -342,6 +342,7 @@ export default function SaasDashbaord(props) {
 
 
           </div>
+          {project?.length == 0 && <center style={{ color: "black" }}>  Data not available </center>}
           <div>
             {
               project?.length > 0 &&

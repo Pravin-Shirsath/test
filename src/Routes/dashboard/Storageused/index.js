@@ -77,10 +77,10 @@ export default function Storageused(props) {
                   
                   if (res?.data?.projects?.length > 0) {
                      
-                     let available_balance = "available_balance"
-                     Label.push(available_balance)
-                     size.push( Number(res?.data?.available_balance) )
-                     colors.push("green")
+                     // let available_balance = "available_balance"
+                     // Label.push(available_balance)
+                     // size.push( Number(res?.data?.available_balance) )
+                     // colors.push("green")
 
                      
                     
