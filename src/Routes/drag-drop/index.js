@@ -14,7 +14,7 @@ const DragAndDrop = ({ match }) => (
 	<div className="content-wrapper">
 		<Helmet>
 			<title>Drag And Drop</title>
-			<meta name="description" content=" Drag And Drop" />
+			<meta name="description" content="Drag And Drop" />
 		</Helmet>
 		<Switch>
 			<Redirect exact from={`${match.url}/`} to={`${match.url}/react-dragula`} />
