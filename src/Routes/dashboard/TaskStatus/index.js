@@ -31,6 +31,7 @@ import '../../../Assets/css/user.css'
 
 import EditDataset from '../ReuseComponent/EditDataset';
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
+import AppConfig from "Constants/AppConfig";
 
 
 export default function TaskStatus(props) {
@@ -138,8 +139,8 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   return (
     <div className="user-management">
       <Helmet>
-        <title>Automaton | Customers List</title>
-        <meta name="description" content="Automaton Widgets" />
+        <title>{AppConfig.brandName} | Customers List</title>
+        <meta name="description" content={`${AppConfig.brandName} Widgets`}/>
       </Helmet>
       {/* <PageTitleBar
         title={<IntlMessages id="sidebar.taskStatus" />}

@@ -45,6 +45,7 @@ import {
     SearchTask
   } from '../../../Api/'
 import { ErrorHandling } from 'Constants/ErrorHandling';
+import AppConfig from 'Constants/AppConfig';
 
 export default function ViewProject(props) {
   const history = useHistory();
@@ -180,8 +181,8 @@ const TaskStatus=()=>{
   return (
     <div className="user-management">
       <Helmet>
-        <title>Automaton | Task List</title>
-        <meta name="description" content="Automaton Widgets" />
+        <title>{AppConfig.brandName} | Task List</title>
+        <meta name="description" content={`${AppConfig.brandName} Widgets`}  />
       </Helmet>
      
  

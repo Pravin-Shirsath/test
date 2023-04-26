@@ -24,6 +24,7 @@ import {
 } from '../projects/data';
 
 import ContentLoader from 'react-content-loader';
+import AppConfig from 'Constants/AppConfig';
 
 export default function ProjectDetail(props){
    const [projectData, setProjectData] = useState(projects);
@@ -59,8 +60,8 @@ export default function ProjectDetail(props){
          {currentDataItem !== null ?
             <div className="project-detail-wrapper">
                <Helmet>
-                  <title>Project Detail</title>
-                  <meta name="description" content="Automaton Blank Page" />
+                  <title>{AppConfig.brandName} | Project Detail</title>
+                  <meta name="description" content={`${AppConfig.brandName} Projects`} />
                </Helmet>
                <PageTitleBar title={<IntlMessages id="sidebar.projectDetail" />} match={props.match} />
                <div className="row">

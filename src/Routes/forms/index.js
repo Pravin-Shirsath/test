@@ -10,12 +10,13 @@ import {
 	AsyncTextFieldComponent,
 	AsyncSelectListComponent
 } from 'Components/AsyncComponent/AsyncComponent';
+import AppConfig from 'Constants/AppConfig';
 
 const Forms = ({ match }) => (
 	<div className="content-wrapper">
 		<Helmet>
-			<title>Automaton | Form Elements</title>
-			<meta name="description" content="Automaton Form Elements" />
+			<title>{AppConfig.brandName} | Form Elements</title>
+			<meta name="description" content={`${AppConfig.brandName} Form Elements`} />
 		</Helmet>
 		<Switch>
 			<Redirect exact from={`${match.url}/`} to={`${match.url}/form-elements`} />

@@ -44,6 +44,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import EditDataset from '../ReuseComponent/EditDataset';
 import { getFormatDate2 } from 'Constants/DateFormator';
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
+import AppConfig from 'Constants/AppConfig';
 
 export default function ViewProject(props) {
   const history = useHistory();
@@ -279,8 +280,8 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   return (
     <div className="user-management">
       <Helmet>
-        <title>Automaton | Customers List</title>
-        <meta name="description" content="Automaton Widgets" />
+        <title>{AppConfig.brandName} | Customers List</title>
+        <meta name="description" content={`${AppConfig.brandName} Widgets`} />
       </Helmet>
       {/* <PageTitleBar
         title={<IntlMessages id="sidebar.viewProject" />}

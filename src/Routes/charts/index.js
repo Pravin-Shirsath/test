@@ -9,12 +9,13 @@ import {
 	AsyncRechartsComponent,
 	AsyncReactChartsjs2Component
 } from 'Components/AsyncComponent/AsyncComponent';
+import AppConfig from 'Constants/AppConfig';
 
 const ChartsComponent = ({ match }) => (
 	<div className="content-wrapper">
 		<Helmet>
-			<title>Automaton | Charts</title>
-			<meta name="description" content="Automaton Charts" />
+			<title>{AppConfig.brandName} | Charts</title>
+			<meta name="description" content={`${AppConfig.brandName} Charts`} />
 		</Helmet>
 		<Switch>
 			<Redirect exact from={`${match.url}/`} to={`${match.url}/re-charts`} />

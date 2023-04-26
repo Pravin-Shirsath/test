@@ -11,6 +11,7 @@ import { LOGIN_USER_SUCCESS } from 'Store/Actions/types';
 import Auth from 'Auth/Auth';
 import { login } from '../Api/index';
 import { Helmet } from 'react-helmet'
+import AppConfig from 'Constants/AppConfig';
 
 
 
@@ -142,8 +143,8 @@ const LogIn = (props) => {
     return (
         <div className='loginContainer'>
              <Helmet>
-            <title>Automaton | Sign-In</title>
-            <meta name="description" content="Automaton Widgets" />
+            <title>{AppConfig.brandName} | Sign-In</title>
+            <meta name="description" content={`${AppConfig.brandName} Widgetse`} />
          </Helmet>
         <div className='row justify-content-between row-gapper'>
                 <div className='col loginInfoWrapper'>

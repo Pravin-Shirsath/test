@@ -9,12 +9,13 @@ import {
 	AsyncGooleMapsComponent,
 	AsyncLeafletMapComponent
 } from 'Components/AsyncComponent/AsyncComponent';
+import AppConfig from 'Constants/AppConfig';
 
 const Maps = ({ match }) => (
 	<div className="content-wrapper">
 		<Helmet>
-			<title>Automaton | Maps</title>
-			<meta name="description" content="Automaton Maps" />
+			<title>{AppConfig.brandName} | Maps</title>
+			<meta name="description" content={`${AppConfig.brandName} Maps`} />
 		</Helmet>
 		<Switch>
 			<Redirect exact from={`${match.url}/`} to={`${match.url}/google-maps`} />

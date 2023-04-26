@@ -51,6 +51,7 @@ import Tus from '@uppy/tus'
 import XHR from '@uppy/xhr-upload';
 import AwsS3Multipart from '@uppy/aws-s3-multipart';
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
+import AppConfig from "Constants/AppConfig";
 const { DashboardModal } = require("@uppy/react");
 // Don’t forget to keep the Uppy instance outside of your component.
 // const uppy = new Uppy()
@@ -469,8 +470,8 @@ let data =location?.state?.breadcrumbData
   return (
     <>
       <Helmet>
-        <title>Automaton | Create Dataset</title>
-        <meta name="description" content="Automaton Widgets" />
+        <title> {AppConfig.brandName} | Create Dataset</title>
+        <meta name="description" content={`${AppConfig.brandName} Widgets`} />
       </Helmet>
       {/* <PageTitleBar
         title={<IntlMessages id="sidebar.createDataset" />}

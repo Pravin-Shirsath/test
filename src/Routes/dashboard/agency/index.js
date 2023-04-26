@@ -37,7 +37,7 @@ export default function AgencyDashboard() {
       <div className="agency-dashboard-wrapper">
          <Helmet>
             <title>Agency Dashboard</title>
-            <meta name="description" content="Automaton Agency Dashboard" />
+            <meta name="description" content=" Agency Dashboard" />
          </Helmet>
          <AgencyWelcomeBlock />
          <RctCollapsibleCard

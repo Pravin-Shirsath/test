@@ -18,7 +18,7 @@ const Ecommerce = ({ match }) => (
 	<div className="content-wrapper">
 		<Helmet>
 			<title>Ecommerce | Shop</title>
-			<meta name="description" content="Automaton Ecommerce Shop" />
+			<meta name="description" content=" Ecommerce Shop" />
 		</Helmet>
 		<Switch>
 			<Redirect exact from={`${match.url}/`} to={`${match.url}/shop-list`} />

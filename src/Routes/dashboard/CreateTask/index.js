@@ -1,4 +1,7 @@
+// createTask ka index.js file
 
+// import "../ViewDataset/viewdataset.css"
+import "./createtask.css"
 
 /**
  * User Management Page
@@ -32,7 +35,6 @@ import RctSectionLoader from '../../../Components/RctSectionLoader/RctSectionLoa
 import '../../../Assets/css/user.css'
 import {
   AddFileToTask,
-
 } from '../../../Api/'
 
 import FolderIcon from '@mui/icons-material/Folder';
@@ -48,6 +50,7 @@ import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
 import TextField from '@mui/material/TextField';
 
 import MenuItem from '@mui/material/MenuItem';
+import AppConfig from "Constants/AppConfig"
 export default function ViewDataset(props) {
   const history = useHistory();
   const { location } = props
@@ -68,7 +71,7 @@ export default function ViewDataset(props) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [searchResult,setSearchResult]=useState([])
-  const [perpagecount, setPerpagecount] = useState(5);
+  const [perpagecount, setPerpagecount] = useState(6);
   const [pagination, setPagination] = useState({
     start: 0,
     end: perpagecount
@@ -111,10 +114,6 @@ export default function ViewDataset(props) {
 
     }
 }
-
- 
-      
-
 
 
 
@@ -210,8 +209,8 @@ export default function ViewDataset(props) {
   return (
     <div className="user-management">
       <Helmet>
-        <title>Automaton | Customers List</title>
-        <meta name="description" content="Automaton Widgets" />
+        <title>{AppConfig.brandName} | Customers List</title>
+        <meta name="description" content={`${AppConfig.brandName} Widgets`} />
       </Helmet>
 
       <CustomBreadcrumbs currentPage={"Create Task"} data={location?.state?.breadcrumbData} />
@@ -237,7 +236,7 @@ export default function ViewDataset(props) {
             <p className="Comman-Heading">Task-{Taskid}</p>
           </div>
 
-          <div className='viewDatasetFilesContainer'>
+          <div className='createTaskFilesContainer'>
             {
               filteredTaskFiles && filteredTaskFiles.slice(pagination.start, pagination.end).map((file, ind) => {
                 console.log(file)
@@ -446,3 +445,6 @@ export default function ViewDataset(props) {
     </div>
   )
 }
+
+
+

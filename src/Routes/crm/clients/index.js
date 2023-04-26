@@ -21,7 +21,7 @@ export default function Clients(props){
       <div className="clients-wrapper">
          <Helmet>
             <title>clients</title>
-            <meta name="description" content="Automaton Blank Page" />
+            <meta name="description" content=" Blank Page" />
          </Helmet>
          <PageTitleBar title={<IntlMessages id="sidebar.clients" />} match={props.match} />
          <div className="search-bar-wrap">

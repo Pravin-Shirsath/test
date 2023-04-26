@@ -190,8 +190,8 @@ function Signin(props) {
 
       <div className="user-management">
          <Helmet>
-            <title>Automaton | Sign-In</title>
-            <meta name="description" content="Automaton Widgets" />
+            <title> {AppConfig.brandName} | Sign-In</title>
+            <meta name="description" content={`${AppConfig.brandName} Widgetse`}  />
          </Helmet>
          <div className="rct-session-wrapper">
             {loading &&

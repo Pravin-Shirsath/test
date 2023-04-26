@@ -47,6 +47,7 @@ import { getFormatDate2 } from '../../../../Constants/DateFormator';
 import CreateCoupan from 'Routes/dashboard/ReuseComponent/CreateCoupan'
 import { copyToClipboard } from 'Constants/CopyToClipboard'
 import CustomBreadcrumbs from 'Routes/dashboard/ReuseComponent/CustomBreadcrumbs'
+import AppConfig from 'Constants/AppConfig'
  
  export default function CustomerManagement(props) {
    const [coupans, setCoupans] = useState([])
@@ -262,8 +263,8 @@ const {location}=props
    return (
      <div className="user-management">
        <Helmet>
-         <title>Automaton | </title>
-         <meta name="description" content="Automaton Widgets" />
+         <title>{AppConfig.brandName} | </title>
+         <meta name="description" content={`${AppConfig.brandName} Widgets`} />
        </Helmet>
    
        <CustomBreadcrumbs    currentPage={"Coupons"} data={location?.state?.breadcrumbData}  />

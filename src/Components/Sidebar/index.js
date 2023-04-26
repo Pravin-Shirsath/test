@@ -1,5 +1,5 @@
 /**
- * Automaton Sidebar
+ * App Name Sidebar
  */
 import React, { Component, Fragment } from 'react';
 import classNames from 'classnames';

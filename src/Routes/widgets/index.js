@@ -12,12 +12,13 @@ import {
 	AsyncGeneralWidgetsComponent,
 	AsyncPromoWidgetsComponent
 } from 'Components/AsyncComponent/AsyncComponent';
+import AppConfig from 'Constants/AppConfig';
 
 const Pages = ({ match }) => (
 	<div className="content-wrapper">
 		<Helmet>
-			<title>Automaton | Widgets</title>
-			<meta name="description" content="Automaton Widgets" />
+			<title>{AppConfig.brandName} | Widgets</title>
+			<meta name="description" content={`${AppConfig.brandName} Widgets`}/>
 		</Helmet>
 		<Switch>
 			<Redirect exact from={`${match.url}/`} to={`${match.url}/user`} />

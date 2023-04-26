@@ -18,6 +18,7 @@ import Folders from './components/Folders';
 import EmailAppSidebar from './components/EmailAppSidebar';
 import ComposeEmail from './components/ComposeEmail';
 import EmailSearch from './components/EmailSearch';
+import AppConfig from 'Constants/AppConfig';
 
 const drawerWidth = 280;
 
@@ -86,8 +87,8 @@ function MailApp(props) {
    const drawer = (
       <div className="mail-sidebar-wrap">
          <Helmet>
-            <title>Automaton | Mail App</title>
-            <meta name="description" content="Automaton Maps" />
+            <title>{AppConfig.brandName}| Mail App</title>
+            <meta name="description" content={`${AppConfig.brandName} Maps`} />
          </Helmet>
          <div className="user-wrap d-flex justify-content-between">
             <div className="media align-items-center">

@@ -1,6 +1,6 @@
 /**
  * Firebase Login
- * Automaton comes with built in firebase login feature
+ * APP NAME comes with built in firebase login feature
  * You Need To Add Your Firsebase App Account Details Here
  */
 import firebase from 'firebase/app';

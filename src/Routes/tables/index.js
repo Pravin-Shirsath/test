@@ -10,12 +10,13 @@ import {
     AsyncDataTableComponent,
     AsyncResponsiveTableComponent
 } from 'Components/AsyncComponent/AsyncComponent';
+import AppConfig from 'Constants/AppConfig';
 
 const Pages = ({ match }) => (
     <div className="content-wrapper">
         <Helmet>
-            <title>Automaton | Tables</title>
-            <meta name="description" content="Automaton Tables" />
+            <title>{AppConfig.brandName} | Tables</title>
+            <meta name="description" content={`${AppConfig.brandName} Tables`} />
         </Helmet>
         <Switch>
             <Redirect exact from={`${match.url}/`} to={`${match.url}/basic`} />

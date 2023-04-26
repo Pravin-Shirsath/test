@@ -28,6 +28,7 @@ import { getAppLayout } from "Helpers/helpers";
 
 //component
 import ProjectListing from './component/ProjectListing';
+import AppConfig from 'Constants/AppConfig';
 
 export default function Projects(props){
    const [gridlayout, setGridlayout] = useState(true);
@@ -45,8 +46,8 @@ export default function Projects(props){
    return (
       <div className="projects-wrapper">
          <Helmet>
-            <title>Projects</title>
-            <meta name="description" content="Automaton Blank Page" />
+            <title>{AppConfig.brandName} | Projects</title>
+            <meta name="description" content={`${AppConfig.brandName} Projects`}/>
          </Helmet>
          <PageTitleBar title={<IntlMessages id="sidebar.projects" />} match={props.match} />
          <div className="search-bar-wrap">

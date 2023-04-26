@@ -53,6 +53,7 @@ import {
 
 } from '../../../Api/'
 import CustomBreadcrumbs from '../ReuseComponent/CustomBreadcrumbs'
+import AppConfig from 'Constants/AppConfig'
 
 
 export default function UserManagement(props) {
@@ -320,8 +321,8 @@ export default function UserManagement(props) {
   return (
     <div className="user-management">
       <Helmet>
-        <title>Automaton | Customers List</title>
-        <meta name="description" content="Automaton Widgets" />
+        <title>{AppConfig.brandName} | Customers List</title>
+        <meta name="description" content={`${AppConfig.brandName} Widgets`} />
       </Helmet>
       {/* <PageTitleBar
         title={<IntlMessages id="sidebar.usermangement" />}

@@ -10,12 +10,13 @@ import {
 	AsyncSimpleLineIconsComponent,
 	AsyncMaterialIconsComponent
 } from 'Components/AsyncComponent/AsyncComponent';
+import AppConfig from 'Constants/AppConfig';
 
 const Icons = ({ match }) => (
 	<div className="content-wrapper">
 		<Helmet>
-			<title>Automaton | Icons</title>
-			<meta name="description" content="Automaton Maps" />
+			<title>{AppConfig.brandName} | Icons</title>
+			<meta name="description" content={`${AppConfig.brandName} Maps`} />
 		</Helmet>
 		<Switch>
 			<Redirect exact from={`${match.url}/`} to={`${match.url}/themify-icons`} />

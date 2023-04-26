@@ -35,6 +35,7 @@ import { NotificationManager } from 'react-notifications'
 import { ErrorHandling } from "Constants/ErrorHandling";
 import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
 import UppyModal from "Components/Header/UppyModal";
+import AppConfig from "Constants/AppConfig";
 
 export default function Recharge(props) {
   const history = useHistory();
@@ -234,8 +235,8 @@ export default function Recharge(props) {
   return (
     <div className="user-management">
       <Helmet>
-        <title>Automaton | Customers List</title>
-        <meta name="description" content="Automaton Widgets" />
+        <title>{AppConfig.brandName} | Customers List</title>
+        <meta name="description" content={`${AppConfig.brandName} Widgets`}/>
       </Helmet>
       {/* <PageTitleBar
         title={<IntlMessages id="sidebar.recharge" />}

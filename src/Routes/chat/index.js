@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 // components
 import ChatArea from './components/ChatArea';
 import ChatSidebar from './components/ChatSidebar';
+import AppConfig from 'Constants/AppConfig';
 
 const drawerWidth = 310;
 
@@ -47,8 +48,8 @@ function ChatList(props) {
    return (
       <div className="chat-wrapper">
          <Helmet>
-            <title>Chat App</title>
-            <meta name="description" content="Automaton Chat App" />
+            <title>{AppConfig.brandName} | Chat App</title>
+            <meta name="description" content={`${AppConfig.brandName} Automaton Chat App`}  />
          </Helmet>
          <div className={classes.root}>
             <Hidden mdUp className="user-list-wrap">

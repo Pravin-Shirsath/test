@@ -17,6 +17,7 @@ import { RctCardFooter } from 'Components/RctCard';
 import IntlMessages from 'Util/IntlMessages';
 // rct section loader
 import RctSectionLoader from 'Components/RctSectionLoader/RctSectionLoader';
+import AppConfig from 'Constants/AppConfig';
 
 function ActivityBoard() {
    const [activityData, setActivityData] = useState(null);
@@ -81,7 +82,7 @@ function ActivityBoard() {
             <ul className="mb-0 list-unstyled">
                <li className="border-bottom">
                   <div className="activity-heading d-flex p-4 border-bottom">
-                     <h3 className="mb-0">Automaton Redesign</h3>
+                     <h3 className="mb-0">{AppConfig.brandName} Redesign</h3>
                   </div>
                   <div className="activity-description p-4">
                      <h4 className="mb-4"><IntlMessages id="widgets.description" /></h4>
@@ -92,7 +93,7 @@ function ActivityBoard() {
                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                         </p>
                      </div>
-                     <h4 className="mb-4">Automaton Redesign Assets</h4>
+                     <h4 className="mb-4">{AppConfig.brandName} Redesign Assets</h4>
                      <ul className="mb-0 list-inline attachment-wrap">
                         {assetsData && assetsData.map((data, key) => (
                            <li key={key} className="list-inline-item overlay-wrap overflow-hidden rounded">

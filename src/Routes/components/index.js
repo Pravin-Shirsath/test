@@ -27,12 +27,13 @@ import {
 	AsyncUISnackbarComponent,
 	AsyncUISelectionControlsComponent
 } from 'Components/AsyncComponent/AsyncComponent';
+import AppConfig from 'Constants/AppConfig';
 
 const Components = ({ match }) => (
 	<div className="content-wrapper">
 		<Helmet>
-			<title>Automaton | UI Components</title>
-			<meta name="description" content="Automaton UI Components" />
+			<title>{AppConfig.brandName} | UI Components</title>
+			<meta name="description" content={`${AppConfig.brandName} UI Components`} />
 		</Helmet>
 		<Switch>
 			<Redirect exact from={`${match.url}/`} to={`${match.url}/alert`} />

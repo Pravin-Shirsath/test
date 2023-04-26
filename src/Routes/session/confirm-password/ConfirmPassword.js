@@ -110,8 +110,8 @@ export default function ConfirmPwd() {
       
         <div className="user-management">
             <Helmet>
-            <title> Automaton | Reset Password</title>
-            <meta name="description" content="Automaton Widgets" />
+            <title> {AppConfig.brandName} | Reset Password</title>
+            <meta name="description" content={`${AppConfig.brandName} Widgets`} />
             </Helmet>
                 <div className="rct-session-wrapper" key="1">
                     <AppBar position="static" className="session-header">

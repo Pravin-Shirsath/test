@@ -43,6 +43,7 @@ import CustomBreadcrumbs from "../ReuseComponent/CustomBreadcrumbs";
 import {
     ViewFiles
   } from '../../../Api/'
+import AppConfig from 'Constants/AppConfig';
 
 export default function ViewProject(props) {
   const history = useHistory();
@@ -284,8 +285,8 @@ const [openEditDataset,setOpenEditDataset] = useState(false)
   return (
     <div className="user-management">
       <Helmet>
-        <title>Automaton | Task Completed</title>
-        <meta name="description" content="Automaton Widgets" />
+        <title>{AppConfig.brandName} | Task Completed</title>
+        <meta name="description" content={`${AppConfig.brandName} Widgets`} />
       </Helmet>
       {/* <PageTitleBar
         title={<IntlMessages id="sidebar.viewProject" />}

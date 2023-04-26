@@ -13,12 +13,13 @@ import {
 	AsyncAdvanceUISweetAlertComponent,
 	AsyncAdvanceUIAutoCompleteComponent
 } from 'Components/AsyncComponent/AsyncComponent';
+import AppConfig from 'Constants/AppConfig';
 
 const AdvanceUIComponents = ({ match }) => (
 	<div className="content-wrapper">
 		<Helmet>
-			<title>Automaton | Advance UI Components</title>
-			<meta name="description" content="Automaton Advance UI Components" />
+			<title>{AppConfig.brandName} | Advance UI Components</title>
+			<meta name="description" content={`${AppConfig.brandName} Advance UI Components`} />
 		</Helmet>
 		<Switch>
 			<Redirect exact from={`${match.url}/`} to={`${match.url}/dateTime-picker`} />

@@ -34,7 +34,7 @@ export default function Reports(props){
       <div className="blank-wrapper">
          <Helmet>
             <title>Reports</title>
-            <meta name="description" content="Automaton Blank Page" />
+            <meta name="description" content=" Blank Page" />
          </Helmet>
          <PageTitleBar title={<IntlMessages id="sidebar.reports" />} match={props.match} />
          <div className="row">

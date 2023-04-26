@@ -42,6 +42,7 @@ import CustomBreadcrumbs from '../ReuseComponent/CustomBreadcrumbs';
 import SpacePieChart from 'Components/Charts/SpacePieChart';
 import { getChartData } from 'Api';
 import { colors } from '@mui/material';
+import AppConfig from 'Constants/AppConfig';
 // import { useState } from 'react';
 
 export default function Storageused(props) {
@@ -124,8 +125,8 @@ export default function Storageused(props) {
    return (
       <div className="ecom-dashboard-wrapper">
          <Helmet>
-            <title>Reports Dashboard</title>
-            <meta name="description" content="Automaton Ecommerce Dashboard" />
+            <title>{AppConfig.brandName} |Reports Dashboard</title>
+            <meta name="description" content={`${AppConfig.brandName} Widgets`}/>
          </Helmet>
          {/* <PageTitleBar title={<IntlMessages id="sidebar.report" />} match={props.match} /> */}
          <CustomBreadcrumbs currentPage={"Storage Uses"} data={location?.state?.breadcrumbData} />

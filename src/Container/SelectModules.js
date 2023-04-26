@@ -5,6 +5,7 @@ import AutomataIcon from '../Assets/img/Automata.png'
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import { getModulesLiks } from 'Api';
 import { Link, useHistory } from 'react-router-dom';
+import AppConfig from 'Constants/AppConfig';
 
 const SelectModules = () => {
 
@@ -60,8 +61,8 @@ const SelectModules = () => {
   return (
     <div className='loginContainer moduleBackground'>
       <Helmet>
-        <title>Automaton | Projects </title>
-        <meta name="description" content="Automaton Widgets" />
+        <title> {AppConfig.brandName} | Projects </title>
+        <meta name="description" content={`${AppConfig.brandName} Widgetse`} />
       </Helmet>
       <div className='row justify-content-between  align-items-center'>
         <div className='col'>

@@ -26,6 +26,7 @@ import Button from '@material-ui/core/Button'
 import { Zip_code_data } from 'Constants/Zipcodedata';
 import { ErrorHandling } from 'Constants/ErrorHandling';
 import eventBus from 'Constants/eventBus';
+import AppConfig from 'Constants/AppConfig';
 
 export default function UserProfile(props) {
   const [type, setUserType] = useState(JSON.parse(localStorage.getItem('user_type')));
@@ -513,7 +514,7 @@ useEffect(()=>{
   return (
     <div className="userProfile-wrapper">
       <Helmet>
-        <title>Automaton | User Profile</title>
+        <title>{AppConfig.brandName} | User Profile</title>
         <meta name="description" content="User Profile" />
       </Helmet>
       <PageTitleBar

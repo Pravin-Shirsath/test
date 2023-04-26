@@ -640,7 +640,7 @@ const h=(e)=>{
                   </div> */}
 
             <div className="user-info flex-column d-flex ml-2">
-              <span className="user-name ml-4 text-white" style={{fontSize:"16px"}}>{profileData?.username} </span>
+              <span className="user-name ml-4 text-white globalFontFamily" style={{fontSize:"16px"}}>{profileData?.username} </span>
               {/* <span className="user-name ml-4 text-white">{profileData?.email}</span> */}
 
             </div>
@@ -673,8 +673,8 @@ const h=(e)=>{
           <DropdownMenu style={{ left: '65px', top: '5px' }}>
             <ul className="list-unstyled mb-0 profile-block-wrap " >
               <li className="p-15 border-bottom user-profile-top userBlockHorizontalDropdown ">
-                <p className="text-white mb-0 fs-14 userNameText pr-3">{profileData?.username}</p>
-                <span className="text-white fs-14 pr-3 userNameText">{profileData?.email}</span>
+                <p className="text-white mb-0 fs-14 userNameText pr-3 globalFontFamily" style={{fontSize:"16px"}}>{profileData?.username}</p>
+                <span className="text-white fs-14 pr-3 userNameText globalFontFamily" style={{fontSize:"16px"}}>{profileData?.email}</span>
               </li>
               <li>
                 <Link to={{
@@ -692,7 +692,7 @@ const h=(e)=>{
                 <li className="border-top">
                   <a onClick={handleClickOpen}>
                     <i class="zmdi zmdi-lock-outline mr-3 primary-dark"></i>
-                    <span>Change Password</span>
+                    <span className='globalFontFamily' style={{fontSize:"16px"}}>Change Password</span>
                   </a>
                 </li>
               </div>
@@ -701,7 +701,7 @@ const h=(e)=>{
               <li className="border-top">
                 <a>
                   <i className="zmdi zmdi-power text-danger mr-3"></i>
-                  <span onClick={logoutUser}><IntlMessages id="widgets.logOut" /></span>
+                  <span className='globalFontFamily' onClick={logoutUser} style={{fontSize:"16px"}}><IntlMessages id="widgets.logOut" /></span>
                 </a>
               </li>
             </ul>

@@ -35,14 +35,15 @@ import {
    transferreport,
    expenseCategory
 } from './data';
+import AppConfig from 'Constants/AppConfig';
 
 export default function CrmDashboard(props){
    const { match } = props;
    return (
       <div className="ecom-dashboard-wrapper">
          <Helmet>
-            <title>Crm Dashboard</title>
-            <meta name="description" content="Automaton Crm Dashboard" />
+            <title>{AppConfig.brandName} | Crm Dashboard</title>
+            <meta name="description" content={`${AppConfig.brandName} Dashboard`} />
          </Helmet>
          <PageTitleBar title={<IntlMessages id="sidebar.crm" />} match={match} />
          <div className="row">

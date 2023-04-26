@@ -28,13 +28,14 @@ import {
 	newsVisitorsData,
 	newslaterCampaignData
 } from './data';
+import AppConfig from 'Constants/AppConfig';
 
 export default function NewsDashboard(){
    return (
       <div className="news-dashboard-wrapper">
          <Helmet>
-            <title>News Dashboard</title>
-            <meta name="description" content="Automaton News Dashboard" />
+            <title>{AppConfig.brandName} | News Dashboard</title>
+            <meta name="description" content={`${AppConfig.brandName} News Dashboard`} />
          </Helmet>
          <TrendingNews />
          <div className="row">

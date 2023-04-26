@@ -85,8 +85,8 @@ export default function Forgotpwd() {
       
          <div className="user-management">
          <Helmet>
-           <title>Automaton | Forgot Password</title>
-           <meta name="description" content="Automaton Widgets" />
+           <title>{AppConfig.brandName} | Forgot Password</title>
+           <meta name="description" content={`${AppConfig.brandName} Widgets`} />
          </Helmet>
             <div className="rct-session-wrapper" key="1">
                <AppBar position="static" className="session-header">

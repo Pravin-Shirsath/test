@@ -9,12 +9,13 @@ import {
 	AsyncQuillEditorComponent,
 	AsyncWysiwygEditorComponent
 } from 'Components/AsyncComponent/AsyncComponent';
+import AppConfig from 'Constants/AppConfig';
 
 const Editor = ({ match }) => (
 	<div className="content-wrapper">
 		<Helmet>
-			<title>Automaton | Editors</title>
-			<meta name="description" content="Automaton Editors" />
+			<title>{AppConfig.brandName} | Editors</title>
+			<meta name="description" content={`${AppConfig.brandName} Editors`}/>
 		</Helmet>
 		<Switch>
 			<Redirect exact from={`${match.url}/`} to={`${match.url}/wysiwyg-editor`} />

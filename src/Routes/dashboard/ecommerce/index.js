@@ -39,14 +39,15 @@ import {
 	topSellingProducts,
 	trafficStatus
 } from './data';
+import AppConfig from 'Constants/AppConfig';
 
 export default function EcommerceDashboard(props) {
    const { match } = props;
    return (
       <div className="ecom-dashboard-wrapper">
          <Helmet>
-            <title>Ecommerce Dashboard</title>
-            <meta name="description" content="Automaton Ecommerce Dashboard" />
+            <title>{AppConfig.brandName} | Ecommerce Dashboard</title>
+            <meta name="description" content={`${AppConfig.brandName} Ecommerce Dashboard`}/>
          </Helmet>
          <PageTitleBar title={<IntlMessages id="sidebar.ecommerce" />} match={match} />
          <div className="row">

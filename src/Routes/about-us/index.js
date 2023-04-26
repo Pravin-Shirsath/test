@@ -11,13 +11,14 @@ import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 import IntlMessages from 'Util/IntlMessages';
 // rct card box
 import { RctCard } from 'Components/RctCard';
+import AppConfig from 'Constants/AppConfig';
 
 function AboutUS(props) {
    return (
       <div className="about-wrapper">
          <Helmet>
-            <title>Automaton | About Us</title>
-            <meta name="description" content="Automaton About Us Page" />
+            <title>{AppConfig.brandName} | About Us</title>
+            <meta name="description" content={`${AppConfig.brandName} About Us Page`} />
          </Helmet>
          <PageTitleBar title={<IntlMessages id="sidebar.aboutUs" />} match={props.match} />
          <div className="about-detail">

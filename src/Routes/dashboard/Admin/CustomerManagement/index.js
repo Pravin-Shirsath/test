@@ -31,6 +31,7 @@ import Switch from 'react-toggle-switch';
  } from '../../../.././Api/'
 import { ErrorHandling } from 'Constants/ErrorHandling'
 import CustomBreadcrumbs from 'Routes/dashboard/ReuseComponent/CustomBreadcrumbs'
+import AppConfig from 'Constants/AppConfig'
  
  export default function CustomerManagement(props) {
    const {location}=props
@@ -210,8 +211,8 @@ import CustomBreadcrumbs from 'Routes/dashboard/ReuseComponent/CustomBreadcrumbs
    return (
      <div className="user-management">
        <Helmet>
-         <title>Automaton | Customers List</title>
-         <meta name="description" content="Automaton Widgets" />
+         <title> {AppConfig.brandName} | Customers List</title>
+         <meta name="description" content={`${AppConfig.brandName} Widgets`} />
        </Helmet>
        {/* <PageTitleBar
          title={<IntlMessages id="custmermangement" />}

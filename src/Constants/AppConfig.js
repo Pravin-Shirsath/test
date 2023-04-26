@@ -3,7 +3,7 @@
  */
 const AppConfig = {
    appLogo: `${process.env.PUBLIC_URL}/assets/images/img/diagnolytics-logo.png`,          // App Logo
-   brandName: 'Automaton',                                    // Brand Name
+   brandName: 'Hello Geo',                                    // Brand Name
    navCollapsed: false,                                      // Sidebar collapse
    darkMode: false,                                          // Dark Mode
    boxLayout: false,                                         // Box Layout
@@ -20,7 +20,7 @@ const AppConfig = {
       icon: 'en',
    },
    enableUserTour: process.env.NODE_ENV === 'production' ? false : false,  // Enable / Disable User Tour
-   copyRightText: 'Automaton © 2022 All Rights Reserved.',      // Copy Right Text
+   copyRightText: 'Hello Geo © 2022 All Rights Reserved.',      // Copy Right Text
    // light theme colors
    themeColors: {
       'primary': '#3d4A9E',
