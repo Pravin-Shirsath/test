@@ -249,15 +249,15 @@ export default function ViewDataset(props) {
                                     } */}
                       
                       {
-                        file.file_type == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> 
-                        : (file.file_type == "jpg" || file.file_type == "jpeg" || file.file_type == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> 
-                        : (file.file_type == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> 
+                        file.file_type.toLowerCase() == "pdf" ? <a href={file?.file} target="_blank"><PictureAsPdfIcon className="folderIcon" /></a> 
+                        : (file.file_type.toLowerCase() == "jpg" || file.file_type.toLowerCase() == "jpeg" || file.file_type.toLowerCase() == "png" ? <a href={file?.file} target="_blank"><ImageIcon className="folderIcon" /></a> 
+                        : (file.file_type.toLowerCase() == "xlsx" ? <a href={file?.file} target="_blank"><DescriptionIcon className="folderIcon" /></a> 
                         : <a href={file?.file} target="_blank"><InsertDriveFileIcon className="folderIcon" /></a>))
                       }
 
                     </div>
                     <div className="nameContainer">
-                      <p>{file.file_name}</p>
+                    <p><abbr title={file.file_name}>{file.file_name}</abbr></p>
                     </div>
 
                     <div className="checkDiv" onClick={() => handleFileSelect(file)}>{

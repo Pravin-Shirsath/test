@@ -52,6 +52,11 @@
     transition: all 0.4s;
 }
 
+abbr[title], abbr[data-original-title] {
+    text-decoration: none !important;
+    cursor:  pointer !important;
+}
+
 .createTaskFilesContainer .mainBox .checkDiv {
     background-color: #fff;
     width: 30px;

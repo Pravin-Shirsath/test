@@ -84,6 +84,12 @@
     transition: all 0.4s;
 }
 
+abbr[title], abbr[data-original-title] {
+    text-decoration: none !important;
+    cursor:  pointer !important;
+}
+
+
 /* Media Query for Mobile Devices */
 @media (min-width: 320px) and (max-width: 480px) {
     .viewDatasetFilesContainer {
