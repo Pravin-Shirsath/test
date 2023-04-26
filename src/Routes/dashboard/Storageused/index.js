@@ -5,6 +5,8 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from "react-helmet";
 // intl messages
+import { Card, CardBody } from 'reactstrap';
+
 import IntlMessages from 'Util/IntlMessages';
 
 // page title bar
@@ -52,6 +54,8 @@ export default function Storageused(props) {
    const [fileSizes, setFileSizes] = useState([])
    const [colorCode, setColorCode] = useState([])
    const [spaceuse, setSpaceused] = useState(null)
+   const [message, setMessage] = useState(null)
+
    
 
 
@@ -71,7 +75,7 @@ export default function Storageused(props) {
                   const colors = []
                  
                   
-                  if (res?.data?.projects) {
+                  if (res?.data?.projects?.length > 0) {
                      
                      let available_balance = "available_balance"
                      Label.push(available_balance)
@@ -108,7 +112,9 @@ export default function Storageused(props) {
                             ]
                         }]
                     },})
-                  
+                    setMessage(false)
+                  }else{
+                     setMessage(true)
                   }
 
 
@@ -131,6 +137,17 @@ export default function Storageused(props) {
          {/* <PageTitleBar title={<IntlMessages id="sidebar.report" />} match={props.match} /> */}
          <CustomBreadcrumbs currentPage={"Storage Uses"} data={location?.state?.breadcrumbData} />
         {spaceuse !=null && <Space data={spaceuse} />} 
+
+        {message &&  <Card className="rct-block d-flex ">
+         <CardBody className="d-flex py-15 align-items-center  justify-content-center">
+         <p>No Project Available</p>
+            
+            
+           
+         </CardBody>
+      </Card> }
+      
+      
       </div>
    )
 }

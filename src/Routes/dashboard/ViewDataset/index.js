@@ -189,6 +189,7 @@ const getDatasetFiles = () => {
                         if(res.data?.task_id){
                           NotificationManager.success("Task Created Successfully")
                           localStorage.setItem("TaskId",JSON.stringify(res?.data?.task_id))
+                          localStorage.setItem("TaskName",JSON.stringify(res?.data?.task_name))
                           history.push("/app/dashboard/createTask",{breadcrumbData:breadcrumbData,files:{"count":1,data:selectedFiles}});
                         }
                       }

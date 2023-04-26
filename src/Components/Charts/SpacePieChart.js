@@ -11,11 +11,17 @@ const options = {
    plugins:{
       legend: {
          display: false,
+         tooltips:true,
          labels: {
             fontColor: ChartConfig.legendFontColor
          }
-      }
-   }
+      },
+
+     },
+   
+  
+
+  
 };
 
 const SpacePieChart = ({ labels, datasets, width, height }) => {

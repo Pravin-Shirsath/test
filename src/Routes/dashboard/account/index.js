@@ -108,8 +108,8 @@ console.log(totalData,useData,totalData-useData,"totalData-useData")
             totalData == 0 ? <Progress bar color="danger" className="account-Progressbar progress-bar progress-bar-striped progress-bar-animated"> <p className="account-gb-text" >0GB</p></Progress>
             :
             <Progress multi   className="account-Progressbar" >
-               <Progress bar color="danger" value={useData *(100/totalData) } className="progress-bar progress-bar-striped progress-bar-animated" ><p className="account-gb-text "  >{useData}GB</p></Progress>
-               <Progress bar color="success" value={(totalData-useData)*(100/totalData)}   className="progress-bar progress-bar-striped progress-bar-animated" > <p className="account-gb-text" >{totalData-useData}GB </p></Progress>
+               <Progress bar color="danger" value={useData *(100/totalData) } className="progress-bar progress-bar-striped progress-bar-animated" ><p className="account-gb-text "  >{useData.toFixed(3)}GB</p></Progress>
+               <Progress bar color="success" value={(totalData-useData)*(100/totalData)}   className="progress-bar progress-bar-striped progress-bar-animated" > <p className="account-gb-text" >{(totalData-useData).toFixed(3)}GB </p></Progress>
             </Progress>
          }
        

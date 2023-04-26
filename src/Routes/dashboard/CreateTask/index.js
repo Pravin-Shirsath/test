@@ -56,7 +56,7 @@ export default function ViewDataset(props) {
   const { location } = props
 
   const [searchText, setSearchText] = useState('');
-  const [Taskid, setTaskId] = useState(JSON.parse(localStorage.getItem("TaskId")))
+  const [Taskid, setTaskId] = useState(JSON.parse(localStorage.getItem("TaskName")))
 
   const [loading, setLoading] = useState(false)
 
@@ -79,7 +79,7 @@ export default function ViewDataset(props) {
 
   useEffect(() => {
 
-    const TID = JSON.parse(localStorage.getItem("TaskId"))
+    const TID = JSON.parse(localStorage.getItem("TaskName"))
 
     setTaskId(TID)
     getTaskFile()
@@ -233,7 +233,7 @@ export default function ViewDataset(props) {
 
           </div>
           <div className="d-flex align-items-center justify-content-center">
-            <p className="Comman-Heading">Task-{Taskid}</p>
+            <p className="Comman-Heading">{Taskid}</p>
           </div>
 
           <div className='createTaskFilesContainer'>

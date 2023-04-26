@@ -397,8 +397,8 @@ useEffect(()=>{
                     fd.append('email', email.toLowerCase())
                     fd.append('billing_address', billingAddress)
                     fd.append('tax_number', taxNumber);
-                    fd.append('company_name', companyName)
-
+                    fd.append('company_name', companyName) 
+                    fd.append('gst_number', taxNumber);
                     ProfileApiCall(fd)
 
                   } else {
@@ -443,6 +443,7 @@ useEffect(()=>{
                   fd.append('email', email.toLowerCase())
                   fd.append('billing_address', billingAddress)
                   fd.append('tax_number', taxNumber);
+                  fd.append('gst_number', taxNumber);
                   fd.append('company_name', companyName)
                   ProfileApiCall(fd)
 
