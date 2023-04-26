@@ -197,9 +197,13 @@ export default function Recharge(props) {
             console.log("coupan=", res)
             if (res?.status === 200) {
               if (res?.data?.[0]) {
+                setCouponDiscount(res?.data?.[0])
+                 
                 localStorage.setItem("Discount", JSON.stringify(res?.data?.[0]))
                 localStorage.setItem("Couponcode", JSON.stringify(couponText))
-                NotificationManager.Success("Copon Apply");
+                
+                // NotificationManager.Success("Copon Apply");
+                NotificationManager.success("Copon Apply")
               }
             } else {
               console.log('Response from fromRecharged:', res)

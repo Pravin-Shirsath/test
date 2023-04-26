@@ -15,8 +15,9 @@ import { UserAccountStatus } from 'Api';
 function Space(props) {
    const { data } = props;
    const[ Accout,setAccout]=useState()
-const[ useData,setUseData]=useState(0)
-const[ totalData,setTotalData]=useState(0)
+   const[ useData,setUseData]=useState(0)
+   const[ totalData,setTotalData]=useState(0);
+   
    useEffect(()=>{
       GetAccountStatus()
    },[])
